@@ -1,13 +1,12 @@
 <?php
-
+  $url = "postgres://weimsrmlmgrchg:422473cf89fbae6d7dcdb81806ceb287fe3463b8dfc248d704de579cc468a84b@ec2-23-21-246-2
+  5.compute-1.amazonaws.com:5432/d3o04jnuouf1lk";
+  $url_db = parse_url($url);
+  $host= $url['host'];
+  $username = $url['user'];
+  $password = $url['pass'];
+  $database = substr($url['path'], 1);
 return [
-    $url = "postgres://weimsrmlmgrchg:422473cf89fbae6d7dcdb81806ceb287fe3463b8dfc248d704de579cc468a84b@ec2-23-21-246-2
-5.compute-1.amazonaws.com:5432/d3o04jnuouf1lk";
-    $url_db = parse_url($url);
-    $host= $url['host'];
-    $username = $url['user'];
-    $password = $url['pass'];
-    $database = substr($url['path'], 1);
     /*
     |--------------------------------------------------------------------------
     | Default Database Connection Name
