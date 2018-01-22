@@ -138,6 +138,9 @@ return [
 
     'providers' => [
 
+      //Email verification
+      Jrean\UserVerification\UserVerificationServiceProvider::class,
+
         /*
          * Laravel Framework Service Providers...
          */
@@ -191,6 +194,9 @@ return [
     */
 
     'aliases' => [
+
+      //Email verification
+      'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
 
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

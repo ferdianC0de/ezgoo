@@ -8,6 +8,14 @@
                 <div class="panel-heading">Login</div>
 
                 <div class="panel-body">
+                    @if(Session::has('alert'))
+                      <div class="alert alert-danger">
+                          {{ Session::get('alert') }}
+                          @php
+                          Session::forget('alert');
+                          @endphp
+                      </div>
+                    @endif
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
