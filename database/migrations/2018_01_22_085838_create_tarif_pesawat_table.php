@@ -15,7 +15,7 @@ class CreateTarifPesawatTable extends Migration
     {
         Schema::create('tarif_pesawats', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('jadwal_pesawat_id')
+            $table->integer('jadwal_pesawat_id');
             $table->string('kelas');
             $table->string('tarif');
             $table->timestamps();
