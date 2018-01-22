@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTarifPesawatTable extends Migration
+class CreateDetailBookingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateTarifPesawatTable extends Migration
      */
     public function up()
     {
-        Schema::create('tarif_pesawats', function (Blueprint $table) {
+        Schema::create('detail_bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('jadwal_pesawat_id');
-            $table->string('kelas');
+            $table->integer('booking_id');
+            $table->integer('status');
             $table->integer('tarif');
+            $table->string('kelas');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateTarifPesawatTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tarif_pesawats');
+        Schema::dropIfExists('detail_bookings');
     }
 }
