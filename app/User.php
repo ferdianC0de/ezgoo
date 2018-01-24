@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use \Illuminate\Contracts\Auth\Authenticatable as Contract;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable implements Contract{
     use Notifiable;
 
     /**
@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'nama_depan', 'nama_belakang','email', 'password','verification',
     ];
 
     /**
@@ -24,6 +24,6 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token','verification',
     ];
 }

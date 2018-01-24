@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
+use Jrean\UserVerification\Traits\VerifiesUsers;
+use Jrean\UserVerification\Facades\UserVerification;
+use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
@@ -21,6 +26,7 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    use VerifiesUsers;
 
     /**
      * Where to redirect users after registration.
@@ -36,7 +42,7 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('guest',['except' => ['getVerification', 'getVerificationError']]);
     }
 
     /**
@@ -49,6 +55,8 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => 'required|string|max:255',
+            'nama_depan' => 'required|string|max:255',
+            'nama_belakang' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
@@ -64,8 +72,19 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'nama_depan' => $data['nama_depan'],
+            'nama_belakang' => $data['nama_belakang'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+        $user = $this->create($request->all());
+        UserVerification::generate($user);
+        UserVerification::send($user, 'My Custom E-mail Subject');
+        return back()->withAlert('Register successfully, please verify your email.');
     }
 }
