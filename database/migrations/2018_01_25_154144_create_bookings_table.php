@@ -17,7 +17,7 @@ class CreateBookingsTable extends Migration
             $table->increments('id');
             $table->integer('customer_id');
             $table->dateTime('booking_date');
-            $table->tinyInt('status');
+            $table->tinyInteger('status');
             $table->string('type');
             $table->integer('schedule_id');
             $table->timestamps();
