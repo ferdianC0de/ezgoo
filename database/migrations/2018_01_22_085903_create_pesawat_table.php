@@ -15,8 +15,9 @@ class CreatePesawatTable extends Migration
     {
         Schema::create('pesawats', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('kursi_eko');
-            $table->string('kursi_bisnis');
+            $table->string('nama_pesawat');
+            $table->integer('kursi_eko');
+            $table->integer('kursi_bisnis');
             $table->timestamps();
         });
     }
