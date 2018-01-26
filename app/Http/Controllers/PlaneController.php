@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Jadwal_pesawat;
+use App\Models\PlaneSchedule;
 
 class PlaneController extends Controller
 {
