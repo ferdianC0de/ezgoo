@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class KeretaTableSeeder extends Seeder
+class TrainScheduleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class KeretaTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Kereta::class, 10)->create();
+        factory(App\Models\TrainSchedule::class, 20)->create();
     }
 }

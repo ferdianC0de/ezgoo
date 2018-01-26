@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class StasiunTableSeeder extends Seeder
+class PlaneSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class StasiunTableSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Stasiun::class, 10)->create();
+        factory(App\Models\Plane::class, 100)->create();
     }
 }
