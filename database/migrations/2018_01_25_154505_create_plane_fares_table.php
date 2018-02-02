@@ -18,6 +18,7 @@ class CreatePlaneFaresTable extends Migration
             $table->decimal('plane_id', 10, 2);
             $table->decimal('eco_seat', 10, 2);
             $table->decimal('bus_seat', 10, 2);
+            $table->decimal('first_seat', 10, 2);
             $table->timestamps();
         });
     }

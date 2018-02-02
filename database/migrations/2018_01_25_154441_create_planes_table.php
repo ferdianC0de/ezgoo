@@ -18,6 +18,7 @@ class CreatePlanesTable extends Migration
             $table->string('plane_name');
             $table->integer('eco_seat');
             $table->integer('bus_seat');
+            $table->integer('first_seat');
             $table->timestamps();
         });
     }
