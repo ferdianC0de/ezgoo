@@ -13,6 +13,6 @@ class CustomerSeeder extends Seeder
     {
         //
         factory(App\Models\Customer::class, 5)->create();
-        factory(App\Models\Customer::class, 20)->states('user')->create();
+        factory(App\Models\Customer::class, 10)->states('user')->create();
     }
 }

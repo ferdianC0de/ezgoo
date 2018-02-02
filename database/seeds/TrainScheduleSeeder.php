@@ -12,6 +12,6 @@ class TrainScheduleSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\TrainSchedule::class, 20)->create();
+        factory(App\Models\TrainSchedule::class, 10)->create();
     }
 }

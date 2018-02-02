@@ -12,6 +12,6 @@ class TrainFareSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\TrainFare::class, 20)->create();
+        factory(App\Models\TrainFare::class, 10)->create();
     }
 }
