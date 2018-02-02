@@ -3,17 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Airport;
-use App\Models\Plane;
 
 class PlaneSchedule extends Model
 {
     public function plane()
     {
-      return $this->hasOne('Plane');
+      return $this->belongsTo('App\Models\Plane');
     }
     public function airport()
     {
-      return $this->hasOne('Airport');
+      return $this->belongsTo('App\Models\Airport');
     }
 }

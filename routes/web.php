@@ -21,3 +21,11 @@ Route::get('/home', 'UserController@index')->name('home');
 Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
 Route::put('/update', 'UserController@update')->name('update');
 Route::resource('/customer','CustomerController');
+
+Route::group(['prefix'=> 'plane'], function(){
+  Route::get('/test', function(){
+    return view('test.testForm');
+  });
+  Route::post('/search', 'PlaneController@search');
+  Route::get('/order/{type}/{id}', 'PlaneController@order');
+});
