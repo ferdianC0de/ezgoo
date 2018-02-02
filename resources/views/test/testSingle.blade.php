@@ -4,7 +4,7 @@
   @foreach ($planeSchedule as $pS)
     <p>{{$pS->from}}</p>
     <p>{{$pS->destination}}</p>
-    <p>{{$pS->boarding_time}}</p>
+    <p>{{date('H:i:s', strtotime($pS->boarding_time))}}</p>
     <p>{{$pS->gate}}</p>
   @endforeach
 

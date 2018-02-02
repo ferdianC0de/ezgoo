@@ -17,7 +17,7 @@ DB::table('plane_schedules')->delete();
     $firstAirport = Airport::find($num1);
     $lastAirport = Airport::find($num2);
 
-    if ($firstAirport == $lastAirport) {
+    if ($lastAirport == $firstAirport) {
       goto a;
     }
 
