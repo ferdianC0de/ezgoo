@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\PlaneSchedule;
 use App\Models\PlaneFare;
 use App\Models\Plane;
 use App\Models\Airport;
+use App\Models\Booking;
 
 class PlaneController extends Controller
 {
@@ -104,11 +106,13 @@ class PlaneController extends Controller
           $planeSchedule = PlaneSchedule::where([
             ['from', '=', $request->from],
             ['destination', '=', $request->destination],
-            ['boarding_time', '%like%', $request->date],
+            ['boarding_time', 'like', '%'.$request->date.'%'],
             [$seat, '>=', $total]
           ])->get();
           return view('test.testSingle', compact('planeSchedule', 'total', 'seat'));
         //Round trip
+
+
         }elseif($request->type == "rt") {
           $planeScheduleG = PlaneSchedule::where([
             ['from', '=', $request->from],
@@ -136,16 +140,42 @@ class PlaneController extends Controller
         // TODO: Ambil variabel total buat banyaknya form
         $id = [$request->go,$request->back];
         $total = $request->total;
-        if ($request->type == "st" && count($request->go) == 1) {
+        if ($request->type == "st") {
           $planeSchedule = PlaneSchedule::find($request->go);
-        }elseif ($request->type == "rt" && count($id == 2)){
+          $bookings = new Booking();
+          $bookings->user_id = Auth::user()->id;
+          $bookings->booking_date = date('Y-m-d H:i:s');
+          $bookings->status = 1;
+          $bookings->type = "Pesawat";
+          $bookings->schedule_id = $request->go;
+          $bookings->save();
+
+        }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
+          $booking = new Booking();
+          $booking->user_id = Auth::user()->id;
+          $booking->booking_date = date('Y-m-d H:i:s');
+          $booking->status = 1;
+          $booking->type = "Pesawat";
+          $booking->schedule_id = $id[0];
+          $booking->save();
+
+          $booking2 = new Booking();
+          $booking2->user_id = Auth::user()->id;
+          $booking2->booking_date = date('Y-m-d H:i:s');
+          $booking2->status = 1;
+          $booking2->type = "Pesawat";
+          $booking2->schedule_id = $id[1];
+          $booking2->save();
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
         }
 
-        return view('', compact('PlaneSchedule', 'total'));
+        // return view('', compact('PlaneSchedule', 'total'));
+        return json_encode($planeSchedule);
       }
+
+
       public function fixOrder(Request $request)
       {
         $bookingContact = $this->validate($request, [
