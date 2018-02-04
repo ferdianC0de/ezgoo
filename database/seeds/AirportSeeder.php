@@ -12,6 +12,6 @@ class AirportSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Airport::class, 20)->create();
+        factory(App\Models\Airport::class, 10)->create();
     }
 }

@@ -113,13 +113,13 @@ class PlaneController extends Controller
           $planeScheduleG = PlaneSchedule::where([
             ['from', '=', $request->from],
             ['destination', '=', $request->destination],
-            ['boarding_time', '=', $request->date],
+            ['boarding_time', 'LIKE', '%'.$request->date.'%'],
             [$seat, '>=', $total]
           ])->get();
           $planeScheduleB = PlaneSchedule::where([
             ['from', '=', $request->destination],
             ['destination', '=', $request->from],
-            ['boarding_time', '=', $request->dateB],
+            ['boarding_time', 'LIKE', '%'.$request->dateB.'%'],
             [$seat, '>=', $total]
           ])->get();
           return view('test.testRound', compact('planeScheduleG','planeScheduleB', 'total', 'seat'));

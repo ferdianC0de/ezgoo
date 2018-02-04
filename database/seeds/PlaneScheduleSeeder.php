@@ -12,6 +12,6 @@ class PlaneScheduleSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\PlaneSchedule::class, 20)->create();
+        factory(App\Models\PlaneSchedule::class, 10)->create();
     }
 }
