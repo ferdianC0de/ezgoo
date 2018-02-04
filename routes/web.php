@@ -27,5 +27,5 @@ Route::group(['prefix'=> 'plane'], function(){
     return view('test.testForm');
   });
   Route::post('/search', 'PlaneController@search');
-  Route::get('/order/{type}/{id}', 'PlaneController@order');
+  Route::post('/order', 'PlaneController@order');
 });

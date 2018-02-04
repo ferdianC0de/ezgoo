@@ -104,10 +104,10 @@ class PlaneController extends Controller
           $planeSchedule = PlaneSchedule::where([
             ['from', '=', $request->from],
             ['destination', '=', $request->destination],
-            ['boarding_time', '=', $request->date],
+            ['boarding_time', '%like%', $request->date],
             [$seat, '>=', $total]
           ])->get();
-          return view('test.testSingle', compact('planeSchedule', 'total'));
+          return view('test.testSingle', compact('planeSchedule', 'total', 'seat'));
         //Round trip
         }elseif($request->type == "rt") {
           $planeScheduleG = PlaneSchedule::where([
@@ -122,7 +122,7 @@ class PlaneController extends Controller
             ['boarding_time', '=', $request->dateB],
             [$seat, '>=', $total]
           ])->get();
-          return view('test.testRound', compact('planeScheduleG','planeScheduleB', 'total'));
+          return view('test.testRound', compact('planeScheduleG','planeScheduleB', 'total', 'seat'));
         }else{
           abort(404);
         }
@@ -134,16 +134,17 @@ class PlaneController extends Controller
       public function order(Request $request)
       {
         // TODO: Ambil variabel total buat banyaknya form
-        // TODO: $request['id'] masuknya array dari view pencarian
-        if ($request->type == "st" && count($request['id']) == 1) {
-          $planeSchedule = PlaneSchedule::find($request['id']);
-        }elseif ($request->type == "rt" && count($request['id'] == 2)){
-          $planeSchedule = PlaneSchedule::find($request['id']);
+        $id = [$request->go,$request->back];
+        $total = $request->total;
+        if ($request->type == "st" && count($request->go) == 1) {
+          $planeSchedule = PlaneSchedule::find($request->go);
+        }elseif ($request->type == "rt" && count($id == 2)){
+          $planeSchedule = PlaneSchedule::find($id);
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
         }
 
-        return view('', compact('PlaneSchedule'));
+        return view('', compact('PlaneSchedule', 'total'));
       }
       public function fixOrder(Request $request)
       {
