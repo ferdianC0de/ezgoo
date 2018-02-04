@@ -138,7 +138,7 @@ class PlaneController extends Controller
         $total = $request->total;
         if ($request->type == "st" && count($request->go) == 1) {
           $planeSchedule = PlaneSchedule::find($request->go);
-        }elseif ($request->type == "rt" && count($id == 2)){
+        }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
