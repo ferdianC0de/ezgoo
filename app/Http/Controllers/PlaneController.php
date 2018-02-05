@@ -40,10 +40,7 @@ class PlaneController extends Controller
      */
     public function store(Request $request)
     {
-      $plane = $this->validate($request, [
 
-      ]);
-      Plane::create($plane);
     }
 
     /**
@@ -77,10 +74,7 @@ class PlaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $plane = $this->validate($request, [
-            'plane' => 'required',
-        ]);
-        Plane::find($id)->update($plane);
+
     }
 
     /**
@@ -91,8 +85,7 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-        $plane = Plane::find($id);
-        $plane->delete();
+
     }
 
     public function search(Request $request)
@@ -116,7 +109,7 @@ class PlaneController extends Controller
             ['boarding_time', 'like', '%'.$request->date.'%'],
             [$seat, '>=', $total]
           ])->get();
-          return view('test.testSingle', compact('planeSchedule', 'total', 'seat'));
+          return view('test.plane.testSingle', compact('planeSchedule', 'total', 'seat'));
         //Round trip
 
 
@@ -133,7 +126,7 @@ class PlaneController extends Controller
             ['boarding_time', 'LIKE', '%'.$request->dateB.'%'],
             [$seat, '>=', $total]
           ])->get();
-          return view('test.testRound', compact('planeScheduleG','planeScheduleB', 'total', 'seat'));
+          return view('test.plane.testRound', compact('planeScheduleG','planeScheduleB', 'total', 'seat'));
         }else{
           abort(404);
         }
@@ -161,21 +154,26 @@ class PlaneController extends Controller
 
       public function fixOrder(Request $request)
       {
-        $id = [$request->go,$request->back];
-        $total = $request->total;
-        $userID = Auth::user()->id;
+        if (Auth::check()) {
+          $id = [$request->go,$request->back];
+          $total = $request->total;
+          $userID = Auth::user()->id;
 
-        if ($request->type == "st") {
-          $planeSchedule = PlaneSchedule::find($id);
-          Booking::singleTrip($request->go, $userID);
-          PlaneSchedule::seatMath($total, $request->seat, $id);
-        }elseif ($request->type == "rt" && count($id) == 2){
-          $planeSchedule = PlaneSchedule::find($id);
-          // Booking::singleTrip($request->go,$request->back,$userID);
+          if ($request->type == "st") {
+            $planeSchedule = PlaneSchedule::find($id);
+            Booking::singleTrip($request->go, $userID);
+            PlaneSchedule::seatMath($total, $request->seat, $id);
+          }elseif ($request->type == "rt" && count($id) == 2){
+            $planeSchedule = PlaneSchedule::find($id);
+            // Booking::singleTrip($request->go,$request->back,$userID);
+          }else{
+            return back()->withAlert('Harap pilih penerbangan.');
+
+          }
+          // return view('', compact('PlaneSchedule', 'total'));
         }else{
-          return back()->withAlert('Harap pilih penerbangan.');
-
+          return 'Register dulu mang baru bisa beli tiket';
         }
-        // return view('', compact('PlaneSchedule', 'total'));
+
       }
 }

@@ -24,7 +24,7 @@ Route::resource('/customer','CustomerController');
 
 Route::group(['prefix'=> 'plane'], function(){
   Route::get('/test', function(){
-    return view('test.testForm');
+    return view('test.plane.testForm');
   });
   Route::post('/search', 'PlaneController@search');
   Route::post('/order', 'PlaneController@order');
