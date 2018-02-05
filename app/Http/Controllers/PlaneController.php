@@ -140,43 +140,37 @@ class PlaneController extends Controller
         // TODO: Ambil variabel total buat banyaknya form
         $id = [$request->go,$request->back];
         $total = $request->total;
-        $userID = Auth::user()->id;
 
+        $seat = $request->seat;
         if ($request->type == "st") {
           $planeSchedule = PlaneSchedule::find($id);
-          Booking::singleTrip(
-            $request->go,
-            $userID
-          );
         }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
-          Booking::singleTrip(
-            $request->go,
-            $request->back,
-            $userID
-          );
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
         }
 
-        // return view('', compact('PlaneSchedule', 'total'));
-        return json_encode($planeSchedule);
+        return view('test.fix', compact('planeSchedule', 'total','seat'));
       }
 
 
       public function fixOrder(Request $request)
       {
-        $bookingContact = $this->validate($request, [
-          'name' => 'required',
-          'email'=> 'required',
-          'contact' => 'required'
-        ]);
-        $booking_id = Booking::create($bookingContact)->id;
+        $id = [$request->go,$request->back];
+        $total = $request->total;
+        $userID = Auth::user()->id;
 
-        $passengerData = $this->validate($request, [
-          'id' => 'required',
-          'name' => 'required',
-          'birthdate' => 'required'
-        ]);
+        if ($request->type == "st") {
+          $planeSchedule = PlaneSchedule::find($id);
+          Booking::singleTrip($request->go, $userID);
+          PlaneSchedule::seatMath($total, $request->seat, $id);
+        }elseif ($request->type == "rt" && count($id) == 2){
+          $planeSchedule = PlaneSchedule::find($id);
+          // Booking::singleTrip($request->go,$request->back,$userID);
+        }else{
+          return back()->withAlert('Harap pilih penerbangan.');
+          
+        }
+        // return view('', compact('PlaneSchedule', 'total'));
       }
 }

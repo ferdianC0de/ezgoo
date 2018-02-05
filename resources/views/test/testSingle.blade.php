@@ -5,6 +5,7 @@
     {{ csrf_field() }}
     <button type="submit" name="button">Pesan</button>
     <input type="hidden" name="total" value="{{$total}}">
+    <input type="hidden" name="seat" value="{{$seat}}">
     <input type="hidden" name="type" value="st">
     <div class="row">
       <div class="col-md-12">
