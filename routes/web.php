@@ -28,4 +28,5 @@ Route::group(['prefix'=> 'plane'], function(){
   });
   Route::post('/search', 'PlaneController@search');
   Route::post('/order', 'PlaneController@order');
+  Route::post('/fixOrder', 'PlaneController@fixOrder');
 });
