@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Airport;
 use App\Models\Plane;
-use App\Models\Plane;
 
 class PlaneSchedule extends Model
 {
