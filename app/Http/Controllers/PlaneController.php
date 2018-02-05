@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use App\Models\PlaneSchedule;
 use App\Models\PlaneFare;
 use App\Models\Plane;
 use App\Models\Airport;
+use App\Models\Booking;
 
 class PlaneController extends Controller
 {
@@ -27,7 +29,7 @@ class PlaneController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -38,7 +40,10 @@ class PlaneController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $plane = $this->validate($request, [
+
+      ]);
+      Plane::create($plane);
     }
 
     /**
@@ -72,7 +77,10 @@ class PlaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $plane = $this->validate($request, [
+            'plane' => 'required',
+        ]);
+        Plane::find($id)->update($plane);
     }
 
     /**
@@ -83,7 +91,8 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plane = Plane::find($id);
+        $plane->delete();
     }
 
     public function search(Request $request)
@@ -104,11 +113,13 @@ class PlaneController extends Controller
           $planeSchedule = PlaneSchedule::where([
             ['from', '=', $request->from],
             ['destination', '=', $request->destination],
-            ['boarding_time', '%like%', $request->date],
+            ['boarding_time', 'like', '%'.$request->date.'%'],
             [$seat, '>=', $total]
           ])->get();
           return view('test.testSingle', compact('planeSchedule', 'total', 'seat'));
         //Round trip
+
+
         }elseif($request->type == "rt") {
           $planeScheduleG = PlaneSchedule::where([
             ['from', '=', $request->from],
@@ -136,7 +147,7 @@ class PlaneController extends Controller
         // TODO: Ambil variabel total buat banyaknya form
         $id = [$request->go,$request->back];
         $total = $request->total;
-        if ($request->type == "st" && count($request->go) == 1) {
+        if ($request->type == "st") {
           $planeSchedule = PlaneSchedule::find($request->go);
         }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
@@ -146,19 +157,10 @@ class PlaneController extends Controller
 
         return view('', compact('PlaneSchedule', 'total'));
       }
+
+
       public function fixOrder(Request $request)
       {
-        $bookingContact = $this->validate($request, [
-          'name' => 'required',
-          'email'=> 'required',
-          'contact' => 'required'
-        ]);
-        $booking_id = Booking::create($bookingContact)->id;
-
-        $passengerData = $this->validate($request, [
-          'id' => 'required',
-          'name' => 'required',
-          'birthdate' => 'required'
-        ]);
+        
       }
 }
