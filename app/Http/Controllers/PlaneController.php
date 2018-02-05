@@ -147,34 +147,20 @@ class PlaneController extends Controller
         // TODO: Ambil variabel total buat banyaknya form
         $id = [$request->go,$request->back];
         $total = $request->total;
-<<<<<<< HEAD
-        if ($request->type == "st") {
-          $planeSchedule = PlaneSchedule::find($request->go);
-=======
-
         $seat = $request->seat;
         if ($request->type == "st") {
           $planeSchedule = PlaneSchedule::find($id);
->>>>>>> b814ee400e7385f7e0812a36190735b2844b3eaf
         }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
         }
-
-<<<<<<< HEAD
-        return view('', compact('PlaneSchedule', 'total'));
-=======
         return view('test.fix', compact('planeSchedule', 'total','seat'));
->>>>>>> b814ee400e7385f7e0812a36190735b2844b3eaf
       }
 
 
       public function fixOrder(Request $request)
       {
-<<<<<<< HEAD
-        
-=======
         $id = [$request->go,$request->back];
         $total = $request->total;
         $userID = Auth::user()->id;
@@ -188,9 +174,8 @@ class PlaneController extends Controller
           // Booking::singleTrip($request->go,$request->back,$userID);
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
-          
+
         }
         // return view('', compact('PlaneSchedule', 'total'));
->>>>>>> b814ee400e7385f7e0812a36190735b2844b3eaf
       }
 }
