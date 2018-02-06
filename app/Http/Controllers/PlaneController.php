@@ -135,45 +135,45 @@ class PlaneController extends Controller
         return 'Bayi gabole lebih dari dewasa';
       }
     }
-      public function order(Request $request)
-      {
-        // TODO: Ambil variabel total buat banyaknya form
+    public function order(Request $request)
+    {
+      // TODO: Ambil variabel total buat banyaknya form
+      $id = [$request->go,$request->back];
+      $total = $request->total;
+      $seat = $request->seat;
+      if ($request->type == "st") {
+        $planeSchedule = PlaneSchedule::find($id);
+      }elseif ($request->type == "rt" && count($id) == 2){
+        $planeSchedule = PlaneSchedule::find($id);
+      }else{
+        return back()->withAlert('Harap pilih penerbangan.');
+      }
+      return view('test.fix', compact('planeSchedule', 'total','seat'));
+    }
+
+
+    public function fixOrder(Request $request)
+    {
+      if (Auth::check()) {
         $id = [$request->go,$request->back];
         $total = $request->total;
-        $seat = $request->seat;
+        $userID = Auth::user()->id;
+
         if ($request->type == "st") {
           $planeSchedule = PlaneSchedule::find($id);
+          Booking::singleTrip($request->go, $userID);
+          PlaneSchedule::seatMath($total, $request->seat, $id);
         }elseif ($request->type == "rt" && count($id) == 2){
           $planeSchedule = PlaneSchedule::find($id);
+          // Booking::singleTrip($request->go,$request->back,$userID);
         }else{
           return back()->withAlert('Harap pilih penerbangan.');
+
         }
-        return view('test.fix', compact('planeSchedule', 'total','seat'));
+        // return view('', compact('PlaneSchedule', 'total'));
+      }else{
+        return 'Register dulu mang baru bisa beli tiket';
       }
 
-
-      public function fixOrder(Request $request)
-      {
-        if (Auth::check()) {
-          $id = [$request->go,$request->back];
-          $total = $request->total;
-          $userID = Auth::user()->id;
-
-          if ($request->type == "st") {
-            $planeSchedule = PlaneSchedule::find($id);
-            Booking::singleTrip($request->go, $userID);
-            PlaneSchedule::seatMath($total, $request->seat, $id);
-          }elseif ($request->type == "rt" && count($id) == 2){
-            $planeSchedule = PlaneSchedule::find($id);
-            // Booking::singleTrip($request->go,$request->back,$userID);
-          }else{
-            return back()->withAlert('Harap pilih penerbangan.');
-
-          }
-          // return view('', compact('PlaneSchedule', 'total'));
-        }else{
-          return 'Register dulu mang baru bisa beli tiket';
-        }
-
-      }
+    }
 }
