@@ -12,6 +12,6 @@ class PlaneSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Plane::class, 100)->create();
+        factory(App\Models\Plane::class, 10)->create();
     }
 }
