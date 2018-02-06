@@ -18,33 +18,32 @@ Route::get('/', function () {
 Auth::routes();
 
 
-
-
-
-
-Route::get('/edit/data_pemesan/{id}', 'AdminController@edit_data_pemesan');
-Route::post('/edit/data_pemesan/{id}', 'AdminController@update_data_pemesan')	;
-Route::delete('/delete/data_pemesan/{id}','AdminController@destroy_data_pemesan');
-Route::get('admin/edit/{id}','AdminController@edit_data_pemesan');
-Route::put('admin/update/{id}','AdminController@update_data_pemesan');
-
 Route::get('/home', 'UserController@index')->name('home');
 Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
 Route::put('/update', 'UserController@update')->name('update');
 Route::resource('/customer','CustomerController');
 
-<<<<<<< HEAD
+
 Route::group(["prefix" => 'admin'], function(){
-	Route::resource('index','AdminController');
-	Route::get('data_pemesan','AdminController@data_pemesan');
-	Route::get('kereta','AdminController@kereta_api');
-	Route::get('pesawat','AdminController@pesawat');
-	Route::post('/create','AdminController@create');
+  Route::resource('index','AdminController');
+  Route::get('data_pemesan','AdminController@data_pemesan');
+  Route::get('kereta','AdminController@kereta_api');
+  Route::get('pesawat','AdminController@pesawat');
+  Route::post('create','AdminController@create');
+
+  /*Edit*/
+  Route::get('edit/data_pemesan/{id}', 'AdminController@edit_data_pemesan');
+  Route::post('edit/data_pemesan/{id}', 'AdminController@update_data_pemesan') ;
+  Route::get('edit/{id}','AdminController@edit_data_pemesan');
+  Route::put('update/{id}','AdminController@update_data_pemesan');
+  Route::delete('delete/data_pemesan/{id}','AdminController@destroy_data_pemesan');
+
+
 });
 
 Route::group(['prefix'=> 'frontend'], function(){
-	Route::get('/home', 'AdminController@index');
-=======
+  Route::get('/home', 'AdminController@index');
+
 Route::group(['prefix'=> 'plane'], function(){
   Route::get('/test', function(){
     return view('test.plane.testForm');
@@ -99,5 +98,6 @@ Route::get('/ksingle', function () {
 
 Route::get('/history', function () {
   return view('frontend.history');
->>>>>>> 1a2fd44d9059cfc4c5c637bd99bcce93ddad6f0a
+});
+
 });

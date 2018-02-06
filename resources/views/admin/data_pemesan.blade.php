@@ -46,12 +46,15 @@
                 <td>{{$data ->last_name}}</td>
                 <td>{{$data ->email}}</td>
                 <td>{{$data ->created_at}}</td>
-               <td><form action="{{action('AdminController@destroy_data_pemesan',$data->id)}}" method="POST">
-                    {{csrf_field()}}
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button class="btn btn-danger" type="submit">Delete</button></td>
-                </form>
-                <td><a href="{{ URL::to('admin/edit/'.$data->id)}}" class="btn btn-success">EDIT</a></td>
+                <td>
+                    <form action="{{action('AdminController@destroy_data_pemesan',$data->id)}}" method="POST">
+                        {{csrf_field()}}
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button class="btn btn-danger" type="submit">Delete</button></td>
+                    </form>
+                <td>
+                    <a href="{{ URL::to('admin/edit/'.$data->id)}}" class="btn btn-success">EDIT</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
