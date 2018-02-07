@@ -22,25 +22,13 @@ Route::get('/home', 'UserController@index')->name('home');
 Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
 Route::put('/update', 'UserController@update')->name('update');
 
-Route::group(['prefix'=> 'plane'], function(){
-  Route::get('test', function(){
-    return view('test.plane.testForm');
-  });
-  Route::post('search', 'PlaneController@search');
-  Route::post('order', 'PlaneController@order');
-  Route::post('fixOrder', 'PlaneController@fixOrder');
-});
-
-Route::group(["prefix" => 'train'], function(){
-  Route::get('test', function(){
-    return view('test.plane.testForm');
-  });
-  Route::post('search', 'PlaneController@search');
-  Route::post('order', 'PlaneController@order');
-});
-
 Route::group(["prefix" => "test"], function(){
-  Route::get('search', 'BookingController@search');
+  Route::get('form', function(){
+    return view('test.testForm');
+  });
+  Route::post('search', 'BookingController@search');
+  Route::post('order', 'BookingController@order');
+  Route::post('fixOrder', 'BookingController@fixOrder');
 });
 
 Route::group(['prefix'=> 'frontend'], function(){

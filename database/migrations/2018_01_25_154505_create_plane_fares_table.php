@@ -15,7 +15,7 @@ class CreatePlaneFaresTable extends Migration
     {
         Schema::create('plane_fares', function (Blueprint $table) {
             $table->increments('id');
-            $table->decimal('plane_id', 10, 2);
+            $table->integer('plane_id');
             $table->decimal('eco_seat', 10, 2);
             $table->decimal('bus_seat', 10, 2);
             $table->decimal('first_seat', 10, 2);

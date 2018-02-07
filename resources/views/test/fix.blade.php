@@ -7,17 +7,18 @@
               <div class="panel panel-default">
                   <div class="panel-heading">Dashboard</div>
                   <div class="panel-body">
-                    <form action="{{ url('plane/fixOrder') }}" method="post">
+                    <form action="{{ url('test/fixOrder') }}" method="post">
                       {{ csrf_field() }}
+                      <input type="hidden" name="vehicle" value="{{$vehicle}}">
                       <input type="hidden" name="total" value="{{$total}}">
                       <input type="hidden" name="seat" value="{{$seat}}">
-                      <input type="hidden" name="type" value="st">
-                      @foreach ($planeSchedule as $pS)
-                        <input type="hidden" name="go" value="{{ $pS->id }}">
-                        <p>Dari   : {{ $pS->from }}</p>
-                        <p>Tujuan : {{ $pS->destination }}</p>
-                        <p>Waktu  : {{date('h:i:s', strtotime($pS->boarding_time))}}</p>
-                        <p>Gate   : {{ $pS->gate }}</p>
+                      <input type="hidden" name="type" value="{{$type}}">
+                      @foreach ($schedule as $s)
+                        <input type="text" name="id[]" value="{{ $s->id }}">
+                        <p>Dari   : {{ $s->from }}</p>
+                        <p>Tujuan : {{ $s->destination }}</p>
+                        <p>Waktu  : {{date('h:i:s', strtotime($s->boarding_time))}}</p>
+                        <p>Gate   : {{ $s->gate }}</p>
                       @endforeach
                       <button type="submit">Pesan</button>
                     </form>
