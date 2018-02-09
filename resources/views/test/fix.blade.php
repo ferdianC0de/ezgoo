@@ -14,13 +14,16 @@
                       <input type="hidden" name="seat" value="{{$seat}}">
                       <input type="hidden" name="type" value="{{$type}}">
                       @foreach ($schedule as $s)
-                        <input type="text" name="id[]" value="{{ $s->id }}">
+                        @php
+                          $fareTotal += $s->$seat * $total
+                        @endphp
+                        <input type="hidden" name="id[]" value="{{ $s->id }}">
                         <p>Dari   : {{ $s->from }}</p>
                         <p>Tujuan : {{ $s->destination }}</p>
                         <p>Waktu  : {{date('h:i:s', strtotime($s->boarding_time))}}</p>
                         <p>Gate   : {{ $s->gate }}</p>
-                        <p>Harga   : {{ isset($s->$seat)}}</p>
                       @endforeach
+                      <p>Harga Total   : Rp {{ number_format($fareTotal, 2, ',','.') }}</p>
                       <button type="submit">Pesan</button>
                     </form>
                   </div>

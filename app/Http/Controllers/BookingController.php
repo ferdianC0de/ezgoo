@@ -68,6 +68,7 @@ class BookingController extends Controller
         $vehicle = $request->vehicle;
         $type = $request->type;
         $id = [$request->go,$request->back];
+        $fareTotal = 0;
         $total = $request->total;
         $seat = $request->seat;
 
@@ -84,7 +85,7 @@ class BookingController extends Controller
         }else{
           abort(404);
         }
-        return view('test.fix', compact('schedule','vehicle', 'type', 'total','seat'));
+        return view('test.fix', compact('schedule','vehicle', 'type', 'total','seat', 'fareTotal'));
       }
       public function fixOrder(Request $request)
       {

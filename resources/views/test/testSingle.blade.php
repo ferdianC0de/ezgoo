@@ -19,7 +19,7 @@
           <p>Tujuan : {{ $s->destination }}</p>
           <p>Waktu  : {{date('h:i:s', strtotime($s->boarding_time))}}</p>
           <p>Gate   : {{ $s->gate }}</p>
-          <p>Price  : {{ $s->$seat }}</p>
+          <p>Harga /orang  : {{ $s->$seat }}</p>
         @endforeach
     </div>
   </form>
