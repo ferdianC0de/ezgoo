@@ -19,6 +19,7 @@
                         <p>Tujuan : {{ $s->destination }}</p>
                         <p>Waktu  : {{date('h:i:s', strtotime($s->boarding_time))}}</p>
                         <p>Gate   : {{ $s->gate }}</p>
+                        <p>Harga   : {{ isset($s->$seat)}}</p>
                       @endforeach
                       <button type="submit">Pesan</button>
                     </form>

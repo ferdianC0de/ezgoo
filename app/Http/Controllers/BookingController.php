@@ -78,9 +78,9 @@ class BookingController extends Controller
         }
 
         if ($request->type == "st") {
-          $schedule = $model::find($id);
+          $schedule = $model::findWithPrice($id, $seat);
         }elseif ($request->type == "rt" && count($id) == 2){
-          $schedule = $model::find($id);
+          $schedule = $model::findWithPrice($id, $seat);
         }else{
           abort(404);
         }
