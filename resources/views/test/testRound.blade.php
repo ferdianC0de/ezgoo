@@ -17,7 +17,7 @@
               </div>
               <p>Dari   :{{$sG->from}}</p>
               <p>Tujuan :{{$sG->destination}}</p>
-              <p>Price  : {{$sG->$seat }}</p>
+              <p>Price  : Rp. {{ number_format($sG->$seat, 2, ",",".")}}</p>
             @endforeach
           </div>
           <div class="col-md-6">
@@ -28,7 +28,7 @@
               </div>
               <p>Dari   :{{$sB->from}}</p>
               <p>Tujuan :{{$sB->destination}}</p>
-              <p>Price  : {{$sB->$seat }}</p>
+              <p>Price  : Rp. {{ number_format($sB->$seat, 2, ",",".")}}</p>
             @endforeach
           </div>
         </div>
