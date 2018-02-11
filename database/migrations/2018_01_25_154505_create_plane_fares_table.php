@@ -15,11 +15,15 @@ class CreatePlaneFaresTable extends Migration
     {
         Schema::create('plane_fares', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('plane_id');
+            $table->integer('plane_id')->unsigned();
             $table->decimal('eco_seat', 10, 2);
             $table->decimal('bus_seat', 10, 2);
             $table->decimal('first_seat', 10, 2);
             $table->timestamps();
+
+            $table->foreign('plane_id')
+                  ->references('id')->on('planes')
+                  ->onDelete('cascade');
         });
     }
 

@@ -15,11 +15,15 @@ class CreateDetailBookingsTable extends Migration
     {
         Schema::create('detail_bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('booking_id');
+            $table->integer('booking_id')->unsigned();
             $table->integer('passenger');
             $table->decimal('fare',10,2);
             $table->string('class');
             $table->timestamps();
+
+            $table->foreign('booking_id')
+                  ->references('id')->on('bookings')
+                  ->onDelete('cascade');
         });
     }
 
