@@ -51,12 +51,6 @@ class PlaneSchedule extends Model
     }
     public static function seatMath($total, $seat, $id)
     {
-      $data = PlaneSchedule::find($id);
-      $math = $data[0]->$seat - $total;
-        $plane = DB::table('plane_schedules')
-        ->where('id', $id)
-        ->update([
-          $seat => $math
-        ]);
+      PlaneSchedule::whereIn('id', $id)->decrement($seat, $total);
     }
 }

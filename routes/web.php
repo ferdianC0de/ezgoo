@@ -26,6 +26,7 @@ Route::group(["prefix" => "test"], function(){
   Route::get('form', function(){
     return view('test.testForm');
   });
+  Route::get('test', 'BookingController@test');
   Route::post('search', 'BookingController@search');
   Route::post('order', 'BookingController@order');
   Route::post('fixOrder', 'BookingController@fixOrder');

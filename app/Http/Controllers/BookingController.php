@@ -78,9 +78,7 @@ class BookingController extends Controller
           $model = $this->trainSchedule;
         }
 
-        if ($request->type == "st") {
-          $schedule = $model::findWithPrice($id, $seat);
-        }elseif ($request->type == "rt" && count($id) == 2){
+        if (isset($request->type) && isset($id) && isset($seat)) {
           $schedule = $model::findWithPrice($id, $seat);
         }else{
           abort(404);
@@ -110,16 +108,22 @@ class BookingController extends Controller
           $modelS = $this->trainSchedule;
         }
 
-        if ($request->type == "st") {
-          $schedule = $modelS::find($id);
-        }elseif ($request->type == "rt" && count($id) == 2){
-          $schedule = $modelS::find($id);
+        if (isset($request->type) && isset($id)) {
+          $math = $modelS::seatMath($total, $seat, $id);
+          return $math;
         }else{
           abort(404);
         }
-        return $schedule;
         // }else{
         //   return 'Register dulu baru bisa pesen';
         // }
+      }
+      public function test()
+      {
+          for ($i=1; $i < 5; $i++) {
+            foreach (range('A','Z') as $key) {
+              echo "$key + $i<br>";
+            }
+          }
       }
 }
