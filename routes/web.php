@@ -77,3 +77,5 @@ Route::get('/ksingle', function () {
 Route::get('/history', function () {
   return view('frontend.history');
 });
+
+Route::resource('/airport', 'AirportController');

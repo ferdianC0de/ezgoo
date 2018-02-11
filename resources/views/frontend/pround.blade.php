@@ -1,27 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('pround')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>EZGOO</title>
-</head>
-<body>
-
-<!--navbar-->
-<nav class="navbar navbar-inverse">
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-		<ul class="nav navbar-nav menu-main">
-			<li class="active">
-				<a href="" title="Pesawat">Pesawat</a>
-			</li>
-      <li class="active">
-				<a href="" title="Kereta Api">Kereta Api</a>
-			</li>
-    </ul>
-  </div>
-</nav>
-
+@section('content')
 <!--tanggal&tujuan-->
 <center><h3>Rabu, 17 Januari 2018 - Senin, 22 Januari 2018 | 1 Dewasa</h3></center>
 <div class="row">
@@ -40,6 +19,7 @@
 <div class="row">
 <div class="container">
   <div class="panel panel-default">
+
     <div class="panel-heading">Rangkuman Pilihan</div>
       <center>
         <div class="panel-body">
@@ -70,15 +50,16 @@
         <br>
         <br>
           <h4 class="card-title">IDR Rp 454.000,00</h4>
-	        <button type="button" class="btn btn-primary">Pesan Tiket</button>
+	           <button type="button" class="btn btn-primary">Pesan Tiket</button>
         </div>
       </div>
     </div>
+    </center>
   </div>
 </div>
 </div>
 </form>
-</center>
+
 
 <br>
 
@@ -90,10 +71,10 @@
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Maskapai<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
-              <li><a href="#">LION</a></li>
-              <li><a href="#">AIRASIA</a></li>
-              <li><a href="#">SRIWIJAYA</a></li>
-              <li><a href="#">GARUDA INDONESIA</a></li>
+                <li><a href="#">LION</a></li>
+                <li><a href="#">AIRASIA</a></li>
+                <li><a href="#">SRIWIJAYA</a></li>
+                <li><a href="#">GARUDA INDONESIA</a></li>
             </ul>
           </ul>
         </li>
@@ -104,7 +85,7 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Waktu<span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
               00.00 - 00.00
-              <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
             </ul>
           </ul>
         </li>
@@ -124,8 +105,8 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pemberhentian<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">TRANSIT</a></li>
-            <li><a href="#">LANGSUNG</a></li>
+              <li><a href="#">TRANSIT</a></li>
+              <li><a href="#">LANGSUNG</a></li>
           </ul>
         </ul>
       </li>
@@ -135,10 +116,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Maskapai<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">LION</a></li>
-            <li><a href="#">AIRASIA</a></li>
-            <li><a href="#">SRIWIJAYA</a></li>
-            <li><a href="#">GARUDA INDONESIA</a></li>
+              <li><a href="#">LION</a></li>
+              <li><a href="#">AIRASIA</a></li>
+              <li><a href="#">SRIWIJAYA</a></li>
+              <li><a href="#">GARUDA INDONESIA</a></li>
           </ul>
         </ul>
       </li>
@@ -148,7 +129,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Waktu<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
           </ul>
         </ul>
       </li>
@@ -158,7 +139,7 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Harga<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+              <input type="range" name="optionsRadios" id="optionsRadios1" value="option1" checked>
           </ul>
         </ul>
       </li>
@@ -168,8 +149,8 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pemberhentian<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">TRANSIT</a></li>
-            <li><a href="#">LANGSUNG</a></li>
+              <li><a href="#">TRANSIT</a></li>
+              <li><a href="#">LANGSUNG</a></li>
           </ul>
         </ul>
       </li>
@@ -178,27 +159,27 @@
 
 <!--form pilihan-->
 <form>
-<div class="row">
-  <div class="container">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">Pergi</div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-9">
+  <div class="row">
+    <div class="container">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Pergi</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-md-9">
                 <div class="radio">
                 <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
                     Garuda Indonesia
-                  <p class="card-text">Waktu : 05.30 - 06.35</p>
-                  <p class="card-text">Transit : Langsung</p>
-                  <p class="card-text">Fasilitas : 20kg</p>
+                      <p class="card-text">Waktu : 05.30 - 06.35</p>
+                      <p class="card-text">Transit : Langsung</p>
+                      <p class="card-text">Fasilitas : 20kg</p>
                 </label>
               </div>
             </div>
               <div class="col-md-2">
                 <h4 class="card-title">Rp 450.000,00</h4>
-                <button type="button" class="btn btn-primary">Pesan Tiket</button>
+                  <button type="button" class="btn btn-primary">Pesan Tiket</button>
               </div>
             </div>
           </div>
@@ -211,27 +192,24 @@
               <div class="row">
                 <div class="col-md-9">
                   <div class="radio">
-                <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                    Sriwijaya Air
-                  <p class="card-text">Waktu : 15.35 - 17.00</p>
-                  <p class="card-text">Transit : Langsung</p>
-                  <p class="card-text">Fasilitas : 20kg</p>
-                </label>
-              </div>
-            </div>
+                    <label>
+                      <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
+                      Sriwijaya Air
+                        <p class="card-text">Waktu : 15.35 - 17.00</p>
+                        <p class="card-text">Transit : Langsung</p>
+                        <p class="card-text">Fasilitas : 20kg</p>
+                      </label>
+                    </div>
+                  </div>
               <div class="col-md-3">
-                <h4 class="card-title">Rp 450.000,00</h4>
-                <button type="button" class="btn btn-primary">Pesan Tiket</button>
+                  <h4 class="card-title">Rp 450.000,00</h4>
+                  <button type="button" class="btn btn-primary">Pesan Tiket</button>
               </div>
           </div>
         </div>
       </div>
    </div>
 </div>
+</div>
 </form>
-
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-
-</body>
-</html>
+@endsection

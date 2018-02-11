@@ -1,27 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('ksingle')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>EZGOO</title>
-</head>
-<body>
-
-<!--navbar-->
-<nav class="navbar navbar-inverse">
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-		<ul class="nav navbar-nav menu-main">
-			<li class="active">
-				<a href="" title="Pesawat">Pesawat</a>
-			</li>
-      <li class="active">
-				<a href="" title="Kereta Api">Kereta Api</a>
-			</li>
-    </ul>
-  </div>
-</nav>
-
+@section('content')
 <!--tanggal & tujuan-->
 <center>
   <h3>6 Februari 2018</h3>
@@ -35,21 +14,21 @@
   </center>
 </div>
 
-<br>	
+<br>
 
 <!--pilihan kereta-->
 <div class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-2">
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kereta Api<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Argo Parahyangan 20</a></li>
-            <li><a href="#">Argo Parahyangan 20</a></li>
-            <li><a href="#">Argo Parahyangan 20</a></li>
-            <li><a href="#">Argo Parahyangan 20</a></li>
-          </ul>
+    <div class="col-md-2">
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kereta Api<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Argo Parahyangan 20</a></li>
+              <li><a href="#">Argo Parahyangan 20</a></li>
+              <li><a href="#">Argo Parahyangan 20</a></li>
+              <li><a href="#">Argo Parahyangan 20</a></li>
+            </ul>
         </ul>
       </li>
     </div>
@@ -77,22 +56,23 @@
     <ul class="nav navbar-nav navbar-right">
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Kelas<span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">EKONOMI</a></li>
-            <li><a href="#">BISNIS</a></li>
-			<li><a href="#">EKSEKUTIF</a></li>
-          </ul>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">EKONOMI</a></li>
+              <li><a href="#">BISNIS</a></li>
+			        <li><a href="#">EKSEKUTIF</a></li>
+             </ul>
         </ul>
       </li>
     </div>
   </div>
-</div>
+
 
 <br>
 
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-body">
+
         <div class="col-md-4">
           <div class="card">
             <div class="card-block">
@@ -100,15 +80,15 @@
                 <p class="card-text">Subclass C</p>
 	              <p class="card-text">Ekonomi</p>
 	              <p class="card-text">18.55</p>
-          </div>
-        </div>
+            </div>
+      </div>
       </div>
       <div class="col-md-4">
           <div class="card">
             <div class="card-block">
               <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-	              <p class="card-text"></p>
+                  <p class="card-text"></p>
+	                 <p class="card-text"></p>
                 <br>
                 <br>
                 <br>
@@ -119,18 +99,21 @@
       </div>
       <div class="col-md-4">
         <div class="card-block">
-        <br>
-	        <button type="button" class="btn btn-primary">Pesan Tiket</button>
-          <h4 class="card-title">IDR Rp 454.000,00</h4>
-          <p class="card-text">19.45</p>
+          <br>
+	         <button type="button" class="btn btn-primary">Pesan Tiket</button>
+           <h4 class="card-title">IDR Rp 454.000,00</h4>
+           <p class="card-text">19.45</p>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-body">
+
         <div class="col-md-4">
           <div class="card">
             <div class="card-block">
@@ -157,17 +140,14 @@
       </div>
       <div class="col-md-4">
         <div class="card-block">
-        <br>
-	        <button type="button" class="btn btn-primary">Pesan Tiket</button>
-          <h4 class="card-title">IDR Rp 450.000,00</h4>
-          <p class="card-text">19.45</p>
+          <br>
+	         <button type="button" class="btn btn-primary">Pesan Tiket</button>
+           <h4 class="card-title">IDR Rp 450.000,00</h4>
+           <p class="card-text">19.45</p>
         </div>
+
       </div>
     </div>
   </div>
 </div>
-
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-
-</body>
-</html>
+@endsection

@@ -1,10 +1,7 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('tittle')
-<title>EzGO - Pemesanan</title>
-@stop
-@section('pesawat')
-<center><head>PEMESANAN TIKET</head></center>
-<br>
+
+@section('content')
 <center>
 <td><a href="">Login</a>Ke Akun EzGo anda untuk kemudahan pemesanan</td>
 </center>
@@ -36,7 +33,7 @@
                         <option>Jogjakarta</option>
                         <option>Magelang</option>
                         <option>Bali</option>
-                      </select>     
+                      </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputkewarganegaraan1">No.Telpon</label>
@@ -44,7 +41,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
@@ -82,11 +79,11 @@
                         <label for="exampleInputemail1">Nama Lengkap</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputnamalengkap1">No.KTP/SIM</label>  
+                        <label for="exampleInputnamalengkap1">No.KTP/SIM</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
                     <div class="form-group">
@@ -95,7 +92,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
@@ -135,11 +132,11 @@
                         <label for="exampleInputemail1">Nama Lengkap</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputnamalengkap1">No.KTP/SIM</label>  
+                        <label for="exampleInputnamalengkap1">No.KTP/SIM</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
                     <div class="form-group">
@@ -148,7 +145,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
@@ -185,7 +182,7 @@
                         <label for="exampleInputemail1">Nama Lengkap</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -195,7 +192,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
@@ -213,7 +210,7 @@
                         <label for="exampleInputemail1">Nama Lengkap</label>
                         <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
                     </div>
-                    
+
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
@@ -223,7 +220,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 @endsection

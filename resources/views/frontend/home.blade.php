@@ -51,12 +51,12 @@
 <div role="tabpanel">
 <!-- nav tabs-->
   <div class="panel panel-default">
-    <div class="panel-body">
-      <ul class="nav nav-tabs">
+      <div class="panel-body">
+        <ul class="nav nav-tabs">
       <!-- Untuk Semua Tab..-->
-        <li class="active"><a href="#pesawat" data-toggle="tab">Pesawat</a></li>
-        <li><a href="#kereta" data-toggle="tab">Kereta</a></li>
-      </ul>
+            <li class="active"><a href="#pesawat" data-toggle="tab">Pesawat</a></li>
+            <li><a href="#kereta" data-toggle="tab">Kereta</a></li>
+        </ul>
   <!-- Tab panes, ini content dari tab di atas -->
   <div class="tab-content">
     <div class="tab-pane active" id="pesawat">
@@ -64,71 +64,71 @@
         <div class="col-md-4">
           <label for="dari">Kota Asal</label>
             <select class='form-control select2' title="Kota Asal" id="departure" name="departure" required="">
-              <option>Jakarta - CGK</option>
-              <option>Jakarta - Halim</option>
-              <option>Yogyakarta - Adi Sucipto</option>
-              <option>Bali - Ngurah Rai</option>
-              <option>Surabaya - Juanda</option>
+                <option>Jakarta - CGK</option>
+                <option>Jakarta - Halim</option>
+                <option>Yogyakarta - Adi Sucipto</option>
+                <option>Bali - Ngurah Rai</option>
+                <option>Surabaya - Juanda</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="tujuan">Tujuan</label>
             <select class="form-control">
-              <option>Jakarta - CGK</option>
-              <option>Jakarta - Halim</option>
-              <option>Yogyakarta - Adi Sucipto</option>
-              <option>Bali - Ngurah Rai</option>
-              <option>Surabaya - Juanda</option>
+                <option>Jakarta - CGK</option>
+                <option>Jakarta - Halim</option>
+                <option>Yogyakarta - Adi Sucipto</option>
+                <option>Bali - Ngurah Rai</option>
+                <option>Surabaya - Juanda</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="kelas penerbangan">Kelas Penerbangan</label>
             <select class="form-control">
-              <option>Ekonomi</option>
-              <option>Bussines</option>
-              <option>First Class</option>
+                <option>Ekonomi</option>
+                <option>Bussines</option>
+                <option>First Class</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="Perjalanan">Perjalanan</label>
             <select class='form-control select2' id="trip-type" name="trip_type" required="">
-              <option>Sekali Jalan</option>
-              <option>Pulang Pergi</option>
+                <option>Sekali Jalan</option>
+                <option>Pulang Pergi</option>
             </select>
         </div>
 
         <div class="col-md-2">
           <label for="dewasa">Dewasa</label>
             <select class="form-control">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
             </select>
         </div>
 
         <div class="col-md-2">
           <label for="anak">Anak-Anak</label>
             <select class="form-control">
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
             </select>
         </div>
 
         <div class="col-md-2">
           <label for="bayi">Bayi</label>
             <select class="form-control">
-              <option>0</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
+                <option>0</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
             </select>
         </div>
 
@@ -141,88 +141,92 @@
           <label for="pulang">Tanggal Pulang</label>
           <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
         </div>
+
         <div class="col-md-4"><br>
           <button class="btn btn-primary">Cari Tiket Pesawat</button>
         </div>
+
       </form>
     </div>
 
   <!-- Kereta-->
     <div class="tab-pane" id="kereta">
-    <form>
+      <form>
+        <div class="col-md-4">
+          <label for="kotaasal">Kota Asal</label>
+            <select class="form-control">
+                <option>Jakarta - Gambir (GMR)</option>
+                <option>Bandung - Bandng (BD)</option>
+                <option>Jakarta Selatan - Manggarai</option>
+                <option>Jakarta Timur - Jatinegara</option>
+                <option>Jakarta Utara - Tanjung Priok</option>
+              </select>
+          </div>
+
     <div class="col-md-4">
-    <label for="kotaasal">Kota Asal</label>
-    <select class="form-control">
-      <option>Jakarta - Gambir (GMR)</option>
-      <option>Bandung - Bandng (BD)</option>
-      <option>Jakarta Selatan - Manggarai</option>
-      <option>Jakarta Timur - Jatinegara</option>
-      <option>Jakarta Utara - Tanjung Priok</option>
-      </select>
+      <label for="kotatujuan">Kota Tujuan</label>
+          <select class="form-control">
+              <option>Jakarta - Gambir (GMR)</option>
+              <option>Bandung - Bandng (BD)</option>
+              <option>Jakarta Selatan - Manggarai</option>
+              <option>Jakarta Timur - Jatinegara</option>
+              <option>Jakarta Utara - Tanjung Priok</option>
+            </select>
+      </div>
+
+    <div class="col-md-4">
+        <label for="kelas penerbangan">Kelas Kereta</label>
+          <select class="form-control">
+              <option>Ekonomi</option>
+              <option>Bussines</option>
+              <option>Eksekutif</option>
+            </select>
+      </div>
+
+    <div class="col-md-4">
+      <label for="Perjalanan">Perjalanan</label>
+          <select class='form-control select2' id="trip-type" name="trip_type" required="">
+              <option>Sekali Jalan</option>
+              <option>Pulang Pergi</option>
+            </select>
+    </div>
+
+
+    <div class="col-md-4">
+        <label for="berangkat">Tanggal Berangkat</label>
+        <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
     </div>
 
     <div class="col-md-4">
-    <label for="kotatujuan">Kota Tujuan</label>
-    <select class="form-control">
-    <option>Jakarta - Gambir (GMR)</option>
-      <option>Bandung - Bandng (BD)</option>
-      <option>Jakarta Selatan - Manggarai</option>
-      <option>Jakarta Timur - Jatinegara</option>
-      <option>Jakarta Utara - Tanjung Priok</option>
-      </select>
-    </div>
-
-    <div class="col-md-4">
-    <label for="kelas penerbangan">Kelas Kereta</label>
-    <select class="form-control">
-      <option>Ekonomi</option>
-      <option>Bussines</option>
-      <option>Eksekutif</option>
-      </select>
-    </div>
-
-    <div class="col-md-4">
-    <label for="Perjalanan">Perjalanan</label>
-    <select class='form-control select2' id="trip-type" name="trip_type" required="">
-      <option>Sekali Jalan</option>
-      <option>Pulang Pergi</option>
-      </select>
-    </div>
-
-
-    <div class="col-md-4">
-    <label for="berangkat">Tanggal Berangkat</label>
-    <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
-    </div>
-
-    <div class="col-md-4">
-    <label for="pulang">Tanggal Pulang</label>
-    <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
+        <label for="pulang">Tanggal Pulang</label>
+        <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
     </div>
 
     <div class="col-md-2">
-    <label for="dewasa">Dewasa</label>
-    <select class="form-control">
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      </select>
+        <label for="dewasa">Dewasa</label>
+          <select class="form-control">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
     </div>
 
     <div class="col-md-2">
-    <label for="anak">Anak-Anak</label>
-    <select class="form-control">
-    <option>0</option>
-      <option>1</option>
-      <option>2</option>
-      <option>3</option>
-      <option>4</option>
-      </select>
+        <label for="anak">Anak-Anak</label>
+          <select class="form-control">
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
     </div>
+
     <div class="col-md-4"><br>
-    <button class="btn btn-primary">Cari Tiket Kereta</button>
+        <button class="btn btn-primary">Cari Tiket Kereta</button>
     </div>
+
     </div>
     </form>
 
@@ -234,27 +238,31 @@
  <!-- Services -->
  <section id="services">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Why Booking with EzGo?</h2>
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                <h2 class="section-heading text-uppercase">Why Booking with EzGo?</h2>
+              </div>
           </div>
-        </div>
+
         <div class="row text-center">
+            <div class="col-md-4">
+                <img src="images/bayar.png" alt="">
+                <h4 class="service-heading">Berbagai Pilihan Pembayaran</h4>
+                <p class="text-muted">Lebih fleksibel dengan berbagai metode pembayaran dari ATM Transfer, Credit Card, hingga Internet Banking.</p>
+            </div>
+
           <div class="col-md-4">
-          <img src="images/bayar.png" alt="">
-            <h4 class="service-heading">Berbagai Pilihan Pembayaran</h4>
-            <p class="text-muted">Lebih fleksibel dengan berbagai metode pembayaran dari ATM Transfer, Credit Card, hingga Internet Banking.</p>
+              <img src="images/search.png" alt="">
+              <h4 class="service-heading">Hasil Pencarian paling Ekstensif</h4>
+              <p class="text-muted">Dengan pencarian satu klik, temukan tiket Pesawat dan Kereta ke 100.000 rute di seluruh Asia Pasifik dan Eropa untuk penerbangan.</p>
           </div>
+
           <div class="col-md-4">
-          <img src="images/search.png" alt="">
-            <h4 class="service-heading">Hasil Pencarian paling Ekstensif</h4>
-            <p class="text-muted">Dengan pencarian satu klik, temukan tiket Pesawat dan Kereta ke 100.000 rute di seluruh Asia Pasifik dan Eropa untuk penerbangan.</p>
+              <img src="images/pay.png" alt="">
+              <h4 class="service-heading">Transaksi Aman Dijamin</h4>
+              <p class="text-muted">Keamanan dan privasi transaksi online Anda dilindungi, anda akan Menerima konfirmasi instan dan e-ticket langsung di email anda.</p>
           </div>
-          <div class="col-md-4">
-          <img src="images/pay.png" alt="">
-            <h4 class="service-heading">Transaksi Aman Dijamin</h4>
-            <p class="text-muted">Keamanan dan privasi transaksi online Anda dilindungi, anda akan Menerima konfirmasi instan dan e-ticket langsung di email anda.</p>
-          </div>
+
         </div>
       </div>
     </section>
@@ -265,11 +273,11 @@
      <!-- Partners -->
  <section id="partners">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Our Partners</h2>
-            <img src="images/maskapai2.png" alt="">
-          </div>
+          <div class="row">
+            <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Our Partners</h2>
+              <img src="images/maskapai2.png" alt="">
+            </div>
         </div>
 
         <hr class="half-rule">
@@ -277,11 +285,12 @@
  <!-- Contact -->
  <section id="contact">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-12 text-center">
-            <h2 class="section-heading text-uppercase">Contact Us</h2>
-          </div>
+          <div class="row">
+              <div class="col-lg-12 text-center">
+              <h2 class="section-heading text-uppercase">Contact Us</h2>
+              </div>
         </div>
+
         <div class="row">
           <div class="col-lg-12">
             <form id="contactForm" name="sentMessage" novalidate>
@@ -319,16 +328,4 @@
     </section>
 
     <hr class="half-rule">
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <span class="copyright">Copyright Luminosite &copy; Your Website 2018</span>
-          </div>
-
-        </div>
-      </div>
-    </footer>
-
 @endsection

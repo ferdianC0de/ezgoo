@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div cla onloadedmetadata=""ss="panel-heading">Register Akun Anda</div>
+                <div class="panel-heading">Register Akun Anda</div>
 
                 <div class="panel-body">
                       @if(Session::has('alert'))
@@ -110,4 +110,5 @@
         </div>
     </div>
 </div>
+<hr class="half-rule">
 @endsection

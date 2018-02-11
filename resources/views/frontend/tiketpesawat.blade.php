@@ -1,8 +1,8 @@
-@extends('layout.app')
+@extends('layouts.app')
 @section('tittle')
 <title>EzGO - Pemesanan</title>
 @stop
-@section('tiketpesawat')
+@section('content')
 <center><head>PEMESANAN TIKET</head></center>
 <br>
 <center>
@@ -36,7 +36,7 @@
                         <option>Jogjakarta</option>
                         <option>Magelang</option>
                         <option>Bali</option>
-                      </select>     
+                      </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputkewarganegaraan1">No.Handphone</label>
@@ -44,7 +44,7 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
  <!-- PERGI -->
@@ -88,13 +88,13 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputnamalengkap1">Tanggal Lahir</label> 
-                        <input type="namalengkap" class="form-control" placeholder="namalengkap">    
+                        <label for="exampleInputnamalengkap1">Tanggal Lahir</label>
+                        <input type="namalengkap" class="form-control" placeholder="namalengkap">
                     </div>
-                    
+
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
