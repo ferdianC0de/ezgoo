@@ -18,6 +18,10 @@ class CreatePassengersTable extends Migration
             $table->integer('detail_booking_id');
             $table->string('name');
             $table->timestamps();
+
+            $table->index('detail_booking_id')
+                  ->references('id')->on('detail_bookings')
+                  ->onDelete('cascade');
         });
     }
 

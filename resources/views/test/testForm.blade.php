@@ -1,10 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-  <form  action="{{url('plane/search')}}" method="post">
+  <form  action="{{url('test/search')}}" method="post">
     {{ csrf_field() }}
     {{-- Ubah ke round trip ganti value type sama munculin form tanggal pulang--}}
-    <input type="hidden" name="type" value="st">
+    <input type="hidden" name="type" value="rt">
+    <input type="hidden" name="vehicle" value="plane">
     <p>Kelas</p>
     <input type="text" name="class">
     <p>Dewasa</p>
