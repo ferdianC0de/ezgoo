@@ -16,11 +16,12 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
-
 Route::get('/home', 'UserController@index')->name('home');
+
+//User
 Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
 Route::put('/update', 'UserController@update')->name('update');
+//
 
 Route::group(["prefix" => "test"], function(){
   Route::get('form', function(){
