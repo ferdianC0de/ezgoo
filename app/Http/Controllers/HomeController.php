@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-USe App\User;
+use App\Models\PlaneSchedule;
 
 class HomeController extends Controller
 {
@@ -12,24 +12,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware(['auth','isVerified']);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
-    }
-
-    public function edit($id)
-    {
-      $data = User::find($id);
-      return view('edit',$data);
+        $planeSchedule = PlaneSchedule::select('id')->get();
+        return $planeSchedule;
+        return view('index');
     }
 }
