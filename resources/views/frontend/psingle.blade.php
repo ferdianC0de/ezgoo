@@ -1,27 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('psingle')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>EZGOO</title>
-</head>
-<body>
-
-<!--navbar-->
-<nav class="navbar navbar-inverse">
-	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-		<ul class="nav navbar-nav menu-main">
-			<li class="active">
-				<a href="" title="Pesawat">Pesawat</a>
-			</li>
-      <li class="active">
-				<a href="" title="Kereta Api">Kereta Api</a>
-			</li>
-    </ul>
-  </div>
-</nav>
-
+@section('content')
 <!--tanggal & tujuan-->
 <center>
   <h3>Rabu, 17 Januari 2018 - Senin, 22 Januari 2018 | 1 Dewasa</h3>
@@ -45,10 +24,10 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Maskapai<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">LION</a></li>
-            <li><a href="#">AIRASIA</a></li>
-            <li><a href="#">SRIWIJAYA</a></li>
-            <li><a href="#">GARUDA INDONESIA</a></li>
+              <li><a href="#">LION</a></li>
+              <li><a href="#">AIRASIA</a></li>
+              <li><a href="#">SRIWIJAYA</a></li>
+              <li><a href="#">GARUDA INDONESIA</a></li>
           </ul>
         </ul>
       </li>
@@ -78,8 +57,8 @@
       <li class="dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Pemberhentian<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">TRANSIT</a></li>
-            <li><a href="#">LANGSUNG</a></li>
+              <li><a href="#">TRANSIT</a></li>
+              <li><a href="#">LANGSUNG</a></li>
           </ul>
         </ul>
       </li>
@@ -94,6 +73,7 @@
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-body">
+
         <div class="col-md-4">
           <div class="card">
             <div class="card-block">
@@ -108,30 +88,33 @@
           <div class="card">
             <div class="card-block">
               <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-	              <p class="card-text"></p>
-                <br>
-                <br>
-                <br>
-                <br>
+                  <p class="card-text"></p>
+	                 <p class="card-text"></p>
+                   <br>
+                   <br>
+                   <br>
+                   <br>
 	              <p class="card-text">3jam 34menit</p>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card-block">
-        <br>
-	        <button type="button" class="btn btn-primary">Pesan Tiket</button>
-          <h4 class="card-title">IDR Rp 454.000,00</h4>
-          <p class="card-text">19.45</p>
+          <br>
+	           <button type="button" class="btn btn-primary">Pesan Tiket</button>
+             <h4 class="card-title">IDR Rp 454.000,00</h4>
+             <p class="card-text">19.45</p>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="panel panel-default">
       <div class="panel-body">
+
         <div class="col-md-4">
           <div class="card">
             <div class="card-block">
@@ -146,12 +129,12 @@
           <div class="card">
             <div class="card-block">
               <h4 class="card-title"></h4>
-                <p class="card-text"></p>
-	              <p class="card-text"></p>
-                <br>
-                <br>
-                <br>
-                <br>
+                  <p class="card-text"></p>
+	                 <p class="card-text"></p>
+                   <br>
+                   <br>
+                   <br>
+                   <br>
 	              <p class="card-text">3jam 16menit</p>
           </div>
         </div>
@@ -165,8 +148,6 @@
         </div>
       </div>
     </div>
-
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-
-</body>
-</html>
+  </div>
+</div>
+@endsection

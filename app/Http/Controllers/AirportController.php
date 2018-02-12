@@ -10,7 +10,7 @@ use App\Models\Plane;
 use App\Models\Airport;
 use App\Models\Booking;
 
-class PlaneController extends Controller
+class AirportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,6 +20,8 @@ class PlaneController extends Controller
     public function index()
     {
         //
+        $data = Airport::all();
+        return view('modulplane.airport.index',compact('data'));
     }
 
     /**
@@ -29,7 +31,8 @@ class PlaneController extends Controller
      */
     public function create()
     {
-
+        //
+        return view('modulplane.airport.create');
     }
 
     /**
@@ -40,8 +43,15 @@ class PlaneController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $this->validate($request, [
+          'airport_name' => 'required',
+          'code' => 'required',
+          'city' => 'required'
+        ]);
+        Airport::create($data);
+        return redirect('airport')->with('alert-success','Berhasil Menambahkan Data!');
+   }
 
-    }
 
     /**
      * Display the specified resource.
@@ -62,7 +72,8 @@ class PlaneController extends Controller
      */
     public function edit($id)
     {
-        //
+        $data = Airport::where('id',$id)->get();
+        return view('modulplane.airport.edit',compact('data'));
     }
 
     /**
@@ -74,7 +85,14 @@ class PlaneController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        //
+        $data = $this->validate($request, [
+          'airport_name' => 'required',
+          'code' => 'required',
+          'city' => 'required'
+        ]);
+        Airport::find($id)->update($data);
+        return redirect('airport')->with('alert-success','Data berhasil diubah!');
     }
 
     /**
@@ -85,7 +103,9 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-
+        //
+        $data = Airport::where('id',$id)->first();
+        $data->delete();
+        return redirect('airport')->with('alert-success','Data berhasi dihapus!');
     }
-
 }

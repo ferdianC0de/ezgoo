@@ -86,3 +86,5 @@ Route::group(["prefix" => 'admin'], function(){
   Route::put('update/{id}','AdminController@update_data_pemesan');
   Route::delete('delete/data_pemesan/{id}','AdminController@destroy_data_pemesan');
 });
+
+Route::resource('/airport', 'AirportController');

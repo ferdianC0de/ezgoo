@@ -32,16 +32,17 @@
           <div class="panel-heading">
             <h4>Ubah Password</h4>
           </div>
+
             <div class="panel-body">
               <form>
                 <div class="col-md-6">
-                  <label for="pw lama">Password Lama</label>
+                  <label for="pw lama">Password Lama
                     <input type="text" class="form-control" id="pw lama" placeholder="Masukkan Password">
                   </label>
-                  <label for="pw baru">Password Baru</label>
+                  <label for="pw baru">Password Baru
                     <input type="text" class="form-control" id="pw baru" placeholder="Masukkan Password">
                   </label>
-                  <label for="konfirm">Confirm Your New Password</label>
+                  <label for="konfirm">Confirm Your New Password
                     <input type="text" class="form-control" id="konfirm" placeholder="Konfirmasi">
                   </label>
                   <br>
@@ -51,16 +52,11 @@
                   </p>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
       </div>
    </div>
 </form>
-
-
-
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-
-</body>
-</html>
+@endsection
