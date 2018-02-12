@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('tittle')
-<title>EzGO - Pemesanan</title>
+<title>{{config('app.name')}} - Pemesanan</title>
 @stop
 @section('content')
 <center><head>PEMESANAN TIKET</head></center>
