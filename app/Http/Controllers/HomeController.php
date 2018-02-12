@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\PlaneSchedule;
+use App\Models\Airport;
+use App\Models\TrainStation;
 
 class HomeController extends Controller
 {
@@ -14,8 +15,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $planeSchedule = PlaneSchedule::select('id')->get();
-        return $planeSchedule;
-        return view('index');
+        $airport = Airport::all();
+        $train_station = TrainStation::all();
+        return view('index', compact('airport', 'train_station'));
     }
 }

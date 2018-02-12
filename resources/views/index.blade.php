@@ -61,25 +61,32 @@
   <div class="tab-content">
     <div class="tab-pane active" id="pesawat">
       <form action="{{ route('search') }}" method="post">
+        {{ csrf_field() }}
         <input type="hidden" name="vehicle" value="plane">
         <div class="col-md-4">
           <label for="from">Kota Asal</label>
             <select class='form-control select2' title="Dari" id="from" name="from" required>
-                <option>Jakarta - CGK</option>
+              @foreach ($airport as $a)
+                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+              @endforeach
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="tujuan">Tujuan</label>
             <select class="form-control" title="Tujuan" id="destination" name="destination" required>
-                <option>Surabaya - Juanda</option>
+              @foreach ($airport as $a)
+                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+              @endforeach
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="kelas penerbangan">Kelas Penerbangan</label>
             <select class="form-control" id="class" name="class" required>
-                <option>Ekonomi</option>
+                <option value="Ekonomi">Ekonomi</option>
+                <option value="Bisnis">Ekonomi</option>
+                <option value="First Class">Ekonomi</option>
             </select>
         </div>
 
