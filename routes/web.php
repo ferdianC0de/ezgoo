@@ -10,28 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
-
-Route::get('/home', 'UserController@index')->name('home');
-Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
-Route::put('/update', 'UserController@update')->name('update');
-
-Route::group(["prefix" => "test"], function(){
-  Route::get('form', function(){
-    return view('test.testForm');
-  });
-  Route::get('test', 'BookingController@test');
-  Route::post('search', 'BookingController@search');
-  Route::post('order', 'BookingController@order');
-  Route::post('fixOrder', 'BookingController@fixOrder');
-});
-
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -71,20 +49,30 @@ Route::group(['prefix'=> 'frontend'], function(){
   });
 });
 
-Route::group(["prefix" => 'admin'], function(){
-  Route::get('home', 'AdminController@index');
-  Route::resource('index','AdminController');
-  Route::get('data_pemesan','AdminController@data_pemesan');
-  Route::get('kereta','AdminController@kereta_api');
-  Route::get('pesawat','AdminController@pesawat');
-  Route::post('create','AdminController@create');
+Auth::routes();
+Route::get('', 'HomeController@index');
 
-  /*Edit*/
-  Route::get('edit/data_pemesan/{id}', 'AdminController@edit_data_pemesan');
-  Route::post('edit/data_pemesan/{id}', 'AdminController@update_data_pemesan') ;
-  Route::get('edit/{id}','AdminController@edit_data_pemesan');
-  Route::put('update/{id}','AdminController@update_data_pemesan');
-  Route::delete('delete/data_pemesan/{id}','AdminController@destroy_data_pemesan');
+Route::group(['prefix' => 'booking'], function(){
+  Route::post('search', 'BookingController@search')->name('search');
+  Route::post('order', 'BookingController@order')->name('order');
+  Route::post('fixOrder', 'BookingController@fixOrder')->name('fixOrder');
 });
 
-Route::resource('/airport', 'AirportController');
+Route::group(['prefix'=>'admin'], function(){
+  Route::resource('airport', 'AirportController');
+});
+Route::group(['prefix' => 'user'], function(){
+  Route::get('home', 'UserController@index')->name('home');
+  Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
+  Route::put('update', 'UserController@update')->name('update');
+});
+
+Route::group(['prefix' => 'test'], function(){
+  Route::get('form', function(){
+    return view('test.testForm');
+  });
+  Route::get('test', 'BookingController@test');
+  Route::post('search', 'BookingController@search');
+  Route::post('order', 'BookingController@order');
+  Route::post('fixOrder', 'BookingController@fixOrder');
+});

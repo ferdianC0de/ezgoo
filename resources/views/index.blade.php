@@ -60,90 +60,81 @@
   <!-- Tab panes, ini content dari tab di atas -->
   <div class="tab-content">
     <div class="tab-pane active" id="pesawat">
-      <form>
+      <form action="{{ route('search') }}" method="post">
+        <input type="hidden" name="vehicle" value="plane">
         <div class="col-md-4">
-          <label for="dari">Kota Asal</label>
-            <select class='form-control select2' title="Kota Asal" id="departure" name="departure" required="">
+          <label for="from">Kota Asal</label>
+            <select class='form-control select2' title="Dari" id="from" name="from" required>
                 <option>Jakarta - CGK</option>
-                <option>Jakarta - Halim</option>
-                <option>Yogyakarta - Adi Sucipto</option>
-                <option>Bali - Ngurah Rai</option>
-                <option>Surabaya - Juanda</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="tujuan">Tujuan</label>
-            <select class="form-control">
-                <option>Jakarta - CGK</option>
-                <option>Jakarta - Halim</option>
-                <option>Yogyakarta - Adi Sucipto</option>
-                <option>Bali - Ngurah Rai</option>
+            <select class="form-control" title="Tujuan" id="destination" name="destination" required>
                 <option>Surabaya - Juanda</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="kelas penerbangan">Kelas Penerbangan</label>
-            <select class="form-control">
+            <select class="form-control" id="class" name="class" required>
                 <option>Ekonomi</option>
-                <option>Bussines</option>
-                <option>First Class</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="Perjalanan">Perjalanan</label>
-            <select class='form-control select2' id="trip-type" name="trip_type" required="">
-                <option>Sekali Jalan</option>
-                <option>Pulang Pergi</option>
+            <select class='form-control select2' id="type" name="type" required>
+                <option value="st">Sekali Jalan</option>
+                <option value="rt">Pulang Pergi</option>
             </select>
         </div>
 
         <div class="col-md-2">
-          <label for="dewasa">Dewasa</label>
+          <label for="dewasa" id="adult" name="adult" required>Dewasa</label>
             <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
             </select>
         </div>
 
         <div class="col-md-2">
-          <label for="anak">Anak-Anak</label>
+          <label for="anak" id="child" name="child" required>Anak-Anak</label>
             <select class="form-control">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
             </select>
         </div>
 
         <div class="col-md-2">
-          <label for="bayi">Bayi</label>
+          <label for="bayi" id="baby" name="baby" required>Bayi</label>
             <select class="form-control">
-                <option>0</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="berangkat">Tanggal Berangkat</label>
-          <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
+          <input type="date" class="form-control" id="date-departing" name='date' placeholder="30/01/2018" required>
         </div>
 
         <div class="col-md-4">
           <label for="pulang">Tanggal Pulang</label>
-          <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
+          <input type="date" class="form-control" id="date-departing" name='dateB' placeholder="30/01/2018" required>
         </div>
 
         <div class="col-md-4"><br>
-          <button class="btn btn-primary">Cari Tiket Pesawat</button>
+          <button type="submit" class="btn btn-primary">Cari Tiket Pesawat</button>
         </div>
 
       </form>
@@ -151,7 +142,7 @@
 
   <!-- Kereta-->
     <div class="tab-pane" id="kereta">
-      <form>
+      <form action="{{route('search')}}" method="post">
         <div class="col-md-4">
           <label for="kotaasal">Kota Asal</label>
             <select class="form-control">
