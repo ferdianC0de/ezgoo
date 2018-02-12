@@ -27,6 +27,7 @@ DB::table('plane_schedules')->delete();
         'destination' => $lastAirport->city,
         'from' => $firstAirport->city,
         'boarding_time' => date('Y-m-d H:i:s'),
+        'duration' => rand(1,99),
         'gate' => rand(1,99),
         'eco_seat' => rand(1,10),
         'bus_seat' => rand(1,10),

@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -34,8 +32,6 @@ Route::group(["prefix" => "test"], function(){
   Route::post('fixOrder', 'BookingController@fixOrder');
 });
 
-=======
->>>>>>> 8a43ad51f842c8bf5ed341db0acd08805a647cb8
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -75,8 +71,8 @@ Route::group(['prefix'=> 'frontend'], function(){
   });
 });
 
-Auth::routes();
-Route::get('', 'HomeController@index');
+// Auth::routes();
+// Route::get('', 'HomeController@index');
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
