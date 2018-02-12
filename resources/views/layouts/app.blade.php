@@ -13,76 +13,74 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <link href="{{ asset('public/images') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top" >
-            <div class="container">
-                <div class="navbar-header page-scroll">
+  <div id="app">
+    <nav class="navbar navbar-inverse navbar-static-top" >
+      <div class="container">
+        <div class="navbar-header page-scroll">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+          <!-- Collapsed Hamburger -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
-                        {{ config('app.name', 'EZGOO.') }}
-                    </a>
-                </div>
+          <!-- Branding Image -->
+          <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
+              {{ config('app.name', 'EZGOO.') }}
+          </a>
+        </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
-                    </ul>
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+          <!-- Left Side Of Navbar -->
+          <ul class="nav navbar-nav">
+              &nbsp;
+          </ul>
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
+          <!-- Right Side Of Navbar -->
+          <ul class="nav navbar-nav navbar-right">
+            <!-- Authentication Links -->
+            @guest
+              <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Register</a></li>
+              <li class="page-scroll">
+                <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+              </li>
+            @else
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
 
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                            <li class="page-scroll">
-                            <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-                        </li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
 
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+              </li>
+            @endguest
+          </ul>
+        </div>
+      </div>
+    </nav>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    @yield('content')
 
-          @yield('content')
-
-
-    </div>
+  </div>
 
     <!--footer-->
     <div class="container">
@@ -137,27 +135,13 @@
         </div>
     </footer>
     <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">EZGOO 2018</a></p></section>
-
 </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
-
-<script type="text/javascript">
-  $(function(){
-    $(".departure").select2();
-  });
-</script>
-
-<script>
-(function(){
-        $("#cart").on("click", function(){
-            $(".shopping-cart").fadeToggle("fast");
-        });
-        })();
-</script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+@stack('scripts')
 
 </body>
 </html>
