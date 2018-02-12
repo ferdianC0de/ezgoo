@@ -10,6 +10,28 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes();
+Route::get('/home', 'UserController@index')->name('home');
+
+//User
+Route::get('/edit/{id}/{type}', 'UserController@edit')->name('edit');
+Route::put('/update', 'UserController@update')->name('update');
+//
+
+Route::group(["prefix" => "test"], function(){
+  Route::get('form', function(){
+    return view('test.testForm');
+  });
+  Route::get('test', 'BookingController@test');
+  Route::post('search', 'BookingController@search');
+  Route::post('order', 'BookingController@order');
+  Route::post('fixOrder', 'BookingController@fixOrder');
+});
+
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -49,8 +71,8 @@ Route::group(['prefix'=> 'frontend'], function(){
   });
 });
 
-Auth::routes();
-Route::get('', 'HomeController@index');
+// Auth::routes();
+// Route::get('', 'HomeController@index');
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');

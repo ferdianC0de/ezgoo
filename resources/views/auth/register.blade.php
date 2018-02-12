@@ -33,29 +33,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('nama_depan') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('first_name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Nama Depan</label>
 
                             <div class="col-md-6">
-                                <input id="nama_depan" type="text" class="form-control" name="nama_depan" value="{{ old('name_depan') }}" required>
+                                <input id="first_name" type="text" class="form-control" name="first_name" value="{{ old('name_depan') }}" required>
 
-                                @if ($errors->has('nama_depan'))
+                                @if ($errors->has('first_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nama_depan') }}</strong>
+                                        <strong>{{ $errors->first('first_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('nama_belakang') ? ' has-error' : '' }}">
-                            <label for="nama_belakang" class="col-md-4 control-label">Nama Belakang</label>
+                        <div class="form-group{{ $errors->has('last_name') ? ' has-error' : '' }}">
+                            <label for="last_name" class="col-md-4 control-label">Nama Belakang</label>
 
                             <div class="col-md-6">
-                                <input id="nama_belakang" type="text" class="form-control" name="nama_belakang" value="{{ old('nama_belakang') }}" required autofocus>
+                                <input id="last_name" type="text" class="form-control" name="last_name" value="{{ old('last_name') }}" required autofocus>
 
-                                @if ($errors->has('nama_belakang'))
+                                @if ($errors->has('last_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('nama_belakang') }}</strong>
+                                        <strong>{{ $errors->first('last_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
