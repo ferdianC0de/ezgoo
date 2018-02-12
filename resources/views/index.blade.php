@@ -67,7 +67,7 @@
           <label for="from">Kota Asal</label>
             <select class='form-control select2' title="Dari" id="from" name="from" required>
               @foreach ($airport as $a)
-                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
               @endforeach
             </select>
         </div>
@@ -76,7 +76,7 @@
           <label for="tujuan">Tujuan</label>
             <select class="form-control" title="Tujuan" id="destination" name="destination" required>
               @foreach ($airport as $a)
-                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
               @endforeach
             </select>
         </div>
@@ -99,7 +99,7 @@
         </div>
 
         <div class="col-md-2">
-          <label for="dewasa" id="adult" name="adult" required>Dewasa</label>
+          <label for="dewasa" name="adult" required>Dewasa</label>
             <select class="form-control">
                 <option value="1">1</option>
                 <option value="2">2</option>

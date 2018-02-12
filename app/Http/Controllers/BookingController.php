@@ -23,6 +23,7 @@ class BookingController extends Controller
 
       public function search(Request $request)
       {
+        return $request;
         if ($request->baby <= $request->adult){
           $total = $request->child + $request->adult;
           $vehicle = $request->vehicle;
