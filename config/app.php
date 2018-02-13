@@ -171,6 +171,7 @@ return [
         /*
          * Package Service Providers...
          */
+         Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -195,6 +196,7 @@ return [
     */
 
     'aliases' => [
+      'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
       //Email verification
       'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,

@@ -61,10 +61,13 @@ Route::group(['prefix' => 'booking'], function(){
   Route::post('fixOrder', 'BookingController@fixOrder')->name('fixOrder');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
+  Route::get('/home', 'AdminController@index');
   Route::resource('airport', 'AirportController');
 });
-Route::group(['prefix' => 'user'], function(){
+Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
+  // Route::get('admin', 'AdminController@index')->name('admin');
+
   Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
