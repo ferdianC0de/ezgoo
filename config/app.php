@@ -138,9 +138,6 @@ return [
 
     'providers' => [
 
-      //Email verification
-      Jrean\UserVerification\UserVerificationServiceProvider::class,
-
         /*
          * Laravel Framework Service Providers...
          */
@@ -171,7 +168,9 @@ return [
         /*
          * Package Service Providers...
          */
+         Jrean\UserVerification\UserVerificationServiceProvider::class,
          Zizaco\Entrust\EntrustServiceProvider::class,
+         Jimmyjs\ReportGenerator\ServiceProvider::class,
 
         /*
          * Application Service Providers...
