@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Auth;
+use Carbon\Carbon;
+use Yajra\DataTables\DataTables;
+
 use App\Models\Plane;
 use App\Models\PlaneSchedule;
-use Auth;
 
 class BookingController extends Controller
 {
@@ -41,19 +44,19 @@ class BookingController extends Controller
           }elseif($request->class == "Bisnis") {
             $seat = 'bus_seat';
           }elseif($request->class == "First Class"){
-            $seat = 'first_class';
+            $seat = 'first_seat';
           }elseif($request->class == "Executive Class"){
-            $seat = 'exec_class';
+            $seat = 'exec_seat';
           }
           //cek tipe
           if ($type == 'st'){
             $schedule = $model::findSchedule($request->from, $request->destination, $request->date, $seat, $total);
-            return view('test.testSingle', compact('schedule', 'vehicle','type','total', 'seat'));
+            return view('booking.bookingSingle', compact('schedule', 'vehicle','type','total', 'seat'));
             // return $schedule;
           }elseif($type == 'rt'){
             $scheduleG = $model::findSchedule($request->from, $request->destination, $request->date, $seat, $total);
             $scheduleB = $model::findSchedule($request->destination, $request->from, $request->dateB, $seat, $total);
-            return view('test.testRound', compact('scheduleG', 'scheduleB', 'vehicle','type','total', 'seat'));
+            return view('booking.bookingRound', compact('scheduleG', 'scheduleB', 'vehicle','type','total', 'seat'));
             // return $scheduleG;
           }else{
             abort(404);
@@ -120,10 +123,23 @@ class BookingController extends Controller
       }
       public function test()
       {
-          for ($i=1; $i < 5; $i++) {
-            foreach (range('A','Z') as $key) {
-              echo "$key + $i<br>";
-            }
-          }
+        return view('test.testTable');
       }
+      public function testData(Datatables $datatables)
+      {
+        $query = Plane::select('*');
+        return $datatables->eloquent($query)->make(true);
+      }
+      //Note
+      //->make(true); selalu paling akhir
+      //Nambah kolom
+        //->addColumn('nama-kolom', function($bebas){
+        // apapun yang mau ditampilin, nanti isinya tinggal return
+        //})
+      //Edit kolom
+        //->editColumn('kolom-yang-diedit', function($bebas){
+        //sama aja kaya nambah, cuma ini ngedit yg udah ada
+        //})
+      //Kalo mau nambahin kolom + html
+        //->rawColumns(['action','lengthofcontract'])
 }

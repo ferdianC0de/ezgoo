@@ -65,18 +65,18 @@
         <input type="hidden" name="vehicle" value="plane">
         <div class="col-md-4">
           <label for="from">Kota Asal</label>
-            <select class='form-control select2' title="Dari" id="from" name="from" required>
+            <select class='form-control' name="from" required>
               @foreach ($airport as $a)
-                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
               @endforeach
             </select>
         </div>
 
         <div class="col-md-4">
           <label for="tujuan">Tujuan</label>
-            <select class="form-control" title="Tujuan" id="destination" name="destination" required>
+            <select class="form-control" title="Tujuan" name="destination" required>
               @foreach ($airport as $a)
-                <option value="{{$a->id}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
               @endforeach
             </select>
         </div>
@@ -85,8 +85,8 @@
           <label for="kelas penerbangan">Kelas Penerbangan</label>
             <select class="form-control" id="class" name="class" required>
                 <option value="Ekonomi">Ekonomi</option>
-                <option value="Bisnis">Ekonomi</option>
-                <option value="First Class">Ekonomi</option>
+                <option value="Bisnis">Bisnis</option>
+                <option value="First Class">First Class</option>
             </select>
         </div>
 
@@ -99,8 +99,8 @@
         </div>
 
         <div class="col-md-2">
-          <label for="dewasa" id="adult" name="adult" required>Dewasa</label>
-            <select class="form-control">
+          <label for="dewasa">Dewasa</label>
+            <select class="form-control"  name="adult" required>
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
@@ -109,8 +109,8 @@
         </div>
 
         <div class="col-md-2">
-          <label for="anak" id="child" name="child" required>Anak-Anak</label>
-            <select class="form-control">
+          <label for="anak">Anak-Anak</label>
+            <select class="form-control"  id="child" name="child" required>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -120,8 +120,8 @@
         </div>
 
         <div class="col-md-2">
-          <label for="bayi" id="baby" name="baby" required>Bayi</label>
-            <select class="form-control">
+          <label for="bayi">Bayi</label>
+            <select class="form-control"  id="baby" name="baby" required>
                 <option value="0">0</option>
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -143,7 +143,6 @@
         <div class="col-md-4"><br>
           <button type="submit" class="btn btn-primary">Cari Tiket Pesawat</button>
         </div>
-
       </form>
     </div>
 
