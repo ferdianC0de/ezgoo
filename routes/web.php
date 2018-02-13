@@ -52,7 +52,8 @@ Route::group(['prefix'=> 'frontend'], function(){
 });
 
 Auth::routes();
-Route::get('', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
@@ -64,9 +65,10 @@ Route::group(['prefix'=>'admin'], function(){
   Route::resource('airport', 'AirportController');
 });
 Route::group(['prefix' => 'user'], function(){
-  Route::get('home', 'UserController@index')->name('home');
+  Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
+  Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
 
 Route::group(['prefix' => 'test'], function(){
