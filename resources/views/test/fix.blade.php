@@ -24,7 +24,11 @@
                         <p>Gate   : {{ $s->gate }}</p>
                       @endforeach
                       <p>Harga Total   : Rp {{ number_format($fareTotal, 2, ',','.') }}</p>
-                      <button type="submit">Pesan</button>
+                      @if (Entrust::hasRole(['member','admin']))
+                        <button type="submit">Pesan</button>
+                      @else
+                        Login sebelum pesan tiket, <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>
+                      @endif
                     </form>
                   </div>
               </div>
