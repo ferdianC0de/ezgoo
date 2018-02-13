@@ -47,7 +47,7 @@
                 <td>{{$data ->email}}</td>
                 <td>{{$data ->created_at}}</td>
                 <td>
-                    <form action="{{action('AdminController@destroy_data_pemesan',$data->id)}}" method="POST">
+                    <form action="{{action('AdminController@dbookingData',$data->id)}}" method="POST">
                         {{csrf_field()}}
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn btn-danger" type="submit">Delete</button></td>

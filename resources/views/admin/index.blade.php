@@ -50,37 +50,6 @@
   </a>
 </div><br>
 
-<div class="row">
-  <div class="col-md-4">
-    <div class="card">
-      <h3 class="card-header">Create New Customers</h3>
-    <div class="card-block">
-      <form  action="{{ url('admin/create')}}" method="POST">
-        {{ csrf_field() }}
-
-        <label>Title</label>
-        <p><input type="text" class="form-control" name="title" placeholder="Tittle"></p>
-
-        <label>First Name</label>
-        <p><input type="text" class="form-control" name="first_name" placeholder="First Name"></p>
-
-        <label>Last Name</label>
-        <p><input type="text" class="form-control" name="last_name" placeholder="Last Name"></p>
-
-        <label>Email</label>
-        <p><input type="text" class="form-control" name="email" placeholder="Email"></p>
-
-        <button class="btn btn-primary" name="submit">TAMBAH</button>
-
-        </form> 
-    </div>
-</div>
-
-
-
-  </div>
-</div>
-
 
 
 @endsection

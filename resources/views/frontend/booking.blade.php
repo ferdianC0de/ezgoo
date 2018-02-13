@@ -8,22 +8,24 @@
 <td><a href="">Login</a>Ke Akun EzGo anda untuk kemudahan pemesanan</td>
 </center>
 
-<form>
+<form action="{{ URL('frontend/plane/booking')}}" method="POST">
+  {{csrf_field()}}
 <div class="container">
   <div class="row">
     <div class="col-md-6">
         <div class="panel panel-default">
-         <div class="panel-heading">Data Kontak Pemesana</div>
+         <div class="panel-heading">Data Kontak Pemesanan</div>
          <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input type="hidden" name="schedule_id" value="1">
                         <label for="exampleInputemail1">Nama Lengkap</label>
-                        <input type="email" class="form-control" id="exampleInputemail1" placeholder="email">
+                        <input type="text" class="form-control" name="type" placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputnotelpon1">Email</label/>
-                        <input type="namalengkap" class="form-control" placeholder="namalengkap">
+                        <input type="namalengkap" class="form-control" placeholder="Email">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -48,7 +50,7 @@
  </div>
 
 <!-- PERGI -->
-<form>
+
 <div class="container">
 <div class="col-md-6">
 <div class="panel panel-default">
@@ -69,7 +71,7 @@
 </div>
 
 <!--penumpang 1-->
-<form>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -102,7 +104,7 @@
 
 
 <!-- Pulang -->
-<form>
+
 <div class="container">
 <div class="col-md-6">
 <div class="panel panel-default">
@@ -124,7 +126,7 @@
 </div>
 
 <!-- penumpang 2-->
-<form>
+
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -169,12 +171,9 @@
 <div class="row">
     <div class="col-md-6">
     <div class="form-group">
-<button type="pesansekarang" class="btn btn-default">Pesan Sekarang</button>
-</form>
 </center>
 
 <!-- penumpang bayi-->
-<form>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -203,5 +202,8 @@
         </div>
     </div>
  </div>
+
+ <center><button class="btn btn-primary" style="width: 500px;" name="submit">PESAN</button></center>
+</form>
 
 @endsection

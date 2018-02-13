@@ -15,7 +15,7 @@
         <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/jquery.dataTables.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/dataTables.bootstrap.css')}}">
+        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
     
     </head>
     <body>
@@ -57,22 +57,22 @@
             </div>
         </form>
         <ul class="nav menu">
-            <li><a href="{{ url('admin/index')}}"><em class="fa fa-home"></em> Dashboard</a></li>
+            <li><a href="{{ url('admin')}}"><em class="fa fa-home"></em> Dashboard</a></li>
             <li><a href="/"><em class="fa fa-users"></em> Users</a></li>
-            <li><a href="{{ URL('admin/data_pemesan') }}"><em class="fa fa-list"></em> Data Pemesan</a></li>
+            <li><a href="{{ URL('admin/bookingdata') }}"><em class="fa fa-list"></em> Booking Data </a></li>
             
             <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-plane">&nbsp;</em> Pesawat <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
                 </a>
                 <ul class="children collapse" id="sub-item-1">
                     <li>
-                        <a class="" href="{{ url('admin/pesawat') }}"><span class="fa fa-arrow-right"></span> List Pesawat</a>
+                        <a class="" href="{{ url('admin/plane') }}"><span class="fa fa-arrow-right"></span> List Pesawat</a>
                     </li>
                     <li>
                         <a class="" href="#"><span class="fa fa-arrow-right"></span> Jadwal Penerbangan</a>
                     </li>
                     <li>
-                        <a class="" href="#"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
+                        <a class="" href="{{ url('admin/pprice')}}"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
                     </li>
                 </ul>
             </li>
@@ -81,13 +81,13 @@
                 </a>
                 <ul class="children collapse" id="sub-item-2">
                     <li>
-                        <a class="" href="{{ url('admin/kereta') }}"><span class="fa fa-arrow-right">&nbsp;</span> List Kereta</a>
+                        <a class="" href="{{ url('admin/train') }}"><span class="fa fa-arrow-right">&nbsp;</span> List Kereta</a>
                     </li>
                     <li>
                         <a class="" href="#"><span class="fa fa-arrow-right">&nbsp;</span> Jadwal Keberangkatan</a>
                     </li>
                     <li>
-                        <a class="" href="#"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
+                        <a class="" href="{{ url('admin/tprice')}}"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
                     </li>
                 </ul>
             </li>
@@ -118,6 +118,46 @@
             $('.data').DataTable();
     })</script>
     <script type="text/javascript" src="{{ asset('js/jquery.dataTables.js') }}"></script>
+    <script type="text/javascript">
+        //bar
+        var ctxB = document.getElementById("barChart").getContext('2d');
+        var myBarChart = new Chart(ctxB, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            optionss: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    </script>
 
 
 

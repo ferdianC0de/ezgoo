@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Booking;
+use App\Models\Passenger;
 
 class BookingController extends Controller
 {
@@ -36,6 +37,20 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function bookingPlane(Request $request)
+    {
+        $date = date('Y-m-d H:i:s');
+        $request->request->add(['booking_date' => $date]);
+        $data = request()->validate([
+            'booking_date'      => 'required',
+            'type'              => 'required',
+            'schedule_id'       => 'required'
+        ]);
+        Booking::create($data);
+        return redirect('frontend/book');
+
     }
 
     /**

@@ -25,18 +25,21 @@ Route::resource('/customer','CustomerController');
 
 
 Route::group(["prefix" => 'admin'], function(){
-  Route::resource('index','AdminController');
-  Route::get('data_pemesan','AdminController@data_pemesan');
-  Route::get('kereta','AdminController@kereta_api');
-  Route::get('pesawat','AdminController@pesawat');
+  Route::resource('/','AdminController');
+  Route::get('bookingdata','AdminController@bookingdata');
+  Route::get('train','AdminController@train');
+  Route::get('tprice','AdminController@tprice');
+  Route::get('plane','AdminController@plane');
+  Route::get('pprice','AdminController@pprice');
   Route::post('create','AdminController@create');
+  Route::post('pcreate','AdminController@pcreate');
 
   /*Edit*/
-  Route::get('edit/data_pemesan/{id}', 'AdminController@edit_data_pemesan');
-  Route::post('edit/data_pemesan/{id}', 'AdminController@update_data_pemesan') ;
-  Route::get('edit/{id}','AdminController@edit_data_pemesan');
-  Route::put('update/{id}','AdminController@update_data_pemesan');
-  Route::delete('delete/data_pemesan/{id}','AdminController@destroy_data_pemesan');
+  Route::get('edit/bookingdata/{id}', 'AdminController@ebookingData');
+  Route::post('edit/bookingdata/{id}', 'AdminController@ubookingData') ;
+  Route::get('edit/{id}','AdminController@ebookingData');
+  Route::put('update/{id}','AdminController@ubookingData');
+  Route::delete('delete/bookingdata/{id}','AdminController@dbookingData');
 
 
 });
@@ -51,7 +54,9 @@ Route::group(['prefix'=> 'plane'], function(){
   Route::post('/search', 'PlaneController@search');
   Route::post('/order', 'PlaneController@order');
   Route::post('/fixOrder', 'PlaneController@fixOrder');
+  Route::post('/booking', 'BookingController@bookingPlane');
 });
+
 Route::get('/', function () {
     return view('frontend.home');
 });
