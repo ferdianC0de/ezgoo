@@ -10,7 +10,7 @@ class TrainSchedule extends Model
     {
       return $this->belongsTo('App/Models/Train');
     }
-    public function train_station()
+    public function trainStation()
     {
       return $this->belongsTo('App/Models/TrainStation');
     }

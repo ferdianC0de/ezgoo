@@ -6,7 +6,7 @@ use App\Models\Plane;
 $factory->define(App\Models\PlaneFare::class, function (Faker $faker) {
   DB::table('plane_fares')->delete();
   $rnd = rand(1,10);
-  $plane = Plane::find($rnd);
+  $plane = Plane::find($rnd)->unique();
   $array = ['A'=> 5000,'B'=>10000,'C'=>15000];
   $abc = array_rand($array);
   $price = $array[$abc];

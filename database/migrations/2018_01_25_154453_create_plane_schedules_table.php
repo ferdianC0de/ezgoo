@@ -23,8 +23,16 @@ class CreatePlaneSchedulesTable extends Migration
             $table->integer('bus_seat');
             $table->integer('first_seat');
             $table->dateTime('boarding_time');
+            $table->integer('duration');
             $table->string('gate');
             $table->timestamps();
+
+            $table->index('plane_id')
+                  ->references('id')->on('planes')
+                  ->onDelete('cascade');
+            $table->index('airport_id')
+                  ->references('id')->on('airports')
+                  ->onDelete('cascade');
         });
     }
 

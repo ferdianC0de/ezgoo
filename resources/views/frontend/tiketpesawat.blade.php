@@ -1,8 +1,6 @@
-@extends('layout.app')
-@section('tittle')
-<title>EzGO - Pemesanan</title>
-@stop
-@section('tiketpesawat')
+@extends('layouts.app')
+
+@section('content')
 <center><head>PEMESANAN TIKET</head></center>
 <br>
 <center>
@@ -36,7 +34,7 @@
                         <option>Jogjakarta</option>
                         <option>Magelang</option>
                         <option>Bali</option>
-                      </select>     
+                      </select>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputkewarganegaraan1">No.Handphone</label>
@@ -44,27 +42,27 @@
                     </div>
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
  <!-- PERGI -->
 <form>
 <div class="container">
-<div class="col-md-6">
-<div class="panel panel-default">
-<div class="panel-heading">Pesawat Pergi Kamis, 25 Jan 2018</div>
-<div class="panel-body">
-<label>
-<img src="images/icon_citilink.png" alt="icon_citilink.png">
-<p class="card-text">QG-100</P>
-  <p class="card-text">07:10 25 Jan 2018 Halim Perdanakusuma (HLP)</p>
-  <p class="card-text">08:30 25 Jan 2018 Adi Sutjipto (JOG)</p>
-  <p class="card-text">Dewasa (x2) IDR 80.000</p>
-  </div>
-</label>
-</div>
-</div>
-</div>
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">Pesawat Pergi Kamis, 25 Jan 2018</div>
+        <div class="panel-body">
+          <label>
+            <img src="images/icon_citilink.png" alt="icon_citilink.png">
+            <p class="card-text">QG-100</P>
+              <p class="card-text">07:10 25 Jan 2018 Halim Perdanakusuma (HLP)</p>
+              <p class="card-text">08:30 25 Jan 2018 Adi Sutjipto (JOG)</p>
+              <p class="card-text">Dewasa (x2) IDR 80.000</p>
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
 
 <form>
 <div class="container">
@@ -88,23 +86,23 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="exampleInputnamalengkap1">Tanggal Lahir</label> 
-                        <input type="namalengkap" class="form-control" placeholder="namalengkap">    
+                        <label for="exampleInputnamalengkap1">Tanggal Lahir</label>
+                        <input type="namalengkap" class="form-control" placeholder="namalengkap">
                     </div>
-                    
+
                 </div>
             </div>
-        </div> 
+        </div>
     </div>
  </div>
 
  <!-- total-->
 <div class="col-md-6">
-<div class="panel panel-default">
-<div class="panel-heading">
-<p class="card-text">Total  Dewasa (x1) IDR 399.960</p>
-</div>
-</div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <p class="card-text">Total  Dewasa (x1) IDR 399.960</p>
+    </div>
+  </div>
 </div>
 
 <!-- button -->

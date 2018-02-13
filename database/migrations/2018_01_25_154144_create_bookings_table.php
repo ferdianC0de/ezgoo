@@ -15,13 +15,16 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable();
-            $table->integer('customer_id')->nullable();
+            $table->integer('user_id');
             $table->dateTime('booking_date');
             $table->tinyInteger('status');
-            $table->string('type');
+            $table->string('vehicle');
             $table->integer('schedule_id');
             $table->timestamps();
+
+            $table->index('user_id')
+                  ->references('id')->on('users')
+                  ->onDelete('cascade');
         });
     }
 

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-USe App\User;
+use App\Models\Airport;
+use App\Models\TrainStation;
 
 class HomeController extends Controller
 {
@@ -12,24 +13,10 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware(['auth','isVerified']);
-    }
-
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('home');
-    }
-
-    public function edit($id)
-    {
-      $data = User::find($id);
-      return view('edit',$data);
+        $airport = Airport::all();
+        $train_station = TrainStation::all();
+        return view('index', compact('airport', 'train_station'));
     }
 }

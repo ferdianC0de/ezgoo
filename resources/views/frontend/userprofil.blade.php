@@ -1,26 +1,6 @@
-@extends('app')
+@extends('layouts.app')
 
-@section('userprofil')
-<!DOCTYPE html>
-<html>
-<head>
-    <title>EZGOO</title>
-</head>
-<body>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">EZGOO</a>
-    </div>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Halo Udin</a></li>
-        <li><a href="#">Logout</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+@section('content')
 <form>
   <div class="container">
     <div class="col-md-4">
@@ -84,10 +64,4 @@
       </div>
    </div>
 </form>
-
-
-
-<link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
-
-</body>
-</html>
+@endsection

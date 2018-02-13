@@ -8,91 +8,140 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'EZGOO') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <link href="{{ asset('public/images') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
-        <nav class="navbar navbar-inverse navbar-static-top" >
-            <div class="container">
-                <div class="navbar-header page-scroll">
+  <div id="app">
+    <nav class="navbar navbar-inverse navbar-static-top" >
+      <div class="container">
+        <div class="navbar-header page-scroll">
 
-                    <!-- Collapsed Hamburger -->
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle Navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
+          <!-- Collapsed Hamburger -->
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse" aria-expanded="false">
+              <span class="sr-only">Toggle Navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
 
-                    <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
-                        {{ config('app.name', 'EZGOO.') }}
-                    </a>
-                </div>
+          <!-- Branding Image -->
+          <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
+              {{ config('app.name', 'EZGOO.') }}
+          </a>
+        </div>
 
-                <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+          <!-- Left Side Of Navbar -->
+          <ul class="nav navbar-nav">
+              &nbsp;
+          </ul>
+
+          <!-- Right Side Of Navbar -->
+          <ul class="nav navbar-nav navbar-right">
+            <!-- Authentication Links -->
+            @guest
+              <li><a href="{{ route('login') }}">Login</a></li>
+              <li><a href="{{ route('register') }}">Register</a></li>
+              <li class="page-scroll">
+                <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+              </li>
+            @else
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                    {{ Auth::user()->name }} <span class="caret"></span>
+                </a>
+
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul>
+              </li>
+            @endguest
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    @yield('content')
+
+  </div>
+
+    <!--footer-->
+    <div class="container">
+      <footer class="footer-bs">
+        <div class="row">
+        	<div class="col-md-3 footer-brand animated fadeInLeft">
+            	<h2>EZGOO</h2>
+                <p>EZGOO Booking Ticket pesawat dan kereta mudah dan aman</p>
+                <p>© 2018 EZGOO, All rights reserved</p>
+            </div>
+        	<div class="col-md-4 footer-nav animated fadeInUp">
+            	<h4>Menu </h4>
+            	<div class="col-md-6">
+                    <ul class="pages">
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Pesawat</a></li>
+                        <li><a href="#">Kereta</a></li>
+                        <li><a href="#">Cek Pemesanan</a></li>
+                        <li><a href="#">Payment</a></li>
                     </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="nav navbar-nav navbar-right">
-                        <!-- Authentication Links -->
-                        @guest
-
-                            <li><a href="{{ route('login') }}">Login</a></li>
-                            <li><a href="{{ route('register') }}">Register</a></li>
-                            <li class="page-scroll">
-                            <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-                        </li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            Logout
-                                        </a>
-
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endguest
+                </div>
+            	<div class="col-md-6">
+                    <ul class="list">
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contacts</a></li>
+                        <li><a href="#">Terms & Condition</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
-        </nav>
-        <div class="container">
-          @yield('content')
+        	<div class="col-md-2 footer-social animated fadeInDown">
+            	<h4>Follow Us</h4>
+            	<ul>
+                	<li><a href="#">Facebook</a></li>
+                	<li><a href="#">Twitter</a></li>
+                	<li><a href="#">Instagram</a></li>
+                	<li><a href="#">RSS</a></li>
+                </ul>
+            </div>
+        	<div class="col-md-3 footer-ns animated fadeInRight">
+            	<h4>Newsletter</h4>
+                <p>Subscribe to our newsletter now and be the first to know about EzGoo's latest promos!</p>
+                <p>
+                    <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Enter Your Email Here...">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+                      </span>
+                    </div>
+                 </p>
+            </div>
         </div>
-
-    </div>
+    </footer>
+    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">EZGOO 2018</a></p></section>
+</div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script type="text/javascript" src="{{asset('js/jquery.js')}}"></script>
-    <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
-
-<script type="text/javascript">
-  $(function(){
-    $(".departure").select2();
-  });
-</script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+@stack('scripts')
 
 </body>
 </html>

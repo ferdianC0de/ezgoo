@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('home');
+        return view('index');
     }
 
     /**
@@ -102,8 +102,8 @@ class UserController extends Controller
         }elseif ($request->name) {
           $datas = request()->validate([
             'name' => 'required|min:10|max:50',
-            'nama_depan' => 'required|min:3|max:50',
-            'nama_belakang' => 'required|min:3|max:70'
+            'first_name' => 'required|min:3|max:50',
+            'last_name' => 'required|min:3|max:70'
             // 'email' => 'sometimes|required|email'
             //'password' => 'required|min:8'
           ]);
@@ -119,8 +119,11 @@ class UserController extends Controller
 
     public function updatePassword(Request $request)
     {
-
-
+      $datas = request()->validate([
+        'name' => 'required|min:10|max:50',
+        'first_name' => 'required|min:3|max:50',
+        'last_name' => 'required|min:3|max:70'
+      ]);
         User::find($request->id)->update($datas);
     }
 
