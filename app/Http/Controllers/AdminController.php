@@ -21,6 +21,11 @@ class AdminController extends Controller
     {
         return view('admin/index');
     }
+    public function showUsers()
+    {
+      $users = User::all();
+      return view('admin.users', compact('users'));
+    }
 
     public function bookingData()
     {
@@ -112,7 +117,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -154,7 +159,7 @@ class AdminController extends Controller
         $passengers = Passenger::where('detail_booking_id', $pass->id)->get();}
         return view('admin.ebookingData',compact('booking','detail','pass'));
 
-        
+
     }
 
     public function ubookingData(Request $request,$id)
@@ -171,10 +176,3 @@ class AdminController extends Controller
     }
 }
  
-
-
-
-
-
-
-

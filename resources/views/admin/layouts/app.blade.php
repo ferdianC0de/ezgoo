@@ -15,8 +15,8 @@
         <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/jquery.dataTables.css')}}">
-        <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" rel="stylesheet">
-    
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/admin/dataTables.bootstrap.css')}}">
+
     </head>
     <body>
 
@@ -60,7 +60,7 @@
             <li><a href="{{ url('admin')}}"><em class="fa fa-home"></em> Dashboard</a></li>
             <li><a href="/"><em class="fa fa-users"></em> Users</a></li>
             <li><a href="{{ URL('admin/bookingdata') }}"><em class="fa fa-list"></em> Booking Data </a></li>
-            
+
             <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-plane">&nbsp;</em> Pesawat <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
                 </a>
@@ -108,7 +108,7 @@
     </div>  <!--/.main-->
 
 
-            
+
 
 
     <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
@@ -164,6 +164,3 @@
 
     </body>
 </html>
-        
-
-    

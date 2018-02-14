@@ -4,16 +4,15 @@
 <!--pilihan pesawat-->
 <div class="container">
   @foreach ($schedule as $s)
-    <h3>Penerbangan tanggal {{date('d-m-Y', strtotime($s->boarding_time))}}</h3>
-    <h4>Dari {{$s->from}} ke {{$s->destination}}</h2>
-    @break(count($s) == 1)
+      <h3>Penerbangan tanggal {{date('d-m-Y', strtotime($s->boarding_time))}}</h3>
+      <h4>Dari {{$s->from}} ke {{$s->destination}}</h2>
+    @break($s)
   @endforeach
-  <form action="{{ url('test/order') }}" method="post">
+  <form action="{{ url('booking/order') }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="vehicle" value="{{$vehicle}}">
-    <input type="hidden" name="total" value="{{$total}}">
+    <input type="hidden" name="total" value="{{json_encode($total)}}">
     <input type="hidden" name="seat" value="{{$seat}}">
-    <input type="hidden" name="type" value="{{$type}}">
     <div class="table-responsive">
       <table class="table">
         <thead>

@@ -45,11 +45,26 @@ Route::group(["prefix" => 'admin'], function(){
 });
 
 Route::group(['prefix'=> 'frontend'], function(){
-  Route::get('/home', 'AdminController@index');
-
-Route::group(['prefix'=> 'plane'], function(){
-  Route::get('/test', function(){
-    return view('test.plane.testForm');
+  Route::get('/', function () {
+      return view('frontend.home');
+  });
+  Route::get('/book', function () {
+      return view('frontend.booking');
+  });
+  Route::get('/userprofil', function () {
+      return view('frontend.userprofil');
+  });
+  Route::get('/userpass', function () {
+    return view('frontend.userpass');
+  });
+  Route::get('/pround', function () {
+    return view('frontend.pround');
+  });
+  Route::get('/psingle', function () {
+    return view('frontend.psingle');
+  });
+  Route::get('/history', function () {
+    return view('frontend.history');
   });
   Route::post('/search', 'PlaneController@search');
   Route::post('/order', 'PlaneController@order');
@@ -57,50 +72,18 @@ Route::group(['prefix'=> 'plane'], function(){
   Route::post('/booking', 'BookingController@bookingPlane');
 });
 
-Route::get('/', function () {
-    return view('frontend.home');
+Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
+  Route::get('pesawat', 'AdminController@pesawat');
+  Route::get('kereta', 'AdminController@kereta_api');
+  Route::get('users', 'AdminController@showUsers');
+  Route::resource('', 'AdminController');
+  Route::resource('airport', 'AirportController');
 });
+Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
+  // Route::get('admin', 'AdminController@index')->name('admin');
 
-Route::get('/book', 'BookingController@dbooking');
-
-Route::get('/pesawat', function () {
-    return view('frontend.pesawat');
-});
-
-Route::get('/tiketkereta', function () {
-    return view('frontend.tiketkereta');
-});
-
-Route::get('/tiketpesawat', function () {
-    return view('frontend.tiketpesawat');
-});
-
-Route::get('/userprofil', function () {
-    return view('frontend.userprofil');
-});
-
-Route::get('/userpass', function () {
-  return view('frontend.userpass');
-});
-
-Route::get('/pround', function () {
-  return view('frontend.pround');
-});
-
-Route::get('/psingle', function () {
-  return view('frontend.psingle');
-});
-
-Route::get('/kround', function () {
-  return view('frontend.kround');
-});
-
-Route::get('/ksingle', function () {
-  return view('frontend.ksingle');
-});
-
-Route::get('/history', function () {
-  return view('frontend.history');
-});
-
+  Route::get('home', 'HomeController@index')->name('home');
+  Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
+  Route::put('update', 'UserController@update')->name('update');
+  Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });

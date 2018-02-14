@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d0e89ae2786e739da7bf175e0e9f271",
+    "content-hash": "1cd253f33b43629af75063d2173d4793",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -589,16 +589,16 @@
         },
         {
             "name": "jrean/laravel-user-verification",
-            "version": "dev-master",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrean/laravel-user-verification.git",
-                "reference": "0b2c6704d2ebb2eb820380c2c7455d10580b298d"
+                "reference": "5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrean/laravel-user-verification/zipball/0b2c6704d2ebb2eb820380c2c7455d10580b298d",
-                "reference": "0b2c6704d2ebb2eb820380c2c7455d10580b298d",
+                "url": "https://api.github.com/repos/jrean/laravel-user-verification/zipball/5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b",
+                "reference": "5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b",
                 "shasum": ""
             },
             "require": {
@@ -648,7 +648,7 @@
                 "user activation",
                 "user verification"
             ],
-            "time": "2017-11-28T09:48:55+00:00"
+            "time": "2017-09-01T20:06:53+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2586,6 +2586,84 @@
                 "laravel"
             ],
             "time": "2018-02-11T14:16:35+00:00"
+        },
+        {
+            "name": "zizaco/entrust",
+            "version": "1.9.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Zizaco/entrust.git",
+                "reference": "05b2542f5f96ea80998a13800c6e216df6821bff"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Zizaco/entrust/zipball/05b2542f5f96ea80998a13800c6e216df6821bff",
+                "reference": "05b2542f5f96ea80998a13800c6e216df6821bff",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/cache": "~5.0",
+                "illuminate/console": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.0"
+            },
+            "require-dev": {
+                "illuminate/database": "~5.0",
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "~4.1",
+                "sami/sami": "dev-master"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Zizaco\\Entrust\\EntrustServiceProvider"
+                    ],
+                    "aliases": {
+                        "Entrust": "Zizaco\\Entrust\\EntrustFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "classmap": [
+                    "src/commands"
+                ],
+                "psr-4": {
+                    "Zizaco\\Entrust\\": "src/Entrust/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Andrew Elkins",
+                    "homepage": "http://andrewelkins.com"
+                },
+                {
+                    "name": "Zizaco Zizuini",
+                    "email": "zizaco@gmail.com"
+                },
+                {
+                    "name": "Ben Batschelet",
+                    "homepage": "http://github.com/bbatsche"
+                },
+                {
+                    "name": "Michele Angioni",
+                    "email": "michele.angioni@gmail.com"
+                }
+            ],
+            "description": "This package provides a flexible way to add Role-based Permissions to Laravel",
+            "keywords": [
+                "acl",
+                "auth",
+                "illuminate",
+                "laravel",
+                "permission",
+                "roles"
+            ],
+            "time": "2017-11-13T23:25:18+00:00"
         }
     ],
     "packages-dev": [
@@ -4316,9 +4394,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "jrean/laravel-user-verification": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
