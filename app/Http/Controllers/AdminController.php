@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Plane;
 Use App\Models\Customer;
-use App\User;
+Use App\Models\Booking;
+Use App\Models\Passenger;
+Use App\Models\DetailBooking;
+use DB;
 
 class AdminController extends Controller
 {
@@ -24,20 +27,30 @@ class AdminController extends Controller
       return view('admin.users', compact('users'));
     }
 
-    public function data_pemesan()
+    public function bookingData()
     {
-        $customer = Customer::all();
-        return view('admin/data_pemesan', compact('customer'));
+        $booking = Booking::all();
+        return view('admin.bookingData', compact('booking'));
     }
 
-    public function pesawat()
+    public function plane()
     {
-        return view('admin/pesawat');
+        return view('admin/plane');
     }
 
-    public function kereta_api()
+    public function pprice()
     {
-        return view('admin/kereta_api');
+        return view('admin/pprice');
+    }
+
+    public function train()
+    {
+        return view('admin/train');
+    }
+
+    public function tprice()
+    {
+        return view('admin/tprice');
     }
 
     /**
@@ -53,8 +66,25 @@ class AdminController extends Controller
             'last_name' => 'required',
             'email' => 'required'
         ]);
+        $data = request()->validate([
+            'plane_name' => 'required',
+            'eco_seat' => 'required',
+            'bus_seat' => 'required',
+        ]);
         Customer::create($crud);
-        return redirect('admin/index');
+        Plane::create($data);
+        return redirect('admin');
+    }
+
+    public function pcreate(Request $request)
+    {
+        $data = request()->validate([
+            'plane_name' => 'required',
+            'eco_seat' => 'required',
+            'bus_seat' => 'required',
+        ]);
+        Plane::create($data);
+        return redirect('admin');
     }
 
     /**
@@ -113,21 +143,26 @@ class AdminController extends Controller
         //
     }
 
-    public function destroy_data_pemesan($id)
+    public function dbookingData($id)
     {
         $customer = Customer::find($id);
         $customer->delete();
 
-        return redirect('admin/data_pemesan');
+        return redirect('admin/bookingdata');
     }
 
-    public function edit_data_pemesan($id)
+    public function ebookingData($id)
     {
-        $data = Customer::find($id);
-        return view('admin.e_data_pemesan', compact('data'));
+        $booking = Booking::find($id);
+        $detail  = DetailBooking::where('booking_id', $id)->get();
+        foreach($detail as $pass){
+        $passengers = Passenger::where('detail_booking_id', $pass->id)->get();}
+        return view('admin.ebookingData',compact('booking','detail','pass'));
+
+
     }
 
-    public function update_data_pemesan(Request $request,$id)
+    public function ubookingData(Request $request,$id)
     {
 
         $data = $this->validate($request,[
@@ -137,6 +172,7 @@ class AdminController extends Controller
             'email' => 'required'
         ]);
         Customer::find($id)->update($data);
-        return redirect('admin/data_pemesan');
+        return redirect('admin/bookingdata');
     }
 }
+ 

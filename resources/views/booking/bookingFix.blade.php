@@ -13,6 +13,7 @@
   <input type="hidden" name="vehicle" value="{{$vehicle}}">
   <input type="hidden" name="total" value="{{implode(',',$total)}}">
   <input type="hidden" name="seat" value="{{$seat}}">
+  <input type="hidden" name="class" value="{{$class}}">
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -37,12 +38,13 @@
               @php
                  $fareTotal += $s->$seat * $totalCount;
               @endphp
+              <input type="hidden" name="id[]" value="{{$s->id}}">
               <div class="panel-heading">{{$s->from}} ke {{$s->destination}}</div>
               <div class="panel-body">
                 <img src="images/kai-logo.jpg" alt="">
-                <p>Nama pesawat</p>
-                <p>Kelas</p>
-                <p>Gerbang</p>
+                <p>{{$s->plane_name}}</p>
+                <p>{{$class}}</p>
+                <p>Gerbang {{$s->gate}}</p>
                 <p>{{ date('d F Y H:i:s', strtotime($s->boarding_time)) }}</p>
                 <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
               </div>

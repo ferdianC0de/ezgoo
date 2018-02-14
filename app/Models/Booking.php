@@ -8,6 +8,7 @@ use App\Models\DetailBooking;
 
 class Booking extends Model
 {
+    protected $fillable = ['booking_date','status','type','schedule_id'];
     //
     public static function singleTrip($go, $userID)
     {
@@ -21,7 +22,11 @@ class Booking extends Model
       $bookings->save();
     }
 
+<<<<<<< HEAD
     public static function roundTrip($go, $back, $userID, $totalCount, $fareTotal)
+=======
+    public static function roundTrip($go, $back, $userID, $total,$seat)
+>>>>>>> 81c611ff4dc583d25d1920d2d7f3b3f2043d120d
     {
       $planeSchedule = PlaneSchedule::find($go);
       $bookings = new Booking();
@@ -40,6 +45,7 @@ class Booking extends Model
       $booking2->schedule_id = $back;
       $booking2->save();
 
+<<<<<<< HEAD
       $detail1 = new DetailBooking();
       $detail1->booking_id = $bookings->id;
       $detail1->passanger = $totalCount;
@@ -53,5 +59,18 @@ class Booking extends Model
       $detail2->fare = $fareTotal;
       $detail2->class = $classSeat;
       $detail2->save();
+=======
+      $detbook = new DetailBooking;
+      $detbook->booking_id = $booking2->id;
+      $detbook->passenger =  $total;
+      $detbook->class = $seat;
+      $detbook->save();
+
+      $detbook2 = new DetailBooking;
+      $detbook2->booking_id = $bookings->id;
+      $detbook2->passenger =  $total;
+      $detbook2->class = $seat;
+      $detbook2->save();
+>>>>>>> 81c611ff4dc583d25d1920d2d7f3b3f2043d120d
     }
 }

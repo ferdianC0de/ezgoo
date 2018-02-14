@@ -35,7 +35,6 @@ Route::group(['prefix'=> 'frontend'], function(){
 });
 
 Auth::routes();
-Route::get('/home', 'HomeController@index');
 Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'booking'], function(){
@@ -45,28 +44,33 @@ Route::group(['prefix' => 'booking'], function(){
 });
 
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
-  Route::get('pesawat', 'AdminController@pesawat');
-  Route::get('kereta', 'AdminController@kereta_api');
-  Route::get('users', 'AdminController@showUsers');
-  Route::resource('', 'AdminController');
-  Route::resource('airport', 'AirportController');
+  Route::resource('/','AdminController');
+  Route::get('bookingdata','AdminController@bookingdata');
+  Route::get('train','AdminController@train');
+  Route::get('tprice','AdminController@tprice');
+  Route::get('plane','AdminController@plane');
+  Route::get('pprice','AdminController@pprice');
+  Route::post('create','AdminController@create');
+  Route::post('pcreate','AdminController@pcreate');
+
+  /*Edit*/
+  Route::get('edit/bookingdata/{id}', 'AdminController@ebookingData');
+  Route::post('edit/bookingdata/{id}', 'AdminController@ubookingData') ;
+  Route::get('edit/{id}','AdminController@ebookingData');
+  Route::put('update/{id}','AdminController@ubookingData');
+  Route::delete('delete/bookingdata/{id}','AdminController@dbookingData');
 });
   Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
   // Route::get('admin', 'AdminController@index')->name('admin');
-
   Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
-
 Route::group(['prefix' => 'test'], function(){
   Route::get('form', function(){
     return view('test.testForm');
   });
   Route::get('test', 'BookingController@test');
   Route::get('testData', 'BookingController@testData');
-  Route::post('search', 'BookingController@search');
-  Route::post('order', 'BookingController@order');
-  Route::post('fixOrder', 'BookingController@fixOrder');
 });

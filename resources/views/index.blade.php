@@ -58,6 +58,11 @@
             <li><a href="#kereta" data-toggle="tab">Kereta</a></li>
         </ul>
   <!-- Tab panes, ini content dari tab di atas -->
+      @if (Session::has('error'))
+        <div class="alert alert-danger">
+          <p>{{Session::get('error')}}</p>
+        </div>
+      @endif
   <div class="tab-content">
     <div class="tab-pane active" id="pesawat">
       <form action="{{ route('search') }}" method="post">
