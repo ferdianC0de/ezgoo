@@ -119,8 +119,11 @@ class UserController extends Controller
 
     public function updatePassword(Request $request)
     {
-
-
+      $datas = request()->validate([
+        'name' => 'required|min:10|max:50',
+        'first_name' => 'required|min:3|max:50',
+        'last_name' => 'required|min:3|max:70'
+      ]);
         User::find($request->id)->update($datas);
     }
 

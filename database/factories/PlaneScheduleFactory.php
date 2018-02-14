@@ -25,7 +25,11 @@ DB::table('plane_schedules')->delete();
         'airport_id' => $firstAirport->id,
         'plane_id' => $plane->id,
         'destination' => $lastAirport->airport_name,
+<<<<<<< HEAD
         'from' => $firstAirport->city,
+=======
+        'from' => $firstAirport->airport_name,
+>>>>>>> 91ae2826c881ac069d3d08f2208337d7458a31e3
         'boarding_time' => date('Y-m-d H:i:s'),
         'duration' => rand(1,99),
         'gate' => rand(1,99),

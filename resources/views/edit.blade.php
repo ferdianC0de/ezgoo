@@ -23,7 +23,7 @@
                           @endphp
                       </div>
                       @endif
-                    <form class="form-horizontal" method="POST" action="{{ route('update')}}">
+                    <form class="form-horizontal" method="POST" action="{{ route('updatePass')}}">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
                         <input type="hidden" name="id" value="{{ Auth::User()->id }}">

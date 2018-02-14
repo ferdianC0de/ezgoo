@@ -37,7 +37,8 @@ Route::group(['prefix'=> 'frontend'], function(){
 });
 
 Auth::routes();
-Route::get('', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
@@ -45,13 +46,19 @@ Route::group(['prefix' => 'booking'], function(){
   Route::post('fixOrder', 'BookingController@fixOrder')->name('fixOrder');
 });
 
-Route::group(['prefix'=>'admin'], function(){
+Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
+  Route::get('pesawat', 'AdminController@pesawat');
+  Route::get('kereta', 'AdminController@kereta_api');
+  Route::resource('home', 'AdminController');
   Route::resource('airport', 'AirportController');
 });
-Route::group(['prefix' => 'user'], function(){
-  Route::get('home', 'UserController@index')->name('home');
+Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
+  // Route::get('admin', 'AdminController@index')->name('admin');
+
+  Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
+  Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
 
 Route::group(['prefix' => 'test'], function(){
