@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Plane;
 Use App\Models\Customer;
+use App\User;
 
 class AdminController extends Controller
 {
@@ -16,6 +17,11 @@ class AdminController extends Controller
     public function index()
     {
         return view('admin/index');
+    }
+    public function showUsers()
+    {
+      $users = User::all();
+      return view('admin.users', compact('users'));
     }
 
     public function data_pemesan()
@@ -81,7 +87,7 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -134,4 +140,3 @@ class AdminController extends Controller
         return redirect('admin/data_pemesan');
     }
 }
-    
