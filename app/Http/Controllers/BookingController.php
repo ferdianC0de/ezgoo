@@ -136,19 +136,6 @@ class BookingController extends Controller
           'adult'=> $total[2]
         ];
         $seat = $request->seat;
-<<<<<<< HEAD
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-=======
         if ($seat == 'eco_seat') {
           $class = 'Ekonomi';
         }elseif($seat == 'bus_seat'){
@@ -163,7 +150,6 @@ class BookingController extends Controller
         }elseif($vehicle == 'train'){
           $model = $this->trainSchedule;
         }
->>>>>>> 595f1d00ffb6498390ea62124c8b0c4cecb0196d
 
         if (isset($id) && isset($seat)) {
           $schedule = $model::findWithPrice($id, $seat);

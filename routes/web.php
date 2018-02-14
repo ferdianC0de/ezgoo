@@ -87,3 +87,14 @@ Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
+<<<<<<< HEAD
+=======
+
+Route::group(['prefix' => 'test'], function(){
+  Route::get('form', function(){
+    return view('test.testForm');
+  });
+  Route::get('test', 'BookingController@test');
+  Route::get('testData', 'BookingController@testData');
+});
+>>>>>>> d50d7fd8309ddfe074698494cd2d75ecdd31fc51
