@@ -16,21 +16,6 @@ class PlaneSchedule extends Model
       return $this->belongsTo('App\Models\Airport');
     }
 
-    public static function findWithPrice(Array $id, $seat)
-    {
-      $data = DB::table('plane_schedules')
-        ->join('plane_fares', 'plane_fares.plane_id','=','plane_schedules.plane_id')
-        ->select('plane_schedules.from',
-                'plane_schedules.id',
-                'plane_schedules.gate',
-                'plane_schedules.destination',
-                'plane_schedules.boarding_time',
-                'plane_fares.'.$seat)
-        ->whereIn('plane_schedules.id', $id)
-        ->get();
-
-      return $data;
-    }
     public static function findSchedule($from, $destination, $date, $seat, $total)
     {
       $dataSchedule = DB::table('plane_schedules')
@@ -51,6 +36,23 @@ class PlaneSchedule extends Model
         ['plane_schedules.'.$seat, '>=', $total]
       ])->get();
       return $dataSchedule;
+    }
+    public static function findWithPrice(Array $id, $seat)
+    {
+      $data = DB::table('plane_schedules')
+        ->join('planes', 'planes.id', '=', 'plane_schedules.plane_id')
+        ->join('plane_fares', 'plane_fares.plane_id','=','plane_schedules.plane_id')
+        ->select('plane_schedules.from',
+                'plane_schedules.id',
+                'plane_schedules.gate',
+                'plane_schedules.destination',
+                'plane_schedules.boarding_time',
+                'planes.plane_name',
+                'plane_fares.'.$seat)
+        ->whereIn('plane_schedules.id', $id)
+        ->get();
+
+      return $data;
     }
     public static function seatMath($total, $seat, $id)
     {

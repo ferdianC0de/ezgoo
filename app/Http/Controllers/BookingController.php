@@ -118,12 +118,13 @@ class BookingController extends Controller
             abort(404);
           }
         }else{
-          return 'Bayi gabole lebih dari dewasa';
+          return redirect('')->withError('Bayi tidak boleh lebih dari dewasa');
         }
       }
       public function order(Request $request)
       {
         $model = "";
+        $class = "";
         $vehicle = $request->vehicle;
         $id = [$request->go,$request->back];
         $fareTotal = 0;
@@ -135,6 +136,7 @@ class BookingController extends Controller
           'adult'=> $total[2]
         ];
         $seat = $request->seat;
+<<<<<<< HEAD
 
     /**
      * Display the specified resource.
@@ -146,16 +148,33 @@ class BookingController extends Controller
     {
         //
     }
+=======
+        if ($seat == 'eco_seat') {
+          $class = 'Ekonomi';
+        }elseif($seat == 'bus_seat'){
+          $class = 'Bisnis';
+        }elseif($seat == 'first_seat'){
+          $class = 'First Class';
+        }elseif($seat == 'exec_seat'){
+          $class = 'Eksekutif';
+        }
+        if ($vehicle == 'plane'){
+          $model = $this->planeSchedule;
+        }elseif($vehicle == 'train'){
+          $model = $this->trainSchedule;
+        }
+>>>>>>> 595f1d00ffb6498390ea62124c8b0c4cecb0196d
 
         if (isset($id) && isset($seat)) {
           $schedule = $model::findWithPrice($id, $seat);
         }else{
           abort(404);
         }
-        return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'fareTotal'));
+        return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal'));
       }
       public function fixOrder(Request $request)
       {
+        return $request;
         // if (Auth::check()) {
           $modelV = "";
           $modelF = "";
