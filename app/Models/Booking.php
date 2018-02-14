@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\PlaneSchedule;
+use App\Models\DetailBooking;
 
 class Booking extends Model
 {
@@ -20,7 +21,7 @@ class Booking extends Model
       $bookings->save();
     }
 
-    public static function roundTrip($go, $back, $userID)
+    public static function roundTrip($go, $back, $userID, $totalCount, $fareTotal)
     {
       $planeSchedule = PlaneSchedule::find($go);
       $bookings = new Booking();
@@ -38,5 +39,19 @@ class Booking extends Model
       $booking2->type = "Pesawat";
       $booking2->schedule_id = $back;
       $booking2->save();
+
+      $detail1 = new DetailBooking();
+      $detail1->booking_id = $bookings->id;
+      $detail1->passanger = $totalCount;
+      $detail1->fare = $fareTotal;
+      $detail1->class = $classSeat;
+      $detail1->save();
+
+      $detail2 = new DetailBooking();
+      $detail2->booking_id = $booking2->id;
+      $detail2->passanger = $totalCount;
+      $detail2->fare = $fareTotal;
+      $detail2->class = $classSeat;
+      $detail2->save();
     }
 }

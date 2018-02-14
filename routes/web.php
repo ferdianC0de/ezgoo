@@ -10,8 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Auth::routes();
-
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -53,7 +51,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::resource('', 'AdminController');
   Route::resource('airport', 'AirportController');
 });
-Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
+  Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
   // Route::get('admin', 'AdminController@index')->name('admin');
 
   Route::get('home', 'HomeController@index')->name('home');

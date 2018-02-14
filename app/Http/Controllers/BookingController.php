@@ -105,8 +105,8 @@ class BookingController extends Controller
           $modelS = "";
           $vehicle = $request->vehicle;
           $type = $request->type;
-          $id = $request->id;
-          // $userId = Auth::user()->id;
+          // $id = $request->id;
+          $userId = Auth::user()->id;
           $total = $request->total;
           $seat = $request->seat;
 
@@ -120,9 +120,11 @@ class BookingController extends Controller
             $modelS = $this->trainSchedule;
           }
 
-          if (isset($request->type) && isset($id)) {
-            $math = $modelS::seatMath($total, $seat, $id);
-            return $math;
+          if (isset($request) && isset($userId)) {
+            // $modelS::seatMath($total, $seat, $id);
+            // Booking::roundTrip();
+            $request->request->add(['id' => $userId]);
+            return $request;
           }else{
             abort(404);
           }
