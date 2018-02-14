@@ -27,7 +27,11 @@ class BookingController extends Controller
       public function search(Request $request)
       {
         if ($request->baby <= $request->adult){
-          $total = $request->child + $request->adult;
+          $total = [
+            'baby' => $request->baby,
+            'child'=> $request->child,
+            'adult'=> $request->adult
+          ];
           $vehicle = $request->vehicle;
           $type = $request->type;
           $seat  = "";
@@ -50,12 +54,12 @@ class BookingController extends Controller
           }
           //cek tipe
           if ($type == 'st'){
-            $schedule = $model::findSchedule($request->from, $request->destination, $request->date, $seat, $total);
+            $schedule = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
             return view('booking.bookingSingle', compact('schedule', 'vehicle','type','total', 'seat'));
             // return $schedule;
           }elseif($type == 'rt'){
-            $scheduleG = $model::findSchedule($request->from, $request->destination, $request->date, $seat, $total);
-            $scheduleB = $model::findSchedule($request->destination, $request->from, $request->dateB, $seat, $total);
+            $scheduleG = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
+            $scheduleB = $model::findSchedule($request->destination, $request->from, $request->dateB, $seat, count($total));
             return view('booking.bookingRound', compact('scheduleG', 'scheduleB', 'vehicle','type','total', 'seat'));
             // return $scheduleG;
           }else{
@@ -69,10 +73,15 @@ class BookingController extends Controller
       {
         $model = "";
         $vehicle = $request->vehicle;
-        $type = $request->type;
         $id = [$request->go,$request->back];
         $fareTotal = 0;
-        $total = $request->total;
+        $total = explode(',',$request->total);
+        $totalCount = $total[0] + $total[1] + $total[2];
+        $total = [
+          'baby' => $total[0],
+          'child'=> $total[1],
+          'adult'=> $total[2]
+        ];
         $seat = $request->seat;
 
         if ($vehicle == 'plane'){
@@ -81,42 +90,42 @@ class BookingController extends Controller
           $model = $this->trainSchedule;
         }
 
-        if (isset($request->type) && isset($id) && isset($seat)) {
+        if (isset($id) && isset($seat)) {
           $schedule = $model::findWithPrice($id, $seat);
         }else{
           abort(404);
         }
-        return view('test.fix', compact('schedule','vehicle', 'type', 'total','seat', 'fareTotal'));
+        return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'fareTotal'));
       }
       public function fixOrder(Request $request)
       {
         // if (Auth::check()) {
-        $modelV = "";
-        $modelF = "";
-        $modelS = "";
-        $vehicle = $request->vehicle;
-        $type = $request->type;
-        $id = $request->id;
-        //$userId = Auth::user()->id;
-        $total = $request->total;
-        $seat = $request->seat;
+          $modelV = "";
+          $modelF = "";
+          $modelS = "";
+          $vehicle = $request->vehicle;
+          $type = $request->type;
+          $id = $request->id;
+          // $userId = Auth::user()->id;
+          $total = $request->total;
+          $seat = $request->seat;
 
-        if ($vehicle == 'plane'){
-          $modelV = $this->plane;
-          $modelF = $this->planeFare;
-          $modelS = $this->planeSchedule;
-        }elseif($vehicle == 'train'){
-          $modelV = $this->train;
-          $modelF = $this->trainFare;
-          $modelS = $this->trainSchedule;
-        }
+          if ($vehicle == 'plane'){
+            $modelV = $this->plane;
+            $modelF = $this->planeFare;
+            $modelS = $this->planeSchedule;
+          }elseif($vehicle == 'train'){
+            $modelV = $this->train;
+            $modelF = $this->trainFare;
+            $modelS = $this->trainSchedule;
+          }
 
-        if (isset($request->type) && isset($id)) {
-          $math = $modelS::seatMath($total, $seat, $id);
-          return $math;
-        }else{
-          abort(404);
-        }
+          if (isset($request->type) && isset($id)) {
+            $math = $modelS::seatMath($total, $seat, $id);
+            return $math;
+          }else{
+            abort(404);
+          }
         // }else{
         //   return 'Register dulu baru bisa pesen';
         // }

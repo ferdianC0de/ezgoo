@@ -24,7 +24,7 @@ DB::table('plane_schedules')->delete();
     return [
         'airport_id' => $firstAirport->id,
         'plane_id' => $plane->id,
-        'destination' => $lastAirport->city,
+        'destination' => $lastAirport->airport_name,
         'from' => $firstAirport->city,
         'boarding_time' => date('Y-m-d H:i:s'),
         'duration' => rand(1,99),

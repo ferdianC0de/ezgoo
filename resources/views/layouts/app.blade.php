@@ -14,7 +14,6 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
     <link href="{{ asset('public/images') }}" rel="stylesheet">
 </head>
 <body>
@@ -140,7 +139,6 @@
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
-<script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 @stack('scripts')
 
 </body>

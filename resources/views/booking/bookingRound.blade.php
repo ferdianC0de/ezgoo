@@ -7,13 +7,12 @@
 
 <!--pilihan pesawat-->
 <div class="container">
-  <form action="{{ url('test/order') }}" method="post">
+  <form action="{{ url('booking/order') }}" method="post">
     {{ csrf_field() }}
     <button type="submit" name="button">Pesan</button>
     <input type="hidden" name="vehicle" value="{{$vehicle}}">
-    <input type="hidden" name="total" value="{{$total}}">
+    <input type="hidden" name="total" value="{{implode(',',$total)}}">
     <input type="hidden" name="seat" value="{{$seat}}">
-    <input type="hidden" name="type" value="{{$type}}">
     <div class="row">
       <div class="col-md-6">
         <div class="table-responsive">

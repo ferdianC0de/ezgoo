@@ -19,15 +19,6 @@ Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/book', function () {
       return view('frontend.booking');
   });
-  Route::get('/pesawat', function () {
-      return view('frontend.pesawat');
-  });
-  Route::get('/tiketkereta', function () {
-      return view('frontend.tiketkereta');
-  });
-  Route::get('/tiketpesawat', function () {
-      return view('frontend.tiketpesawat');
-  });
   Route::get('/userprofil', function () {
       return view('frontend.userprofil');
   });
@@ -39,12 +30,6 @@ Route::group(['prefix'=> 'frontend'], function(){
   });
   Route::get('/psingle', function () {
     return view('frontend.psingle');
-  });
-  Route::get('/kround', function () {
-    return view('frontend.kround');
-  });
-  Route::get('/ksingle', function () {
-    return view('frontend.ksingle');
   });
   Route::get('/history', function () {
     return view('frontend.history');
