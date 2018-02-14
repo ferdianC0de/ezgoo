@@ -49,7 +49,8 @@ Route::group(['prefix' => 'booking'], function(){
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::get('pesawat', 'AdminController@pesawat');
   Route::get('kereta', 'AdminController@kereta_api');
-  Route::resource('home', 'AdminController');
+  Route::get('users', 'AdminController@showUsers');
+  Route::resource('', 'AdminController');
   Route::resource('airport', 'AirportController');
 });
 Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){

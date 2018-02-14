@@ -53,7 +53,11 @@
             <h4 class="card-text">
               <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak | {{$total['baby']}} Bayi)</p>
               IDR {{ number_format($fareTotal, 2, ',','.') }}
-              <button type="submit" class="btn btn-success">Pesan</button>
+              @if (Entrust::hasRole(['member','admin']))
+               <button type="submit">Pesan</button>
+             @else
+               Login sebelum pesan tiket, <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>
+             @endif
             </h4>
             </form>
           </div>
