@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "454de487ba9df10ff46e94fd509197eb",
+    "content-hash": "1cd253f33b43629af75063d2173d4793",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -589,21 +589,21 @@
         },
         {
             "name": "jrean/laravel-user-verification",
-            "version": "dev-master",
+            "version": "v5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jrean/laravel-user-verification.git",
-                "reference": "a6d581c5c93dc0667c825efce5753b44a977825e"
+                "reference": "5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jrean/laravel-user-verification/zipball/a6d581c5c93dc0667c825efce5753b44a977825e",
-                "reference": "a6d581c5c93dc0667c825efce5753b44a977825e",
+                "url": "https://api.github.com/repos/jrean/laravel-user-verification/zipball/5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b",
+                "reference": "5f3ce72d68ca93fb5a1e1bcb3d694b2e3320e93b",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "5.6.*",
-                "php": ">=7.1.3"
+                "illuminate/support": "5.5.*",
+                "php": ">=7.0.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.12",
@@ -648,7 +648,7 @@
                 "user activation",
                 "user verification"
             ],
-            "time": "2017-11-28T09:48:55+00:00"
+            "time": "2017-09-01T20:06:53+00:00"
         },
         {
             "name": "laravel/framework",
@@ -4394,9 +4394,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "jrean/laravel-user-verification": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

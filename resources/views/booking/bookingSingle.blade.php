@@ -11,7 +11,7 @@
   <form action="{{ url('booking/order') }}" method="post">
     {{ csrf_field() }}
     <input type="hidden" name="vehicle" value="{{$vehicle}}">
-    <input type="hidden" name="total" value="{{json_encode($total)}}">
+    <input type="hidden" name="total" value="{{implode(',',$total)}}">
     <input type="hidden" name="seat" value="{{$seat}}">
     <div class="table-responsive">
       <table class="table">
