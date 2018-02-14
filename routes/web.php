@@ -68,7 +68,4 @@ Route::group(['prefix' => 'test'], function(){
   });
   Route::get('test', 'BookingController@test');
   Route::get('testData', 'BookingController@testData');
-  Route::post('search', 'BookingController@search');
-  Route::post('order', 'BookingController@order');
-  Route::post('fixOrder', 'BookingController@fixOrder');
 });
