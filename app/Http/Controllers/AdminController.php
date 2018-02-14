@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Plane;
 Use App\Models\Customer;
+Use App\Models\Booking;
+Use App\Models\Passenger;
+Use App\Models\DetailBooking;
+use DB;
 
 class AdminController extends Controller
 {
@@ -20,8 +24,8 @@ class AdminController extends Controller
 
     public function bookingData()
     {
-        $customer = Customer::all();
-        return view('admin/bookingData', compact('customer'));
+        $booking = Booking::all();
+        return view('admin.bookingData', compact('booking'));
     }
 
     public function plane()
@@ -144,8 +148,13 @@ class AdminController extends Controller
 
     public function ebookingData($id)
     {
-        $data = Customer::find($id);
-        return view('admin.ebookingData', compact('data'));
+        $booking = Booking::find($id);
+        $detail  = DetailBooking::where('booking_id', $id)->get();
+        foreach($detail as $pass){
+        $passengers = Passenger::where('detail_booking_id', $pass->id)->get();}
+        return view('admin.ebookingData',compact('booking','detail','pass'));
+
+        
     }
 
     public function ubookingData(Request $request,$id)
@@ -161,4 +170,11 @@ class AdminController extends Controller
         return redirect('admin/bookingdata');
     }
 }
-    
+ 
+
+
+
+
+
+
+

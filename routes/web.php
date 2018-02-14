@@ -61,9 +61,7 @@ Route::get('/', function () {
     return view('frontend.home');
 });
 
-Route::get('/book', function () {
-    return view('frontend.booking');
-});
+Route::get('/book', 'BookingController@dbooking');
 
 Route::get('/pesawat', function () {
     return view('frontend.pesawat');

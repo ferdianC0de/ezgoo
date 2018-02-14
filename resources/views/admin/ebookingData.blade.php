@@ -14,27 +14,26 @@
 
 <body>
 <!-- content -->
+<div class="card" style="width: 20rem;">
+  <div class="card-block">
+    <h4 class="card-title">	{{$booking->type}}</h4>
+    <p class="card-text">	{{$booking->booking_date}}</p>
+  </div>
+ @foreach($detail as $data)
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{$data->class}}</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
+  @endforeach
 
 
-<form  action="{{ URL::to('admin/update/'.$data->id)}}" method="POST">
-{{ csrf_field() }}
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">{{$pass->name}}</li>
+    <li class="list-group-item">Vestibulum at eros</li>
+  </ul>
 
-<input type="hidden" name="_method" value="put">
-<label>Title</label>
-<p><input type="text" class="form-controller" name="title" value="{{$data->title}}"></p>
+</div>
 
-<label>Nama Pesawat</label>
-<p><input type="text" class="form-controller" name="first_name" value="{{$data->first_name}}"></p>
-
-<label>Eco Seat</label>
-<p><input type="text" class="form-controller" name="last_name" value="{{$data->last_name}}"></p>
-
-<label>Bus Seat</label>
-<p><input type="text" class="form-controller" name="email" value="{{$data->email}}"></p>
-
-<button class="btn btn-primary" name="submit">TAMBAH</button>
-
-</form>
 
   </div>
 </div>

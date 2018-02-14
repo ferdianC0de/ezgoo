@@ -18,14 +18,15 @@
          <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">
+                    <div class="form-group">  
                         <input type="hidden" name="schedule_id" value="1">
+                        <input type="hidden" name="passenger" value="1">
                         <label for="exampleInputemail1">Nama Lengkap</label>
                         <input type="text" class="form-control" name="type" placeholder="Nama Lengkap">
                     </div>
                     <div class="form-group">
                         <label for="exampleInputnotelpon1">Email</label/>
-                        <input type="namalengkap" class="form-control" placeholder="Email">
+                        <input type="text" class="form-control" name="class" placeholder="Email">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -41,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputkewarganegaraan1">No.Telpon</label>
-                        <input type="namalengkap" class="form-control" placeholder="namalengkap">
+                        <input type="text" name="name" class="form-control" placeholder="No telpon">
                     </div>
                 </div>
             </div>

@@ -7,7 +7,7 @@ use App\Models\DetailBooking;
 
 class Passenger extends Model
 {
-	protected $fillable = ['name'];
+	protected $fillable = ['detail_booking_id','name'];
 
 
     public function detail_booking()

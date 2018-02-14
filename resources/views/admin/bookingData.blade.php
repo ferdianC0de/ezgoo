@@ -19,41 +19,27 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
+                <th>Tanggal Booking</th>
+                <th>Jenis Pesanan</th>
                 <th>Aksi</th>
             </tr>
         </thead>
         <tfoot>
             <tr>
                 <th>No</th>
-                <th>Nama Depan</th>
-                <th>Nama Belakang</th>
-                <th>Email</th>
-                <th>Tanggal</th>
-                <th>Aksi</th>
+                <th>Tanggal Booking</th>
+                <th>Jenis Booking</th>
                 <th>Aksi</th>
             </tr>
         </tfoot>
         <tbody>
-            @foreach($customer as $data)
+            @foreach($booking as $data)
             <tr>
                 <td>1</td>
-                <td>{{$data ->first_name}}</td>
-                <td>{{$data ->last_name}}</td>
-                <td>{{$data ->email}}</td>
-                <td>{{$data ->created_at}}</td>
+                <td>{{$data->booking_date}}</td>
+                <td>{{$data->type}}</td>
                 <td>
-                    <form action="{{action('AdminController@dbookingData',$data->id)}}" method="POST">
-                        {{csrf_field()}}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger" type="submit">Delete</button></td>
-                    </form>
-                <td>
-                    <a href="{{ URL::to('admin/edit/'.$data->id)}}" class="btn btn-success">EDIT</a>
+                    <a href="{{ URL::to('admin/edit/'.$data->id)}}" class="btn btn-success">DETAIL</a>
                 </td>
             </tr>
             @endforeach

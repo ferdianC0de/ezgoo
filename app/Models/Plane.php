@@ -7,10 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Plane extends Model
 {
     protected $fillable = ['plane_name','eco_seat','bus_seat'];
-<<<<<<< HEAD
 
-=======
->>>>>>> 5f210aa7b2809be510fc110ca10396f6f8f4b821
     public function planeSchedule()
     {
       return $this->hasOne('App\Models\PlaneSchedule');

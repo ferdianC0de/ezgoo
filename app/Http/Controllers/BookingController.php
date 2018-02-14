@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
+use App\Models\DetailBooking;
 
 class BookingController extends Controller
 {
@@ -39,8 +40,15 @@ class BookingController extends Controller
         //
     }
 
+    public function dBooking(Request $request)
+    {
+        $booking = Booking::all();
+        return view('frontend/booking', compact('booking'));
+    }
+
     public function bookingPlane(Request $request)
     {
+        //booking
         $date = date('Y-m-d H:i:s');
         $request->request->add(['booking_date' => $date]);
         $data = request()->validate([
@@ -48,7 +56,24 @@ class BookingController extends Controller
             'type'              => 'required',
             'schedule_id'       => 'required'
         ]);
-        Booking::create($data);
+        $booking = Booking::create($data);
+        $request->request->add(['booking_id'=> $booking->id]);
+        //detailbooking
+        $dBooking = request()->validate([
+            'booking_id'        => 'required',
+            'passenger'        => 'required',
+            'class'             => 'required',
+
+        ]);
+        $dBooking = DetailBooking::create($dBooking);
+        $request->request->add(['detail_booking_id' => $dBooking->id]);
+        //passenger
+        $passenger = request()->validate([
+            'detail_booking_id' => 'required',
+            'name'              => 'required',
+
+        ]);
+        Passenger::create($passenger);
         return redirect('frontend/book');
 
     }
