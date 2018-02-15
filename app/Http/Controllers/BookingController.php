@@ -145,24 +145,26 @@ class BookingController extends Controller
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
           $date = date('Y-m-d H:i:s');
-          $request->request->add(['booking_date' => $date]);
-          $request->request->add(['user_id' => $userId]);
-          $booking = request()->validate([
-              'user_id'       => 'required',
-              'booking_date'  => 'required',
-              'vehicle'       => 'required',
-              'schedule_id'   => 'required',
-          ]);
-          $booking = Booking::create($booking);
-          $request->request->add(['booking_id'  => $booking->id]);
-          $request->request->add(['passenger'   => $total]);
-          $dbooking = request()->validate([
-              'booking_id'  =>  'required',
-              'passenger'   =>  'required',
-              'fare'        =>  'required',
-              'class'       =>  'required',
-          ]);
-          $dbooking = DetailBooking::create($dbooking);
+          $booking = [];
+            $dBooking = [];
+          for ($i=0; $i < count($request->id); $i++) {
+            $book[] = [
+              'booking_date'  => $date,
+              'user_id'       => $userId,
+              'schedule_id'   => $request->id[$i],
+              'vehicle'       => $vehicle,
+            ];
+            $booking = Booking::insert($book);
+            $dBooking[] = [
+              $booking_id => $booking->id,
+              $passenger  => $total,
+              $fare       => $fare,
+              $class      => $class,
+            ];
+          }
+            $dBooking = DetailBooking::insert($dBooking);
+
+            return [$Booking,$dBooking];
 
           $data = [];
           for ($i=0; $i < count($request->name); $i++) {

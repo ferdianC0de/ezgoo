@@ -15,7 +15,6 @@
   <input type="hidden" name="totalCount" value="{{$totalCount}}">
   <input type="hidden" name="seat" value="{{$seat}}">
   <input type="hidden" name="class" value="{{$class}}">
-  <input type="hidden" name="schedule_id" value="1">
 
   <div class="container">
     <div class="row">
