@@ -101,7 +101,7 @@ class BookingController extends Controller
         $class = 'First Class';
       }elseif($seat == 'exec_seat'){
         $class = 'Eksekutif';
-        
+      }
       if ($vehicle == 'plane'){
         $model = $this->planeSchedule;
       }elseif($vehicle == 'train'){
