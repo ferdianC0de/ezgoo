@@ -12,6 +12,7 @@
   {{ csrf_field() }}
   <input type="hidden" name="vehicle" value="{{$vehicle}}">
   <input type="hidden" name="total" value="{{implode(',',$total)}}">
+  <input type="hidden" name="totalCount" value="{{$totalCount}}">
   <input type="hidden" name="seat" value="{{$seat}}">
   <input type="hidden" name="class" value="{{$class}}">
   <div class="container">

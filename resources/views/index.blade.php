@@ -7,6 +7,10 @@
         $.fn.select2.defaults.set( "theme", "bootstrap" );
         $.fn.select2.defaults.set("width", null);
         $('.select2').select2();
+        $('.datepicker').datepicker({
+          format: "dd-mm-yyyy",
+          startDate: '+1d'
+        });
         $('.select2').change(function(){
           $('.select2').find('option').prop('disabled', false);
           $('.select2').each(function(){
@@ -95,7 +99,7 @@
                   <input type="hidden" name="vehicle" value="plane">
                   <div class="col-md-4">
                     <label>Kota Asal</label>
-                      <select class="select2 item_id" id="select2" name="from" >
+                      <select class="select2 item_id" id="select2" name="from_code" >
                         <option value="">Pilih</option>
                         @foreach ($airport as $a)
                           <option value="{{$a->code}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
@@ -105,7 +109,7 @@
 
                   <div class="col-md-4">
                     <label>Tujuan</label>
-                      <select class="select2 item_id" id="select2" name="destination" >
+                      <select class="select2 item_id" id="select2" name="destination_code" >
                         <option value="">Pilih</option>
                         @foreach ($airport as $a)
                           <option value="{{$a->code}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
@@ -164,12 +168,12 @@
 
                   <div class="col-md-4">
                     <label for="berangkat">Tanggal Berangkat</label>
-                    <input type="date" class="form-control" name='date' placeholder="30/01/2018" >
+                    <input type="text" class="form-control datepicker" name='date' placeholder="30/01/2018" >
                   </div>
 
                   <div class="col-md-4 dateB">
                     <label for="pulang">Tanggal Pulang</label>
-                    <input type="date" class="form-control" name='dateB' placeholder="30/01/2018">
+                    <input type="text" class="form-control datepicker" name='dateB' placeholder="30/01/2018">
                   </div>
 
                   <div class="col-md-4"><br>
@@ -183,20 +187,20 @@
                   <input type="hidden" name="vehicle" value="train">
                   <div class="col-md-4">
                     <label for="from">Kota Asal</label>
-                      <select class='select2' id="select2" name="from" >
+                      <select class='select2' id="select2" name="from_code" >
                         <option value="">Pilih</option>
                         @foreach ($train_station as $ts)
-                          <option value="{{$ts->station_name}}">{{"$ts->city - $ts->station_name ($ts->code)"}}</option>
+                          <option value="{{$ts->code}}">{{"$ts->city - $ts->station_name ($ts->code)"}}</option>
                         @endforeach
                       </select>
                   </div>
 
                   <div class="col-md-4">
                     <label for="kotatujuan">Kota Tujuan</label>
-                      <select class="select2" id="select2" name="destination" >
+                      <select class="select2" id="select2" name="destination_code" >
                         <option value="">Pilih</option>
                         @foreach ($train_station as $ts)
-                          <option value="{{$ts->station_name}}">{{$ts->city}} - {{$ts->station_name}} ({{$ts->code}})</option>
+                          <option value="{{$ts->code}}">{{$ts->city}} - {{$ts->station_name}} ({{$ts->code}})</option>
                         @endforeach
                       </select>
                   </div>
