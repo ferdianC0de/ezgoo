@@ -69,6 +69,42 @@ class BookingController extends Controller
       }else{
         return redirect('')->withError('Bayi tidak boleh lebih dari dewasa');
       }
+<<<<<<< HEAD
+      public function fixOrder(Request $request)
+      {
+        // if (Auth::check()) {
+          $modelV = "";
+          $modelF = "";
+          $modelS = "";
+          $vehicle = $request->vehicle;
+          $type = $request->type;
+          // $id = $request->id;
+          $userId = Auth::user()->id;
+          $total = $request->total;
+          $seat = $request->seat;
+
+          if ($vehicle == 'plane'){
+            $modelV = $this->plane;
+            $modelF = $this->planeFare;
+            $modelS = $this->planeSchedule;
+          }elseif($vehicle == 'train'){
+            $modelV = $this->train;
+            $modelF = $this->trainFare;
+            $modelS = $this->trainSchedule;
+          }
+
+          if (isset($request) && isset($userId)) {
+            // $modelS::seatMath($total, $seat, $id);
+            // Booking::roundTrip();
+            $request->request->add(['id' => $userId]);
+            return $request;
+          }else{
+            abort(404);
+          }
+        // }else{
+        //   return 'Register dulu baru bisa pesen';
+        // }
+=======
     }
     public function order(Request $request)
     {
@@ -101,6 +137,7 @@ class BookingController extends Controller
         $class = 'First Class';
       }elseif($seat == 'exec_seat'){
         $class = 'Eksekutif';
+>>>>>>> 81c611ff4dc583d25d1920d2d7f3b3f2043d120d
       }
       if ($vehicle == 'plane'){
         $model = $this->planeSchedule;

@@ -60,7 +60,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::put('update/{id}','AdminController@ubookingData');
   Route::delete('delete/bookingdata/{id}','AdminController@dbookingData');
 });
-Route::group(['prefix' => 'user', 'middleware'=> 'checkRole'], function(){
+  Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
   // Route::get('admin', 'AdminController@index')->name('admin');
   Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
