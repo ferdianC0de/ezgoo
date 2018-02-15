@@ -8,7 +8,7 @@
 <td><a href="">Login</a>Ke Akun EzGo anda untuk kemudahan pemesanan</td>
 </center>
 
-<form action="{{ URL('frontend/plane/booking')}}" method="POST">
+<form action="{{ URL('booking')}}" method="POST">
   {{csrf_field()}}
 <div class="container">
   <div class="row">
@@ -18,7 +18,7 @@
          <div class="panel-body">
             <div class="row">
                 <div class="col-md-6">
-                    <div class="form-group">  
+                    <div class="form-group">
                         <input type="hidden" name="schedule_id" value="1">
                         <input type="hidden" name="passenger" value="1">
                         <label for="exampleInputemail1">Nama Lengkap</label>

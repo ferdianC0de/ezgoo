@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
+use Auth;
 
 class BookingController extends Controller
 {
@@ -119,15 +120,13 @@ class BookingController extends Controller
     }
     public function fixOrder(Request $request)
     {
-      return $request;
-      // if (Auth::check()) {
+      if (Auth::check()) {
         $modelV = "";
         $modelF = "";
         $modelS = "";
         $vehicle = $request->vehicle;
-        $type = $request->type;
         $id = $request->id;
-        // $userId = Auth::user()->id;
+        $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
 
@@ -145,7 +144,36 @@ class BookingController extends Controller
 
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
-          return $math;
+          $date = date('Y-m-d H:i:s');
+          $request->request->add(['booking_date' => $date]);
+          $request->request->add(['user_id' => $userId]);
+          $booking = request()->validate([
+              'user_id'       => 'required',
+              'booking_date'  => 'required',
+              'vehicle'       => 'required',
+              'schedule_id'   => 'required',
+          ]);
+          $booking = Booking::create($booking);
+          $request->request->add(['booking_id'  => $booking->id]);
+          $request->request->add(['passenger'   => $total]);
+          $dbooking = request()->validate([
+              'booking_id'  =>  'required',
+              'passenger'   =>  'required',
+              'fare'        =>  'required',
+              'class'       =>  'required',
+          ]);
+          $dbooking = DetailBooking::create($dbooking);
+
+          $data = [];
+          for ($i=0; $i < count($request->name); $i++) {
+            $data[] = [
+              'detail_booking_id' => $dbooking->id,
+              'name'              => $request->name[$i],
+            ];
+          }
+          $p = Passenger::insert($data);
+
+          return [$booking,$dbooking,$p];
         }else{
           abort(404);
         }
@@ -153,6 +181,7 @@ class BookingController extends Controller
       //   return 'Register dulu baru bisa pesen';
       // }
     }
+  }
     public function test()
     {
       return view('test.testView');
