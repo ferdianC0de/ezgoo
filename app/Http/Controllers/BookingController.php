@@ -13,20 +13,27 @@ class BookingController extends Controller
     {
       $this->plane = "App\Models\Plane";
       $this->planeFare = "App\Models\PlaneFare";
-      $this->planeSchedule = "App\Models\planeSchedule";
+      $this->planeSchedule = "App\Models\PlaneSchedule";
       $this->train = "App\Models\Train";
       $this->trainFare = "App\Models\TrainFare";
-      $this->trainSchedule = "App\Models\trainSchedule";
+      $this->trainSchedule = "App\Models\TrainSchedule";
     }
     public function search(Request $request)
     {
       if ($request->baby <= $request->adult){
-        $total = [
-          'baby' => $request->baby,
-          'child'=> $request->child,
-          'adult'=> $request->adult
-        ];
         $vehicle = $request->vehicle;
+        if ($vehicle == 'plane') {
+          $total = [
+            'baby' => $request->baby,
+            'child'=> $request->child,
+            'adult'=> $request->adult
+          ];
+        }elseif($vehicle == 'train'){
+          $total = [
+            'child'=> $request->child,
+            'adult'=> $request->adult
+          ];
+        }
         $type = $request->type;
         $seat  = "";
         $model = "";
@@ -43,7 +50,7 @@ class BookingController extends Controller
           $seat = 'bus_seat';
         }elseif($request->class == "First Class"){
           $seat = 'first_seat';
-        }elseif($request->class == "Executive Class"){
+        }elseif($request->class == "Eksekutif"){
           $seat = 'exec_seat';
         }
         //cek tipe
@@ -71,12 +78,20 @@ class BookingController extends Controller
       $id = [$request->go,$request->back];
       $fareTotal = 0;
       $total = explode(',',$request->total);
-      $totalCount = $total[0] + $total[1] + $total[2];
-      $total = [
-        'baby' => $total[0],
-        'child'=> $total[1],
-        'adult'=> $total[2]
-      ];
+      if ($vehicle == 'plane') {
+        $totalCount = $total[0] + $total[1] + $total[2];
+        $total = [
+          'baby' => $total[0],
+          'child'=> $total[1],
+          'adult'=> $total[2]
+        ];
+      }elseif($vehicle == 'train'){
+        $totalCount = $total[0] + $total[1];
+        $total = [
+          'child'=> $total[0],
+          'adult'=> $total[1]
+        ];
+      }
       $seat = $request->seat;
       if ($seat == 'eco_seat') {
         $class = 'Ekonomi';
@@ -92,7 +107,7 @@ class BookingController extends Controller
       }elseif($vehicle == 'train'){
         $model = $this->trainSchedule;
       }
-
+      
       if (isset($id) && isset($seat)) {
         $schedule = $model::findWithPrice($id, $seat);
       }else{

@@ -19,12 +19,21 @@
           <table class="table">
             <thead>
               <tr>
-                <td></td>
-                <th>Pesawat</th>
-                <th>Pergi</th>
-                <th>Tiba</th>
-                <th>Gate</th>
-                <th>/orang</th>
+                @if ($vehicle == 'plane')
+                  <td></td>
+                  <th>Pesawat</th>
+                  <th>Pergi</th>
+                  <th>Tiba</th>
+                  <th>Gate</th>
+                  <th>/orang</th>
+                @elseif($vehicle == 'train')
+                  <td></td>
+                  <th>Kereta</th>
+                  <th>Pergi</th>
+                  <th>Tiba</th>
+                  <th>Peron</th>
+                  <th>/orang</th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -36,10 +45,17 @@
                       <input type="radio" name="go" value="{{ $s->id }}"></label>
                     </div>
                   </td>
-                  <td>{{$s->plane_name}}</td>
-                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                  <td></td>
-                  <td>{{ $s->gate }}</td>
+                  @if ($vehicle == 'plane')
+                    <td>{{$s->plane_name}}</td>
+                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                    <td></td>
+                    <td>{{ $s->gate }}</td>
+                  @elseif($vehicle == 'train')
+                    <td>{{$s->train_name}}</td>
+                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                    <td></td>
+                    <td>{{ $s->platform }}</td>
+                  @endif
                   <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
                 </tr>
               @endforeach
@@ -52,12 +68,21 @@
           <table class="table">
             <thead>
               <tr>
-                <td></td>
-                <th>Pesawat</th>
-                <th>Pergi</th>
-                <th>Tiba</th>
-                <th>Gate</th>
-                <th>/orang</th>
+                @if ($vehicle == 'plane')
+                  <td></td>
+                  <th>Pesawat</th>
+                  <th>Pergi</th>
+                  <th>Tiba</th>
+                  <th>Gate</th>
+                  <th>/orang</th>
+                @elseif($vehicle == 'train')
+                  <td></td>
+                  <th>Kereta</th>
+                  <th>Pergi</th>
+                  <th>Tiba</th>
+                  <th>Peron</th>
+                  <th>/orang</th>
+                @endif
               </tr>
             </thead>
             <tbody>
@@ -69,10 +94,17 @@
                       <input type="radio" name="back" value="{{ $s->id }}"></label>
                     </div>
                   </td>
-                  <td>{{$s->plane_name}}</td>
-                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                  <td></td>
-                  <td>{{ $s->gate }}</td>
+                  @if ($vehicle == 'plane')
+                    <td>{{$s->plane_name}}</td>
+                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                    <td></td>
+                    <td>{{ $s->gate }}</td>
+                  @elseif($vehicle == 'train')
+                    <td>{{$s->train_name}}</td>
+                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                    <td></td>
+                    <td>{{ $s->platform }}</td>
+                  @endif
                   <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
                 </tr>
               @endforeach
