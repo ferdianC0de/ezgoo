@@ -8,12 +8,15 @@
   <head><h2>PEMESANAN TIKET</h2></head>
 </center>
 
-<form action="{{url('booking/fixOrder')}}" method="post">
+<form action="{{route('fixOrder')}}" method="post">
   {{ csrf_field() }}
   <input type="hidden" name="vehicle" value="{{$vehicle}}">
   <input type="hidden" name="total" value="{{implode(',',$total)}}">
+  <input type="hidden" name="totalCount" value="{{$totalCount}}">
   <input type="hidden" name="seat" value="{{$seat}}">
   <input type="hidden" name="class" value="{{$class}}">
+  <input type="hidden" name="schedule_id" value="1">
+
   <div class="container">
     <div class="row">
       <div class="col-md-6">
@@ -49,6 +52,7 @@
                 <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
               </div>
             @endforeach
+            <input type="hidden" name="fare"  value="{{$fareTotal}}">
           </div>
           <div class="panel panel-info">
           <div class="panel-heading">

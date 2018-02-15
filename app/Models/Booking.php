@@ -7,7 +7,7 @@ use App\Models\PlaneSchedule;
 
 class Booking extends Model
 {
-    protected $fillable = ['booking_date','status','type','schedule_id'];
+    protected $fillable = ['user_id','booking_date','status','vehicle','schedule_id'];
     //
     public static function singleTrip($go, $userID)
     {
