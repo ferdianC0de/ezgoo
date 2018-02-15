@@ -37,28 +37,32 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($scheduleG as $s)
-                <tr>
-                  <td>
-                    <div class="radio">
-                      <label>
-                      <input type="radio" name="go" value="{{ $s->id }}"></label>
-                    </div>
-                  </td>
-                  @if ($vehicle == 'plane')
-                    <td>{{$s->plane_name}}</td>
-                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                    <td></td>
-                    <td>{{ $s->gate }}</td>
-                  @elseif($vehicle == 'train')
-                    <td>{{$s->train_name}}</td>
-                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                    <td></td>
-                    <td>{{ $s->platform }}</td>
-                  @endif
-                  <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
-                </tr>
-              @endforeach
+              @if ($scheduleG->isEmpty())
+                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+              @else
+                @foreach ($scheduleG as $s)
+                  <tr>
+                    <td>
+                      <div class="radio">
+                        <label>
+                        <input type="radio" name="go" value="{{ $s->id }}"></label>
+                      </div>
+                    </td>
+                    @if ($vehicle == 'plane')
+                      <td>{{$s->plane_name}}</td>
+                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                      <td></td>
+                      <td>{{ $s->gate }}</td>
+                    @elseif($vehicle == 'train')
+                      <td>{{$s->train_name}}</td>
+                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                      <td></td>
+                      <td>{{ $s->platform }}</td>
+                    @endif
+                    <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
+                  </tr>
+                @endforeach
+              @endif
             </tbody>
           </table>
         </div>
@@ -86,28 +90,32 @@
               </tr>
             </thead>
             <tbody>
-              @foreach ($scheduleB as $s)
-                <tr>
-                  <td>
-                    <div class="radio">
-                      <label>
-                      <input type="radio" name="back" value="{{ $s->id }}"></label>
-                    </div>
-                  </td>
-                  @if ($vehicle == 'plane')
-                    <td>{{$s->plane_name}}</td>
-                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                    <td></td>
-                    <td>{{ $s->gate }}</td>
-                  @elseif($vehicle == 'train')
-                    <td>{{$s->train_name}}</td>
-                    <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                    <td></td>
-                    <td>{{ $s->platform }}</td>
-                  @endif
-                  <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
-                </tr>
-              @endforeach
+              @if ($scheduleB->isEmpty())
+                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+              @else
+                @foreach ($scheduleB as $s)
+                  <tr>
+                    <td>
+                      <div class="radio">
+                        <label>
+                        <input type="radio" name="back" value="{{ $s->id }}"></label>
+                      </div>
+                    </td>
+                    @if ($vehicle == 'plane')
+                      <td>{{$s->plane_name}}</td>
+                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                      <td></td>
+                      <td>{{ $s->gate }}</td>
+                    @elseif($vehicle == 'train')
+                      <td>{{$s->train_name}}</td>
+                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                      <td></td>
+                      <td>{{ $s->platform }}</td>
+                    @endif
+                    <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
+                  </tr>
+                @endforeach
+              @endif
             </tbody>
           </table>
         </div>

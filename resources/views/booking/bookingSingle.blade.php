@@ -36,30 +36,34 @@
           </tr>
         </thead>
         <tbody>
-          @if ($vehicle == 'plane')
-            @foreach ($schedule as $s)
-              <tr>
-                <td>{{ $s->plane_name }}</td>
-                <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                <td></td>
-                <td>{{ $s->duration }}</td>
-                <td>{{ $s->gate }}</td>
-                <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
-                <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
-              </tr>
-            @endforeach
-          @elseif($vehicle == 'train')
-            @foreach ($schedule as $s)
-              <tr>
-                <td>{{ $s->train_name }}</td>
-                <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                <td></td>
-                <td>{{ $s->duration }}</td>
-                <td>{{ $s->platform }}</td>
-                <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
-                <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
-              </tr>
-            @endforeach
+          @if ($schedule->isEmpty())
+            <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+          @else
+            @if ($vehicle == 'plane')
+              @foreach ($schedule as $s)
+                <tr>
+                  <td>{{ $s->plane_name }}</td>
+                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                  <td></td>
+                  <td>{{ $s->duration }}</td>
+                  <td>{{ $s->gate }}</td>
+                  <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
+                  <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
+                </tr>
+              @endforeach
+            @elseif($vehicle == 'train')
+              @foreach ($schedule as $s)
+                <tr>
+                  <td>{{ $s->train_name }}</td>
+                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
+                  <td></td>
+                  <td>{{ $s->duration }}</td>
+                  <td>{{ $s->platform }}</td>
+                  <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
+                  <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
+                </tr>
+              @endforeach
+            @endif
           @endif
         </tbody>
       </table>
