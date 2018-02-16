@@ -5,8 +5,7 @@
 
 <div class="container">
   @foreach ($schedule as $s)
-      <h3 id="test">Penerbangan tanggal {{date('d-m-Y', strtotime($s->boarding_time))}}</h3>
-      <h4>Dari {{$s->from}} ke {{$s->destination}}</h2>
+      <h4>Dari {{$s->from}} ke {{$s->destination}} <p class="pull-right">{{date('d-m-Y', strtotime($s->boarding_time))}}</p> </h4>
     @break($s)
   @endforeach
   <form action="{{ url('booking/order') }}" method="post">

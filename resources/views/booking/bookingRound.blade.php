@@ -15,6 +15,10 @@
     <input type="hidden" name="seat" value="{{$seat}}">
     <div class="row">
       <div class="col-md-6">
+        @foreach ($scheduleG as $s)
+            <h4>Dari {{$s->from}} ke {{$s->destination}}<p class="pull-right">{{date('d-m-Y', strtotime($s->boarding_time))}}</p> </h4>
+          @break($s)
+        @endforeach
         <div class="table-responsive">
           <table class="table">
             <thead>
@@ -68,6 +72,10 @@
         </div>
       </div>
       <div class="col-md-6">
+        @foreach ($scheduleB as $s)
+            <h4>Dari {{$s->from}} ke {{$s->destination}} <p class="pull-right">{{date('d-m-Y', strtotime($s->boarding_time))}}</p> </h4>
+          @break($s)
+        @endforeach
         <div class="table-responsive">
           <table class="table">
             <thead>
