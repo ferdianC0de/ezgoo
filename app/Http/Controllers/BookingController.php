@@ -125,38 +125,29 @@ class BookingController extends Controller
 
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
-          $date = date('Y-m-d H:i:s');
-          $booking = [];
-            $dBooking = [];
           for ($i=0; $i < count($request->id); $i++) {
-            $book[] = [
-              'booking_date'  => $date,
-              'user_id'       => $userId,
-              'schedule_id'   => $request->id[$i],
-              'vehicle'       => $vehicle,
-            ];
-            $booking = Booking::insert($book);
-            $dBooking[] = [
-              $booking_id => $booking->id,
-              $passenger  => $total,
-              $fare       => $fare,
-              $class      => $class,
-            ];
-          }
-            $dBooking = DetailBooking::insert($dBooking);
+              $booking = new Booking();
+              $booking->user_id = $userId;
+              $booking->booking_date = date('Y-m-d H:i:s');
+              $booking->vehicle = $vehicle;
+              $booking->schedule_id = $request->id[$i];
+              $booking->save();
 
-            return [$Booking,$dBooking];
+              $detbook = new DetailBooking;
+              $detbook->booking_id = $booking->id;
+              $detbook->passenger =  $total;
+              $detbook->fare = $request->fare;
+              $detbook->class = $seat;
+              $detbook->save();
 
-          $data = [];
-          for ($i=0; $i < count($request->name); $i++) {
-            $data[] = [
-              'detail_booking_id' => $dbooking->id,
-              'name'              => $request->name[$i],
-            ];
-          }
-          $p = Passenger::insert($data);
+              for ($i=0; $i < count($request->name); $i++) {
+              $passenger = new Passenger;
+              $passenger->detail_booking_id = $detbook->id;
+              $passenger->name = $request->name[$i];
+              $passenger->save();
+              }
+            }
 
-          return [$booking,$dbooking,$p];
         }else{
           abort(404);
         }
