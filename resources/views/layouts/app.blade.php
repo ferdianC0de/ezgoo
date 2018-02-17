@@ -34,7 +34,7 @@
           </button>
 
           <!-- Branding Image -->
-          <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
+          <a class="navbar-brand" href="{{url('')}}">
               {{ config('app.name', 'EZGOO.') }}
           </a>
         </div>

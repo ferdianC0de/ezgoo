@@ -68,10 +68,10 @@ class UserController extends Controller
 
       if ($type == "password") {
         # code...
-        return view('editPassword',$data);
+        return view('user.editPassword',$data);
       }elseif ($type == "profile") {
         # code...
-        return view('edit',$data);
+        return view('user.edit',$data);
       }else {
         return abort(404);
       }
