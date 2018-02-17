@@ -14,20 +14,29 @@ class BookingController extends Controller
     {
       $this->plane = "App\Models\Plane";
       $this->planeFare = "App\Models\PlaneFare";
-      $this->planeSchedule = "App\Models\planeSchedule";
+      $this->planeSchedule = "App\Models\PlaneSchedule";
       $this->train = "App\Models\Train";
       $this->trainFare = "App\Models\TrainFare";
-      $this->trainSchedule = "App\Models\trainSchedule";
+      $this->trainSchedule = "App\Models\TrainSchedule";
     }
     public function search(Request $request)
     {
+      $request['date'] = date('Y-m-d', strtotime($request->date));
+      $request['dateB'] = date('Y-m-d', strtotime($request->dateB));
       if ($request->baby <= $request->adult){
-        $total = [
-          'baby' => $request->baby,
-          'child'=> $request->child,
-          'adult'=> $request->adult
-        ];
         $vehicle = $request->vehicle;
+        if ($vehicle == 'plane') {
+          $total = [
+            'baby' => $request->baby,
+            'child'=> $request->child,
+            'adult'=> $request->adult
+          ];
+        }elseif($vehicle == 'train'){
+          $total = [
+            'child'=> $request->child,
+            'adult'=> $request->adult
+          ];
+        }
         $type = $request->type;
         $seat  = "";
         $model = "";
@@ -44,19 +53,19 @@ class BookingController extends Controller
           $seat = 'bus_seat';
         }elseif($request->class == "First Class"){
           $seat = 'first_seat';
-        }elseif($request->class == "Executive Class"){
+        }elseif($request->class == "Eksekutif"){
           $seat = 'exec_seat';
         }
         //cek tipe
         if ($type == 'st'){
-          $schedule = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
+          $schedule = $model::findSchedule($request->from_code, $request->destination_code, $request->date, $seat, count($total));
           return view('booking.bookingSingle', compact('schedule', 'vehicle','type','total', 'seat'));
           // return $schedule;
         }elseif($type == 'rt'){
-          $scheduleG = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
-          $scheduleB = $model::findSchedule($request->destination, $request->from, $request->dateB, $seat, count($total));
+          $scheduleG = $model::findSchedule($request->from_code, $request->destination_code, $request->date, $seat, count($total));
+          $scheduleB = $model::findSchedule($request->destination_code, $request->from_code, $request->dateB, $seat, count($total));
+          // return $scheduleB;
           return view('booking.bookingRound', compact('scheduleG', 'scheduleB', 'vehicle','type','total', 'seat'));
-          // return $scheduleG;
         }else{
           abort(404);
         }
@@ -72,12 +81,20 @@ class BookingController extends Controller
       $id = [$request->go,$request->back];
       $fareTotal = 0;
       $total = explode(',',$request->total);
-      $totalCount = $total[0] + $total[1] + $total[2];
-      $total = [
-        'baby' => $total[0],
-        'child'=> $total[1],
-        'adult'=> $total[2]
-      ];
+      if ($vehicle == 'plane') {
+        $totalCount = $total[0] + $total[1] + $total[2];
+        $total = [
+          'baby' => $total[0],
+          'child'=> $total[1],
+          'adult'=> $total[2]
+        ];
+      }elseif($vehicle == 'train'){
+        $totalCount = $total[0] + $total[1];
+        $total = [
+          'child'=> $total[0],
+          'adult'=> $total[1]
+        ];
+      }
       $seat = $request->seat;
       if ($seat == 'eco_seat') {
         $class = 'Ekonomi';
@@ -121,6 +138,8 @@ class BookingController extends Controller
           $modelV = $this->train;
           $modelF = $this->trainFare;
           $modelS = $this->trainSchedule;
+        }else{
+          abort(404);
         }
 
         if (isset($id)) {
@@ -158,7 +177,7 @@ class BookingController extends Controller
   }
     public function test()
     {
-      return view('test.testTable');
+      return view('test.testView');
     }
     public function testData(Datatables $datatables)
     {

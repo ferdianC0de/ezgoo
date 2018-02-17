@@ -1,6 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
+  @push('scripts')
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $.fn.select2.defaults.set( "theme", "bootstrap" );
+        $.fn.select2.defaults.set("width", null);
+        $('.select2').select2();
+        $('.datepicker').datepicker({
+          format: "dd-mm-yyyy",
+          startDate: '+1d'
+        });
+        $('.select2').change(function(){
+          $('.select2').find('option').prop('disabled', false);
+          $('.select2').each(function(){
+            var current = $(this);
+            console.log(current);
+            $('.select2').not(current).find('option').each(function(){
+              if($(this).val() == current.val()){
+                $(this).prop('disabled', true);
+              }
+            });
+          });
+          $('.select2').select2();
+        });
+        $('.dateB').hide();
+        $('.type').change(function(){
+          if ($(this).val() == 'rt') {
+            $('.dateB').show();
+          }else{
+            $('.dateB').hide();
+          }
+        });
+      });
+    </script>
+  @endpush
 <!--slider-->
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -45,244 +79,239 @@
 </div>
 
 <!-- tab -->
-<div class="container">
-<div class="row">
-<div class="col-lg-12 center">
-<div role="tabpanel">
-<!-- nav tabs-->
-  <div class="panel panel-default">
-      <div class="panel-body">
-        <ul class="nav nav-tabs">
-      <!-- Untuk Semua Tab..-->
-            <li class="active"><a href="#pesawat" data-toggle="tab">Pesawat</a></li>
-            <li><a href="#kereta" data-toggle="tab">Kereta</a></li>
-        </ul>
-  <!-- Tab panes, ini content dari tab di atas -->
-      @if (Session::has('error'))
-        <div class="alert alert-danger">
-          <p>{{Session::get('error')}}</p>
-        </div>
-      @endif
-  <div class="tab-content">
-    <div class="tab-pane active" id="pesawat">
-      <form action="{{ route('search') }}" method="post">
-        {{ csrf_field() }}
-        <input type="hidden" name="vehicle" value="plane">
-        <div class="col-md-4">
-          <label for="from">Kota Asal</label>
-            <select class='form-control' name="from" required>
-              @foreach ($airport as $a)
-                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
-              @endforeach
-            </select>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div role="tabpanel">
+          <div class="panel-body">
+            <ul class="nav nav-tabs">
+              <li class="active"> <a href="#pesawat" data-toggle="tab">Pesawat</a></li>
+              <li> <a href="#kereta" data-toggle="tab">Kereta</a></li>
+            </ul>
+            @if (Session::has('error'))
+              <div class="alert alert-danger">
+                <p>{{Session::get('error')}}</p>
+              </div>
+            @endif
+            <div class="tab-content">
+              <div class="tab-pane active" id="pesawat">
+                <form action="{{ route('search') }}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="vehicle" value="plane">
+                  <div class="col-md-4">
+                    <label>Kota Asal</label>
+                      <select class="select2 item_id" id="select2" name="from_code" >
+                        <option value="">Pilih</option>
+                        @foreach ($airport as $a)
+                          <option value="{{$a->code}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                        @endforeach
+                      </select>
+                  </div>
 
-        <div class="col-md-4">
-          <label for="tujuan">Tujuan</label>
-            <select class="form-control" title="Tujuan" name="destination" required>
-              @foreach ($airport as $a)
-                <option value="{{$a->airport_name}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
-              @endforeach
-            </select>
-        </div>
+                  <div class="col-md-4">
+                    <label>Tujuan</label>
+                      <select class="select2 item_id" id="select2" name="destination_code" >
+                        <option value="">Pilih</option>
+                        @foreach ($airport as $a)
+                          <option value="{{$a->code}}">{{"$a->city - $a->airport_name ($a->code)"}}</option>
+                        @endforeach
+                      </select>
+                  </div>
 
-        <div class="col-md-4">
-          <label for="kelas penerbangan">Kelas Penerbangan</label>
-            <select class="form-control" id="class" name="class" required>
-                <option value="Ekonomi">Ekonomi</option>
-                <option value="Bisnis">Bisnis</option>
-                <option value="First Class">First Class</option>
-            </select>
-        </div>
+                  <div class="col-md-4">
+                    <label for="kelas penerbangan">Kelas Penerbangan</label>
+                      <select class="form-control" name="class" >
+                          <option value="Ekonomi">Ekonomi</option>
+                          <option value="Bisnis">Bisnis</option>
+                          <option value="First Class">First Class</option>
+                      </select>
+                  </div>
 
-        <div class="col-md-4">
-          <label for="Perjalanan">Perjalanan</label>
-            <select class='form-control select2' id="type" name="type" required>
-                <option value="st">Sekali Jalan</option>
-                <option value="rt">Pulang Pergi</option>
-            </select>
-        </div>
+                  <div class="col-md-4">
+                    <label for="Perjalanan">Perjalanan</label>
+                      <select class='form-control type' name="type" >
+                          <option value="st">Sekali Jalan</option>
+                          <option value="rt">Pulang Pergi</option>
+                      </select>
+                  </div>
 
-        <div class="col-md-2">
-          <label for="dewasa">Dewasa</label>
-            <select class="form-control"  name="adult" required>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
+                  <div class="col-md-2">
+                    <label for="dewasa">Dewasa</label>
+                      <select class="form-control"  name="adult" >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                      </select>
+                  </div>
 
-        <div class="col-md-2">
-          <label for="anak">Anak-Anak</label>
-            <select class="form-control"  id="child" name="child" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
+                  <div class="col-md-2">
+                    <label for="anak">Anak-Anak</label>
+                      <select class="form-control"  id="child" name="child" >
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                      </select>
+                  </div>
 
-        <div class="col-md-2">
-          <label for="bayi">Bayi</label>
-            <select class="form-control"  id="baby" name="baby" required>
-                <option value="0">0</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-            </select>
-        </div>
+                  <div class="col-md-2">
+                    <label for="bayi">Bayi</label>
+                      <select class="form-control"  id="baby" name="baby" >
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                      </select>
+                  </div>
 
-        <div class="col-md-4">
-          <label for="berangkat">Tanggal Berangkat</label>
-          <input type="date" class="form-control" id="date-departing" name='date' placeholder="30/01/2018" required>
-        </div>
+                  <div class="col-md-4">
+                    <label for="berangkat">Tanggal Berangkat</label>
+                    <input type="text" class="form-control datepicker" name='date' placeholder="30/01/2018" >
+                  </div>
 
-        <div class="col-md-4">
-          <label for="pulang">Tanggal Pulang</label>
-          <input type="date" class="form-control" id="date-departing" name='dateB' placeholder="30/01/2018" required>
-        </div>
+                  <div class="col-md-4 dateB">
+                    <label for="pulang">Tanggal Pulang</label>
+                    <input type="text" class="form-control datepicker" name='dateB' placeholder="30/01/2018">
+                  </div>
 
-        <div class="col-md-4"><br>
-          <button type="submit" class="btn btn-primary">Cari Tiket Pesawat</button>
-        </div>
-      </form>
-    </div>
+                  <div class="col-md-4"><br>
+                    <button type="submit" class="btn btn-primary">Cari Tiket Pesawat</button>
+                  </div>
+                </form>
+              </div>
+              <div class="tab-pane" id="kereta">
+                <form action="{{route('search')}}" method="post">
+                  {{ csrf_field() }}
+                  <input type="hidden" name="vehicle" value="train">
+                  <div class="col-md-4">
+                    <label for="from">Kota Asal</label>
+                      <select class='select2' id="select2" name="from_code" >
+                        <option value="">Pilih</option>
+                        @foreach ($train_station as $ts)
+                          <option value="{{$ts->code}}">{{"$ts->city - $ts->station_name ($ts->code)"}}</option>
+                        @endforeach
+                      </select>
+                  </div>
 
-  <!-- Kereta-->
-    <div class="tab-pane" id="kereta">
-      <form action="{{route('search')}}" method="post">
-        <div class="col-md-4">
-          <label for="kotaasal">Kota Asal</label>
-            <select class="form-control">
-                <option>Jakarta - Gambir (GMR)</option>
-                <option>Bandung - Bandng (BD)</option>
-                <option>Jakarta Selatan - Manggarai</option>
-                <option>Jakarta Timur - Jatinegara</option>
-                <option>Jakarta Utara - Tanjung Priok</option>
-              </select>
+                  <div class="col-md-4">
+                    <label for="kotatujuan">Kota Tujuan</label>
+                      <select class="select2" id="select2" name="destination_code" >
+                        <option value="">Pilih</option>
+                        @foreach ($train_station as $ts)
+                          <option value="{{$ts->code}}">{{$ts->city}} - {{$ts->station_name}} ({{$ts->code}})</option>
+                        @endforeach
+                      </select>
+                  </div>
+
+                  <div class="col-md-4">
+                      <label for="kelas kereta">Kelas Kereta</label>
+                        <select class="form-control" name="class">
+                            <option value="Ekonomi">Ekonomi</option>
+                            <option value="Bisnis">Bisnis</option>
+                            <option value="Eksekutif">Eksekutif</option>
+                          </select>
+                  </div>
+
+                  <div class="col-md-4">
+                    <label for="Perjalanan">Perjalanan</label>
+                        <select class='form-control type' name="type" >
+                            <option value="st">Sekali Jalan</option>
+                            <option value="rt">Pulang Pergi</option>
+                          </select>
+                  </div>
+
+
+                  <div class="col-md-4">
+                      <label for="berangkat">Tanggal Berangkat</label>
+                      <input type="date" class="form-control" id="date-departing" name='date' >
+                  </div>
+
+                  <div class="col-md-4 dateB">
+                      <label for="pulang">Tanggal Pulang</label>
+                      <input type="date" class="form-control" id="date-departing" name='dateB'>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label for="dewasa">Dewasa</label>
+                      <select class="form-control"  name="adult" >
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                      </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <label for="anak">Anak-Anak</label>
+                      <select class="form-control"  id="child" name="child" >
+                          <option value="0">0</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                      </select>
+                  </div>
+
+                  <div class="col-md-4"><br>
+                      <button type="submit" class="btn btn-primary">Cari Tiket Kereta</button>
+                  </div>
+                </form>
+              </div>
+            </div>
           </div>
-
-    <div class="col-md-4">
-      <label for="kotatujuan">Kota Tujuan</label>
-          <select class="form-control">
-              <option>Jakarta - Gambir (GMR)</option>
-              <option>Bandung - Bandng (BD)</option>
-              <option>Jakarta Selatan - Manggarai</option>
-              <option>Jakarta Timur - Jatinegara</option>
-              <option>Jakarta Utara - Tanjung Priok</option>
-            </select>
       </div>
-
-    <div class="col-md-4">
-        <label for="kelas penerbangan">Kelas Kereta</label>
-          <select class="form-control">
-              <option>Ekonomi</option>
-              <option>Bussines</option>
-              <option>Eksekutif</option>
-            </select>
-      </div>
-
-    <div class="col-md-4">
-      <label for="Perjalanan">Perjalanan</label>
-          <select class='form-control select2' id="trip-type" name="trip_type" required="">
-              <option>Sekali Jalan</option>
-              <option>Pulang Pergi</option>
-            </select>
     </div>
-
-
-    <div class="col-md-4">
-        <label for="berangkat">Tanggal Berangkat</label>
-        <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
-    </div>
-
-    <div class="col-md-4">
-        <label for="pulang">Tanggal Pulang</label>
-        <input type="date" class="form-control" id="date-departing" name='start' value="30/01/2018" required="" type="text">
-    </div>
-
-    <div class="col-md-2">
-        <label for="dewasa">Dewasa</label>
-          <select class="form-control">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-    </div>
-
-    <div class="col-md-2">
-        <label for="anak">Anak-Anak</label>
-          <select class="form-control">
-            <option>0</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-          </select>
-    </div>
-
-    <div class="col-md-4"><br>
-        <button class="btn btn-primary">Cari Tiket Kereta</button>
-    </div>
-
-    </div>
-    </form>
-
   </div>
-  </div>
-</div>
 
 <hr class="half-rule">
  <!-- Services -->
- <section id="services">
-      <div class="container">
-          <div class="row">
-              <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">Why Booking with EzGo?</h2>
-              </div>
-          </div>
-
-        <div class="row text-center">
-            <div class="col-md-4">
-                <img src="images/bayar.png" alt="">
-                <h4 class="service-heading">Berbagai Pilihan Pembayaran</h4>
-                <p class="text-muted">Lebih fleksibel dengan berbagai metode pembayaran dari ATM Transfer, Credit Card, hingga Internet Banking.</p>
-            </div>
-
-          <div class="col-md-4">
-              <img src="images/search.png" alt="">
-              <h4 class="service-heading">Hasil Pencarian paling Ekstensif</h4>
-              <p class="text-muted">Dengan pencarian satu klik, temukan tiket Pesawat dan Kereta ke 100.000 rute di seluruh Asia Pasifik dan Eropa untuk penerbangan.</p>
-          </div>
-
-          <div class="col-md-4">
-              <img src="images/pay.png" alt="">
-              <h4 class="service-heading">Transaksi Aman Dijamin</h4>
-              <p class="text-muted">Keamanan dan privasi transaksi online Anda dilindungi, anda akan Menerima konfirmasi instan dan e-ticket langsung di email anda.</p>
-          </div>
-
+<section id="services">
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Why Booking with EzGo?</h2>
         </div>
+    </div>
+
+    <div class="row text-center">
+      <div class="col-md-4">
+          <img src="images/bayar.png" alt="">
+          <h4 class="service-heading">Berbagai Pilihan Pembayaran</h4>
+          <p class="text-muted">Lebih fleksibel dengan berbagai metode pembayaran dari ATM Transfer, Credit Card, hingga Internet Banking.</p>
       </div>
-    </section>
 
+      <div class="col-md-4">
+          <img src="images/search.png" alt="">
+          <h4 class="service-heading">Hasil Pencarian paling Ekstensif</h4>
+          <p class="text-muted">Dengan pencarian satu klik, temukan tiket Pesawat dan Kereta ke 100.000 rute di seluruh Asia Pasifik dan Eropa untuk penerbangan.</p>
+      </div>
 
-    <hr class="half-rule">
+      <div class="col-md-4">
+          <img src="images/pay.png" alt="">
+          <h4 class="service-heading">Transaksi Aman Dijamin</h4>
+          <p class="text-muted">Keamanan dan privasi transaksi online Anda dilindungi, anda akan Menerima konfirmasi instan dan e-ticket langsung di email anda.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<hr class="half-rule">
 
      <!-- Partners -->
- <section id="partners">
-      <div class="container">
-          <div class="row">
-            <div class="col-lg-12 text-center">
-              <h2 class="section-heading text-uppercase">Our Partners</h2>
-              <img src="images/maskapai2.png" alt="">
-            </div>
-        </div>
+<section id="partners">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading text-uppercase" id="test">Our Partners</h2>
+        <img src="images/maskapai2.png" alt="">
+      </div>
+    </div>
+  </div>
 
-        <hr class="half-rule">
+<hr class="half-rule">
+</section>
 
  <!-- Contact -->
  <section id="contact">
@@ -299,21 +328,21 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <input class="form-control" id="name" type="text" placeholder="Your Name *" required data-validation-required-message="Please enter your name.">
+                    <input class="form-control" id="name" type="text" placeholder="Your Name *"  data-validation--message="Please enter your name.">
                     <p class="help-block text-danger"></p>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" id="email" type="email" placeholder="Your Email *" required data-validation-required-message="Please enter your email address.">
+                    <input class="form-control" id="email" type="email" placeholder="Your Email *"  data-validation--message="Please enter your email address.">
                     <p class="help-block text-danger"></p>
                   </div>
                   <div class="form-group">
-                    <input class="form-control" id="phone" type="tel" placeholder="Your Phone *" required data-validation-required-message="Please enter your phone number.">
+                    <input class="form-control" id="phone" type="tel" placeholder="Your Phone *"  data-validation--message="Please enter your phone number.">
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
-                    <textarea class="form-control" id="message" placeholder="Your Message *" required data-validation-required-message="Please enter a message."></textarea>
+                    <textarea class="form-control" id="message" placeholder="Your Message *"  data-validation--message="Please enter a message."></textarea>
                     <p class="help-block text-danger"></p>
                   </div>
                 </div>

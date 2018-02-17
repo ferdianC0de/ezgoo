@@ -21,15 +21,27 @@
       <div class="col-md-6">
         <div class="row">
           <div class="panel panel-info">
-            @for ($i=1; $i <= $totalCount - $total['baby']; $i++)
-              <div class="panel-heading">Data penumpang {{$i}}</div>
-              <div class="panel-body">
-                    <div class="form-group">
-                        <label for="exampleInputemail1">Nama Lengkap</label>
-                        <input type="text" class="form-control" name="name[]" placeholder="Nama Lengkap">
-                    </div>
-              </div>
-            @endfor
+            @if ($vehicle == 'plane')
+              @for ($i=1; $i <= $totalCount - $total['baby']; $i++)
+                <div class="panel-heading">Data penumpang {{$i}}</div>
+                <div class="panel-body">
+                      <div class="form-group">
+                          <label for="exampleInputemail1">Nama Lengkap</label>
+                          <input type="text" class="form-control" name="name[]" placeholder="Nama Lengkap">
+                      </div>
+                </div>
+              @endfor
+            @elseif($vehicle == 'train')
+              @for ($i=1; $i <= $totalCount; $i++)
+                <div class="panel-heading">Data penumpang {{$i}}</div>
+                <div class="panel-body">
+                      <div class="form-group">
+                          <label for="exampleInputemail1">Nama Lengkap</label>
+                          <input type="text" class="form-control" name="name[]" placeholder="Nama Lengkap">
+                      </div>
+                </div>
+              @endfor
+            @endif
           </div>
         </div>
       </div>
@@ -44,9 +56,15 @@
               <div class="panel-heading">{{$s->from}} ke {{$s->destination}}</div>
               <div class="panel-body">
                 <img src="images/kai-logo.jpg" alt="">
-                <p>{{$s->plane_name}}</p>
-                <p>{{$class}}</p>
-                <p>Gerbang {{$s->gate}}</p>
+                @if ($vehicle == 'plane')
+                  <p>{{$s->plane_name}}</p>
+                  <p>{{$class}}</p>
+                  <p>Gerbang {{$s->gate}}</p>
+                @elseif($vehicle == 'train')
+                  <p>{{$s->train_name}}</p>
+                  <p>{{$class}}</p>
+                  <p>Peron {{$s->platform}}</p>
+                @endif
                 <p>{{ date('d F Y H:i:s', strtotime($s->boarding_time)) }}</p>
                 <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
               </div>
@@ -56,7 +74,11 @@
           <div class="panel panel-info">
           <div class="panel-heading">
             <h4 class="card-text">
-              <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak | {{$total['baby']}} Bayi)</p>
+              @if ($vehicle == 'plane')
+                <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak | {{$total['baby']}} Bayi)</p>
+              @elseif ($vehicle == 'train')
+                <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
+              @endif
               IDR {{ number_format($fareTotal, 2, ',','.') }}
               @if (Entrust::hasRole(['member','admin']))
                <button type="submit">Pesan</button>

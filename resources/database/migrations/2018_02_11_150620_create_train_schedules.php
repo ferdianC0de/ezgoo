@@ -19,7 +19,14 @@ class CreateTrainSchedules extends Migration
             $table->integer('train_id');
             $table->string('from');
             $table->string('destination');
+            $table->string('from_code');
+            $table->string('destination_code');
             $table->datetime('boarding_time');
+            $table->integer('duration');
+            $table->integer('eco_seat');
+            $table->integer('bus_seat');
+            $table->integer('exec_seat');
+            $table->string('platform');
             $table->timestamps();
 
             $table->index('station_id')

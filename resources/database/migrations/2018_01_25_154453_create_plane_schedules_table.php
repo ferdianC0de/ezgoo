@@ -19,6 +19,8 @@ class CreatePlaneSchedulesTable extends Migration
             $table->integer('plane_id');
             $table->string('from');
             $table->string('destination');
+            $table->string('from_code');
+            $table->string('destination_code');
             $table->integer('eco_seat');
             $table->integer('bus_seat');
             $table->integer('first_seat');

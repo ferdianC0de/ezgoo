@@ -13,8 +13,11 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="{{asset('css/select2.min.css')}}">
-    <link href="{{ asset('public/images') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/images') }}">
 </head>
 <body>
   <div id="app">
@@ -138,7 +141,9 @@
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
-<script type="text/javascript" src="{{asset('js/select2.min.js')}}"></script>
+<script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
+<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 @stack('scripts')
 
 </body>
