@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Models\Entrust\Role as Role;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +59,7 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'role' => 'required|min:1|max:2',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -81,8 +83,10 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $role = Role::find($request->role);
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
+        $user->attachRole($role);
         UserVerification::generate($user);
         UserVerification::send($user, 'My Custom E-mail Subject');
         return back()->withAlert('Register successfully, please verify your email.');
