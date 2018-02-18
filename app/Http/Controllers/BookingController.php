@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
+use Auth;
 
 class BookingController extends Controller
 {
@@ -20,6 +21,8 @@ class BookingController extends Controller
     }
     public function search(Request $request)
     {
+      $request['date'] = date('Y-m-d', strtotime($request->date));
+      $request['dateB'] = date('Y-m-d', strtotime($request->dateB));
       if ($request->baby <= $request->adult){
         $vehicle = $request->vehicle;
         if ($vehicle == 'plane') {
@@ -55,14 +58,14 @@ class BookingController extends Controller
         }
         //cek tipe
         if ($type == 'st'){
-          $schedule = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
+          $schedule = $model::findSchedule($request->from_code, $request->destination_code, $request->date, $seat, count($total));
           return view('booking.bookingSingle', compact('schedule', 'vehicle','type','total', 'seat'));
           // return $schedule;
         }elseif($type == 'rt'){
-          $scheduleG = $model::findSchedule($request->from, $request->destination, $request->date, $seat, count($total));
-          $scheduleB = $model::findSchedule($request->destination, $request->from, $request->dateB, $seat, count($total));
+          $scheduleG = $model::findSchedule($request->from_code, $request->destination_code, $request->date, $seat, count($total));
+          $scheduleB = $model::findSchedule($request->destination_code, $request->from_code, $request->dateB, $seat, count($total));
+          // return $scheduleB;
           return view('booking.bookingRound', compact('scheduleG', 'scheduleB', 'vehicle','type','total', 'seat'));
-          // return $scheduleG;
         }else{
           abort(404);
         }
@@ -117,16 +120,14 @@ class BookingController extends Controller
     }
     public function fixOrder(Request $request)
     {
-      return $request;
-      // if (Auth::check()) {
+      if (Auth::check()) {
         $modelV = "";
         $modelF = "";
         $modelS = "";
         $vehicle = $request->vehicle;
-        $type = $request->type;
         $id = $request->id;
-        // $userId = Auth::user()->id;
-        $total = $request->total;
+        $userId = Auth::user()->id;
+        $total = $request->totalCount;
         $seat = $request->seat;
 
         if ($vehicle == 'plane'){
@@ -137,11 +138,35 @@ class BookingController extends Controller
           $modelV = $this->train;
           $modelF = $this->trainFare;
           $modelS = $this->trainSchedule;
+        }else{
+          abort(404);
         }
 
-        if (isset($request->type) && isset($id)) {
+        if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
-          return $math;
+          for ($i=0; $i < count($request->id); $i++) {
+              $booking = new Booking();
+              $booking->user_id = $userId;
+              $booking->booking_date = date('Y-m-d H:i:s');
+              $booking->vehicle = $vehicle;
+              $booking->schedule_id = $request->id[$i];
+              $booking->save();
+
+              $detbook = new DetailBooking;
+              $detbook->booking_id = $booking->id;
+              $detbook->passenger =  $total;
+              $detbook->fare = $request->fare;
+              $detbook->class = $seat;
+              $detbook->save();
+
+              for ($i=0; $i < count($request->name); $i++) {
+              $passenger = new Passenger;
+              $passenger->detail_booking_id = $detbook->id;
+              $passenger->name = $request->name[$i];
+              $passenger->save();
+              }
+            }
+
         }else{
           abort(404);
         }
@@ -149,9 +174,10 @@ class BookingController extends Controller
       //   return 'Register dulu baru bisa pesen';
       // }
     }
+  }
     public function test()
     {
-      return view('test.testTable');
+      return view('test.testView');
     }
     public function testData(Datatables $datatables)
     {

@@ -37,9 +37,11 @@
             <tr>
                 <td>1</td>
                 <td>{{$data->booking_date}}</td>
-                <td>{{$data->type}}</td>
+                <td>{{$data->vehicle}}</td>
                 <td>
-                    <a href="{{ URL::to('admin/edit/'.$data->id)}}" class="btn btn-success">DETAIL</a>
+                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
+                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-minus-circle"></a>
+                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-trash 5x"></a>
                 </td>
             </tr>
             @endforeach
