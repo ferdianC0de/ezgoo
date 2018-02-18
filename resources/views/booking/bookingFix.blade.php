@@ -78,7 +78,7 @@
               @endif
               IDR {{ number_format($fareTotal, 2, ',','.') }}
               @if (Entrust::hasRole(['member','admin']))
-               <button type="submit">Pesan</button>
+               <button type="submit" class="btn btn-primary">Pesan</button>
              @else
                Login sebelum pesan tiket, <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>
              @endif
