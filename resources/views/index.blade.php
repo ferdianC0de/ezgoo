@@ -9,13 +9,14 @@
         $('.select2').select2();
         $('.datepicker').datepicker({
           format: "dd-mm-yyyy",
-          startDate: '+1d'
+          startDate: '+1d',
+          autoclose: true
         });
         $('.select2').change(function(){
           $('.select2').find('option').prop('disabled', false);
           $('.select2').each(function(){
             var current = $(this);
-            console.log(current);
+            // console.log(current);
             $('.select2').not(current).find('option').each(function(){
               if($(this).val() == current.val()){
                 $(this).prop('disabled', true);
@@ -225,12 +226,12 @@
 
                   <div class="col-md-4">
                       <label for="berangkat">Tanggal Berangkat</label>
-                      <input type="date" class="form-control" id="date-departing" name='date' >
+                      <input type="text" class="form-control datepicker" placeholder="30/01/2018" name='date' >
                   </div>
 
                   <div class="col-md-4 dateB">
                       <label for="pulang">Tanggal Pulang</label>
-                      <input type="date" class="form-control" id="date-departing" name='dateB'>
+                      <input type="text" class="form-control datepicker" placeholder="30/01/2018" name='dateB'>
                   </div>
 
                   <div class="col-md-2">

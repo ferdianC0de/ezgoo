@@ -15,11 +15,11 @@ class CreatePassengersTable extends Migration
     {
         Schema::create('passengers', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('detail_booking_id');
+            $table->integer('detail_booking_id')->unsigned();
             $table->string('name');
             $table->timestamps();
 
-            $table->index('detail_booking_id')
+            $table->foreign('detail_booking_id')
                   ->references('id')->on('detail_bookings')
                   ->onDelete('cascade');
         });

@@ -54,6 +54,15 @@ class PlaneSchedule extends Model
 
       return $data;
     }
+    public static function findPrice(Array $id, $seat)
+    {
+      $data = DB::table('plane_schedules')
+                ->join('plane_fares', 'plane_fares.plane_id', '=', 'plane_schedules.plane_id')
+                ->select('plane_fares.'.$seat)
+                ->whereIn('plane_schedules.id', $id)
+                ->get();
+      return $data;
+    }
     public static function seatMath($total, $seat, $id)
     {
       PlaneSchedule::whereIn('id', $id)->decrement($seat, $total);

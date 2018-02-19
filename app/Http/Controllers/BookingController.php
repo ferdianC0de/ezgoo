@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
+use App\Models\Transaction;
+
 use Auth;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -124,6 +127,7 @@ class BookingController extends Controller
         $modelV = "";
         $modelF = "";
         $modelS = "";
+        $fareTotal  = 0;
         $vehicle = $request->vehicle;
         $id = $request->id;
         $userId = Auth::user()->id;
@@ -141,23 +145,31 @@ class BookingController extends Controller
         }else{
           abort(404);
         }
-
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
+          $price = $modelS::findPrice($id, $seat);
+          foreach($price as $p){
+            $fareTotal += $p->$seat * $total;
+          }
+
           for ($i=0; $i < count($request->id); $i++) {
               $booking = new Booking();
               $booking->user_id = $userId;
-              $booking->booking_date = date('Y-m-d H:i:s');
               $booking->vehicle = $vehicle;
+              $booking->bill = $fareTotal;
               $booking->schedule_id = $request->id[$i];
+              $booking->expire = Carbon::now()->addHours(8);
               $booking->save();
 
               $detbook = new DetailBooking;
               $detbook->booking_id = $booking->id;
               $detbook->passenger =  $total;
-              $detbook->fare = $request->fare;
               $detbook->class = $seat;
               $detbook->save();
+
+              $transaction = new Transaction;
+              $transaction->booking_id = $booking->id;
+              $transaction->save();
 
               for ($i=0; $i < count($request->name); $i++) {
               $passenger = new Passenger;

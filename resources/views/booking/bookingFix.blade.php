@@ -69,7 +69,6 @@
                 <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
               </div>
             @endforeach
-            <input type="hidden" name="fare"  value="{{$fareTotal}}">
           </div>
           <div class="panel panel-info">
           <div class="panel-heading">
