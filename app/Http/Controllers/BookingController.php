@@ -166,7 +166,7 @@ class BookingController extends Controller
               $passenger->save();
               }
             }
-
+            return 'sukses';
         }else{
           abort(404);
         }
