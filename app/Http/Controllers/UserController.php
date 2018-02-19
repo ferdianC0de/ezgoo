@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-USe App\User;
+Use App\User;
+use Auth;
+use App\Models\Booking;
 
 class UserController extends Controller
 {
@@ -54,6 +56,18 @@ class UserController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function showBooking($id)
+    {
+        //
+        $unique = Auth::user()->id;
+        if ($id == $unique) {
+          $datas = Booking::where('user_id', $id)->get();
+          return view('booking.usersBookings', compact('datas'));
+        }else {
+          abort(500);
+        }
     }
 
     /**

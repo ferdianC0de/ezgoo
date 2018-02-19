@@ -64,6 +64,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   // Route::get('admin', 'AdminController@index')->name('admin');
   Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
+  Route::get('booking/{id}', 'UserController@showBooking');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
