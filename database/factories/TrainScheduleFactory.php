@@ -17,7 +17,9 @@ $factory->define(App\Models\TrainSchedule::class, function (Faker $faker) {
         'station_id' => $firstStation->id,
         'train_id' => $train->id,
         'from' => $firstStation->station_name,
+        'from_code' => $firstStation->code,
         'destination' => $lastStation->station_name,
+        'destination_code' =>$lastStation->code,
         'boarding_time' => date('Y-m-d H:i:s'),
     ];
 });
