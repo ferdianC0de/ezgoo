@@ -58,13 +58,17 @@ class UserController extends Controller
         //
     }
 
-    public function showBooking($id)
+    public function showBooking($id, $order=NULL)
     {
         //
         $unique = Auth::user()->id;
         if ($id == $unique) {
           $datas = Booking::where('user_id', $id)->get();
-          return view('booking.usersBookings', compact('datas'));
+          if ($order) {
+            $data = Booking::find($order);
+            return $data;
+          }
+            return view('booking.usersBookings', compact('datas'));
         }else {
           abort(500);
         }
