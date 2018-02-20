@@ -165,6 +165,8 @@ class BookingController extends Controller
               $passenger->name = $request->name[$i];
               $passenger->save();
               }
+
+              return redirect('/');
             }
 
         }else{

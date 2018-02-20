@@ -14,6 +14,16 @@
     </div><br><!--/.row-->
 
 <body>
+  <div class="row">
+    <div class="col-md-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+            @if(Session::has('alert-success'))
+                <div class="alert alert-success">
+                    <strong>{{ Session::get('alert-success') }}</strong>
+                </div>
+            @endif
+            <hr>
 
 <table class="table table-striped table-bordered data">
         <thead>
@@ -47,7 +57,7 @@
             @endforeach
         </tbody>
     </table>
-
+</div>
 
 
 @endsection

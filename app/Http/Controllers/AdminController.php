@@ -8,6 +8,13 @@ Use App\Models\Customer;
 Use App\Models\Booking;
 Use App\Models\Passenger;
 Use App\Models\DetailBooking;
+Use App\Models\PlaneSchedule;
+Use App\Models\PlaneFare;
+Use App\Models\Airport;
+Use App\Models\TrainStation;
+Use App\Models\Train;
+Use App\Models\TrainFare;
+use Illuminate\Support\Facades\Input;
 use DB;
 
 class AdminController extends Controller
@@ -33,115 +40,223 @@ class AdminController extends Controller
         return view('admin.bookingData', compact('booking'));
     }
 
-    public function plane()
+    public function listPlane()
     {
-        return view('admin/plane');
+      $plane = Plane::with('planefare')->get();
+      return view('admin/plane/listPlane',compact('plane'));
     }
 
-    public function pprice()
+    public function airport()
     {
-        return view('admin/pprice');
+      $airport = Airport::all();
+      return view('admin/plane/airport', compact('airport'));
     }
 
-    public function train()
+    public function planeSchedule()
     {
-        return view('admin/train');
+      $planeSchedule =  PlaneSchedule::with('airport','plane')->get();
+      return view('admin/plane/planeSchedule', compact('planeSchedule'));
     }
 
-    public function tprice()
+    public function station()
     {
-        return view('admin/tprice');
+      $station = TrainStation::all();
+      return view('admin/train/station', compact('station'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
+    public function listTrain()
     {
-        $crud = request()->validate([
-            'title' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required'
+      $train = Train::with('trainfare')->get();
+      return view('admin/train/listTrain',compact('train'));
+    }
+
+    public function pcreateAirport(Request $request)
+    {
+      $data = $request->validate([
+        'airport_name' => 'required',
+        'code' => 'required',
+        'city' => 'required'
+      ]);
+      Airport::create($data);
+      return redirect('admin/plane/airport')->with('alert-success','Berhasil Menambahkan Data!');
+    }
+
+
+    public function pcreatePlane(Request $request)
+    {
+        $plane = new Plane();
+        $plane->plane_name  = input::get('plane_name');
+        $plane->eco_seat    = input::get('eco_seat');
+        $plane->bus_seat    = input::get('bus_seat');
+        $plane->first_seat  = input::get('first_seat');
+        $plane->save();
+
+        $planeFare = new PlaneFare();
+        $planeFare->plane_id = $plane->id;
+        $planeFare->eco_seat = input::get('eco_seatfare');
+        $planeFare->bus_seat = input::get('bus_seatfare');
+        $planeFare->first_seat = input::get('first_seatfare');
+        $planeFare->save();
+
+        return redirect('admin/plane/listPlane');
+    }
+
+    public function pcreateStation(Request $request)
+    {
+      $data = $this->validate($request, [
+          'station_name' => 'required',
+          'code' => 'required',
+          'city' => 'required'
+      ]);
+      TrainStation::create($data);
+      return redirect('admin/train/station')->with('success','Berhasil');
+    }
+
+    public function pcreateTrain(Request $request)
+    {
+      $train = new Train();
+      $train->train_name  = input::get('train_name');
+      $train->eco_seat    = input::get('eco_seat');
+      $train->bus_seat    = input::get('bus_seat');
+      $train->exec_seat  = input::get('exec_seat');
+      $train->save();
+
+      $trainfare = new TrainFare();
+      $trainfare->train_id = $train->id;
+      $trainfare->eco_seat = input::get('eco_seatfare');
+      $trainfare->bus_seat = input::get('bus_seatfare');
+      $trainfare->exec_seat = input::get('exec_seatfare');
+      $trainfare->save();
+
+      return redirect('admin/train/listTrain');
+    }
+
+
+
+    public function editAirport($id)
+    {
+      $data = Airport::where('id',$id)->get();
+      return view('admin/plane/eAirport', compact('data'));
+    }
+
+    public function editlistPlane($id)
+    {
+      $data = Plane::where('id',$id)->with('planefare')->get();
+      return view('admin/plane/eListplane', compact('data'));
+    }
+
+    public function editStation($id)
+    {
+      $data = TrainStation::where('id',$id)->get();
+      return view('admin/train/eStation', compact('data'));
+    }
+
+    public function editTrain($id)
+    {
+      $data = Train::where('id',$id)->with('trainfare')->get();
+      return view('admin/train/eListtrain', compact('data'));
+    }
+
+    //update
+
+    public function updateAirport(Request $request, $id)
+    {
+      $data = $this->validate($request, [
+        'airport_name' => 'required',
+        'code' => 'required',
+        'city' => 'required'
+      ]);
+      Airport::find($id)->update($data);
+      return redirect('admin/plane/airport')->with('alert-success','Data berhasil diubah!');
+    }
+
+    public function updatelistPlane(Request $request, $id)
+    {
+      $plane = Plane::findOrFail($id);
+      $plane->plane_name  = $request->plane_name;
+      $plane->eco_seat    = $request->eco_seat;
+      $plane->bus_seat    = $request->bus_seat;
+      $plane->first_seat  = $request->first_seat;
+      $plane->save();
+
+      $planefare = PlaneFare::findOrFail($request->id);
+      $planefare->eco_seat    = $request->eco_seatfare;
+      $planefare->bus_seat    = $request->bus_seatfare;
+      $planefare->first_seat  = $request->first_seatfare;
+      $planefare->save();
+
+      return redirect('admin/plane/listPlane')->with('alert-success','Data berhasil diubah!');
+    }
+
+    public function updateStation(Request $request, $id)
+    {
+      $data = $this->validate($request, [
+          'station_name' => 'required',
+          'code' => 'required',
+          'city' => 'required'
         ]);
-        $data = request()->validate([
-            'plane_name' => 'required',
-            'eco_seat' => 'required',
-            'bus_seat' => 'required',
-        ]);
-        Customer::create($crud);
-        Plane::create($data);
-        return redirect('admin');
+        TrainStation::find($id)->update($data);
+        return redirect('admin/train/station')->with('success','Berhasil diubah');
     }
 
-    public function pcreate(Request $request)
+    public function updateTrain(Request $request, $id)
     {
-        $data = request()->validate([
-            'plane_name' => 'required',
-            'eco_seat' => 'required',
-            'bus_seat' => 'required',
-        ]);
-        Plane::create($data);
-        return redirect('admin');
+      $train = Train::findOrFail($id);
+      $train->train_name  = $request->train_name;
+      $train->eco_seat    = $request->eco_seat;
+      $train->bus_seat    = $request->bus_seat;
+      $train->exec_seat   = $request->exec_seat;
+      $train->save();
+
+      $trainfare = TrainFare::findOrFail($request->id);
+      $trainfare->eco_seat    = $request->eco_seatfare;
+      $trainfare->bus_seat    = $request->bus_seatfare;
+      $trainfare->exec_seat  = $request->exec_seatfare;
+      $trainfare->save();
+
+      return redirect('admin/train/listTrain')->with('alert-success','Data berhasil diubah!');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+
+    // destroy
+
+    public function destroyAP($id)
     {
-        //
+      $data = Airport::where('id',$id)->first();
+      $data->delete();
+      return redirect('admin/plane/airport')->with('alert-success','Data berhasi dihapus!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function destroyPS($id)
     {
-        //
+      $data = PlaneSchedule::where('id',$id)->first();
+      $data->delete();
+      return redirect('admin/plane/planeSchedule')->with('alert-success','Data berhasi dihapus!');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function destroyPlane($id)
     {
-
+      $data = Plane::where('id',$id)->first();
+      $data->delete();
+      return redirect('admin/plane/listPlane')->with('alert-success','Data berhasi dihapus!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function destroyStation($id)
     {
-        //
+      $data = TrainStation::where('id',$id)->first();
+      $data->delete();
+      return redirect('admin/train/station')->with('alert-success','Data berhasi dihapus!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroyTrain($id)
     {
-        //
+      $data = Train::where('id',$id)->first();
+      $data->delete();
+      return redirect('admin/train/listTrain')->with('alert-success','Data berhasi dihapus!');
     }
+
+
+
 
     public function dbookingData($id)
     {
@@ -175,4 +290,3 @@ class AdminController extends Controller
         return redirect('admin/bookingdata');
     }
 }
- 
