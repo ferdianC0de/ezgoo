@@ -21,4 +21,9 @@ class Booking extends Model
       $bookings->schedule_id = $go;
       $bookings->save();
     }
+
+    public function detail()
+   {
+       return $this->hasOne('App\Models\DetailBooking');
+   }
 }

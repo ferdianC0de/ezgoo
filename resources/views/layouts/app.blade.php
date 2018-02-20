@@ -141,9 +141,28 @@
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+
+<script type="text/javascript">
+$('.lol').on('click', function () {
+  var target = 'isi'+$(this).attr('id');
+  if (document.getElementById(target).classList.contains('collapse')) {
+    $('#'+target).removeClass('collapse').addClass('collapse-in');
+  }else {
+    $('#'+target).removeClass('collapse-in').addClass('collapse');
+  }
+});
+
+$('#collapse').on('hidden.bs.collapse', function () {
+var target = '#'+$(this).attr('data-parent');
+$(target).removeClass('collapse-open');
+});
+
+//on open collapse
+</script>
 @stack('scripts')
 
 </body>

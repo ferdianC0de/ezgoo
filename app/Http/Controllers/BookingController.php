@@ -149,6 +149,7 @@ class BookingController extends Controller
               $booking->user_id = $userId;
               $booking->booking_date = date('Y-m-d H:i:s');
               $booking->vehicle = $vehicle;
+              $booking->status = 0;
               $booking->schedule_id = $request->id[$i];
               $booking->save();
 
