@@ -22,11 +22,6 @@ class Booking extends Model
         return $this->hasOne('App\Models\TrainSchedule');
       }
     }
-    //
-    public function detail_booking()
-    {
-      return $this->hasOne(DetailBooking::class);
-    }
     public static function singleTrip($go, $userID)
     {
       $planeSchedule = PlaneSchedule::find($go);
