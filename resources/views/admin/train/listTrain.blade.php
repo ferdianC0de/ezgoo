@@ -45,9 +45,9 @@
                 <td>{{ $data->eco_seat }}</td>
                 <td>{{ $data->bus_seat }}</td>
                 <td>{{ $data->exec_seat }}</td>
-                <td>{{ $data->trainfare->eco_seat }}</td>
-                <td>{{ $data->trainfare->bus_seat }}</td>
-                <td>{{ $data->trainfare->exec_seat }}</td>
+                <td>{{ number_format($data->trainfare->eco_seat) }}</td>
+                <td>{{ number_format($data->trainfare->bus_seat) }}</td>
+                <td>{{ number_format($data->trainfare->exec_seat) }}</td>
                 <td>
                   <form action="{{ url('admin/train/destroyTrain', $data->id) }}" method="post">
                       {{ csrf_field() }}
