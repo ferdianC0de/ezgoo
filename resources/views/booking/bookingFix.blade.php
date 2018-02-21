@@ -119,6 +119,7 @@
               @elseif ($vehicle == 'train')
                 <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
+              <p>Kode Unik {{ $s->unique_code }}</p>
               <p> IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
                <button type="submit" class="btn btn-primary">Pesan</button>

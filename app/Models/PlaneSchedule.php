@@ -48,7 +48,8 @@ class PlaneSchedule extends Model
                 'plane_schedules.destination',
                 'plane_schedules.boarding_time',
                 'planes.plane_name',
-                'plane_fares.'.$seat)
+                'plane_fares.'.$seat,
+                'plane_fares.unique_code')
         ->whereIn('plane_schedules.id', $id)
         ->get();
 

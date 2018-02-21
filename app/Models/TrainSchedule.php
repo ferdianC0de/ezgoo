@@ -27,7 +27,8 @@ class TrainSchedule extends Model
                 'train_schedules.boarding_time',
                 'train_schedules.duration',
                 'trains.train_name',
-                'train_fares.'.$seat)
+                'train_fares.'.$seat,
+                'train_fares.unique_code')
         ->where([
         ['train_schedules.from_code', '=', $from],
         ['train_schedules.destination_code', '=', $destination],
