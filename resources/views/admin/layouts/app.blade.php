@@ -63,13 +63,13 @@
                 </a>
                 <ul class="children collapse" id="sub-item-1">
                     <li>
-                        <a class="" href="{{ url('admin/plane') }}"><span class="fa fa-arrow-right"></span> List Pesawat</a>
+                        <a class="" href="{{ url('admin/plane/airport') }}"><span class="fa fa-arrow-right"></span> Bandara</a>
                     </li>
                     <li>
-                        <a class="" href="#"><span class="fa fa-arrow-right"></span> Jadwal Penerbangan</a>
+                        <a class="" href="{{ url('admin/plane/listPlane') }}"><span class="fa fa-arrow-right"></span> Daftar Pesawat</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/pprice')}}"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
+                        <a class="" href="{{ url('admin/plane/planeSchedule') }}"><span class="fa fa-arrow-right"></span> Jadwal Penerbangan </a>
                     </li>
                 </ul>
             </li>
@@ -78,13 +78,13 @@
                 </a>
                 <ul class="children collapse" id="sub-item-2">
                     <li>
-                        <a class="" href="{{ url('admin/train') }}"><span class="fa fa-arrow-right">&nbsp;</span> List Kereta</a>
+                        <a class="" href="{{ url('admin/train/station') }}"><span class="fa fa-arrow-right">&nbsp;</span> Stasiun</a>
                     </li>
                     <li>
-                        <a class="" href="#"><span class="fa fa-arrow-right">&nbsp;</span> Jadwal Keberangkatan</a>
+                        <a class="" href="{{ url('admin/train/listTrain')}}"><span class="fa fa-arrow-right">&nbsp;</span> Daftar Kereta</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/tprice')}}"><span class="fa fa-arrow-right">&nbsp;</span> Tarif</a>
+                        <a class="" href="{{ url('admin/train/trainSchedule')}}"><span class="fa fa-arrow-right">&nbsp;</span> Jadwal Keberangkatan</a>
                     </li>
                 </ul>
             </li>
