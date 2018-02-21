@@ -65,7 +65,9 @@ class UserController extends Controller
         if ($id == $unique) {
           $datas = Booking::where('user_id', $id)->get();
           if ($order) {
-            $data = Booking::find($order);
+            $data = Booking::where('id', $order)->with('detail')->get();
+            // $dt = Booking::find($order);
+            // $he = $dt->merge($data)->all();
             return $data;
           }
             return view('booking.usersBookings', compact('datas'));

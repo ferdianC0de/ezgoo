@@ -12,6 +12,8 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
@@ -36,7 +38,7 @@
 
           <!-- Branding Image -->
           <a class="navbar-brand" href="{{url('')}}">
-              {{ config('app.name', 'EZGOO.') }}
+              {{ config('app.name') }}
           </a>
         </div>
 
@@ -89,9 +91,9 @@
       <footer class="footer-bs">
         <div class="row">
         	<div class="col-md-3 footer-brand animated fadeInLeft">
-            	<h2>EZGOO</h2>
-                <p>EZGOO Booking Ticket pesawat dan kereta mudah dan aman</p>
-                <p>© 2018 EZGOO, All rights reserved</p>
+            	<h2>{{config('app.name')}}</h2>
+                <p>{{config('app.name')}} Booking Ticket pesawat dan kereta mudah dan aman</p>
+                <p>© 2018 {{config('app.name')}}, All rights reserved</p>
             </div>
         	<div class="col-md-4 footer-nav animated fadeInUp">
             	<h4>Menu </h4>
@@ -124,7 +126,7 @@
             </div>
         	<div class="col-md-3 footer-ns animated fadeInRight">
             	<h4>Newsletter</h4>
-                <p>Subscribe to our newsletter now and be the first to know about EzGoo's latest promos!</p>
+                <p>Subscribe to our newsletter now and be the first to know about {{config('app.name')}}'s latest promos!</p>
                 <p>
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Enter Your Email Here...">
@@ -136,14 +138,24 @@
             </div>
         </div>
     </footer>
-    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">EZGOO 2018</a></p></section>
+    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
 </div>
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+{{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
 <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+
+<script type="text/javascript">
+$('#collapse').on('hidden.bs.collapse', function () {
+var target = '#'+$(this).attr('data-parent');
+$(target).removeClass('collapse-open');
+});
+
+//on open collapse
+</script>
 @stack('scripts')
 
 </body>

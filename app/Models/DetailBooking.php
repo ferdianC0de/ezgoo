@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Booking;
+use App\Models\Passenger;
 
 class DetailBooking extends Model
 {
@@ -14,6 +15,6 @@ class DetailBooking extends Model
 		}
     public function passengers()
     {
-      return $this->hasMany('App\Models\Passenger');
+      return $this->hasMany(Passenger::class);
     }
 }

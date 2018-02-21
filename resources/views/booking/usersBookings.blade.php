@@ -2,40 +2,32 @@
 
 @section('content')
 <!--pilihan pesawat-->
-
 <div class="container">
-  <form action="{{ url('booking/order') }}" method="post">
-    {{ csrf_field() }}
-    <div class="table-responsive">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>No. </th>
-            <th>Kode</th>
-            <th>Tipe Tiket</th>
-            <th>Tanggal</th>
-            <th>...</th>
-            <th>...</th>
-          </tr>
-        </thead>
-        <tbody>
           @if ($datas->isEmpty())
             <td colspan="5">Maaf, anda belum memesan tiket</td>
           @else
-          <tr>
-            <td></td>
-            <td>{{ "kode" }}</td>
-            <td>{{ "tipe" }}</td>
-            <td>{{ "tanggal" }}</td>
-            <td>{{ "..." }}</td>
-            <td>{{ "..." }}</td>
-            <td> <button type="submit" name="go" value="{{"a"}}">Pesan</button></td>
-          </tr>
+        <div class="accordion">
+              @foreach ($datas as $data)
+                <div class="panel panel-default">
+                  <div class="panel-heading" id="heading{{$data->id}}">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapse{{$data->id}}">
+                    <h5 class="mb-0">
+                        Booking {{$data->id }}
+                    </h5>
+                  </button>
+                  </div>
+                  <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
+                    <div class="panel-body">
+                          @inject('heheh', 'App\Http\Controllers\UserController')
+                          @php
+                          $cih = $heheh->showBooking(Auth::user()->id,$data->id)
+                          @endphp
+                      {{$cih}}
+                    </div>
+                  </div>
+                </div>
+          @endforeach
+        </div>
           @endif
-        </tbody>
-      </table>
-    </div>
-  </form>
-</div>
-
+        </div>
 @endsection

@@ -45,6 +45,7 @@ class CreatePlaneSchedulesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('plane_schedules');
     }
 }
