@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
 use App\Models\Transaction;
+use DB;
 
 use Auth;
 use Carbon\Carbon;
@@ -151,7 +152,9 @@ class BookingController extends Controller
           foreach($price as $p){
             $fareTotal += $p->$seat * $total;
           }
-
+            # code...
+            DB::transaction(function() use ($userId, $vehicle, $fareTotal, $seat, $total, $request)
+            {
           for ($i=0; $i < count($request->id); $i++) {
               $booking = new Booking();
               $booking->user_id = $userId;
@@ -177,10 +180,9 @@ class BookingController extends Controller
               $passenger->name = $request->name[$i];
               $passenger->save();
               }
-
-              return redirect('/');
             }
-            return 'sukses';
+          });
+            return redirect('/');
         }else{
           abort(404);
         }
