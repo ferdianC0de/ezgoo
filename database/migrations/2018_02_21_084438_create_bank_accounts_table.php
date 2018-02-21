@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePlanesTable extends Migration
+class CreateBankAccountsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePlanesTable extends Migration
      */
     public function up()
     {
-        Schema::create('planes', function (Blueprint $table) {
+        Schema::create('bank_accounts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('plane_name');
-            $table->integer('eco_seat');
-            $table->integer('bus_seat');
-            $table->integer('first_seat');
+            $table->string('bank');
+            $table->string('account_name');
+            $table->string('account_number');
             $table->timestamps();
         });
     }
@@ -30,7 +29,6 @@ class CreatePlanesTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('planes');
+        Schema::dropIfExists('bank_accounts');
     }
 }

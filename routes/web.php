@@ -10,30 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::group(['prefix'=> 'frontend'], function(){
-  Route::get('/', function () {
-      return view('frontend.home');
-  });
-  Route::get('/book', function () {
-      return view('frontend.booking');
-  });
-  Route::get('/userprofil', function () {
-      return view('frontend.userprofil');
-  });
-  Route::get('/userpass', function () {
-    return view('frontend.userpass');
-  });
-  Route::get('/pround', function () {
-    return view('frontend.pround');
-  });
-  Route::get('/psingle', function () {
-    return view('frontend.psingle');
-  });
-  Route::get('/history', function () {
-    return view('frontend.history');
-  });
-});
-
 Auth::routes();
 Route::get('/', 'HomeController@index');
 
@@ -104,9 +80,6 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
 Route::group(['prefix' => 'test'], function(){
-  Route::get('form', function(){
-    return view('test.testForm');
-  });
   Route::get('test', 'BookingController@test');
   Route::get('testData', 'BookingController@testData');
 });

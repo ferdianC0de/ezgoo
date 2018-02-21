@@ -23,6 +23,10 @@ class Booking extends Model
       }
     }
     //
+    public function detail_booking()
+    {
+      return $this->hasOne(DetailBooking::class);
+    }
     public static function singleTrip($go, $userID)
     {
       $planeSchedule = PlaneSchedule::find($go);
