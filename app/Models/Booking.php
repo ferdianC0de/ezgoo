@@ -9,6 +9,19 @@ use App\Models\DetailBooking;
 class Booking extends Model
 {
     protected $fillable = ['user_id','booking_date','status','vehicle','schedule_id'];
+    public function detail_booking()
+    {
+      return $this->hasOne('App\Models\DetailBooking');
+    }
+
+    public static function sche( $vehicle)
+    {
+      if ($vehicle['param'] == "plane") {
+        return $this->hasOne('App\Models\PlaneSchedule');
+      }elseif ($vehicle == "train") {
+        return $this->hasOne('App\Models\TrainSchedule');
+      }
+    }
     //
     public function detail_booking()
     {
@@ -25,4 +38,5 @@ class Booking extends Model
       $bookings->schedule_id = $go;
       $bookings->save();
     }
+
 }

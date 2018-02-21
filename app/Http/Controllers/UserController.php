@@ -63,9 +63,9 @@ class UserController extends Controller
         //
         $unique = Auth::user()->id;
         if ($id == $unique) {
-          $datas = Booking::where('user_id', $id)->get();
+          $datas = Booking::where('user_id', $id)->with('sche',['param' => 'plane'])->get();
           if ($order) {
-            $data = Booking::where('id', $order)->with('detail')->get();
+            $data = Booking::where('id', $order)->with('detail_booking')->get();
             // $dt = Booking::find($order);
             // $he = $dt->merge($data)->all();
             return $data;
