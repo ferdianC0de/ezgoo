@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
+use App\Models\BankAccount;
 use App\Models\Transaction;
 use DB;
 
@@ -84,6 +85,7 @@ class BookingController extends Controller
       $vehicle = $request->vehicle;
       $id = [$request->go,$request->back];
       $fareTotal = 0;
+      $bank = BankAccount::select('*')->get();
       $total = explode(',',$request->total);
       if ($vehicle == 'plane') {
         $totalCount = $total[0] + $total[1] + $total[2];
@@ -120,7 +122,7 @@ class BookingController extends Controller
       }else{
         abort(404);
       }
-      return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal'));
+      return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal', 'bank'));
     }
     public function fixOrder(Request $request)
     {
@@ -128,7 +130,6 @@ class BookingController extends Controller
         $modelV = "";
         $modelF = "";
         $modelS = "";
-        $fareTotal  = 0;
         $vehicle = $request->vehicle;
         $id = $request->id;
         $userId = Auth::user()->id;
@@ -146,51 +147,49 @@ class BookingController extends Controller
         }else{
           abort(404);
         }
+
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
-          $price = $modelS::findPrice($id, $seat);
-          foreach($price as $p){
-            $fareTotal += $p->$seat * $total;
-          }
-            # code...
-            DB::transaction(function() use ($userId, $vehicle, $fareTotal, $seat, $total, $request)
+            DB::transaction(function() use ($modelS, $userId, $vehicle, $seat, $total, $expire, $request)
             {
-          for ($i=0; $i < count($request->id); $i++) {
-              $booking = new Booking();
-              $booking->user_id = $userId;
-              $booking->vehicle = $vehicle;
-              $booking->bill = $fareTotal;
-              $booking->schedule_id = $request->id[$i];
-              $booking->expire = Carbon::now()->addHours(8);
-              $booking->save();
-
-              $detbook = new DetailBooking;
-              $detbook->booking_id = $booking->id;
-              $detbook->passenger =  $total;
-              $detbook->class = $seat;
-              $detbook->save();
-
-              $transaction = new Transaction;
-              $transaction->booking_id = $booking->id;
-              $transaction->save();
-
-              for ($i=0; $i < count($request->name); $i++) {
-              $passenger = new Passenger;
-              $passenger->detail_booking_id = $detbook->id;
-              $passenger->name = $request->name[$i];
-              $passenger->save();
-              }
-            }
-          });
-            return redirect('/');
+              for ($i=0; $i < count($request->id); $i++) {
+                $price = $modelS::findPrice($request->id[$i], $seat);
+                  $booking = new Booking();
+                  $booking->user_id = $userId;
+                  $booking->vehicle = $vehicle;
+                  $booking->bill = $price->$seat;
+                  $booking->schedule_id = $request->id[$i];
+                  $booking->expire = $expire;
+                  $booking->save();
+                  //
+                  $detbook = new DetailBooking;
+                  $detbook->booking_id = $booking->id;
+                  $detbook->passenger =  $total;
+                  $detbook->class = $seat;
+                  $detbook->save();
+                  //
+                  $transaction = new Transaction;
+                  $transaction->booking_id = $booking->id;
+                  $transaction->bank = $request->bank;
+                  $transaction->save();
+                  //
+                  for ($j=0; $j < count($request->name); $j++) {
+                  $passenger = new Passenger;
+                  $passenger->detail_booking_id = $detbook->id;
+                  $passenger->name = $request->name[$j];
+                  $passenger->save();
+                  }
+                }
+              });
+              //return 'sukses';
         }else{
           abort(404);
         }
       // }else{
       //   return 'Register dulu baru bisa pesen';
       // }
+      }
     }
-  }
     public function test()
     {
       return view('test.testView');

@@ -21,6 +21,47 @@
       <div class="col-md-6">
         <div class="row">
           <div class="panel panel-info">
+            <div class="panel-heading">Metode pembayaran</div>
+            <div class="panel-body">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                @foreach ($bank as $b)
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#{{$b->bank}}" aria-expanded="false" aria-controls="{{$b->bank}}">
+                          <label> {{$b->bank}} </label>
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="{{$b->bank}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                        <div class="form-group">
+                          <input type="radio" name="bank" value="{{$b->bank}}">
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-3">
+                            <p>Atas nama</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>: {{$b->account_name}}</p>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-3">
+                            <p>No. Rekening</p>
+                          </div>
+                          <div class="col-sm-9">
+                            <p>: {{$b->account_number}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                @endforeach
+              </div>
+            </div>
+          </div>
+          <div class="panel panel-info">
             @if ($vehicle == 'plane')
               @for ($i=1; $i <= $totalCount - $total['baby']; $i++)
                 <div class="panel-heading">Data penumpang {{$i}}</div>
@@ -78,7 +119,8 @@
               @elseif ($vehicle == 'train')
                 <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
-              IDR {{ number_format($fareTotal, 2, ',','.') }}
+              <p> Kode unik {{ $still }}  </p>
+              <p> IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
                <button type="submit" class="btn btn-primary">Pesan</button>
              @else
