@@ -22,6 +22,7 @@ class Booking extends Model
         return $this->hasOne('App\Models\TrainSchedule');
       }
     }
+    //
     public static function singleTrip($go, $userID)
     {
       $planeSchedule = PlaneSchedule::find($go);

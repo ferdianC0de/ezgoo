@@ -135,7 +135,6 @@ class BookingController extends Controller
         $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
-        $expire = Carbon::now()->addHours(8);
 
         if ($vehicle == 'plane'){
           $modelV = $this->plane;
@@ -193,7 +192,7 @@ class BookingController extends Controller
     }
     public function test()
     {
-      return view('booking.payment');
+      return view('test.testView');
     }
     public function testData(Datatables $datatables)
     {
