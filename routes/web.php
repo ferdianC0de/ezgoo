@@ -46,10 +46,45 @@ Route::group(['prefix' => 'booking'], function(){
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::resource('/','AdminController');
   Route::get('bookingdata','AdminController@bookingdata');
-  Route::get('train','AdminController@train');
+
+  // plane
+  Route::group(['prefix'=>'plane','middleware'=> 'checkRole'],function(){
+    Route::get('airport ','AdminController@airport');
+    Route::get('listPlane','AdminController@listPlane');
+    Route::get('planeSchedule','AdminController@planeSchedule');
+    Route::get('createAirport', function(){ return view('admin.plane.cAirport');});
+    Route::get('createPlane',   function(){ return view('admin..plane.cPlane');});
+    Route::get('cplaneSchedule',function(){ return view('admin.plane.cplaneSchedule');});
+    Route::post('pcreateAirport','AdminController@pcreateAirport');
+    Route::post('pcreatePlane','AdminController@pcreatePlane');
+    Route::get('editAirport/{id}','AdminController@editAirport');
+    Route::get('editlistPlane/{id}','AdminController@editlistPlane');
+    Route::put('updateAirport/{id}','AdminController@updateAirport');
+    Route::put('updatelistPlane/{id}','AdminController@updatelistPlane');
+    Route::put('updateTrain/{id}','AdminController@updateTrain');
+    Route::delete('destroyAP/{id}','AdminController@destroyAP');
+    Route::delete('destroyPS/{id}','AdminController@destroyPS');
+    Route::delete('destroyPlane/{id}','AdminController@destroyPlane');
+  });
+  Route::group(['prefix'=>'train','middleware'=>'checkRole'],function(){
+    Route::get('station','AdminController@station');
+    Route::get('listTrain','AdminController@listTrain');
+    Route::get('trainSchedule','AdminController@trainSchedule');
+    Route::get('createStation', function(){ return view('admin.train.cStation');});
+    Route::get('createTrain',   function(){ return view('admin.train.cTrain');});
+    Route::get('ctrainSchedule',function(){ return view('admin.train.ctrainSchedule');});
+    Route::post('pcreateStation','AdminController@pcreateStation');
+    Route::post('pcreateTrain','AdminController@pcreateTrain');
+    Route::get('editStation/{id}','AdminController@editStation');
+    Route::get('editTrain/{id}','AdminController@editTrain');
+    Route::put('updateStation/{id}','AdminController@updateStation');
+    Route::put('updateTrain/{id}','AdminController@updateTrain');
+    Route::delete('destroyStation/{id}','AdminController@destroyStation');
+    Route::delete('destroyTrain/{id}','AdminController@destroyTrain');
+
+  });
+  //train
   Route::get('tprice','AdminController@tprice');
-  Route::get('plane','AdminController@plane');
-  Route::get('pprice','AdminController@pprice');
   Route::post('create','AdminController@create');
   Route::post('pcreate','AdminController@pcreate');
 

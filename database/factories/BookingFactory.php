@@ -3,21 +3,19 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Booking::class, function (Faker $faker) {
-  $cs = App\User::all();
+  $cs = App\Models\Customer::all();
+  $sch = App\Models\TrainSchedule::all();
   $csid = $cs->count();
-
-  $type = ['App\Models\TrainSchedule' => 'Kereta','App\Models\PlaneSchedule' => 'Pesawat'];
-  $cd = array_rand($type);
-  $hehe = $type[$cd];
-
-  $sch = $cd::all();
   $schid = $sch->count();
+  $cd = rand(0,1);
+  $type = array("Kereta","Pesawat");
+
     return [
         //
-        'user_id' => rand(1,$csid),
+        'customer_id' => rand(1,$csid),
         'booking_date' => date('Y-m-d H:i:s'),
-        'status' => rand(0,4),
-        'vehicle' => $hehe,
+        'status' => $cd,
+        'type' => $type[$cd],
         'schedule_id' => rand(1,$schid),
     ];
 });
