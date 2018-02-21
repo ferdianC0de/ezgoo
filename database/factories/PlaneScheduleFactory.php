@@ -14,6 +14,7 @@ DB::table('plane_schedules')->delete();
     $plane = Plane::find($rnd);
     $num1 = rand(1,$nums);
     $num2 = rand(1,$nums);
+    $date = date('Y-m-d H:i:s');
     $firstAirport = Airport::find($num1);
     $lastAirport = Airport::find($num2);
 
@@ -28,7 +29,7 @@ DB::table('plane_schedules')->delete();
         'destination_code' =>$lastAirport->code,
         'from' => $firstAirport->airport_name,
         'from_code' => $firstAirport->code,
-        'boarding_time' => date('Y-m-d H:i:s'),
+        'boarding_time' => date('Y-m-d H:i:s', strtotime($date.'+ 1 days')),
         'duration' => rand(1,99),
         'gate' => rand(1,99),
         'eco_seat' => rand(1,10),

@@ -20,7 +20,14 @@ class UsersTableSeeder extends Seeder
         // $member->description  = 'Pengguna menjadi member di EzGoo'; // optional
         // $member->save();
 
-        //membuat Permission
+        //membuat Role
+        $admin = new Role();
+        $admin->name         = 'admin';
+        $admin->display_name = 'Admin EzGoo'; // optional
+        $admin->description  = 'Admin'; // optional
+        $admin->save();
+
+        // membuat Permission
         // $createPost = new Permission();
         // $createPost->name         = 'create-ticket';
         // $createPost->display_name = 'Create Ticket'; // optional
