@@ -5,14 +5,13 @@ use App\Models\Train;
 
 $factory->define(App\Models\TrainFare::class, function (Faker $faker) {
     DB::table('train_fares')->delete();
-    $rnd = rand(1,99);
-    $train = Train::find($rnd);
-
-      $array = ['A'=> 5000,'B'=>10000,'C'=>15000];
-      $abc = array_rand($array);
-      $priceEco = $array[$abc];
-      // $priceBus = $array[$abc];
-      // $priceExec = $array[$abc];
+    static $num = 1;
+    $unique = mt_rand(1,999);
+    $train = Train::find($num);
+    $num++;
+    $array = ['A'=> 5000,'B'=>10000,'C'=>15000];
+    $abc = array_rand($array);
+    $price = $array[$abc];
 
       return [
           //
@@ -20,5 +19,6 @@ $factory->define(App\Models\TrainFare::class, function (Faker $faker) {
           'eco_seat' => $priceEco,
           'bus_seat' => $priceEco,
           'exec_seat' => $priceEco,
+          'unique_code' => $unique
       ];
 });

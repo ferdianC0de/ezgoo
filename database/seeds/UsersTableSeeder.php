@@ -14,11 +14,11 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         //membuat Role
-        // $member = new Role();
-        // $member->name         = 'member';
-        // $member->display_name = 'Member EzGoo'; // optional
-        // $member->description  = 'Pengguna menjadi member di EzGoo'; // optional
-        // $member->save();
+        $member = new Role();
+        $member->name         = 'member';
+        $member->display_name = 'Member EzGoo'; // optional
+        $member->description  = 'Pengguna menjadi member di EzGoo'; // optional
+        $member->save();
 
         //membuat Role
         $admin = new Role();
