@@ -156,11 +156,7 @@ class BookingController extends Controller
               $booking = new Booking();
               $booking->user_id = $userId;
               $booking->vehicle = $vehicle;
-<<<<<<< HEAD
-              $booking->status = 0;
-=======
               $booking->bill = $fareTotal;
->>>>>>> 29347a1fef04b1ea88049956e8be909788d3720c
               $booking->schedule_id = $request->id[$i];
               $booking->expire = Carbon::now()->addHours(8);
               $booking->save();
