@@ -21,27 +21,6 @@
       <div class="col-md-6">
         <div class="row">
           <div class="panel panel-info">
-            <div class="panel-heading">Metode pembayaran</div>
-            <div class="panel-body">
-              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                <div class="panel panel-default">
-                  <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                      <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        BCA
-                      </a>
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-                    <div class="panel-body">
-                        <input type="radio" name="bank" value="bca">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-info">
             @if ($vehicle == 'plane')
               @for ($i=1; $i <= $totalCount - $total['baby']; $i++)
                 <div class="panel-heading">Data penumpang {{$i}}</div>

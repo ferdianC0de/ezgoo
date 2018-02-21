@@ -42,7 +42,6 @@ class AddVerificationToUserTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::table($this->getUserTableName(), function (Blueprint $table) {
             $table->dropColumn('verified');
             $table->dropColumn('verification_token');

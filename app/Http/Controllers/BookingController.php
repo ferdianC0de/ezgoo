@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
-use App\Models\BankAccount;
 use App\Models\Transaction;
 use DB;
 
@@ -85,8 +84,6 @@ class BookingController extends Controller
       $vehicle = $request->vehicle;
       $id = [$request->go,$request->back];
       $fareTotal = 0;
-      $bank = BankAccount::select('*')->get();
-      return $bank;
       $total = explode(',',$request->total);
       if ($vehicle == 'plane') {
         $totalCount = $total[0] + $total[1] + $total[2];
@@ -137,7 +134,6 @@ class BookingController extends Controller
         $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
-        $expire = Carbon::now()->addHours(8);
 
         if ($vehicle == 'plane'){
           $modelV = $this->plane;
@@ -165,7 +161,7 @@ class BookingController extends Controller
               $booking->vehicle = $vehicle;
               $booking->bill = $fareTotal;
               $booking->schedule_id = $request->id[$i];
-              $booking->expire = $expire;
+              $booking->expire = Carbon::now()->addHours(8);
               $booking->save();
 
               $detbook = new DetailBooking;
@@ -185,7 +181,8 @@ class BookingController extends Controller
               $passenger->save();
               }
             }
-            return $request;
+          });
+            return redirect('/');
         }else{
           abort(404);
         }
@@ -196,7 +193,7 @@ class BookingController extends Controller
   }
     public function test()
     {
-      return view('booking.payment');
+      return view('test.testView');
     }
     public function testData(Datatables $datatables)
     {

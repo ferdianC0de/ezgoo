@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        'App\Console\Commands\ExpireJob',
+        //
     ];
 
     /**
@@ -24,8 +24,8 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('ExpireJob:cronjob')
-                 ->everyMinute();
+        // $schedule->command('inspire')
+        //          ->hourly();
     }
 
     /**
