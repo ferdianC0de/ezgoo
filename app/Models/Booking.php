@@ -10,6 +10,10 @@ class Booking extends Model
 {
     protected $fillable = ['user_id','booking_date','status','vehicle','schedule_id'];
     //
+    public function detail_booking()
+    {
+      return $this->hasOne(DetailBooking::class);
+    }
     public static function singleTrip($go, $userID)
     {
       $planeSchedule = PlaneSchedule::find($go);

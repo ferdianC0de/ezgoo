@@ -33,7 +33,7 @@ class CreateTrainSchedules extends Migration
                   ->references('id')->on('trains')
                   ->onDelete('cascade');
             $table->foreign('station_id')
-                  ->references('id')->on('stations')
+                  ->references('id')->on('train_stations')
                   ->onDelete('cascade');
         });
     }

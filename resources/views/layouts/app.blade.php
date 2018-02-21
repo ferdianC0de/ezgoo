@@ -17,6 +17,7 @@
     <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('public/images') }}">
 </head>
 <body>
@@ -51,9 +52,6 @@
             @guest
               <li><a href="{{ route('login') }}">Login</a></li>
               <li><a href="{{ route('register') }}">Register</a></li>
-              <li class="page-scroll">
-                <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-              </li>
             @else
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -61,11 +59,13 @@
                 </a>
 
                 <ul class="dropdown-menu">
+                    <li><a href="#">Pemesanan<span class="badge">1</span></a></li>
+                    <li><a href="#">Profil saya</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                            Logout
+                            Keluar
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

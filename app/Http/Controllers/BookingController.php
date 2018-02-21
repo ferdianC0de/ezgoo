@@ -189,7 +189,7 @@ class BookingController extends Controller
   }
     public function test()
     {
-      return view('test.testView');
+      return Carbon::now();
     }
     public function testData(Datatables $datatables)
     {
