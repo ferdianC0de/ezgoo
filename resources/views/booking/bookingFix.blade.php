@@ -107,31 +107,32 @@
                   <p>Peron {{$s->platform}}</p>
                 @endif
                 <p>{{ date('d F Y H:i:s', strtotime($s->boarding_time)) }}</p>
-                <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
+                <p>IDR {{number_format($s->$seat * $totalCount + $s->unique_code, 2, ',','.')}}</p>
               </div>
             @endforeach
           </div>
           <div class="panel panel-info">
           <div class="panel-heading">
-            <h4 class="card-text">
               @if ($vehicle == 'plane')
-                <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak | {{$total['baby']}} Bayi)</p>
+                <p class="col-md-12">({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak | {{$total['baby']}} Bayi)</p>
               @elseif ($vehicle == 'train')
-                <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
+                <p class="col-md-12">({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
-              <p>Kode Unik {{ $s->unique_code }}</p>
-              <p> IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
+              <p class="col-md-4">Kode unik /tiket</p>
+              <p class="col-md-8">{{ $s->unique_code }}</p>
+              <p class="col-md-4">Total
+              <p class="col-md-8">IDR {{ number_format($fareTotal + $s->unique_code * 2, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
-               <button type="submit" class="btn btn-primary">Pesan</button>
-             @else
-               Login sebelum pesan tiket, <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>
-             @endif
-            </h4>
-            </form>
+                <p class="col-md-12">*Harap transfer sesuai nominal diatas untuk menghindari verifikasi error</p>
+                <button type="submit" class="btn btn-primary">Pesan</button>
+              @else
+                Login sebelum pesan tiket <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>
+              @endif
           </div>
         </div>
       </div>
     </div>
   </div>
+</form>
 <hr class="half-rule">
 @endsection
