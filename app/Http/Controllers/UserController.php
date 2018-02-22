@@ -63,7 +63,7 @@ class UserController extends Controller
         //
         $unique = Auth::user()->id;
         if ($id == $unique) {
-          $datas = Booking::where('user_id', $id)->with('sche',['param' => 'plane'])->get();
+          $datas = Booking::where('user_id', $id)->with('scheP')->get();
           if ($order) {
             $data = Booking::where('id', $order)->with('detail_booking')->get();
             // $dt = Booking::find($order);

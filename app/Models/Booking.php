@@ -13,15 +13,15 @@ class Booking extends Model
     {
       return $this->hasOne('App\Models\DetailBooking');
     }
-
-    public static function sche( $vehicle)
+    public function scheP()
     {
-      if ($vehicle['param'] == "plane") {
-        return $this->hasOne('App\Models\PlaneSchedule');
-      }elseif ($vehicle == "train") {
-        return $this->hasOne('App\Models\TrainSchedule');
-      }
+      return $this->hasOne('App\Models\PlaneSchedule', 'id', 'schedule_id');
     }
+    public function scheT()
+    {
+      return $this->hasOne('App\Models\TrainSchedule', 'id', 'schedule_id');
+    }
+    
     //
     public static function singleTrip($go, $userID)
     {

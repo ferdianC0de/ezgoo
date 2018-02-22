@@ -23,7 +23,7 @@
     <link href="{{ asset('public/images') }}">
 </head>
 <body>
-  <div id="app">
+  <div id="app" >
     <nav class="navbar navbar-inverse navbar-static-top" >
       <div class="container">
         <div class="navbar-header page-scroll">
@@ -61,7 +61,7 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="#">Pemesanan<span class="badge">1</span></a></li>
+                    <li><a href="{{ url('admin/booking/'.Auth::user()->id) }}">Pemesanan<span class="badge">1</span></a></li>
                     <li><a href="#">Profil saya</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
@@ -87,7 +87,7 @@
   </div>
 
     <!--footer-->
-    <div class="container">
+<div class="container">
       <footer class="footer-bs">
         <div class="row">
         	<div class="col-md-3 footer-brand animated fadeInLeft">
@@ -138,8 +138,8 @@
             </div>
         </div>
     </footer>
-    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
 </div>
+    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
@@ -148,14 +148,6 @@
 <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 
-<script type="text/javascript">
-$('#collapse').on('hidden.bs.collapse', function () {
-var target = '#'+$(this).attr('data-parent');
-$(target).removeClass('collapse-open');
-});
-
-//on open collapse
-</script>
 @stack('scripts')
 
 </body>

@@ -12,6 +12,10 @@
 */
 Auth::routes();
 Route::get('/', 'HomeController@index');
+Route::get('/tampilanajaib', function()
+{
+  return view('booking.tiket');
+});
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
