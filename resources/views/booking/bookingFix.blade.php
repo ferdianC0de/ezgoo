@@ -91,7 +91,8 @@
           <div class="panel panel-info">
             @foreach ($schedule as $s)
               @php
-                 $fareTotal += $s->$seat * $totalCount;
+                 $unique = $s->unique_code;
+                 $fareTotal += $s->$seat * $totalCount + $unique;
               @endphp
               <input type="hidden" name="id[]" value="{{$s->id}}">
               <div class="panel-heading">{{$s->from}} ke {{$s->destination}}</div>
@@ -119,9 +120,9 @@
                 <p class="col-md-12">({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
               <p class="col-md-4">Kode unik /tiket</p>
-              <p class="col-md-8">{{ $s->unique_code }}</p>
+              <p class="col-md-8">{{ $unique }}</p>
               <p class="col-md-4">Total
-              <p class="col-md-8">IDR {{ number_format($fareTotal + $s->unique_code * 2, 2, ',','.') }} </p>
+              <p class="col-md-8">IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
                 <p class="col-md-12">*Harap transfer sesuai nominal diatas untuk menghindari verifikasi error</p>
                 <button type="submit" class="btn btn-primary">Pesan</button>

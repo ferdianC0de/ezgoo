@@ -135,6 +135,8 @@ class BookingController extends Controller
         $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
+        $date = Carbon::now();
+        $expire = $date->addHours(8);
 
         if ($vehicle == 'plane'){
           $modelV = $this->plane;
