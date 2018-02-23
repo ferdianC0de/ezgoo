@@ -55,12 +55,12 @@ class TrainSchedule extends Model
 
       return $data;
     }
-    public static function findPrice(Array $id, $seat)
+    public static function findPrice($id, $seat)
     {
       $data = DB::table('train_schedules')
                 ->join('train_fares', 'train_fares.train_id', '=', 'train_schedules.train_id')
                 ->select('train_fares.'.$seat)
-                ->whereIn('train_schedules.id', $id)
+                ->where('train_schedules.id', $id)
                 ->get();
       return $data;
     }
