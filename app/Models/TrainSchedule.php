@@ -48,7 +48,8 @@ class TrainSchedule extends Model
                 'train_schedules.destination',
                 'train_schedules.boarding_time',
                 'trains.train_name',
-                'train_fares.'.$seat)
+                'train_fares.'.$seat,
+                'train_fares.unique_code')
         ->whereIn('train_schedules.id', $id)
         ->get();
 

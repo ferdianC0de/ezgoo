@@ -91,7 +91,8 @@
           <div class="panel panel-info">
             @foreach ($schedule as $s)
               @php
-                 $fareTotal += $s->$seat * $totalCount;
+              $unique = $s->unique_code;
+                 $fareTotal += $s->$seat * $totalCount + $unique;
               @endphp
               <input type="hidden" name="id[]" value="{{$s->id}}">
               <div class="panel-heading">{{$s->from}} ke {{$s->destination}}</div>
@@ -107,7 +108,7 @@
                   <p>Peron {{$s->platform}}</p>
                 @endif
                 <p>{{ date('d F Y H:i:s', strtotime($s->boarding_time)) }}</p>
-                <p>IDR {{number_format($s->$seat * $totalCount, 2, ',','.')}}</p>
+                <p>IDR {{number_format($s->$seat * $totalCount +$s->unique_code, 2, ',','.')}}</p>
               </div>
             @endforeach
           </div>
@@ -119,7 +120,7 @@
               @elseif ($vehicle == 'train')
                 <p>Total ({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
-              <p>Kode Unik {{ $s->unique_code }}</p>
+              <p>Kode Unik {{ $unique }}</p>
               <p> IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
                <button type="submit" class="btn btn-primary">Pesan</button>
