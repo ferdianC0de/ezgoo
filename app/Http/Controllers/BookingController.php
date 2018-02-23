@@ -135,8 +135,13 @@ class BookingController extends Controller
         $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
+<<<<<<< HEAD
         $date = Carbon::now();
         $expire = $date->addHours(8);
+=======
+        $date = date('Y-m-d H:i:s');
+        $expire = date('Y-m-d H:i:s', strtotime($date.'+ 7 hours'));
+>>>>>>> db70731b4347909d8804d8ebaa35884c303ded14
 
         if ($vehicle == 'plane'){
           $modelV = $this->plane;

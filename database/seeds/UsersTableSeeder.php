@@ -28,19 +28,19 @@ class UsersTableSeeder extends Seeder
         $admin->save();
 
         // membuat Permission
-        // $createPost = new Permission();
-        // $createPost->name         = 'create-ticket';
-        // $createPost->display_name = 'Create Ticket'; // optional
-        // // Allow a user to...
-        // $createPost->description  = 'Membuat ticket'; // optional
-        // $createPost->save();
-        //
-        // $editUser = new Permission();
-        // $editUser->name         = 'edit-user';
-        // $editUser->display_name = 'Edit Users'; // optional
-        // // Allow a user to...
-        // $editUser->description  = 'Mengedit User'; // optional
-        // $editUser->save();
+        $createPost = new Permission();
+        $createPost->name         = 'create-ticket';
+        $createPost->display_name = 'Create Ticket'; // optional
+        // Allow a user to...
+        $createPost->description  = 'Membuat ticket'; // optional
+        $createPost->save();
+
+        $editUser = new Permission();
+        $editUser->name         = 'edit-user';
+        $editUser->display_name = 'Edit Users'; // optional
+        // Allow a user to...
+        $editUser->description  = 'Mengedit User'; // optional
+        $editUser->save();
 
         // $admin = App\Models\Entrust\Role::find(2);
         // $user = User::find(2);
