@@ -9,20 +9,21 @@ class TrainSchedule extends Model
 {
     public function train()
     {
-      return $this->belongsTo('App/Models/Train');
+      return $this->belongsTo('App\Models\train');
     }
-    public function trainStation()
+    public function airport()
     {
-      return $this->belongsTo('App/Models/TrainStation');
+      return $this->belongsTo('App\Models\Airport');
     }
+
     public static function findSchedule($from, $destination, $date, $seat, $total)
     {
       $dataSchedule = DB::table('train_schedules')
         ->join('trains', 'trains.id', '=', 'train_schedules.train_id')
         ->join('train_fares', 'train_fares.train_id','=','train_schedules.train_id')
-        ->select('train_schedules.from',
-                'train_schedules.id',
+        ->select('train_schedules.id',
                 'train_schedules.platform',
+                'train_schedules.from',
                 'train_schedules.destination',
                 'train_schedules.boarding_time',
                 'train_schedules.duration',
@@ -61,7 +62,7 @@ class TrainSchedule extends Model
                 ->join('train_fares', 'train_fares.train_id', '=', 'train_schedules.train_id')
                 ->select('train_fares.'.$seat)
                 ->where('train_schedules.id', $id)
-                ->get();
+                ->get()->first();
       return $data;
     }
     public static function seatMath($total, $seat, $id)

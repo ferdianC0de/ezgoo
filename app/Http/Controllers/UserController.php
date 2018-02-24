@@ -71,7 +71,8 @@ class UserController extends Controller
             // $he = $dt->merge($data)->all();
             return $data;
           }
-            return view('user.usersBookings', compact('dataP'));
+          // return $dataT;
+           return view('user.usersBookings', compact('dataP', 'dataT'));
         }else {
           abort(500);
         }

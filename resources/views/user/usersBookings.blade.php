@@ -14,12 +14,15 @@
   </script>
 @endpush
 <div class="container">
-          @if ($dataP->isEmpty() && $dataT->isEmpty())
-            <td colspan="5">Maaf, anda belum memesan tiket</td>
-          @elseif($dataP)
-        <div class="accordion">
-              @foreach ($dataP as $data)
-              <div class="col-md-6">
+  @if ($dataP->isEmpty() && $dataT->isEmpty())
+    <td colspan="5">Maaf, anda belum memesan tiket</td>
+  @else
+  <div class="row">
+    <div class="col-md-6">
+      <div class="row">
+        @if (isset($dataP))
+          <div class="accordion">
+            @foreach ($dataP as $data)
                 <div class="panel panel-default">
 
                   <div class="panel-heading" id="heading{{$data->id}}">
@@ -35,24 +38,28 @@
                     </div>
                   </div>
 
-                    <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
-                      <div class="panel-body">
-                            @inject('heheh', 'App\Http\Controllers\UserController')
-                            @php
-                            $cih = $heheh->showBooking(Auth::user()->id,$data->id)
-                            @endphp
-                            <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
-                      </div>
+                  <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
+                    <div class="panel-body">
+                      @inject('heheh', 'App\Http\Controllers\UserController')
+                      @php
+                      $cih = $heheh->showBooking(Auth::user()->id,$data->id)
+                      @endphp
+                      <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
                     </div>
+                  </div>
 
                 </div>
-              </div>
-              @endforeach
-        </div>
-      @elseif ($dataT)
-        <div class="accordion">
-              @foreach ($dataT as $data)
-              <div class="col-md-6">
+            @endforeach
+          </div>
+
+        @endif
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="row">
+        @if (isset($dataT))
+          <div class="accordion">
+            @foreach ($dataT as $data)
                 <div class="panel panel-default">
 
                   <div class="panel-heading" id="heading{{$data->id}}">
@@ -68,20 +75,24 @@
                     </div>
                   </div>
 
-                    <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
-                      <div class="panel-body">
-                            @inject('heheh', 'App\Http\Controllers\UserController')
-                            @php
-                            $cih = $heheh->showBooking(Auth::user()->id,$data->id)
-                            @endphp
-                            <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
-                      </div>
+                  <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
+                    <div class="panel-body">
+                      @inject('heheh', 'App\Http\Controllers\UserController')
+                      @php
+                      $cih = $heheh->showBooking(Auth::user()->id,$data->id)
+                      @endphp
+                      <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
                     </div>
+                  </div>
 
                 </div>
-              </div>
-              @endforeach
-        </div>
+            @endforeach
+          </div>
+
+        @endif
+      </div>
+    </div>
+  </div>
           @endif
         </div>
 @endsection
