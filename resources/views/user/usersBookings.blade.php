@@ -44,7 +44,7 @@
                       @php
                       $cih = $heheh->showBooking(Auth::user()->id,$data->id)
                       @endphp
-                      <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
+                      <a href="{{url('booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
                     </div>
                   </div>
 
@@ -81,7 +81,7 @@
                       @php
                       $cih = $heheh->showBooking(Auth::user()->id,$data->id)
                       @endphp
-                      <a href="{{url('admin/booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
+                      <a href="{{url('booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
                     </div>
                   </div>
 
