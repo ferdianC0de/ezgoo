@@ -61,7 +61,7 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="{{ url('admin/booking/'.Auth::user()->id) }}">Pemesanan<span class="badge">1</span></a></li>
+                    <li><a href="{{ url('booking/'.Auth::user()->id) }}">Pemesanan<span class="badge">1</span></a></li>
                     <li><a href="#">Profil saya</a></li>
                     <li>
                         <a href="{{ route('logout') }}"

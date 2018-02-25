@@ -124,6 +124,7 @@ class BookingController extends Controller
       }
       return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal', 'bank'));
     }
+
     public function fixOrder(Request $request)
     {
       if (Auth::check()) {
@@ -183,7 +184,7 @@ class BookingController extends Controller
                   }
                 }
               });
-              //return 'sukses';
+              return redirect('booking/'.Auth::user()->id);
         }else{
           abort(404);
         }

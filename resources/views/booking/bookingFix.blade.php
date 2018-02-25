@@ -108,7 +108,7 @@
                   <p>Peron {{$s->platform}}</p>
                 @endif
                 <p>{{ date('d F Y H:i:s', strtotime($s->boarding_time)) }}</p>
-                <p>IDR {{number_format($s->$seat * $totalCount + $s->unique_code, 2, ',','.')}}</p>
+                <p>IDR {{number_format($s->$seat * $totalCount +$s->unique_code, 2, ',','.')}}</p>
               </div>
             @endforeach
           </div>

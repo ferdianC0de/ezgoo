@@ -12,6 +12,7 @@
 */
 Auth::routes();
 Route::get('/', 'HomeController@index');
+Route::get('booking/{id}/{order?}', 'UserController@showBooking');
 Route::get('/tampilanajaib', function()
 {
   return view('booking.tiket');
@@ -74,7 +75,6 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::get('edit/{id}','AdminController@ebookingData');
   Route::put('update/{id}','AdminController@ubookingData');
   Route::delete('delete/bookingdata/{id}','AdminController@dbookingData');
-  Route::get('booking/{id}/{order?}', 'UserController@showBooking');
 });
   Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
   // Route::get('admin', 'AdminController@index')->name('admin');
