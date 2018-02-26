@@ -160,7 +160,7 @@ class BookingController extends Controller
                   $booking = new Booking();
                   $booking->user_id = $userId;
                   $booking->vehicle = $vehicle;
-                  $booking->bill = $price->$seat;
+                  $booking->bill = $price->$seat + $price->unique_code;
                   $booking->schedule_id = $request->id[$i];
                   $booking->expire = $expire;
                   $booking->save();
@@ -193,6 +193,25 @@ class BookingController extends Controller
       // }
       }
     }
+
+    public function payment(Request $request, $id)
+    {
+      $request->request->add(['status'=> 1]);
+      $data = $this->validate($request,[
+        'sender_name' => 'required',
+        'ammount' => 'required|integer',
+        'status' => 'required'
+      ]);
+      $booking = Booking::find($id);
+      if ($booking->bill == $request->ammount) {
+        Transaction::where('id', $id)->update($data);
+        return redirect('booking/'.Auth::user()->id)->with('success', 'Pembayaran berhasil');
+      }else{
+        return back()->with('error', 'Jumlah uang tidak sesuai');
+      }
+
+    }
+
     public function test()
     {
       return view('test.testView');

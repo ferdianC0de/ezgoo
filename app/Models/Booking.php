@@ -21,7 +21,12 @@ class Booking extends Model
     {
       return $this->hasOne('App\Models\TrainSchedule', 'id', 'schedule_id');
     }
-    
+
+    public function transaction()
+    {
+      return $this->hasOne('App\Models\Transaction');
+    }
+
     //
     public static function singleTrip($go, $userID)
     {

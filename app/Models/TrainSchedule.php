@@ -9,7 +9,7 @@ class TrainSchedule extends Model
 {
     public function train()
     {
-      return $this->belongsTo('App\Models\train');
+      return $this->belongsTo('App\Models\Train');
     }
     public function airport()
     {
@@ -67,6 +67,6 @@ class TrainSchedule extends Model
     }
     public static function seatMath($total, $seat, $id)
     {
-      trainSchedule::whereIn('id', $id)->decrement($seat, $total);
+      TrainSchedule::whereIn('id', $id)->decrement($seat, $total);
     }
 }

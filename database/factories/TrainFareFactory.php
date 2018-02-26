@@ -16,9 +16,9 @@ $factory->define(App\Models\TrainFare::class, function (Faker $faker) {
       return [
           //
           'train_id' => $train->id,
-          'eco_seat' => $priceEco,
-          'bus_seat' => $priceEco,
-          'exec_seat' => $priceEco,
+          'eco_seat' => $price,
+          'bus_seat' => $price,
+          'exec_seat' => $price,
           'unique_code' => $unique
       ];
 });

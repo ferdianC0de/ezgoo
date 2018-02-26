@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Models\Booking;
+use App\Models\Transaction;
 
 class ExpireJob extends Command
 {
@@ -50,11 +51,14 @@ class ExpireJob extends Command
           }
           $increment = $modelS::where('id', $bE->schedule_id)->increment($bE->detail_booking->class, $bE->detail_booking->passenger);
         }
-        $delete = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->delete();
-        if ($delete) {
-          $this->info('Expired booking deleted!');
-        }else{
-          $this->info('Nothing expired');
+        $transaction= Transaction::find($bE->id);
+        if ($transaction->status == 0) {
+          $delete = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->delete();
+          if ($delete) {
+            $this->info('Expired booking deleted!');
+          }else{
+            $this->info('Nothing expired');
+          }
         }
     }
 }

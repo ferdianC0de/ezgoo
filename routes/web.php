@@ -12,7 +12,7 @@
 */
 Auth::routes();
 Route::get('/', 'HomeController@index');
-Route::get('booking/{id}/{order?}', 'UserController@showBooking');
+Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
 Route::get('/tampilanajaib', function()
 {
   return view('booking.tiket');
@@ -22,6 +22,7 @@ Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
   Route::post('order', 'BookingController@order')->name('order');
   Route::post('fixOrder', 'BookingController@fixOrder')->name('fixOrder');
+  Route::put('payment/{id}', 'BookingController@payment')->name('payment');
 });
 
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){

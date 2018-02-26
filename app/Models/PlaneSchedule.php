@@ -60,7 +60,10 @@ class PlaneSchedule extends Model
     {
       $data = DB::table('plane_schedules')
                 ->join('plane_fares', 'plane_fares.plane_id', '=', 'plane_schedules.plane_id')
-                ->select('plane_fares.'.$seat)
+                ->select(
+                  'plane_fares.'.$seat,
+                  'plane_fares.unique_code'
+                  )
                 ->where('plane_schedules.id', $id)
                 ->get()->first();
       return $data;

@@ -17,7 +17,7 @@ class DatabaseSeeder extends Seeder
         //Train Seeder
         $this->call(TrainTableSeeder::class);
         $this->call(TrainStationTableSeeder::class);
-        // $this->call(TrainFareSeeder::class);
+        $this->call(TrainFareSeeder::class);
         $this->call(TrainScheduleSeeder::class);
 
         //Plane Seeder

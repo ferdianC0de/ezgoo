@@ -58,21 +58,17 @@ class UserController extends Controller
         //
     }
 
-    public function showBooking($id, $order=NULL)
+    public function showBooking($id, $id_booking=null)
     {
         //
         $unique = Auth::user()->id;
         if ($id == $unique) {
-          $dataP = Booking::where([['user_id','=' ,$id],['vehicle','=','plane'] ])->with('scheP')->get();
-          $dataT = Booking::where([['user_id','=' ,$id],['vehicle','=','train'] ])->with('scheT')->get();
-          if ($order) {
-            $data = Booking::where('id', $order)->with('detail_booking')->get();
-            // $dt = Booking::find($order);
-            // $he = $dt->merge($data)->all();
-            return $data;
+          if ($id_booking) {
+            return view('booking.payment', compact('id_booking'));
           }
-          // return $dataT;
-           return view('user.usersBookings', compact('dataP', 'dataT'));
+          $dataP = Booking::where(['user_id' => $id,'vehicle'=>'plane'])->with('scheP','detail_booking','transaction')->get();
+          $dataT = Booking::where(['user_id' => $id,'vehicle'=>'train'])->with('scheT','detail_booking','transaction')->get();
+          return view('user.usersBookings', compact('dataP', 'dataT'));
         }else {
           abort(500);
         }

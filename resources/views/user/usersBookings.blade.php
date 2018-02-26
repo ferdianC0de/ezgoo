@@ -5,15 +5,21 @@
 
 @push('scripts')
   <script type="text/javascript">
-  $('#collapse').on('hidden.bs.collapse', function () {
-  var target = '#'+$(this).attr('data-parent');
-  $(target).removeClass('collapse-open');
-  });
-
+    $(document).ready(function(){
+      $('.test').click(function(){
+        var heh = $(this).val();
+        alert(heh);
+      });
+    });
   //on open collapse
   </script>
 @endpush
 <div class="container">
+  @if (Session::has('error'))
+    <div class="alert alert-danger">
+      {{Session::get('error')}}
+    </div>
+  @endif
   @if ($dataP->isEmpty() && $dataT->isEmpty())
     <td colspan="5">Maaf, anda belum memesan tiket</td>
   @else
@@ -27,24 +33,55 @@
 
                   <div class="panel-heading" id="heading{{$data->id}}">
                     <div class="row">
-                      <div class="col-md-4">
-                        {{$data->created_at}}
+                      <div class="col-md-6">
+                        <h5>Tiket {{$data->scheP->from}} ke {{$data->scheP->destination}}</h5>
                       </div>
-                      <div class="col-md-4 col-md-offset-4">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapse{{$data->id}}">
-                          {{"Rincian"}}
-                        </button>
+                      @if ($data->transaction->status == 0)
+                        <div class="col-md-5" style="color:red;">
+                          <h5>Expire {{date('H:i', strtotime($data->expire))}}</h5>
+                        </div>
+                      @else
+                        <div class="col-md-5"></div>
+                      @endif
+                      <div class="col-md-1">
+                        <i value="heh" class="fa fa-angle-down fa-2x" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapse{{$data->id}}" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>
 
                   <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
                     <div class="panel-body">
-                      @inject('heheh', 'App\Http\Controllers\UserController')
-                      @php
-                      $cih = $heheh->showBooking(Auth::user()->id,$data->id)
-                      @endphp
-                      <a href="{{url('booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
+                      <p class="col-md-6">Status</p>
+                      @if ($data->transaction->status == 0)
+                        <div class="alert alert-danger col-md-6"><center>Belum dibayar</center></div>
+                      @elseif ($data->transaction->status == 1)
+                        <div class="alert alert-success col-md-6"><center>Sudah dibayar</center></div>
+                      @endif
+                      <p class="col-md-6">Keberangkatan</p>
+                        <p class="col-md-6">{{date('d-m-Y H:i', strtotime($data->scheP->boarding_time))}}</p>
+                        <p class="col-md-6">Gate</p>
+                          <p class="col-md-6">{{$data->scheP->gate}}</p>
+                      <p class="col-md-6">Durasi penerbangan</p>
+                        <p class="col-md-6">{{$data->scheP->duration}}</p>
+                      <p class="col-md-6">Total penumpang</p>
+                        <p class="col-md-6">{{$data->detail_booking->passenger}}</p>
+                      <p class="col-md-6">Kelas</p>
+                      @if ($data->detail_booking->class == 'eco_seat')
+                        <p class="col-md-6">Ekonomi</p>
+                      @elseif ($data->detail_booking->class == 'bus_seat')
+                        <p class="col-md-6">Bisnis</p>
+                      @elseif ($data->detail_booking->class == 'first_seat')
+                        <p class="col-md-6">First class</p>
+                      @elseif ($data->detail_booking->class == 'exec_seat')
+                        <p class="col-md-6">Eksekutif</p>
+                      @endif
+                      <p class="col-md-6">Bill</p>
+                        <p class="col-md-6">IDR {{ number_format($data->bill, 2,',','.')}}</p>
+                        @if ($data->transaction->status == 0)
+                          <a href="{{url('booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-primary pull-right">Bayar</a>
+                        @else
+                          <a href="{{url('booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-success pull-right">Lihat tiket</a>
+                        @endif
                     </div>
                   </div>
 
@@ -60,32 +97,44 @@
         @if (isset($dataT))
           <div class="accordion">
             @foreach ($dataT as $data)
-                <div class="panel panel-default">
+              <div class="panel panel-default">
 
-                  <div class="panel-heading" id="heading{{$data->id}}">
-                    <div class="row">
-                      <div class="col-md-4">
-                        {{$data->created_at}}
-                      </div>
-                      <div class="col-md-4 col-md-offset-4">
-                        <button class="btn btn-info" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapse{{$data->id}}">
-                          {{"Rincian"}}
-                        </button>
-                      </div>
+                <div class="panel-heading" id="heading{{$data->id}}">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h5>Tiket {{$data->scheP->from}} ke {{$data->scheP->destination}}</h5>
+                    </div>
+                    <div class="col-md-5" style="color:red;">
+                      <h5>Expire {{date('H:i', strtotime($data->expire))}}</h5>
+                    </div>
+                    <div class="col-md-1">
+                      <i value="heh" class="fa fa-angle-down fa-2x" data-toggle="collapse" data-target="#collapse{{$data->id}}" aria-expanded="true" aria-controls="collapse{{$data->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
-
-                  <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
-                    <div class="panel-body">
-                      @inject('heheh', 'App\Http\Controllers\UserController')
-                      @php
-                      $cih = $heheh->showBooking(Auth::user()->id,$data->id)
-                      @endphp
-                      <a href="{{url('booking/'.Auth::user()->id).'/'.$data->id}}">lihat</a>
-                    </div>
-                  </div>
-
                 </div>
+
+                <div id="collapse{{$data->id}}" class="collapse" aria-labelledby="heading{{$data->id}}" data-parent="#accordion">
+                  <div class="panel-body">
+                    <p class="col-md-4">Status</p>
+                    @if ($data->transaction->status == 0)
+                      <button type="button" class="col-md-8 btn btn-danger" name="button">Belum dibayar</button>
+                    @endif
+                    <p class="col-md-4">Keberangkatan</p>
+                      <p class="col-md-8">...</p>
+                      <p class="col-md-4">Gate</p>
+                        <p class="col-md-8">...</p>
+                    <p class="col-md-4">Durasi penerbangan</p>
+                      <p class="col-md-8">...</p>
+                    <p class="col-md-4">Total penumpang</p>
+                      <p class="col-md-8">...</p>
+                    <p class="col-md-4">Kelas</p>
+                      <p class="col-md-8">...</p>
+                    <p class="col-md-4">Bill</p>
+                      <p class="col-md-8">...</p>
+                  </div>
+                </div>
+
+              </div>
             @endforeach
           </div>
 
