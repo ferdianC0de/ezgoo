@@ -57,6 +57,8 @@
                       @elseif ($data->transaction->status == 1)
                         <div class="alert alert-success col-md-6"><center>Sudah dibayar</center></div>
                       @endif
+                      <p class="col-md-6">Booking code</p>
+                        <p class="col-md-6">{{$data->booking_code}}</p>
                       <p class="col-md-6">Keberangkatan</p>
                         <p class="col-md-6">{{date('d-m-Y H:i', strtotime($data->scheP->boarding_time))}}</p>
                         <p class="col-md-6">Gate</p>
@@ -78,9 +80,9 @@
                       <p class="col-md-6">Bill</p>
                         <p class="col-md-6">IDR {{ number_format($data->bill, 2,',','.')}}</p>
                         @if ($data->transaction->status == 0)
-                          <a href="{{url('booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-primary pull-right">Bayar</a>
+                          <a href="{{url('user/booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-primary pull-right">Bayar</a>
                         @else
-                          <a href="{{url('ticket/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-success pull-right">Lihat tiket</a>
+                          <a href="{{url('user/ticket/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-success pull-right">Lihat tiket</a>
                         @endif
                     </div>
                   </div>
@@ -125,6 +127,8 @@
                     @elseif ($data->transaction->status == 1)
                       <div class="alert alert-success col-md-6"><center>Sudah dibayar</center></div>
                     @endif
+                    <p class="col-md-6">Booking code</p>
+                      <p class="col-md-6">{{$data->booking_code}}</p>
                     <p class="col-md-6">Keberangkatan</p>
                       <p class="col-md-6">{{date('d-m-Y H:i', strtotime($data->scheP->boarding_time))}}</p>
                       <p class="col-md-6">Gate</p>
@@ -146,9 +150,9 @@
                     <p class="col-md-6">Bill</p>
                       <p class="col-md-6">IDR {{ number_format($data->bill, 2,',','.')}}</p>
                       @if ($data->transaction->status == 0)
-                        <a href="{{url('booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-primary pull-right">Bayar</a>
+                        <a href="{{url('user/booking/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-primary pull-right">Bayar</a>
                       @else
-                        <a href="{{url('ticket/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-success pull-right">Lihat tiket</a>
+                        <a href="{{url('user/ticket/'.Auth::user()->id.'/'.$data->id)}}" class="btn btn-success pull-right">Lihat tiket</a>
                       @endif
                   </div>
                 </div>

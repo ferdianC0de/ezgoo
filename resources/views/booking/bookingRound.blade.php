@@ -30,6 +30,7 @@
                   <td></td>
                   <th>Pesawat</th>
                   <th>Pergi</th>
+                  <th>Durasi</th>
                   <th>Tiba</th>
                   <th>Gate</th>
                   <th>/orang</th>
@@ -37,6 +38,7 @@
                   <td></td>
                   <th>Kereta</th>
                   <th>Pergi</th>
+                  <th>Durasi</th>
                   <th>Tiba</th>
                   <th>Peron</th>
                   <th>/orang</th>
@@ -57,13 +59,23 @@
                     </td>
                     @if ($vehicle == 'plane')
                       <td>{{$s->plane_name}}</td>
-                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                      <td></td>
+                      @php
+                        $duration = date('h',$s->duration);
+                        $range    = strtotime($s->boarding_time ."+$duration hours");
+                      @endphp
+                      <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                      <td>{{ $duration }} jam</td>
+                      <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->gate }}</td>
                     @elseif($vehicle == 'train')
                       <td>{{$s->train_name}}</td>
-                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                      <td></td>
+                      @php
+                        $duration = date('h',$s->duration);
+                        $range    = strtotime($s->boarding_time ."+$duration hours");
+                      @endphp
+                      <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                      <td>{{ $duration }} jam</td>
+                      <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->platform }}</td>
                     @endif
                     <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
@@ -90,6 +102,7 @@
                   <td></td>
                   <th>Pesawat</th>
                   <th>Pergi</th>
+                  <th>Durasi</th>
                   <th>Tiba</th>
                   <th>Gate</th>
                   <th>/orang</th>
@@ -97,6 +110,7 @@
                   <td></td>
                   <th>Kereta</th>
                   <th>Pergi</th>
+                  <th>Durasi</th>
                   <th>Tiba</th>
                   <th>Peron</th>
                   <th>/orang</th>
@@ -117,13 +131,23 @@
                     </td>
                     @if ($vehicle == 'plane')
                       <td>{{$s->plane_name}}</td>
-                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                      <td></td>
+                      @php
+                        $duration = date('h',$s->duration);
+                        $range    = strtotime($s->boarding_time ."+$duration hours");
+                      @endphp
+                      <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                      <td>{{ $duration }} jam</td>
+                      <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->gate }}</td>
                     @elseif($vehicle == 'train')
                       <td>{{$s->train_name}}</td>
-                      <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                      <td></td>
+                      @php
+                        $duration = date('h',$s->duration);
+                        $range    = strtotime($s->boarding_time ."+$duration hours");
+                      @endphp
+                      <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                      <td>{{ $duration }} jam</td>
+                      <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->platform }}</td>
                     @endif
                     <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>

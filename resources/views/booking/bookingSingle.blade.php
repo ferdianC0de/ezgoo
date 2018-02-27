@@ -20,15 +20,15 @@
             @if ($vehicle == 'plane')
               <th>Pesawat</th>
               <th>Pergi</th>
-              <th>Tiba</th>
               <th>Durasi</th>
+              <th>Tiba</th>
               <th>Gate</th>
               <th>/orang</th>
             @elseif($vehicle == 'train')
               <th>Kereta</th>
               <th>Pergi</th>
-              <th>Tiba</th>
               <th>Durasi</th>
+              <th>Tiba</th>
               <th>Peron</th>
               <th>/orang</th>
             @endif
@@ -42,9 +42,13 @@
               @foreach ($schedule as $s)
                 <tr>
                   <td>{{ $s->plane_name }}</td>
-                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                  <td></td>
-                  <td>{{ $s->duration }}</td>
+                  @php
+                    $duration = date('h',$s->duration);
+                    $range    = strtotime($s->boarding_time ."+$duration hours");
+                  @endphp
+                  <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                  <td>{{ $duration }} jam</td>
+                  <td>{{ date('H:i:s', $range) }}</td>
                   <td>{{ $s->gate }}</td>
                   <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
                   <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
@@ -54,8 +58,13 @@
               @foreach ($schedule as $s)
                 <tr>
                   <td>{{ $s->train_name }}</td>
-                  <td>{{ date('h:i:s', strtotime($s->boarding_time))}}</td>
-                  <td></td>
+                  @php
+                    $duration = date('h',$s->duration);
+                    $range    = strtotime($s->boarding_time ."+$duration hours");
+                  @endphp
+                  <td>{{ date('H:i:s', strtotime($s->boarding_time)) }}</td>
+                  <td>{{ $duration }} jam</td>
+                  <td>{{ date('H:i:s', $range) }}</td>
                   <td>{{ $s->duration }}</td>
                   <td>{{ $s->platform }}</td>
                   <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>

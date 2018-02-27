@@ -12,12 +12,6 @@
 */
 Auth::routes();
 Route::get('/', 'HomeController@index');
-Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
-Route::get('ticket/{id}/{id_booking}', 'UserController@showTicket');
-Route::get('/tampilanajaib', function()
-{
-  return view('booking.tiket');
-});
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
@@ -79,11 +73,12 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::delete('delete/bookingdata/{id}','AdminController@dbookingData');
 });
   Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
-  // Route::get('admin', 'AdminController@index')->name('admin');
-  Route::get('home', 'HomeController@index')->name('home');
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
+
+  Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
+  Route::get('ticket/{id}/{id_booking}', 'UserController@showTicket');
 });
 Route::group(['prefix' => 'test'], function(){
   Route::get('test', 'BookingController@test');

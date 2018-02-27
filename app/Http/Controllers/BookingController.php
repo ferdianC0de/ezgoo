@@ -24,7 +24,7 @@ class BookingController extends Controller
       $this->trainFare = "App\Models\TrainFare";
       $this->trainSchedule = "App\Models\TrainSchedule";
     }
-    
+
     public function search(Request $request)
     {
       $request['date'] = date('Y-m-d', strtotime($request->date));
@@ -161,8 +161,9 @@ class BookingController extends Controller
                 $price = $modelS::findPrice($request->id[$i], $seat);
                   $booking = new Booking();
                   $booking->user_id = $userId;
+                  $booking->booking_code = str_random(4);
                   $booking->vehicle = $vehicle;
-                  $booking->bill = $price->$seat + $price->unique_code;
+                  $booking->bill = $price->$seat * $total + $price->unique_code;
                   $booking->schedule_id = $request->id[$i];
                   $booking->expire = $expire;
                   $booking->save();
@@ -186,7 +187,7 @@ class BookingController extends Controller
                   }
                 }
               });
-              return redirect('booking/'.Auth::user()->id);
+              return redirect('user/booking/'.Auth::user()->id);
         }else{
           abort(404);
         }
@@ -207,7 +208,7 @@ class BookingController extends Controller
       $booking = Booking::find($id);
       if ($booking->bill == $request->ammount) {
         Transaction::where('id', $id)->update($data);
-        return redirect('booking/'.Auth::user()->id)->with('success', 'Pembayaran berhasil');
+        return redirect('user/booking/'.Auth::user()->id)->with('success', 'Pembayaran berhasil');
       }else{
         return back()->with('error', 'Jumlah uang tidak sesuai');
       }
@@ -215,7 +216,10 @@ class BookingController extends Controller
 
     public function test()
     {
-      return view('test.testView');
+      $date = date('Y-m-d H:i:s');
+      $date  = "2018-02-27 12:43:31";
+      $hour  = "2018-02-27 16:43:31";
+      return strtotime($hour);
     }
 
     public function testData(Datatables $datatables)

@@ -61,8 +61,9 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li><a href="{{ url('booking/'.Auth::user()->id) }}">Pemesanan<span class="badge">1</span></a></li>
-                    <li><a href="#">Profil saya</a></li>
+                    <li><a href="{{ url('user/booking/'.Auth::user()->id) }}">Pemesanan</a></li>
+                    <li><a href="{{ url('user/edit/'.Auth::user()->id.'/profile')}}">Ubah profile</a></li>
+                    <li><a href="{{ url('user/edit/'.Auth::user()->id.'/password')}}">Ubah password</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();

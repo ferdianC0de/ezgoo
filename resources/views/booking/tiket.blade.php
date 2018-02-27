@@ -21,23 +21,19 @@
         <div class="panel-body">
           <div class="col-md-3">
             <h4>Booking code</h4>
-            <h3>{{$d->id}}</h3>
+            <h3>{{$d->booking_code}}</h3>
           </div>
           <div class="col-md-9">
             <table class="table">
               <thead>
                 <tr>
-                  <th>Panggilan</th>
                   <th>Nama penumpang</th>
-                  <th>Tipe tiket</th>
                 </tr>
               </thead>
               <tbody>
                 @foreach ($passenger as $p)
                   <tr>
-                    <td>Tuan</td>
                     <td>{{$p->name}}</td>
-                    <td>Dewasa</td>
                   </tr>
                 @endforeach
               </tbody>
@@ -84,8 +80,12 @@
                   </td>
                   <td>
                     <h5 class="card-title"><b>{{$d->scheP->destination}} ({{$d->scheP->destination_code}})</b></h5>
-                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheP->boarding_time))}}</p>
-                    <p class="card-text">{{date('H:i', strtotime($d->scheP->boarding_time))}}</p>
+                    @php
+                      $duration = date('h',$d->scheP->duration);
+                      $range    = strtotime($d->scheP->boarding_time ."+$duration hours");
+                    @endphp
+                    <p class="card-text">{{date('D-m-Y', $range)}}</p>
+                    <p class="card-text">{{date('H:i', $range)}}</p>
                   </td>
                 @elseif($vehicleT)
                   <h5 class="card-title"><center><b>{{$vehicleT->train_name}}</b></center></h5></td>
@@ -97,8 +97,12 @@
                   </td>
                   <td>
                     <h5 class="card-title"><b>{{$d->scheT->destination}} ({{$d->scheT->destination_code}})</b></h5>
-                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheT->boarding_time))}}</p>
-                    <p class="card-text">{{date('H:i', strtotime($d->scheT->boarding_time))}}</p>
+                    @php
+                      $duration = date('h',$d->scheT->duration);
+                      $range    = strtotime($d->scheT->boarding_time ."+$duration hours");
+                    @endphp
+                    <p class="card-text">{{date('D-m-Y', $range)}}</p>
+                    <p class="card-text">{{date('H:i', $range)}}</p>
                   </td>
                 @endif
             </tr>
