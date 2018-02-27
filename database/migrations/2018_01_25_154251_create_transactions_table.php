@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDetailBookingsTable extends Migration
+class CreateTransactionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class CreateDetailBookingsTable extends Migration
      */
     public function up()
     {
-        Schema::create('detail_bookings', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('booking_id')->unsigned();
-            $table->integer('passenger');
-            $table->string('class');
+            $table->string('bank')->nullable();
+            $table->string('sender_name')->nullable();
+            $table->decimal('ammount',10,2)->nullable();
+            $table->string('receipt')->nullable();
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
 
             $table->foreign('booking_id')
@@ -33,7 +36,6 @@ class CreateDetailBookingsTable extends Migration
      */
     public function down()
     {
-        Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('detail_bookings');
+        Schema::dropIfExists('transactions');
     }
 }

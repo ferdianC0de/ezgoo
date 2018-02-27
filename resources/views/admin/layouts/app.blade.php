@@ -40,7 +40,7 @@
                 <img src="{{ asset('img/world.png') }}" class="img-responsive" alt="">
             </div>
             <div class="profile-usertitle">
-                <div class="profile-usertitle-name">mfahmifadh</div>
+                <div class="profile-usertitle-name">{{Auth::user()->name}}</div>
                 <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
             </div>
             <div class="clear"></div>

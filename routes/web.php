@@ -10,6 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+<<<<<<< HEAD
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -38,13 +39,22 @@ Route::group(['prefix'=> 'frontend'], function(){
 Route::get('/plane/ajax/{id}','AdminController@planeAjax');
 Route::get('/airport/ajax/{id}','AdminController@airportAjax');
 
+=======
+>>>>>>> aa835a512ff59c1e43385d43722921b767ef0cf0
 Auth::routes();
 Route::get('/', 'HomeController@index');
+Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
+Route::get('ticket/{id}/{id_booking}', 'UserController@showTicket');
+Route::get('/tampilanajaib', function()
+{
+  return view('booking.tiket');
+});
 
 Route::group(['prefix' => 'booking'], function(){
   Route::post('search', 'BookingController@search')->name('search');
   Route::post('order', 'BookingController@order')->name('order');
   Route::post('fixOrder', 'BookingController@fixOrder')->name('fixOrder');
+  Route::put('payment/{id}', 'BookingController@payment')->name('payment');
 });
 
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
@@ -112,9 +122,6 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
 });
 Route::group(['prefix' => 'test'], function(){
-  Route::get('form', function(){
-    return view('test.testForm');
-  });
   Route::get('test', 'BookingController@test');
   Route::get('testData', 'BookingController@testData');
 });

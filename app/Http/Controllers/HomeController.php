@@ -13,7 +13,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-  
+
     public function index()
     {
         $airport = Airport::all();

@@ -15,14 +15,14 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
-            $table->dateTime('booking_date');
-            $table->tinyInteger('status');
-            $table->string('vehicle');
+            $table->integer('user_id')->unsigned();
             $table->integer('schedule_id');
+            $table->string('vehicle');
+            $table->decimal('bill',10,2);
+            $table->dateTime('expire');
             $table->timestamps();
 
-            $table->index('user_id')
+            $table->foreign('user_id')
                   ->references('id')->on('users')
                   ->onDelete('cascade');
         });
@@ -35,6 +35,7 @@ class CreateBookingsTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('bookings');
     }
 }

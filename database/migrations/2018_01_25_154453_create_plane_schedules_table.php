@@ -15,8 +15,8 @@ class CreatePlaneSchedulesTable extends Migration
     {
         Schema::create('plane_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('airport_id');
-            $table->integer('plane_id');
+            $table->integer('airport_id')->unsigned();
+            $table->integer('plane_id')->unsigned();
             $table->string('from');
             $table->string('destination');
             $table->string('from_code');
@@ -29,10 +29,10 @@ class CreatePlaneSchedulesTable extends Migration
             $table->string('gate');
             $table->timestamps();
 
-            $table->index('plane_id')
+            $table->foreign('plane_id')
                   ->references('id')->on('planes')
                   ->onDelete('cascade');
-            $table->index('airport_id')
+            $table->foreign('airport_id')
                   ->references('id')->on('airports')
                   ->onDelete('cascade');
         });
@@ -45,6 +45,7 @@ class CreatePlaneSchedulesTable extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('plane_schedules');
     }
 }

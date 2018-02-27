@@ -15,8 +15,8 @@ class CreateTrainSchedules extends Migration
     {
         Schema::create('train_schedules', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('station_id');
-            $table->integer('train_id');
+            $table->integer('station_id')->unsigned();
+            $table->integer('train_id')->unsigned();
             $table->string('from');
             $table->string('destination');
             $table->string('from_code');
@@ -29,11 +29,11 @@ class CreateTrainSchedules extends Migration
             $table->string('platform');
             $table->timestamps();
 
-            $table->index('station_id')
-                  ->references('id')->on('train_stations')
-                  ->onDelete('cascade');
-            $table->index('train_id')
+            $table->foreign('train_id')
                   ->references('id')->on('trains')
+                  ->onDelete('cascade');
+            $table->foreign('station_id')
+                  ->references('id')->on('train_stations')
                   ->onDelete('cascade');
         });
     }
@@ -45,6 +45,7 @@ class CreateTrainSchedules extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('train_schedules');
     }
 }

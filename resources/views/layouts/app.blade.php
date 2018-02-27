@@ -12,15 +12,18 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet"> --}}
+    {{-- <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet"> --}}
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
+    <link href="{{ asset('vendor/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
     <link href="{{ asset('public/images') }}">
 </head>
 <body>
-  <div id="app">
+  <div id="app" >
     <nav class="navbar navbar-inverse navbar-static-top" >
       <div class="container">
         <div class="navbar-header page-scroll">
@@ -34,8 +37,8 @@
           </button>
 
           <!-- Branding Image -->
-          <a class="navbar-brand" href="{{ asset('image/logo.png') }}">
-              {{ config('app.name', 'EZGOO.') }}
+          <a class="navbar-brand" href="{{url('')}}">
+              {{ config('app.name') }}
           </a>
         </div>
 
@@ -51,9 +54,6 @@
             @guest
               <li><a href="{{ route('login') }}">Login</a></li>
               <li><a href="{{ route('register') }}">Register</a></li>
-              <li class="page-scroll">
-                <a href="#cekpemesanan"><span class="glyphicon glyphicon-shopping-cart"></span></a>
-              </li>
             @else
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
@@ -61,11 +61,13 @@
                 </a>
 
                 <ul class="dropdown-menu">
+                    <li><a href="{{ url('booking/'.Auth::user()->id) }}">Pemesanan<span class="badge">1</span></a></li>
+                    <li><a href="#">Profil saya</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
-                            Logout
+                            Keluar
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -85,13 +87,13 @@
   </div>
 
     <!--footer-->
-    <div class="container">
+<div class="container">
       <footer class="footer-bs">
         <div class="row">
         	<div class="col-md-3 footer-brand animated fadeInLeft">
-            	<h2>EZGOO</h2>
-                <p>EZGOO Booking Ticket pesawat dan kereta mudah dan aman</p>
-                <p>© 2018 EZGOO, All rights reserved</p>
+            	<h2>{{config('app.name')}}</h2>
+                <p>{{config('app.name')}} Booking Ticket pesawat dan kereta mudah dan aman</p>
+                <p>© 2018 {{config('app.name')}}, All rights reserved</p>
             </div>
         	<div class="col-md-4 footer-nav animated fadeInUp">
             	<h4>Menu </h4>
@@ -124,7 +126,7 @@
             </div>
         	<div class="col-md-3 footer-ns animated fadeInRight">
             	<h4>Newsletter</h4>
-                <p>Subscribe to our newsletter now and be the first to know about EzGoo's latest promos!</p>
+                <p>Subscribe to our newsletter now and be the first to know about {{config('app.name')}}'s latest promos!</p>
                 <p>
                     <div class="input-group">
                       <input type="text" class="form-control" placeholder="Enter Your Email Here...">
@@ -136,20 +138,25 @@
             </div>
         </div>
     </footer>
-    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">EZGOO 2018</a></p></section>
 </div>
+    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+{{-- <script src="{{ asset('js/bootstrap.min.js') }}"></script> --}}
 <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+<<<<<<< HEAD
 <script type="text/javascript">
   $('.datepicker').datepicker({
     format: 'mm/dd/yyyy',
     startDate: '-3d'
   });
 </script>
+=======
+
+>>>>>>> aa835a512ff59c1e43385d43722921b767ef0cf0
 @stack('scripts')
 
 </body>

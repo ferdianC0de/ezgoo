@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Booking;
 use App\Models\Passenger;
 use App\Models\DetailBooking;
+use App\Models\BankAccount;
+use App\Models\Transaction;
+use DB;
+
 use Auth;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
@@ -19,6 +24,7 @@ class BookingController extends Controller
       $this->trainFare = "App\Models\TrainFare";
       $this->trainSchedule = "App\Models\TrainSchedule";
     }
+    
     public function search(Request $request)
     {
       $request['date'] = date('Y-m-d', strtotime($request->date));
@@ -73,6 +79,7 @@ class BookingController extends Controller
         return redirect('')->withError('Bayi tidak boleh lebih dari dewasa');
       }
     }
+
     public function order(Request $request)
     {
       $model = "";
@@ -80,6 +87,7 @@ class BookingController extends Controller
       $vehicle = $request->vehicle;
       $id = [$request->go,$request->back];
       $fareTotal = 0;
+      $bank = BankAccount::select('*')->get();
       $total = explode(',',$request->total);
       if ($vehicle == 'plane') {
         $totalCount = $total[0] + $total[1] + $total[2];
@@ -116,8 +124,9 @@ class BookingController extends Controller
       }else{
         abort(404);
       }
-      return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal'));
+      return view('booking.bookingFix', compact('schedule','vehicle', 'total', 'totalCount', 'seat', 'class', 'fareTotal', 'bank'));
     }
+
     public function fixOrder(Request $request)
     {
       if (Auth::check()) {
@@ -129,6 +138,8 @@ class BookingController extends Controller
         $userId = Auth::user()->id;
         $total = $request->totalCount;
         $seat = $request->seat;
+        $date = Carbon::now();
+        $expire = $date->addHours(8);
 
         if ($vehicle == 'plane'){
           $modelV = $this->plane;
@@ -144,58 +155,72 @@ class BookingController extends Controller
 
         if (isset($id)) {
           $math = $modelS::seatMath($total, $seat, $id);
-          for ($i=0; $i < count($request->id); $i++) {
-              $booking = new Booking();
-              $booking->user_id = $userId;
-              $booking->booking_date = date('Y-m-d H:i:s');
-              $booking->vehicle = $vehicle;
-              $booking->schedule_id = $request->id[$i];
-              $booking->save();
-
-              $detbook = new DetailBooking;
-              $detbook->booking_id = $booking->id;
-              $detbook->passenger =  $total;
-              $detbook->fare = $request->fare;
-              $detbook->class = $seat;
-              $detbook->save();
-
-              for ($i=0; $i < count($request->name); $i++) {
-              $passenger = new Passenger;
-              $passenger->detail_booking_id = $detbook->id;
-              $passenger->name = $request->name[$i];
-              $passenger->save();
-              }
-
-              return redirect('/');
-            }
-
+            DB::transaction(function() use ($modelS, $userId, $vehicle, $seat, $total, $expire, $request)
+            {
+              for ($i=0; $i < count($request->id); $i++) {
+                $price = $modelS::findPrice($request->id[$i], $seat);
+                  $booking = new Booking();
+                  $booking->user_id = $userId;
+                  $booking->vehicle = $vehicle;
+                  $booking->bill = $price->$seat + $price->unique_code;
+                  $booking->schedule_id = $request->id[$i];
+                  $booking->expire = $expire;
+                  $booking->save();
+                  //
+                  $detbook = new DetailBooking;
+                  $detbook->booking_id = $booking->id;
+                  $detbook->passenger =  $total;
+                  $detbook->class = $seat;
+                  $detbook->save();
+                  //
+                  $transaction = new Transaction;
+                  $transaction->booking_id = $booking->id;
+                  $transaction->bank = $request->bank;
+                  $transaction->save();
+                  //
+                  for ($j=0; $j < count($request->name); $j++) {
+                  $passenger = new Passenger;
+                  $passenger->detail_booking_id = $detbook->id;
+                  $passenger->name = $request->name[$j];
+                  $passenger->save();
+                  }
+                }
+              });
+              return redirect('booking/'.Auth::user()->id);
         }else{
           abort(404);
         }
       // }else{
       //   return 'Register dulu baru bisa pesen';
       // }
+      }
     }
-  }
+
+    public function payment(Request $request, $id)
+    {
+      $request->request->add(['status'=> 1]);
+      $data = $this->validate($request,[
+        'sender_name' => 'required',
+        'ammount' => 'required|integer',
+        'status' => 'required'
+      ]);
+      $booking = Booking::find($id);
+      if ($booking->bill == $request->ammount) {
+        Transaction::where('id', $id)->update($data);
+        return redirect('booking/'.Auth::user()->id)->with('success', 'Pembayaran berhasil');
+      }else{
+        return back()->with('error', 'Jumlah uang tidak sesuai');
+      }
+    }
+
     public function test()
     {
       return view('test.testView');
     }
+
     public function testData(Datatables $datatables)
     {
       $query = Plane::select('*');
       return $datatables->eloquent($query)->make(true);
     }
-    //Note
-    //->make(true); selalu paling akhir
-    //Nambah kolom
-      //->addColumn('nama-kolom', function($bebas){
-      // apapun yang mau ditampilin, nanti isinya tinggal return
-      //})
-    //Edit kolom
-      //->editColumn('kolom-yang-diedit', function($bebas){
-      //sama aja kaya nambah, cuma ini ngedit yg udah ada
-      //})
-    //Kalo mau nambahin kolom + html
-      //->rawColumns(['action','lengthofcontract'])
 }

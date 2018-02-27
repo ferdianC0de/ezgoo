@@ -3,7 +3,7 @@
 use Faker\Generator as Faker;
 
 $factory->define(App\Models\Booking::class, function (Faker $faker) {
-  $cs = App\Models\Customer::all();
+  $cs = App\Models\User::all();
   $sch = App\Models\TrainSchedule::all();
   $csid = $cs->count();
   $schid = $sch->count();
@@ -12,7 +12,7 @@ $factory->define(App\Models\Booking::class, function (Faker $faker) {
 
     return [
         //
-        'customer_id' => rand(1,$csid),
+        'user_id' => rand(1,$csid),
         'booking_date' => date('Y-m-d H:i:s'),
         'status' => $cd,
         'type' => $type[$cd],

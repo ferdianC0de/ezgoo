@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PlaneSeeder extends Seeder
+class BankSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class PlaneSeeder extends Seeder
     public function run()
     {
         //
-        factory(App\Models\Plane::class, 5)->create();
+        factory(App\Models\BankAccount::class, 3)->create();
     }
 }
