@@ -119,12 +119,10 @@
               @elseif ($vehicle == 'train')
                 <p class="col-md-12">({{$total['adult']}} Dewasa | {{$total['child']}} Anak - anak)</p>
               @endif
-              <p class="col-md-4">Kode unik /tiket</p>
-              <p class="col-md-8">{{ $unique }}</p>
               <p class="col-md-4">Total
               <p class="col-md-8">IDR {{ number_format($fareTotal, 2, ',','.') }} </p>
               @if (Entrust::hasRole(['member','admin']))
-                <p class="col-md-12">*Harap transfer sesuai nominal diatas untuk menghindari verifikasi error</p>
+                <p class="col-md-12">*Harap transfer sesuai nominal di tiket untuk menghindari verifikasi error</p>
                 <button type="submit" class="btn btn-primary">Pesan</button>
               @else
                 Login sebelum pesan tiket <a href="{{ url('login') }}"><button type="button" class="btn btn-primary">Login</button> </a>

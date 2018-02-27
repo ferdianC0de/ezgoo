@@ -13,6 +13,7 @@
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
+Route::get('ticket/{id}/{id_booking}', 'UserController@showTicket');
 Route::get('/tampilanajaib', function()
 {
   return view('booking.tiket');

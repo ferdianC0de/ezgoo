@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 Use App\User;
 use Auth;
+use App\Models\Plane;
+use App\Models\Train;
 use App\Models\Booking;
+use App\Models\Passenger;
 
 class UserController extends Controller
 {
@@ -69,9 +72,30 @@ class UserController extends Controller
           $dataP = Booking::where(['user_id' => $id,'vehicle'=>'plane'])->with('scheP','detail_booking','transaction')->get();
           $dataT = Booking::where(['user_id' => $id,'vehicle'=>'train'])->with('scheT','detail_booking','transaction')->get();
           return view('user.usersBookings', compact('dataP', 'dataT'));
-        }else {
+        } else {
           abort(500);
         }
+    }
+
+    public function showTicket($id, $id_booking)
+    {
+      $vehicleP = '';
+      $vehicleT = '';
+      $unique = Auth::user()->id;
+      if ($id == $unique) {
+        $booking = Booking::find($id_booking);
+        if ($booking->vehicle == 'plane') {
+          $data = Booking::where(['id' => $id_booking,'vehicle'=>'plane'])->with('scheP','detail_booking','transaction')->get();
+          $vehicleP = Plane::find($data[0]->scheP->plane_id);
+        } elseif ($booking->vehicle == 'train') {
+          $data = Booking::where(['id' => $id_booking,'vehicle'=>'train'])->with('scheT','detail_booking','transaction')->get();
+          $vehicleT = Train::find($data[0]->scheT->train_id);
+        }
+        $passenger = Passenger::where('detail_booking_id',$data[0]->detail_booking->id)->get();
+        return view('booking.tiket', compact('data', 'vehicleP','vehicleT', 'passenger'));
+      } else {
+        abort(500);
+      }
     }
 
     /**

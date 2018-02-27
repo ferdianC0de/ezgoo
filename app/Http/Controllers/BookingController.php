@@ -24,6 +24,7 @@ class BookingController extends Controller
       $this->trainFare = "App\Models\TrainFare";
       $this->trainSchedule = "App\Models\TrainSchedule";
     }
+    
     public function search(Request $request)
     {
       $request['date'] = date('Y-m-d', strtotime($request->date));
@@ -78,6 +79,7 @@ class BookingController extends Controller
         return redirect('')->withError('Bayi tidak boleh lebih dari dewasa');
       }
     }
+
     public function order(Request $request)
     {
       $model = "";
@@ -209,28 +211,16 @@ class BookingController extends Controller
       }else{
         return back()->with('error', 'Jumlah uang tidak sesuai');
       }
-
     }
 
     public function test()
     {
       return view('test.testView');
     }
+
     public function testData(Datatables $datatables)
     {
       $query = Plane::select('*');
       return $datatables->eloquent($query)->make(true);
     }
-    //Note
-    //->make(true); selalu paling akhir
-    //Nambah kolom
-      //->addColumn('nama-kolom', function($bebas){
-      // apapun yang mau ditampilin, nanti isinya tinggal return
-      //})
-    //Edit kolom
-      //->editColumn('kolom-yang-diedit', function($bebas){
-      //sama aja kaya nambah, cuma ini ngedit yg udah ada
-      //})
-    //Kalo mau nambahin kolom + html
-      //->rawColumns(['action','lengthofcontract'])
 }

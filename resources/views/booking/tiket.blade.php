@@ -2,80 +2,111 @@
 
 @section('content')
 
-<div class="container">
-  <h1><b>E-Ticket</b></h1>
-  <h4>Departure Flight - Wednesday,21 Feb 2018</h4>
-</div>
+@foreach ($data as $d)
+  <div class="container">
+    <h1><b>E-Ticket</b></h1>
+    @if ($vehicleP)
+      <h4>Jadwal penerbangan - {{date('d-m-Y', strtotime($d->scheP->boarding_time))}}</h4>
+    @elseif ($vehicleT)
+      <h4>Jadwal keberangkatan - {{date('d-m-Y', strtotime($d->scheT->boarding_time))}}</h4>
+    @endif
+  </div>
 
-<div class="container">
-  <div class="col-md-12">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4><b>Passanger Details</b></h4>
-    </div>
-  <div class="panel-body">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th><center>BOOKING CODE</center></th>
-          <th>TITTLE</th>
-          <th>PASSANGER NAME</th>
-          <th>TICKET TYPE</th>
-        </tr>
-      <tbody>
-        <tr>
-          <td><center><h3>WUREVT-007</h3></center></td>
-          <td>Nona</td>
-          <td>Inge Arfatikka</td>
-          <td>Dewasa</td>
-        </tr>
-          </tbody>
-        </thead>
-      </table>
+  <div class="container">
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4><b>Detail Penumpang</b></h4>
+        </div>
+        <div class="panel-body">
+          <div class="col-md-3">
+            <h4>Booking code</h4>
+            <h3>{{$d->id}}</h3>
+          </div>
+          <div class="col-md-9">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Panggilan</th>
+                  <th>Nama penumpang</th>
+                  <th>Tipe tiket</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach ($passenger as $p)
+                  <tr>
+                    <td>Tuan</td>
+                    <td>{{$p->name}}</td>
+                    <td>Dewasa</td>
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
+
+    <div class="col-md-12">
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4><b>Detail Perjalanan</b></h4>
+        </div>
+        <div class="panel-body">
+        <table class="table table-striped">
+          <thead>
+            @if ($vehicleP)
+              <tr>
+                <th><center>Pesawat</center></th>
+                <th><center>Gate</center></th>
+                <th><center>Keberangkatan</center></th>
+                <th><center>Ketibaan</center></th>
+              </tr>
+            @elseif ($vehicleT)
+              <tr>
+                <th><center>Kereta</center></th>
+                <th><center>Platform</center></th>
+                <th><center>Keberangkatan</center></th>
+                <th><center>Ketibaan</center></th>
+              </tr>
+            @endif
+
+          </thead>
+            <tr>
+              <td><center><img src="images/garuda2.png" alt="..."></center>
+                @if ($vehicleP)
+                  <h5 class="card-title"><center><b>{{$vehicleP->plane_name}}</b></center></h5></td>
+                  <td><b><center>{{$d->scheP->gate}}</center></b></td>
+                  <td>
+                    <h5 class="card-title"><b>{{$d->scheP->from}} ({{$d->scheP->from_code}})</b></h5>
+                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheP->boarding_time))}}</p>
+                    <p class="card-text">{{date('H:i', strtotime($d->scheP->boarding_time))}}</p>
+                  </td>
+                  <td>
+                    <h5 class="card-title"><b>{{$d->scheP->destination}} ({{$d->scheP->destination_code}})</b></h5>
+                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheP->boarding_time))}}</p>
+                    <p class="card-text">{{date('H:i', strtotime($d->scheP->boarding_time))}}</p>
+                  </td>
+                @elseif($vehicleT)
+                  <h5 class="card-title"><center><b>{{$vehicleT->train_name}}</b></center></h5></td>
+                  <td><b><center>{{$d->scheT->platform}}</center></b></td>
+                  <td>
+                    <h5 class="card-title"><b>{{$d->scheT->from}} ({{$d->scheT->from_code}})</b></h5>
+                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheT->boarding_time))}}</p>
+                    <p class="card-text">{{date('H:i', strtotime($d->scheT->boarding_time))}}</p>
+                  </td>
+                  <td>
+                    <h5 class="card-title"><b>{{$d->scheT->destination}} ({{$d->scheT->destination_code}})</b></h5>
+                    <p class="card-text">{{date('D-m-Y', strtotime($d->scheT->boarding_time))}}</p>
+                    <p class="card-text">{{date('H:i', strtotime($d->scheT->boarding_time))}}</p>
+                  </td>
+                @endif
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
-
-<div class="container">
-  <div class="col-md-12">
-    <div class="panel panel-info">
-      <div class="panel-heading">
-        <h4><b>Itinerary Details</b></h4>
-      </div>
-
-      <div class="panel-body">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th><center>PLANE</center></th>
-          <th><center>GATE</center></th>
-          <th><center>DEPARTURE</center></th>
-          <th><center>ARRIVAL</center></th>
-        </tr>
-      </thead>
-        <tr>
-          <td><center><img src="images/garuda2.png" alt="..."></center>
-          <h5 class="card-title"><center><b>GARUDA INDONESIA BOEING 737</b></center></h5></td>
-          <td><b>A1</b></td>
-          <td>
-            <h5 class="card-title"><b>SOEKARNO HATTA (CGK) JAKARTA</b></h5>
-            <p class="card-text">Wednesday, 21 FEB 2018</p>
-            <p class="card-text">17:00 WIB</p>
-          </td>
-
-        <td>
-          <h5 class="card-title"><b>NGURAH RAI (DPS) BALI</b></h5>
-          <p class="card-text">Wednesday, 21 FEB 2018</p>
-          <p class="card-text">22:00 WITA</p>
-        </td>
-        </tr>
-      </table>
-      </div>
-    </div>
-  </div>
-</div>
+@endforeach
 
 @endsection

@@ -60,7 +60,9 @@ class TrainSchedule extends Model
     {
       $data = DB::table('train_schedules')
                 ->join('train_fares', 'train_fares.train_id', '=', 'train_schedules.train_id')
-                ->select('train_fares.'.$seat)
+                ->select(
+                  'train_fares.'.$seat,
+                  'train_fares.unique_code')
                 ->where('train_schedules.id', $id)
                 ->get()->first();
       return $data;
