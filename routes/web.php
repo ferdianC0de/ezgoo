@@ -34,6 +34,10 @@ Route::group(['prefix'=> 'frontend'], function(){
   });
 });
 
+// AJAX
+Route::get('/plane/ajax/{id}','AdminController@planeAjax');
+Route::get('/airport/ajax/{id}','AdminController@airportAjax');
+
 Auth::routes();
 Route::get('/', 'HomeController@index');
 
@@ -46,6 +50,7 @@ Route::group(['prefix' => 'booking'], function(){
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::resource('/','AdminController');
   Route::get('bookingdata','AdminController@bookingdata');
+  Route::get('users','AdminController@showUsers');
 
   // plane
   Route::group(['prefix'=>'plane','middleware'=> 'checkRole'],function(){
@@ -54,13 +59,17 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
     Route::get('planeSchedule','AdminController@planeSchedule');
     Route::get('createAirport', function(){ return view('admin.plane.cAirport');});
     Route::get('createPlane',   function(){ return view('admin..plane.cPlane');});
-    Route::get('cplaneSchedule',function(){ return view('admin.plane.cplaneSchedule');});
+    Route::get('detailPlaneschedule/{id}','AdminController@detailPlaneschedule');
+    Route::get('cplaneSchedule','AdminController@cPlaneschedule');
     Route::post('pcreateAirport','AdminController@pcreateAirport');
     Route::post('pcreatePlane','AdminController@pcreatePlane');
+    Route::post('pcreatePlaneschedule','AdminController@pcreatePlaneschedule');
     Route::get('editAirport/{id}','AdminController@editAirport');
     Route::get('editlistPlane/{id}','AdminController@editlistPlane');
+    Route::get('editPlaneschedule/{id}','AdminController@editPlaneschedule');
     Route::put('updateAirport/{id}','AdminController@updateAirport');
     Route::put('updatelistPlane/{id}','AdminController@updatelistPlane');
+    Route::put('updatePlaneschedule/{id}','AdminController@updatePlaneschedule');
     Route::put('updateTrain/{id}','AdminController@updateTrain');
     Route::delete('destroyAP/{id}','AdminController@destroyAP');
     Route::delete('destroyPS/{id}','AdminController@destroyPS');

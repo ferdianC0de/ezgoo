@@ -21,8 +21,8 @@
                       <strong>{{ Session::get('alert-success') }}</strong>
                   </div>
               @endif
+              <a href="{{ url('admin/train/createTrain') }}" class="fa fa-plus-circle fa-2x"></a></a><h3 align="center">DAFTAR KERETA API</h3>
             <hr>
-            <a href="{{ url('admin/train/createTrain') }}" class="btn btn-primary pull right">Tambah Data Kereta</a><br><br>
             <table class="table table-striped table-bordered data">
             <thead>
               <tr>
@@ -45,9 +45,9 @@
                 <td>{{ $data->eco_seat }}</td>
                 <td>{{ $data->bus_seat }}</td>
                 <td>{{ $data->exec_seat }}</td>
-                <td>{{ number_format($data->trainfare->eco_seat) }}</td>
-                <td>{{ number_format($data->trainfare->bus_seat) }}</td>
-                <td>{{ number_format($data->trainfare->exec_seat) }}</td>
+                <td>IDR {{ number_format($data->trainfare->eco_seat) }}</td>
+                <td>IDR {{ number_format($data->trainfare->bus_seat) }}</td>
+                <td>IDR {{ number_format($data->trainfare->exec_seat) }}</td>
                 <td>
                   <form action="{{ url('admin/train/destroyTrain', $data->id) }}" method="post">
                       {{ csrf_field() }}

@@ -10,6 +10,7 @@ Use App\Models\Passenger;
 Use App\Models\DetailBooking;
 Use App\Models\PlaneSchedule;
 Use App\Models\PlaneFare;
+Use App\User;
 Use App\Models\Airport;
 Use App\Models\TrainStation;
 Use App\Models\Train;
@@ -70,6 +71,40 @@ class AdminController extends Controller
       return view('admin/train/listTrain',compact('train'));
     }
 
+    public function cPlaneschedule()
+    {
+      $plane = Plane::select("plane_name","id")->get();
+      $airport = Airport::select("airport_name","id")->get();
+      return view('admin/plane/cplaneSchedule',compact('plane','airport'));
+
+    }
+
+    public function planeAjax($id)
+    {
+      $plane = DB::table("plane_fares")->where("plane_id",$id)->get();
+      return response()->json($plane);
+    }
+
+    public function airportAjax($id)
+    {
+      $airport = DB::table("airports")->where("id",$id)->get();
+      return response()->json($airport);
+    }
+
+    public function destinationAjax($id)
+    {
+      $destination = DB::table("airports")->where("id",$id)->get();
+      return response()->json($destination);
+    }
+
+
+    public function detailPlaneschedule($id)
+    {
+      $detail = PlaneSchedule::where('id',$id)->with('Plane')->get();
+      return view('admin/plane/dPlaneschedule', compact('detail'));
+    }
+
+
     public function pcreateAirport(Request $request)
     {
       $data = $request->validate([
@@ -85,20 +120,20 @@ class AdminController extends Controller
     public function pcreatePlane(Request $request)
     {
         $plane = new Plane();
-        $plane->plane_name  = input::get('plane_name');
-        $plane->eco_seat    = input::get('eco_seat');
-        $plane->bus_seat    = input::get('bus_seat');
-        $plane->first_seat  = input::get('first_seat');
+        $plane->plane_name  = $request->plane_name;
+        $plane->eco_seat    = $request->eco_seat;
+        $plane->bus_seat    = $request->bus_seat;
+        $plane->first_seat  = $request->first_seat;
         $plane->save();
 
         $planeFare = new PlaneFare();
         $planeFare->plane_id = $plane->id;
-        $planeFare->eco_seat = input::get('eco_seatfare');
-        $planeFare->bus_seat = input::get('bus_seatfare');
-        $planeFare->first_seat = input::get('first_seatfare');
+        $planeFare->eco_seat = $request->eco_seatfare;
+        $planeFare->bus_seat = $request->bus_seatfare;
+        $planeFare->first_seat = $request->first_seatfare;
         $planeFare->save();
 
-        return redirect('admin/plane/listPlane');
+        return redirect('admin/plane/listPlane')->with('alert-success','Berhasil Menambah Data!');
     }
 
     public function pcreateStation(Request $request)
@@ -115,20 +150,40 @@ class AdminController extends Controller
     public function pcreateTrain(Request $request)
     {
       $train = new Train();
-      $train->train_name  = input::get('train_name');
-      $train->eco_seat    = input::get('eco_seat');
-      $train->bus_seat    = input::get('bus_seat');
-      $train->exec_seat  = input::get('exec_seat');
+      $train->train_name  = $request->train_name;
+      $train->eco_seat    = $request->eco_seat;
+      $train->bus_seat    = $request->bus_seat;
+      $train->exec_seat  = $request->exec_seat;
       $train->save();
 
       $trainfare = new TrainFare();
       $trainfare->train_id = $train->id;
-      $trainfare->eco_seat = input::get('eco_seatfare');
-      $trainfare->bus_seat = input::get('bus_seatfare');
-      $trainfare->exec_seat = input::get('exec_seatfare');
+      $trainfare->eco_seat = $request->eco_seatfare;
+      $trainfare->bus_seat = $request->bus_seatfare;
+      $trainfare->exec_seat = $request->exec_seatfare;
       $trainfare->save();
 
       return redirect('admin/train/listTrain');
+    }
+
+    public function pcreatePlaneschedule(Request $request)
+    {
+      $destination = Airport::find($request->destination);
+      $planeschedule = new PlaneSchedule();
+      $planeschedule->plane_id          = $request->plane_id;
+      $planeschedule->airport_id        = $request->airport_id;
+      $planeschedule->from              = $request->from;
+      $planeschedule->destination       = $destination->airport_name;
+      $planeschedule->from_code         = $request->from_code;
+      $planeschedule->destination_code  = $request->destination_code;
+      $planeschedule->eco_seat          = $request->eco_seat;
+      $planeschedule->bus_seat          = $request->bus_seat;
+      $planeschedule->first_seat        = $request->first_seat;
+      $planeschedule->boarding_time     = $request->boarding_time;
+      $planeschedule->duration          = $request->duration;
+      $planeschedule->gate              = $request->gate;
+      $planeschedule->save();
+      return redirect('admin/plane/planeSchedule')->with('alert-success','Berhasil Menambah Data!');
     }
 
 
@@ -143,6 +198,14 @@ class AdminController extends Controller
     {
       $data = Plane::where('id',$id)->with('planefare')->get();
       return view('admin/plane/eListplane', compact('data'));
+    }
+
+    public function editPlaneschedule($id)
+    {
+      $planeschedule = PlaneSchedule::where('id',$id)->with('Plane')->get();
+      $plane = Plane::select("plane_name","id")->get();
+      $airport = Airport::select("airport_name","id")->get();
+      return view('admin/plane/ePlaneschedule',compact('planeschedule','plane','airport'));
     }
 
     public function editStation($id)
@@ -186,6 +249,26 @@ class AdminController extends Controller
       $planefare->save();
 
       return redirect('admin/plane/listPlane')->with('alert-success','Data berhasil diubah!');
+    }
+
+    public function updatePlaneschedule(Request $request, $id)
+    {
+      $destination = Airport::find($request->destination);
+      $planeschedule = PlaneSchedule::findorFail($id);
+      $planeschedule->plane_id          = $request->plane_id;
+      $planeschedule->airport_id        = $request->airport_id;
+      $planeschedule->from              = $request->from;
+      $planeschedule->destination       = $destination->airport_name;
+      $planeschedule->from_code         = $request->from_code;
+      $planeschedule->destination_code  = $request->destination_code;
+      $planeschedule->eco_seat          = $request->eco_seat;
+      $planeschedule->bus_seat          = $request->bus_seat;
+      $planeschedule->first_seat        = $request->first_seat;
+      $planeschedule->boarding_time     = $request->boarding_time;
+      $planeschedule->duration          = $request->duration;
+      $planeschedule->gate              = $request->gate;
+      return redirect('admin/plane/planeSchedule')->with('alert-success','Berhasil Mengubah Data!');
+
     }
 
     public function updateStation(Request $request, $id)
