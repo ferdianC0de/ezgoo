@@ -7,13 +7,14 @@ use DB;
 
 class TrainSchedule extends Model
 {
+    protected $fillable = ['id','station_id','train_id','from','destination','from_code','destination_code','boarding_time','duration','eco_seat','bus_seat','exec_seat','platform'];
     public function train()
     {
       return $this->belongsTo('App\Models\Train');
     }
-    public function airport()
+    public function station()
     {
-      return $this->belongsTo('App\Models\Airport');
+      return $this->belongsTo('App\Models\TrainStation');
     }
 
     public static function findSchedule($from, $destination, $date, $seat, $total)

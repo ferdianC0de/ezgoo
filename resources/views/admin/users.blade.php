@@ -30,7 +30,7 @@
                   <th>NO.</th>
                   <th>Nama Lengkap</th>
                   <th>Email</th>
-                  <th>Aksi</th>
+                  <!-- <th>Aksi</th> -->
               </tr>
               </thead>
               <tbody>
@@ -39,7 +39,7 @@
                       <td>{{ $loop->iteration }}</td>
                       <td>{{ $data->first_name }} {{ $data->last_name }}</td>
                       <td>{{ $data->email }}</td>
-                      <td>
+                      <!-- <td>
                           <form action="{{ url('admin/plane/destroyPS', $data->id) }}" method="post">
                               {{ csrf_field() }}
                               {{ method_field('delete') }}
@@ -47,7 +47,7 @@
                               <a href="{{ url('planeschedule.edit',$data->id) }}" class="fa fa-edit fa-2x"></a>
                               <button class="fa fa-trash fa-2x" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"></button>
                           </form>
-                      </td>
+                      </td> -->
                   </tr>
               @endforeach
               </tbody>

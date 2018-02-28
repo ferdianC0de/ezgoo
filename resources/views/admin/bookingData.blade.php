@@ -31,28 +31,20 @@
                 <th>No</th>
                 <th>Tanggal Booking</th>
                 <th>Jenis Pesanan</th>
-                <th>Aksi</th>
+                <!-- <th>Aksi</th> -->
             </tr>
         </thead>
-        <tfoot>
-            <tr>
-                <th>No</th>
-                <th>Tanggal Booking</th>
-                <th>Jenis Booking</th>
-                <th>Aksi</th>
-            </tr>
-        </tfoot>
         <tbody>
             @foreach($booking as $data)
             <tr>
                 <td>1</td>
                 <td>{{$data->booking_date}}</td>
                 <td>{{$data->vehicle}}</td>
-                <td>
+                <!-- <td>
                     <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
                     <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-minus-circle"></a>
                     <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-trash 5x"></a>
-                </td>
+                </td> -->
             </tr>
             @endforeach
         </tbody>

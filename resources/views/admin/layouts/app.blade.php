@@ -117,12 +117,14 @@
     <script type="text/javascript">
     $(document).ready(function() {
       $('.data').DataTable();
-      $('.datetimepicker').datetimepicker();
+      $('.datetimepicker').datetimepicker({
+        format:'YYYY-MM-DD HH:mm:ss',
+      });
       $('select[name="plane_id"]').on('change', function() {
-          var plane_id = $(this).val();
-          if(plane_id) {
+          var param = $(this).val();
+          if(param) {
               $.ajax({
-                  url: '/plane/ajax/'+plane_id,
+                  url: '/plane/ajax/'+param,
                   type: "GET",
                   dataType: 'JSON',
                   success:function(data) {
@@ -171,6 +173,61 @@
               }
             });
           });
+          // TRAIN
+
+          $('select[name="train_id"]').on('change', function() {
+              var train_id = $(this).val();
+              if(train_id) {
+                  $.ajax({
+                      url: '/train/ajax/'+train_id,
+                      type: "GET",
+                      dataType: 'JSON',
+                      success:function(data) {
+                        console.log(data);
+                          $.each(data, function(index, obj) {
+                            $('.option').empty();
+                            $('#eco_seat').val(obj.eco_seat);
+                            $('#bus_seat').val(obj.bus_seat);
+                            $('#exec_seat').val(obj.exec_seat);
+                          });
+                      }
+                  });
+              }else{
+                  $('select[name="eco"]').empty();
+              }
+          });
+              $('select[name="station_id"]').on('change', function() {
+                param = $(this).val();
+                $.ajax({
+                  url: '/station/ajax/'+param,
+                  type: "GET",
+                  dataType: 'JSON',
+                  success:function(data) {
+                    console.log(data);
+                    $.each(data, function(index, obj) {
+                      $('.from').empty();
+                      $('#asal').append('<input type="hidden" name="from" value="'+ obj.station_name +'">');
+                      $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+                    });
+                  }
+                });
+              });
+
+              $('select[name="destination"]').on('change', function() {
+                param = $(this).val();
+                $.ajax({
+                  url: '/airport/ajax/'+param,
+                  type: "GET",
+                  dataType: 'JSON',
+                  success:function(data) {
+                    console.log(data);
+                    $.each(data, function(index, obj) {
+                      $('.destination').empty();
+                      $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+                    });
+                  }
+                });
+              });
     });
     </script>
 

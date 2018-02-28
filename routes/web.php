@@ -1,4 +1,4 @@
-<?php
+  <?php
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-<<<<<<< HEAD
 Route::group(['prefix'=> 'frontend'], function(){
   Route::get('/', function () {
       return view('frontend.home');
@@ -38,9 +37,9 @@ Route::group(['prefix'=> 'frontend'], function(){
 // AJAX
 Route::get('/plane/ajax/{id}','AdminController@planeAjax');
 Route::get('/airport/ajax/{id}','AdminController@airportAjax');
+Route::get('/train/ajax/{id}','AdminController@trainAjax');
+Route::get('/station/ajax/{id}','AdminController@stationAjax');
 
-=======
->>>>>>> aa835a512ff59c1e43385d43722921b767ef0cf0
 Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
@@ -91,15 +90,19 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
     Route::get('trainSchedule','AdminController@trainSchedule');
     Route::get('createStation', function(){ return view('admin.train.cStation');});
     Route::get('createTrain',   function(){ return view('admin.train.cTrain');});
-    Route::get('ctrainSchedule',function(){ return view('admin.train.ctrainSchedule');});
+    Route::get('cTrainschedule','AdminController@cTrainschedule');
+    Route::get('detailTrainschedule/{id}','AdminController@detailTrainschedule');
     Route::post('pcreateStation','AdminController@pcreateStation');
     Route::post('pcreateTrain','AdminController@pcreateTrain');
+    Route::post('pcreateTrainschedule','AdminController@pcreateTrainschedule');
     Route::get('editStation/{id}','AdminController@editStation');
     Route::get('editTrain/{id}','AdminController@editTrain');
+    Route::get('editTrainschedule/{id}','AdminController@editTrainschedule');
     Route::put('updateStation/{id}','AdminController@updateStation');
     Route::put('updateTrain/{id}','AdminController@updateTrain');
     Route::delete('destroyStation/{id}','AdminController@destroyStation');
     Route::delete('destroyTrain/{id}','AdminController@destroyTrain');
+    Route::delete('destroyTS/{id}','AdminController@destroyTS');
 
   });
   //train

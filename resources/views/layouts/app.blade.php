@@ -147,16 +147,13 @@
 <script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
-<<<<<<< HEAD
 <script type="text/javascript">
   $('.datepicker').datepicker({
     format: 'mm/dd/yyyy',
-    startDate: '-3d'
+    startDate: '+1d',
+    autoclose:true
   });
 </script>
-=======
-
->>>>>>> aa835a512ff59c1e43385d43722921b767ef0cf0
 @stack('scripts')
 
 </body>

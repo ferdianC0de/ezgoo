@@ -60,7 +60,6 @@ class RegisterController extends Controller
             'last_name' => 'required|string|max:255',
             'phone' => 'required|string|max:25',
             'email' => 'required|string|email|max:255|unique:users',
-            'role' => 'required|min:1|max:2',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -85,7 +84,7 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $role = Role::find($request->role);
+        $role = Role::find(1);
         $this->validator($request->all())->validate();
         $user = $this->create($request->all());
         $user->attachRole($role);

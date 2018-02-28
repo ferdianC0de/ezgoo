@@ -25,7 +25,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Asal :</label>
-                    <select class="form-control" name="airport_id">
+                    <select class="form-control" name="airport_id" required>
                       <option value="0">--Select Plane--</option>
                       @foreach($airport as $key)
                         <option value="{{ $key->id }}">{{ $key->airport_name }}</option>
@@ -37,7 +37,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
-                    <select class="form-control" name="destination">
+                    <select class="form-control" name="destination" required>
                       <option value="0">--Select Plane--</option>
                       @foreach($airport as $key)
                         <option value="{{ $key->id }}">{{ $key->airport_name }}</option>
@@ -65,26 +65,26 @@
               <div class="col-md-4">
                 <div class="form-group">
                     <label for="code">Eco Seat:</label>
-                    <input type="text" class="form-control option" id="eco_seat" name="eco_seat">
+                    <input type="text" class="form-control option" id="eco_seat" name="eco_seat" readonly>
                 </div>
               </div>
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="code">Bussiness Seat:</label>
-                      <input type="text" class="form-control option" id="bus_seat" name="bus_seat">
+                      <input type="text" class="form-control option" id="bus_seat" name="bus_seat" readonly>
                   </div>
                 </div>
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">First Seat:</label>
-                        <input type="text" class="form-control option" id="first_seat" name="first_seat">
+                        <input type="text" class="form-control option" id="first_seat" name="first_seat" readonly>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Boarding Time:</label>
                         <div class='input-group date'>
-                        <input type="text" name="boarding_time" class="form-control datetimepicker">
+                        <input type="text" name="boarding_time" class="form-control datetimepicker" required>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -94,13 +94,13 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Duration :</label>
-                        <input type="time" name="duration" class="form-control" placeholder="dd/mm/yy">
+                        <input type="time" name="duration" class="form-control" placeholder="dd/mm/yy" required>
                     </div>
                   </div>
                     <div class="col-md-4">
                       <div class="form-group">
                           <label for="code">Gate :</label>
-                          <input type="text" name="gate" class="form-control" placeholder="Ex : G27">
+                          <input type="text" name="gate" class="form-control" placeholder="Ex : G27" required>
                       </div>
                     </div>
                 </div>
