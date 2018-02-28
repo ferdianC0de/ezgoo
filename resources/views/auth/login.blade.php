@@ -1,6 +1,19 @@
 @extends('layouts.app')
 
 @section('content')
+
+@push('scripts')
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#eye').hover(function(){
+      $('#password').attr('type', 'text');
+    }, function(){
+      $('#password').attr('type', 'password');
+    });
+  });
+</script>
+@endpush
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -37,13 +50,15 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                             <div class="col-md-6">
+                              <div class="input-group">
                                 <input id="password" type="password" class="form-control" name="password" required>
-
+                                <span class="input-group-addon" id="eye"><i class="fa fa-eye"></i></span>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                              </div>
                             </div>
                         </div>
 
