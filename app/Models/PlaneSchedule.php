@@ -7,6 +7,7 @@ use DB;
 
 class PlaneSchedule extends Model
 {
+    protected $fillable = ['airport_id','plane_id','from','destination','from_code','eco_seat','bus_seat','first_seat','boarding_time','duration','gate'];
     public function plane()
     {
       return $this->belongsTo('App\Models\Plane');

@@ -9,7 +9,7 @@
           <li><a href="#">
               <em class="fa fa-home"></em>
               </a></li>
-          <li class="active">Pesawat</li>
+          <li class="active">Kereta Api</li>
       </ol>
     </div><br><!--/.row-->
 
@@ -19,16 +19,17 @@
             <div class="panel panel-default">
               <div class="panel-body">
             <hr>
-            <form action="{{ url('admin/plane/pcreatePlaneschedule') }}" method="post">
+            @foreach($trainschedule as $data)
+            <form action="{{ url('admin/train/pcreateTrainschedule') }}" method="post">
                 {{ csrf_field() }}
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Asal :</label>
-                    <select class="form-control" name="airport_id" required>
-                      <option value="0">--Select Plane--</option>
-                      @foreach($airport as $key)
-                        <option value="{{ $key->id }}">{{ $key->airport_name }}</option>
+                    <select class="form-control" name="station_id" required>
+                      <option value="0" disabled>{{ $data->from }}</option>
+                      @foreach($station as $key)
+                        <option value="{{ $key->id }}">{{ $key->station_name }}</option>
                       @endforeach
                     </select>
                     <input type="hidden" class="form-control asal" id="asal">
@@ -38,9 +39,10 @@
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
                     <select class="form-control" name="destination" required>
-                      <option value="0">--Select Plane--</option>
-                      @foreach($airport as $key)
-                        <option value="{{ $key->id }}">{{ $key->airport_name }}</option>
+                      <option value="0" disabled
+                      >{{ $data->destination }}</option>
+                      @foreach($station as $key)
+                        <option value="{{ $key->id }}">{{ $key->station_name }}</option>
                       @endforeach
                     </select>
                 </div>
@@ -53,11 +55,11 @@
               </div>
               <div class="col-md-12">
                 <div class="form-group">
-                  <label for="code">Nama Pesawat :</label>
-                    <select class="form-control" name="plane_id">
-                      <option value="0">--Select Plane--</option>
-                      @foreach($plane as $key)
-                        <option value="{{ $key->id }}">{{ $key->plane_name }}</option>
+                  <label for="code">Nama Kereta Api :</label>
+                    <select class="form-control" name="train_id">
+                      <option value="0">{{ $data->train->train_name }}</option>
+                      @foreach($train as $key)
+                        <option value="{{ $key->id }}">{{ $key->train_name }}</option>
                       @endforeach
                     </select>
                 </div>
@@ -76,15 +78,15 @@
                 </div>
                   <div class="col-md-4">
                     <div class="form-group">
-                        <label for="code">First Seat:</label>
-                        <input type="text" class="form-control option" id="first_seat" name="first_seat" readonly>
+                        <label for="code">Executive Seat:</label>
+                        <input type="text" class="form-control option" id="exec_seat" name="exec_seat" readonly>
                     </div>
                   </div>
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Boarding Time:</label>
                         <div class='input-group date'>
-                        <input type="text" name="boarding_time" class="form-control datetimepicker" required>
+                        <input type="text" name="boarding_time" class="form-control datetimepicker" value="{{ $data->boarding_time }}" required>
                         <span class="input-group-addon">
                           <span class="glyphicon glyphicon-calendar"></span>
                         </span>
@@ -99,11 +101,12 @@
                   </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="code">Gate :</label>
-                          <input type="text" name="gate" class="form-control" placeholder="Ex : G27" required>
+                          <label for="code">platform :</label>
+                          <input type="text" name="platform" class="form-control" value="{{ $data->platform }}" required>
                       </div>
                     </div>
                 </div>
+                @endforeach
                 <div class="form-group">
                     <button type="submit" class="btn btn-md btn-primary">Submit</button>
                     <button type="reset" class="btn btn-md btn-danger">Cancel</button>

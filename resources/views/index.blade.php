@@ -7,11 +7,6 @@
         $.fn.select2.defaults.set( "theme", "bootstrap" );
         $.fn.select2.defaults.set("width", null);
         $('.select2').select2();
-        $('.datepicker').datepicker({
-          format: "dd-mm-yyyy",
-          startDate: '+1d',
-          autoclose: true
-        });
         $('.select2').change(function(){
           $('.select2').find('option').prop('disabled', false);
           $('.select2').each(function(){

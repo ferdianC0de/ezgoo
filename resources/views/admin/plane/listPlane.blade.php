@@ -22,8 +22,8 @@
                     <strong>{{ Session::get('alert-success') }}</strong>
                 </div>
             @endif
+            <a href="{{ url('admin/plane/createPlane')}}" class="fa fa-plus-circle fa-2x"></a><h3 align="center">DAFTAR PESAWAT</h3>
             <hr>
-            <a href="{{ url('admin/plane/createPlane')}}" class="btn btn-primary pull right">Tambah Data Pesawat</a><br><br>
             <table class="table table-striped table-bordered data">
                 <thead>
                 <tr>

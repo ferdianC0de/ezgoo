@@ -14,7 +14,7 @@
 <body>
   <div class="row">
     <div class="col-md-12">
-            <h1>Data Pesawat</h1>
+            <h1>Edit Data Pesawat</h1>
             <div class="panel panel-default">
               <div class="panel-body">
             <hr>
