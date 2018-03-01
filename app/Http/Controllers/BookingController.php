@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Booking;
 use App\Models\Passenger;
+use App\Models\Booking;
 use App\Models\DetailBooking;
 use App\Models\BankAccount;
 use App\Models\Transaction;
@@ -23,6 +23,39 @@ class BookingController extends Controller
       $this->train = "App\Models\Train";
       $this->trainFare = "App\Models\TrainFare";
       $this->trainSchedule = "App\Models\TrainSchedule";
+    }
+
+    public function index()
+    {
+      $booking = Booking::all();
+      return view('admin.booking.index', compact('booking'));
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function edit($id)
+    {
+      $booking = Booking::find($id);
+      $detail  = DetailBooking::where('booking_id', $id)->get();
+      foreach($detail as $pass){
+      $passengers = Passenger::where('detail_booking_id', $pass->id)->get();}
+      return view('admin.booking.edit',compact('booking','detail','pass'));
+    }
+
+    public function update(Request $request, $id)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+      $customer = Customer::find($id);
+      $customer->delete();
+
+      return redirect('admin.booking.index');
     }
 
     public function search(Request $request)

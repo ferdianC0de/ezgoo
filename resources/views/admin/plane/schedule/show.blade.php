@@ -18,7 +18,11 @@
             <div class="col-md-12"><img class="card-img-top" src="{{ asset('images/plane_detail.png') }}" alt="Card image cap" height="200"></div>
             <div class="card-block">
               @foreach($detail as $data)
-                  <h4 class="card-title"><h3><b>{{ $data->boarding_time }} - {{ $data->gate }} ( {{ $data->duration }} Jam Penerbangan)</b><h2></h4>
+                  @php
+                    $duration = date('h',$data->duration);
+                    $range    = strtotime($data->boarding_time ."+$duration hours");
+                  @endphp
+                  <h4 class="card-title"><h3><b>{{ $data->boarding_time }} - {{ $data->gate }} ( {{ $duration }} Jam Penerbangan)</b><h2></h4>
                   <h4 class="card-title"><h3><b>{{ $data->plane->plane_name }}</b><h2></h4>
                   <p class="card-text"><h4><b>{{ $data->from }} ({{ $data->from_code }}) - {{ $data->destination }} ({{ $data->destination_code }})</b></h4></p>
                   <table class="table bordered" border="1">
@@ -31,9 +35,9 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td><p align="center">{{number_format($data->eco_seat)}}</p></td>
-                        <td><p align="center">{{number_format($data->bus_seat)}}</p></td>
-                        <td><p align="center">{{number_format($data->first_seat)}}</p></td>
+                        <td><p align="center">{{$data->eco_seat}}</p></td>
+                        <td><p align="center">{{$data->bus_seat}}</p></td>
+                        <td><p align="center">{{$data->first_seat}}</p></td>
                       </tr>
                     </tbody>
                   </table>

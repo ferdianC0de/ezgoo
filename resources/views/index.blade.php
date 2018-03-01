@@ -90,7 +90,7 @@
             @endif
             <div class="tab-content">
               <div class="tab-pane active" id="pesawat">
-                <form action="{{ route('search') }}" method="post">
+                <form action="{{ url('booking/search') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="vehicle" value="plane">
                   <div class="col-md-4">
@@ -178,7 +178,7 @@
                 </form>
               </div>
               <div class="tab-pane" id="kereta">
-                <form action="{{route('search')}}" method="post">
+                <form action="{{ url('booking/search') }}" method="post">
                   {{ csrf_field() }}
                   <input type="hidden" name="vehicle" value="train">
                   <div class="col-md-4">

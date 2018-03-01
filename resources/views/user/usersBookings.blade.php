@@ -1,19 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<!--pilihan pesawat-->
 
-@push('scripts')
-  <script type="text/javascript">
-    $(document).ready(function(){
-      $('.test').click(function(){
-        var heh = $(this).val();
-        alert(heh);
-      });
-    });
-  //on open collapse
-  </script>
-@endpush
 <div class="container">
   @if (Session::has('error'))
     <div class="alert alert-danger">
@@ -63,8 +51,8 @@
                         <p class="col-md-6">{{date('d-m-Y H:i', strtotime($data->scheP->boarding_time))}}</p>
                         <p class="col-md-6">Gate</p>
                           <p class="col-md-6">{{$data->scheP->gate}}</p>
-                      <p class="col-md-6">Durasi penerbangan</p>
-                        <p class="col-md-6">{{$data->scheP->duration}}</p>
+                      <p class="col-md-6">Durasi</p>
+                        <p class="col-md-6">{{date('h',$data->scheP->duration)}} jam</p>
                       <p class="col-md-6">Total penumpang</p>
                         <p class="col-md-6">{{$data->detail_booking->passenger}}</p>
                       <p class="col-md-6">Kelas</p>
@@ -133,8 +121,8 @@
                       <p class="col-md-6">{{date('d-m-Y H:i', strtotime($data->scheP->boarding_time))}}</p>
                       <p class="col-md-6">Gate</p>
                         <p class="col-md-6">{{$data->scheT->platform}}</p>
-                    <p class="col-md-6">Durasi penerbangan</p>
-                      <p class="col-md-6">{{$data->scheT->duration}}</p>
+                    <p class="col-md-6">Durasi</p>
+                      <p class="col-md-6">{{date('h',$data->scheT->duration)}} jam</p>
                     <p class="col-md-6">Total penumpang</p>
                       <p class="col-md-6">{{$data->detail_booking->passenger}}</p>
                     <p class="col-md-6">Kelas</p>

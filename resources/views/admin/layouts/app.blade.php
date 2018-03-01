@@ -8,11 +8,10 @@
         <title>EZGo</title>
 
         <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/jquery.dataTables.min.css')}}">
     </head>
     <body>
@@ -108,130 +107,127 @@
 
 
 
-    <script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datepicker/moment.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      $('.data').DataTable();
-      $('.datetimepicker').datetimepicker({
-        format:'YYYY-MM-DD HH:mm:ss',
-      });
-      $('select[name="plane_id"]').on('change', function() {
-          var param = $(this).val();
-          if(param) {
-              $.ajax({
-                  url: '/plane/ajax/'+param,
-                  type: "GET",
-                  dataType: 'JSON',
-                  success:function(data) {
-                    console.log(data);
-                      $.each(data, function(index, obj) {
-                        $('.option').empty();
-                        $('#eco_seat').val(obj.eco_seat);
-                        $('#bus_seat').val(obj.bus_seat);
-                        $('#first_seat').val(obj.first_seat);
-                      });
-                  }
+<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datepicker/moment.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
+<script type="text/javascript" src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  $('.data').DataTable();
+  $('.datetimepicker').datetimepicker({
+    format:'YYYY-MM-DD HH:mm:ss',
+  });
+  $('.timepicker').datetimepicker({
+    format:'HH:mm',
+  });
+  $('select[name="plane_id"]').on('change', function() {
+    var param = $(this).val();
+    if(param) {
+      $.ajax({
+          url: '/plane/ajax/'+param,
+          type: "GET",
+          dataType: 'JSON',
+          success:function(data) {
+            console.log(data);
+              $.each(data, function(index, obj) {
+                $('.option').empty();
+                $('#eco_seat').val(obj.eco_seat);
+                $('#bus_seat').val(obj.bus_seat);
+                $('#first_seat').val(obj.first_seat);
               });
-          }else{
-              $('select[name="eco"]').empty();
           }
       });
-          $('select[name="airport_id"]').on('change', function() {
-            param = $(this).val();
-            $.ajax({
-              url: '/airport/ajax/'+param,
-              type: "GET",
-              dataType: 'JSON',
-              success:function(data) {
-                console.log(data);
-                $.each(data, function(index, obj) {
-                  $('.from').empty();
-                  $('#asal').append('<input type="hidden" name="from" value="'+ obj.airport_name +'">');
-                  $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-                });
-              }
-            });
-          });
-
-          $('select[name="destination"]').on('change', function() {
-            param = $(this).val();
-            $.ajax({
-              url: '/airport/ajax/'+param,
-              type: "GET",
-              dataType: 'JSON',
-              success:function(data) {
-                console.log(data);
-                $.each(data, function(index, obj) {
-                  $('.destination').empty();
-                  $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-                });
-              }
-            });
-          });
-          // TRAIN
-
-          $('select[name="train_id"]').on('change', function() {
-              var train_id = $(this).val();
-              if(train_id) {
-                  $.ajax({
-                      url: '/train/ajax/'+train_id,
-                      type: "GET",
-                      dataType: 'JSON',
-                      success:function(data) {
-                        console.log(data);
-                          $.each(data, function(index, obj) {
-                            $('.option').empty();
-                            $('#eco_seat').val(obj.eco_seat);
-                            $('#bus_seat').val(obj.bus_seat);
-                            $('#exec_seat').val(obj.exec_seat);
-                          });
-                      }
-                  });
-              }else{
-                  $('select[name="eco"]').empty();
-              }
-          });
-              $('select[name="station_id"]').on('change', function() {
-                param = $(this).val();
-                $.ajax({
-                  url: '/station/ajax/'+param,
-                  type: "GET",
-                  dataType: 'JSON',
-                  success:function(data) {
-                    console.log(data);
-                    $.each(data, function(index, obj) {
-                      $('.from').empty();
-                      $('#asal').append('<input type="hidden" name="from" value="'+ obj.station_name +'">');
-                      $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-                    });
-                  }
-                });
-              });
-
-              $('select[name="destination"]').on('change', function() {
-                param = $(this).val();
-                $.ajax({
-                  url: '/airport/ajax/'+param,
-                  type: "GET",
-                  dataType: 'JSON',
-                  success:function(data) {
-                    console.log(data);
-                    $.each(data, function(index, obj) {
-                      $('.destination').empty();
-                      $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-                    });
-                  }
-                });
-              });
+    }else{
+        $('select[name="eco"]').empty();
+    }
+  });
+  $('select[name="airport_id"]').on('change', function() {
+    param = $(this).val();
+    $.ajax({
+      url: '/airport/ajax/'+param,
+      type: "GET",
+      dataType: 'JSON',
+      success:function(data) {
+        console.log(data);
+        $.each(data, function(index, obj) {
+          $('.from').empty();
+          $('#asal').append('<input type="hidden" name="from" value="'+ obj.airport_name +'">');
+          $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+        });
+      }
     });
-    </script>
-
-
-
-    </body>
+  });
+  $('select[name="destination"]').on('change', function() {
+    param = $(this).val();
+    $.ajax({
+      url: '/airport/ajax/'+param,
+      type: "GET",
+      dataType: 'JSON',
+      success:function(data) {
+        console.log(data);
+        $.each(data, function(index, obj) {
+          $('.destination').empty();
+          $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+        });
+      }
+    });
+  });
+  // TRAIN
+  $('select[name="train_id"]').on('change', function() {
+    var train_id = $(this).val();
+    if(train_id) {
+      $.ajax({
+        url: '/train/ajax/'+train_id,
+        type: "GET",
+        dataType: 'JSON',
+        success:function(data) {
+          console.log(data);
+            $.each(data, function(index, obj) {
+              $('.option').empty();
+              $('#eco_seat').val(obj.eco_seat);
+              $('#bus_seat').val(obj.bus_seat);
+              $('#exec_seat').val(obj.exec_seat);
+            });
+          }
+        });
+      }else{
+        $('select[name="eco"]').empty();
+      }
+  });
+  $('select[name="station_id"]').on('change', function() {
+    param = $(this).val();
+    $.ajax({
+      url: '/station/ajax/'+param,
+      type: "GET",
+      dataType: 'JSON',
+      success:function(data) {
+        console.log(data);
+        $.each(data, function(index, obj) {
+          $('.from').empty();
+          $('#asal').append('<input type="hidden" name="from" value="'+ obj.station_name +'">');
+          $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+        });
+      }
+    });
+  });
+  $('select[name="destination"]').on('change', function() {
+    param = $(this).val();
+    $.ajax({
+      url: '/airport/ajax/'+param,
+      type: "GET",
+      dataType: 'JSON',
+      success:function(data) {
+        console.log(data);
+        $.each(data, function(index, obj) {
+          $('.destination').empty();
+          $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+        });
+      }
+    });
+  });
+});
+</script>
+</body>
 </html>

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
-use App\Models\Airport;
 
-class AirportController extends Controller
+class TrainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +14,6 @@ class AirportController extends Controller
     public function index()
     {
         //
-        $data = Airport::all();
-        return view('admin.plane.airport.index',compact('data'));
     }
 
     /**
@@ -28,7 +24,6 @@ class AirportController extends Controller
     public function create()
     {
         //
-        return view('admin.plane.airport.create');
     }
 
     /**
@@ -39,15 +34,8 @@ class AirportController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $this->validate($request, [
-          'airport_name' => 'required',
-          'code' => 'required',
-          'city' => 'required'
-        ]);
-        Airport::create($data);
-        return view('admin.plane.airport.index')->with('alert-success','Berhasil Menambahkan Data!');
-   }
-
+        //
+    }
 
     /**
      * Display the specified resource.
@@ -68,8 +56,7 @@ class AirportController extends Controller
      */
     public function edit($id)
     {
-        $data = Airport::where('id',$id)->get();
-        return view('admin.plane.airport.edit',compact('data'));
+        //
     }
 
     /**
@@ -82,13 +69,6 @@ class AirportController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $data = $this->validate($request, [
-          'airport_name' => 'required',
-          'code' => 'required',
-          'city' => 'required'
-        ]);
-        Airport::find($id)->update($data);
-        return view('admin.plane.airport.index')->with('alert-success','Data berhasil diubah!');
     }
 
     /**
@@ -100,8 +80,5 @@ class AirportController extends Controller
     public function destroy($id)
     {
         //
-        $data = Airport::where('id',$id)->first();
-        $data->delete();
-        return view('admin.plane.airport.index')->with('alert-success','Data berhasi dihapus!');
     }
 }

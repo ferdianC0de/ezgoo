@@ -42,6 +42,7 @@ class ExpireJob extends Command
     public function handle()
     {
         $modelS = '';
+
         $bookingExp = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->with('detail_booking')->get();
         foreach($bookingExp as $bE){
           if ($bE->vehicle == 'plane') {
@@ -49,15 +50,16 @@ class ExpireJob extends Command
           }else{
             $modelS = $this->train;
           }
-          $increment = $modelS::where('id', $bE->schedule_id)->increment($bE->detail_booking->class, $bE->detail_booking->passenger);
-        }
-        $transaction= Transaction::find($bE->id);
-        if ($transaction->status == 0) {
-          $delete = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->delete();
-          if ($delete) {
-            $this->info('Expired booking deleted!');
-          }else{
-            $this->info('Nothing expired');
+
+          $transaction= Transaction::find($bE->id);
+          if ($transaction->status == 0) {
+            $delete = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->delete();
+            if ($delete) {
+              $increment = $modelS::where('id', $bE->schedule_id)->increment($bE->detail_booking->class, $bE->detail_booking->passenger);
+              $this->info('Expired booking deleted!');
+            }else{
+              $this->info('Nothing expired');
+            }
           }
         }
     }
