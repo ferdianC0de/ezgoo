@@ -171,6 +171,7 @@ return [
          * Package Service Providers...
          */
          Zizaco\Entrust\EntrustServiceProvider::class,
+         Maatwebsite\Excel\ExcelServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -195,11 +196,6 @@ return [
     */
 
     'aliases' => [
-      'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
-
-      //Email verification
-      'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
-
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -233,6 +229,12 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        //package
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        'UserVerification' => Jrean\UserVerification\Facades\UserVerification::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+
+
 
     ],
 

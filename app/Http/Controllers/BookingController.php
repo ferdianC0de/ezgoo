@@ -12,6 +12,8 @@ use DB;
 
 use Auth;
 use Carbon\Carbon;
+use Excel;
+use PDF;
 
 class BookingController extends Controller
 {
@@ -249,15 +251,31 @@ class BookingController extends Controller
 
     public function test()
     {
-      $date = date('Y-m-d H:i:s');
-      $date  = "2018-02-27 12:43:31";
-      $hour  = "2018-02-27 16:43:31";
-      return strtotime($hour);
+      return view('test.testView');
     }
 
-    public function testData(Datatables $datatables)
+    public function export($type)
     {
-      $query = Plane::select('*');
-      return $datatables->eloquent($query)->make(true);
+        $data = Passenger::all();
+        return Excel::create('passenger_'.date('d-m-Y'),function($excel) use ($data){
+          $excel->sheet('test', function($sheet) use($data){
+            $sheet->cell('A1', function($cell) {$cell->setValue('Nama');   });
+              if (!empty($data)) {
+                foreach ($data as $key => $value) {
+                    $i= $key+2;
+                    $sheet->cell('A'.$i, $value['name']);
+                }
+              }
+          });
+        })->download($type);
+    }
+
+    public function import(Request $request)
+    {
+      $path = $request->file('import_file')->getRealPath();
+      $data = Excel::load($path, function($reader){
+
+      })->get();
+      return $data;
     }
 }

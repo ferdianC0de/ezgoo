@@ -8,7 +8,7 @@
   <head><h2>PEMESANAN TIKET</h2></head>
 </center>
 
-<form action="{{route('fixOrder')}}" method="post">
+<form action="{{ url('booking/fixOrder') }}" method="post">
   {{ csrf_field() }}
   <input type="hidden" name="vehicle" value="{{$vehicle}}">
   <input type="hidden" name="total" value="{{implode(',',$total)}}">
