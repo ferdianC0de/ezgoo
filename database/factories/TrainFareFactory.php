@@ -4,7 +4,6 @@ use Faker\Generator as Faker;
 use App\Models\Train;
 
 $factory->define(App\Models\TrainFare::class, function (Faker $faker) {
-    DB::table('train_fares')->delete();
     static $num = 1;
     $unique = mt_rand(1,999);
     $train = Train::find($num);

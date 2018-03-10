@@ -3,6 +3,7 @@
 use Faker\Generator as Faker;
 use App\Models\Plane;
 use App\Models\Airport;
+use Carbon\Carbon;
 
 $factory->define(App\Models\PlaneSchedule::class, function (Faker $faker) {
 DB::table('plane_schedules')->delete();
@@ -14,9 +15,11 @@ DB::table('plane_schedules')->delete();
     $plane = Plane::find($rnd);
     $num1 = rand(1,$nums);
     $num2 = rand(1,$nums);
-    $date = date('Y-m-d H:i:s');
     $firstAirport = Airport::find($num1);
     $lastAirport = Airport::find($num2);
+    $w = rand(1,7);
+    $d = rand(1,28);
+    $date = Carbon::create(2018,5,1)->addWeeks($w)->addDays($d);
 
     if ($lastAirport == $firstAirport) {
       goto a;
