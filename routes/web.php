@@ -49,7 +49,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   });
 });
 //user
-Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
+Route::group(['prefix' => 'user', 'middleware'=> ['isVerified']], function(){
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
