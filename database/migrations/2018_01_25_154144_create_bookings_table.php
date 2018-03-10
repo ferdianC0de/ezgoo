@@ -17,6 +17,7 @@ class CreateBookingsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('schedule_id');
+            $table->string('booking_code');
             $table->string('vehicle');
             $table->decimal('bill',10,2);
             $table->dateTime('expire');
