@@ -51,6 +51,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
     Route::put('update/{id}','TrainController@updateSchedule');
   });
 });
+//
 //user
 Route::group(['prefix' => 'user', 'middleware'=> ['isVerified']], function(){
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');

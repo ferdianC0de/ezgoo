@@ -36,7 +36,7 @@
         </thead>
         <tbody>
           @if ($schedule->isEmpty())
-            <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+            <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan atau sudah penuh</td>
           @else
             @if ($vehicle == 'plane')
               @foreach ($schedule as $s)
