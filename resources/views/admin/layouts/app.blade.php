@@ -36,7 +36,7 @@
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
             <div class="profile-userpic">
-                <img src="{{ asset('img/world.png') }}" class="img-responsive" alt="">
+                <img src="{{ asset('images/logo.png') }}" class="img-responsive" alt="">
             </div>
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">{{Auth::user()->name}}</div>

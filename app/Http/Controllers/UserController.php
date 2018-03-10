@@ -9,6 +9,7 @@ use App\Models\Plane;
 use App\Models\Train;
 use App\Models\Booking;
 use App\Models\Passenger;
+use PDF;
 
 class UserController extends Controller
 {
@@ -48,6 +49,15 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    //Download PDF
+    public function pdf()
+    {
+      $date = date('Ymd');
+      $data = User::all();
+      $pdf = PDF::loadView('pdf', compact('data'));
+      return $pdf->download('EzGoo_Users_Registered'.$date.'.pdf');
     }
 
     /**

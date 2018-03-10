@@ -69,7 +69,7 @@
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
+                                        <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -84,6 +84,22 @@
                                 @if ($errors->has('phone'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <label for="title" class="col-md-4 control-label">Title</label>
+
+                            <div class="col-md-6">
+                                <select id="title" class="form-control" name="title" value="{{ old('title') }}" required>
+                                  <option value="Tuan">Tuan</option>
+                                  <option value="Nyonya">Nyonya</option>
+                                  <option value="Nona">Nona</option>
+                                </select>
+                                @if ($errors->has('title'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                 @endif
                             </div>

@@ -17,6 +17,9 @@ Route::group(['prefix' => 'booking'], function(){
 });
 //admin
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
+  //PDF
+  Route::get('pdfUsers', 'UserController@pdf');
+
   Route::get('', 'AdminController@index');
   Route::get('users','AdminController@showUsers');
   //booking
