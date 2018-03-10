@@ -19,7 +19,7 @@
             <h4>- <p class="pull-right">-</p> </h4>
           @endif
           @foreach ($scheduleG as $s)
-              <h4>{{$s->from}} - {{$s->destination}}<p class="pull-right">{{date('d-m-Y', strtotime($s->boarding_time))}}</p> </h4>
+              <h4>Dari {{$s->from}} ke {{$s->destination}}<p class="pull-right">{{date('d-m-Y', strtotime($s->boarding_time))}}</p> </h4>
             @break($s)
           @endforeach
         <div class="table-responsive">
@@ -47,7 +47,7 @@
             </thead>
             <tbody>
               @if ($scheduleG->isEmpty())
-                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan atau sudah penuh</td>
               @else
                 @foreach ($scheduleG as $s)
                   <tr>
@@ -119,7 +119,7 @@
             </thead>
             <tbody>
               @if ($scheduleB->isEmpty())
-                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan</td>
+                <td colspan="5">Maaf, jadwal dan rute yang dicari tidak ditemukan atau sudah penuh</td>
               @else
                 @foreach ($scheduleB as $s)
                   <tr>

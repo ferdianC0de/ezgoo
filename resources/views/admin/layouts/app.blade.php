@@ -114,6 +114,7 @@
 <script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 <script type="text/javascript">
+@stack('scripts')
 $(document).ready(function() {
   $('.data').DataTable();
   $('.datetimepicker').datetimepicker({

@@ -80,67 +80,61 @@
             @endguest
           </ul>
         </div>
-      </div>
-    </nav>
-
+      </nav>
+    </div>
     @yield('content')
-
   </div>
-
-    <!--footer-->
-<div class="container">
-      <footer class="footer-bs">
-        <div class="row">
-        	<div class="col-md-3 footer-brand animated fadeInLeft">
-            	<h2>{{config('app.name')}}</h2>
-                <p>{{config('app.name')}} Booking Ticket pesawat dan kereta mudah dan aman</p>
-                <p>© 2018 {{config('app.name')}}, All rights reserved</p>
-            </div>
-        	<div class="col-md-4 footer-nav animated fadeInUp">
-            	<h4>Menu </h4>
-            	<div class="col-md-6">
-                    <ul class="pages">
-                        <li><a href="#">Travel</a></li>
-                        <li><a href="#">Pesawat</a></li>
-                        <li><a href="#">Kereta</a></li>
-                        <li><a href="#">Cek Pemesanan</a></li>
-                        <li><a href="#">Payment</a></li>
-                    </ul>
-                </div>
-            	<div class="col-md-6">
-                    <ul class="list">
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Contacts</a></li>
-                        <li><a href="#">Terms & Condition</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        	<div class="col-md-2 footer-social animated fadeInDown">
-            	<h4>Follow Us</h4>
-            	<ul>
-                	<li><a href="#">Facebook</a></li>
-                	<li><a href="#">Twitter</a></li>
-                	<li><a href="#">Instagram</a></li>
-                	<li><a href="#">RSS</a></li>
-                </ul>
-            </div>
-        	<div class="col-md-3 footer-ns animated fadeInRight">
-            	<h4>Newsletter</h4>
-                <p>Subscribe to our newsletter now and be the first to know about {{config('app.name')}}'s latest promos!</p>
-                <p>
-                    <div class="input-group">
-                      <input type="text" class="form-control" placeholder="Enter Your Email Here...">
-                      <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
-                      </span>
-                    </div>
-                 </p>
-            </div>
+  <footer class="footer-bs">
+    <div class="row">
+    	<div class="col-md-3 footer-brand animated fadeInLeft">
+        <h2>{{config('app.name')}}</h2>
+        <p>{{config('app.name')}} Booking Ticket pesawat dan kereta mudah dan aman</p>
+        <p>© 2018 {{config('app.name')}}, All rights reserved</p>
+      </div>
+    	<div class="col-md-4 footer-nav animated fadeInUp">
+      	<h4>Menu </h4>
+      	<div class="col-md-6">
+          <ul class="pages">
+              <li><a href="#">Travel</a></li>
+              <li><a href="#">Pesawat</a></li>
+              <li><a href="#">Kereta</a></li>
+              <li><a href="#">Cek Pemesanan</a></li>
+              <li><a href="#">Payment</a></li>
+          </ul>
         </div>
-    </footer>
-</div>
-    <section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
+      	<div class="col-md-6">
+          <ul class="list">
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Contacts</a></li>
+              <li><a href="#">Terms & Condition</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    	<div class="col-md-2 footer-social animated fadeInDown">
+      	<h4>Follow Us</h4>
+      	<ul>
+        	<li><a href="#">Facebook</a></li>
+        	<li><a href="#">Twitter</a></li>
+        	<li><a href="#">Instagram</a></li>
+        	<li><a href="#">RSS</a></li>
+        </ul>
+      </div>
+    	<div class="col-md-3 footer-ns animated fadeInRight">
+      	<h4>Newsletter</h4>
+        <p>Subscribe to our newsletter now and be the first to know about {{config('app.name')}}'s latest promos!</p>
+        <p>
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Enter Your Email Here...">
+              <span class="input-group-btn">
+                <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-envelope"></span></button>
+              </span>
+            </div>
+        </p>
+      </div>
+    </div>
+</footer>
+<section style="text-align:center; margin:10px auto;"><p>Copyright <a href="#">{{config('app.name')}} 2018</a></p></section>
 
     <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
