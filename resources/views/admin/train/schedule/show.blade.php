@@ -6,7 +6,7 @@
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
       <ol class="breadcrumb">
-          <a href="{{ url('admin/train')}}" class="fa fa-arrow-circle-left fa-2x"></a>
+          <a href="{{ url('admin/train/schedule/index')}}" class="fa fa-arrow-circle-left fa-2x"></a>
       </ol>
     </div><br><!--/.row-->
 

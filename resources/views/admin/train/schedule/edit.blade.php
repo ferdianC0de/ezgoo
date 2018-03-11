@@ -151,7 +151,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Duration :</label>
-                        <input type="time" name="duration" class="form-control" value="{{ $data->duration }}" required>
+                        <input type="time" name="duration" class="form-control" value="{{ date('H:i', strtotime($data->duration))}}" required>
                     </div>
                   </div>
                     <div class="col-md-4">

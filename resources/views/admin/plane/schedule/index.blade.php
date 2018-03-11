@@ -47,9 +47,9 @@
                           <form action="{{ url('admin/plane/schedule/destroy', $data->id) }}" method="post">
                               {{ csrf_field() }}
                               {{ method_field('delete') }}
-                              <a href="{{ url('admin/plane/schedule/detail',$data->id) }}" class="fa fa-info-circle"></a>
-                              <a href="{{ url('admin/plane/schedule/edit',$data->id) }}" class="fa fa-edit"></a>
-                              <button class="fa fa-trash" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"></button>
+                              <a href="{{ url('admin/plane/schedule/detail',$data->id) }}" class="btn btn-sm btn-success">Detail</a>
+                              <a href="{{ url('admin/plane/schedule/edit',$data->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                              <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
                           </form>
                       </td>
                   </tr>

@@ -25,15 +25,15 @@
           <form action="{{ url('admin/airport') }}" method="post">
               {{ csrf_field() }}
               <div class="form-group">
-                  <label for="nama">Airport Name:</label>
+                  <label for="nama">Nama Pesawat :</label>
                   <input type="text" class="form-control" id="airport_name" name="airport_name">
               </div>
               <div class="form-group">
-                  <label for="code">Code:</label>
+                  <label for="code">Kode :</label>
                   <input type="text" class="form-control" id="code" name="code">
               </div>
               <div class="form-group">
-                  <label for="city">City:</label>
+                  <label for="city">Kota ::</label>
                   <input type="text" class="form-control" id="city" name="city">
               </div>
               <div class="form-group">

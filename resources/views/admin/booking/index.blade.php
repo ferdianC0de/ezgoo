@@ -23,6 +23,7 @@
             @endif
             <hr>
 
+
 <table class="table table-striped table-bordered data">
         <thead>
             <tr>
@@ -40,8 +41,13 @@
               <td>{{ $loop->iteration }}</td>
               <td>{{ $data->booking_code }}</td>
               <td>{{ date('d-m-Y', strtotime($data->created_at)) }}</td>
-              <td>pakein if plane = Pesawat, train = kereta</td>
-              <td>Pake number format</td>
+              @if($data->vehicle == "plane")
+              <td>Pesawat</td>
+            @else
+              <td>Kereta Api</td>
+
+              @endif
+              <td>Rp. {{number_format($data->bill)}}</td>
               <!-- <td>
                   <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
                   <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-minus-circle"></a>
