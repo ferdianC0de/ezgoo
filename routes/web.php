@@ -4,7 +4,6 @@ Route::get('plane/ajax/{id}','AdminController@planeAjax');
 Route::get('airport/ajax/{id}','AdminController@airportAjax');
 Route::get('train/ajax/{id}','AdminController@trainAjax');
 Route::get('station/ajax/{id}','AdminController@stationAjax');
-Route::get('pdfUser', 'UserController@pdf');
 //auth
 Auth::routes();
 //home / index
@@ -55,7 +54,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   });
 });
 //user
-Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
+Route::group(['prefix' => 'user', 'middleware'=> ['isVerified']], function(){
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');
