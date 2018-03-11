@@ -51,15 +51,6 @@ class UserController extends Controller
         //
     }
 
-    //Download PDF
-    public function pdf()
-    {
-      $date = date('Ymd');
-      $data = User::all();
-      $pdf = PDF::loadView('pdf', compact('data'));
-      return $pdf->download('EzGoo_Users_Registered'.$date.'.pdf');
-    }
-
     /**
      * Display the specified resource.
      *
@@ -188,5 +179,14 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    //Download PDF
+    public function pdf()
+    {
+      $date = date('d-m-Y');
+      $data = User::all();
+      $pdf = PDF::loadView('pdf/pdf', compact('data'));
+      return $pdf->download('registered_user'.$date.'.pdf');
     }
 }

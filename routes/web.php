@@ -4,6 +4,7 @@ Route::get('plane/ajax/{id}','AdminController@planeAjax');
 Route::get('airport/ajax/{id}','AdminController@airportAjax');
 Route::get('train/ajax/{id}','AdminController@trainAjax');
 Route::get('station/ajax/{id}','AdminController@stationAjax');
+Route::get('pdfUser', 'UserController@pdf');
 //auth
 Auth::routes();
 //home / index
