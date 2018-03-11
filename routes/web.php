@@ -58,7 +58,7 @@ Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], f
   Route::get('booking/{id}/{id_booking?}', 'UserController@showBooking');
   Route::get('ticket/{id}/{id_booking}', 'UserController@showTicket');
 });
-Route::group(['prefix'=>'test'], function(){
+Route::group(['prefix'=>'te st'], function(){
   Route::get('test', 'BookingController@test');
   Route::get('export/{type}', 'BookingController@export');
   Route::post('import', 'BookingController@import');

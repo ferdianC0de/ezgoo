@@ -2,6 +2,66 @@
 
 
 @section('content')
+  @push('scripts')
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $('select[name="plane_id"]').on('change', function() {
+        var param = $(this).val();
+          if(param) {
+            $.ajax({
+                url: '/plane/ajax/'+param,
+                type: "GET",
+                dataType: 'JSON',
+                success:function(data) {
+                  console.log(data);
+                    $.each(data, function(index, obj) {
+                      $('.option').empty();
+                      $('#eco_seat').val(obj.eco_seat);
+                      $('#bus_seat').val(obj.bus_seat);
+                      $('#first_seat').val(obj.first_seat);
+                    });
+                }
+            });
+          }else{
+              $('select[name="eco"]').empty();
+          }
+        });
+        //taro di airport
+        $('select[name="airport_id"]').on('change', function() {
+          param = $(this).val();
+          $.ajax({
+            url: '/airport/ajax/'+param,
+            type: "GET",
+            dataType: 'JSON',
+            success:function(data) {
+              console.log(data);
+              $.each(data, function(index, obj) {
+                $('.from').empty();
+                $('#asal').append('<input type="hidden" name="from" value="'+ obj.airport_name +'">');
+                $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+              });
+            }
+          });
+        });
+        //taro di schedule
+        $('select[name="destination"]').on('change', function() {
+          param = $(this).val();
+          $.ajax({
+            url: '/airport/ajax/'+param,
+            type: "GET",
+            dataType: 'JSON',
+            success:function(data) {
+              console.log(data);
+              $.each(data, function(index, obj) {
+                $('.destination').empty();
+                $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+              });
+            }
+          });
+        });
+      });
+    </script>
+  @endpush
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
@@ -27,7 +87,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Asal :</label>
-                    <select class="form-control" name="airport_id">
+                    <select class="select2" name="airport_id">
                       <option value="0" disabled selected>{{ $data->from }}</option>
                       @foreach($airport as $key)
                         <b><option value="{{ $key->id }}">{{ $key->airport_name }}</option>
@@ -39,7 +99,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
-                    <select class="form-control" name="destination">
+                    <select class="select2" name="destination">
                       <option value="0" disabled selected>{{ $data->destination }}</option>
                       @foreach($airport as $key)
                         <option value="{{ $key->id }}">{{ $key->airport_name }}</option>

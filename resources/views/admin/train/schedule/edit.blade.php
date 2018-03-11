@@ -2,7 +2,62 @@
 
 
 @section('content')
-
+  @push('scripts')
+    <script type="text/javascript">
+    $('select[name="train_id"]').on('change', function() {
+      var param = $(this).val();
+      if(param) {
+        $.ajax({
+          url: '/train/ajax/'+param,
+          type: "GET",
+          dataType: 'JSON',
+          success:function(data) {
+            console.log(data);
+              $.each(data, function(index, obj) {
+                $('.option').empty();
+                $('#eco_seat').append('<input type="hidden" name="eco_seat" value="'+ obj.eco_seat +'">');
+                $('#bus_seat').append('<input type="hidden" name="bus_seat" value="'+ obj.bus_seat +'">');
+                $('#exec_seat').append('<input type="hidden" name="exec_seat" value="'+ obj.exec_seat +'">');
+              });
+            }
+          });
+        }else{
+          $('select[name="eco"]').empty();
+        }
+    });
+    $('select[name="station_id"]').on('change', function() {
+      param = $(this).val();
+      $.ajax({
+        url: '/station/ajax/'+param,
+        type: "GET",
+        dataType: 'JSON',
+        success:function(data) {
+          console.log(data);
+          $.each(data, function(index, obj) {
+            $('.from').empty();
+            $('#asal').append('<input type="hidden" name="from" value="'+ obj.station_name +'">');
+            $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+          });
+        }
+      });
+    });
+    $('select[name="Tdestination"]').on('change', function() {
+      param = $(this).val();
+      $.ajax({
+        url: '/station/ajax/'+param,
+        type: "GET",
+        dataType: 'JSON',
+        success:function(data) {
+          console.log(data);
+          $.each(data, function(index, obj) {
+            $('.Tdestination').empty();
+            $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
+          });
+        }
+      });
+    });
+    </script>
+  @endpush
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
   <div class="row">
       <ol class="breadcrumb">
@@ -39,7 +94,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
-                    <select class="form-control" name="Tdestination">
+                    <select class="select2" name="Tdestination">
                       <option value="0" disabled selected>{{ $data->destination }}</option>
                       @foreach($station as $key)
                         <option value="{{ $key->id }}">{{ $key->station_name }}</option>
@@ -96,7 +151,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Duration :</label>
-                        <input type="time" name="duration" class="form-control" value="{{ $data->gate }}" required>
+                        <input type="time" name="duration" class="form-control" value="{{ $data->duration }}" required>
                     </div>
                   </div>
                     <div class="col-md-4">

@@ -149,7 +149,7 @@ class TrainController extends Controller
       $trainschedule->bus_seat          = $request->bus_seat;
       $trainschedule->exec_seat         = $request->exec_seat;
       $trainschedule->boarding_time     = $request->boarding_time;
-      $trainschedule->duration          = strtotime($request->duration);
+      $trainschedule->duration          = $request->duration;
       $trainschedule->platform          = $request->platform;
       $trainschedule->save();
       return redirect('admin/train/schedule/index')->with('alert-success','Berhasil Menambah Data!');
@@ -177,7 +177,7 @@ class TrainController extends Controller
       $trainschedule->bus_seat          = $request->bus_seat;
       $trainschedule->exec_seat         = $request->exec_seat;
       $trainschedule->boarding_time     = $request->boarding_time;
-      $trainschedule->duration          = strtotime($request->duration);
+      $trainschedule->duration          = $request->duration;
       $trainschedule->platform          = $request->platform;
       $trainschedule->save();
       return redirect('admin/train/schedule/index')->with('alert-success','Berhasil Menambah Data!');

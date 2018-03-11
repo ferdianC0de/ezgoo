@@ -17,6 +17,7 @@
       <div class="panel panel-info">
         <div class="panel-heading">
           <h4><b>Detail Penumpang</b></h4>
+          <a href="javascript:window.print()">Cetak</a>
         </div>
         <div class="panel-body">
           <div class="col-md-3">
