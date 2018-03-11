@@ -9,6 +9,8 @@ use App\Models\Plane;
 use App\Models\Train;
 use App\Models\Booking;
 use App\Models\Passenger;
+use App\Models\PlaneSchedule;
+use App\Models\TrainSchedule;
 use PDF;
 
 class UserController extends Controller
@@ -78,25 +80,41 @@ class UserController extends Controller
         }
     }
 
-    public function showTicket($id, $id_booking)
+    public function showTicket($id, $param)
     {
-      $vehicleP = '';
-      $vehicleT = '';
-      $unique = Auth::user()->id;
-      if ($id == $unique) {
-        $booking = Booking::find($id_booking);
-        if ($booking->vehicle == 'plane') {
-          $data = Booking::where(['id' => $id_booking,'vehicle'=>'plane'])->with('scheP','detail_booking','transaction')->get();
-          $vehicleP = Plane::find($data[0]->scheP->plane_id);
-        } elseif ($booking->vehicle == 'train') {
-          $data = Booking::where(['id' => $id_booking,'vehicle'=>'train'])->with('scheT','detail_booking','transaction')->get();
-          $vehicleT = Train::find($data[0]->scheT->train_id);
+      if ($id == Auth::user()->id) {
+        $data = Booking::where('id', $param)->with(['detail_booking', 'transaction'])->get();
+        $pas = Passenger::where('detail_booking_id', $data[0]->detail_booking->id)->get();
+        if ($data[0]->vehicle == "plane") {
+          $sche = PlaneSchedule::where('id',$data[0]->schedule_id)->with(['airport','plane'])->get();
+        }elseif ($data[0]->vehicle == "train") {
+          $sche = TrainSchedule::where('id',$data[0]->schedule_id)->with(['station','train'])->get();
         }
-        $passenger = Passenger::where('detail_booking_id',$data[0]->detail_booking->id)->get();
-        return view('booking.tiket', compact('data', 'vehicleP','vehicleT', 'passenger'));
-      } else {
-        abort(500);
+        if ($data[0]->transaction->status != 1) {
+          return redirect('payment/'.$data[0]->id);
+        }else {
+          return view('booking.myTicket', compact('data','pas', 'sche'));
+        }
+      }else {
+        return back();
       }
+      // $vehicleP = '';
+      // $vehicleT = '';
+      // $unique = Auth::user()->id;
+      // if ($id == $unique) {
+      //   $booking = Booking::find($id_booking);
+      //   if ($booking->vehicle == 'plane') {
+      //     $data = Booking::where(['id' => $id_booking,'vehicle'=>'plane'])->with('scheP','detail_booking','transaction')->get();
+      //     $vehicleP = Plane::find($data[0]->scheP->plane_id);
+      //   } elseif ($booking->vehicle == 'train') {
+      //     $data = Booking::where(['id' => $id_booking,'vehicle'=>'train'])->with('scheT','detail_booking','transaction')->get();
+      //     $vehicleT = Train::find($data[0]->scheT->train_id);
+      //   }
+      //   $passenger = Passenger::where('detail_booking_id',$data[0]->detail_booking->id)->get();
+      //   return view('booking.tiket', compact('data', 'vehicleP','vehicleT', 'passenger'));
+      // } else {
+      //   abort(500);
+      // }
     }
 
     /**

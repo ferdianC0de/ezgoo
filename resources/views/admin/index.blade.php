@@ -27,15 +27,15 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     <div class="item active">
-      <img src="{{ asset('img/images.png')}}" alt="Los Angeles">
+      <img src="{{ asset('images/awesome.png')}}" alt="Los Angeles">
     </div>
 
     <div class="item">
-      <img src="{{ asset('img/images.png')}}" alt="Chicago">
+      <img src="{{ asset('images/awesome.png')}}" alt="Chicago">
     </div>
 
     <div class="item">
-      <img src="{{ asset('img/images.png')}}" alt="New York">
+      <img src="{{ asset('images/awesome.png')}}" alt="New York">
     </div>
   </div>
 
@@ -53,20 +53,3 @@
 
 
 @endsection
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

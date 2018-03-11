@@ -20,6 +20,9 @@ Route::group(['prefix' => 'booking'], function(){
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
   Route::get('', 'AdminController@index');
   Route::get('users','AdminController@showUsers');
+  //Download PDF
+  Route::get('pdfUsers', 'UserController@pdf');
+
   //booking
   Route::resource('booking','BookingController');
   //plane
