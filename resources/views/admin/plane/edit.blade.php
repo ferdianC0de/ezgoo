@@ -19,7 +19,7 @@
               <div class="panel-body">
             <hr>
             @foreach($data as $datas)
-            <form action="{{ url('admin/plane/updatelistPlane', $datas->id) }}" method="post">
+            <form action="{{ url('admin/plane', $datas->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('put')}}
                 <input type="hidden" name="id" value="{{ $datas->planefare->id }}">

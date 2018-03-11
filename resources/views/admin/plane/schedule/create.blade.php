@@ -19,7 +19,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
             <hr>
-            <form action="{{ url('admin/plane/pcreatePlaneschedule') }}" method="post">
+            <form action="{{ url('admin/plane/schedule/store') }}" method="post">
                 {{ csrf_field() }}
             <div class="row">
               <div class="col-md-6">

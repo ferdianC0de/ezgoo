@@ -19,7 +19,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
           <hr>
-          <form action="{{ url('admin/train/pcreateTrain') }}" method="post">
+          <form action="{{ url('admin/train') }}" method="post">
               {{ csrf_field() }}
           <div class="row">
             <div class="col-md-12">

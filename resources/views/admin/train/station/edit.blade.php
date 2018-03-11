@@ -21,7 +21,7 @@
               <div class="panel-body">
             <hr>
             @foreach($data as $datas)
-            <form action="{{ url('admin/train/updateStation', $datas->id) }}" method="post">
+            <form action="{{ url('admin/station', $datas->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('put') }};
                 <div class="form-group">

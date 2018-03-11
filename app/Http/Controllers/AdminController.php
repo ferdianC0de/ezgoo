@@ -37,7 +37,7 @@ class AdminController extends Controller
 
     public function trainAjax($id)
     {
-      $train = DB::table("train_fares")->where("train_id",$id)->get();
+      $train = DB::table("trains")->where("id",$id)->get();
       return response()->json($train);
     }
 

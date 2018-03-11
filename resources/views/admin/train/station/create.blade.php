@@ -19,7 +19,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
           <hr>
-          <form action="{{ url('admin/train/pcreateStation') }}" method="post">
+          <form action="{{ url('admin/station') }}" method="post">
               {{ csrf_field() }}
               <div class="form-group">
                   <label for="nama">Nama Stasiun :</label>

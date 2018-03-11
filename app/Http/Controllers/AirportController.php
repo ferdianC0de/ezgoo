@@ -16,8 +16,8 @@ class AirportController extends Controller
     public function index()
     {
         //
-        $data = Airport::all();
-        return view('admin.plane.airport.index',compact('data'));
+        $airport = Airport::all();
+        return view('admin.plane.airport.index',compact('airport'));
     }
 
     /**
@@ -45,7 +45,7 @@ class AirportController extends Controller
           'city' => 'required'
         ]);
         Airport::create($data);
-        return view('admin.plane.airport.index')->with('alert-success','Berhasil Menambahkan Data!');
+        return redirect('admin/airport')->with('alert-success','Berhasil Menambahkan Data!');
    }
 
 
@@ -88,7 +88,7 @@ class AirportController extends Controller
           'city' => 'required'
         ]);
         Airport::find($id)->update($data);
-        return view('admin.plane.airport.index')->with('alert-success','Data berhasil diubah!');
+        return redirect('admin/airport')->with('alert-success','Data berhasil diubah!');
     }
 
     /**
@@ -102,6 +102,6 @@ class AirportController extends Controller
         //
         $data = Airport::where('id',$id)->first();
         $data->delete();
-        return view('admin.plane.airport.index')->with('alert-success','Data berhasi dihapus!');
+        return redirect('admin/airport')->with('alert-success','Berhasil Menghapus Data!');
     }
 }

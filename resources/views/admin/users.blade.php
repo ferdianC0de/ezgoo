@@ -41,7 +41,6 @@
             @endforeach
             </tbody>
           </table>
-          <a href="pdfUsers"><button class="btn btn-info" type="submit" name="button">Export PDF</button></a>
         </div>
       </div>
 

@@ -20,16 +20,17 @@
               <div class="panel-body">
             <hr>
             @foreach($trainschedule as $data)
-            <form action="{{ url('admin/train/pcreateTrainschedule') }}" method="post">
+            <form action="{{ url('admin/train/schedule/update/'.$data->id) }}" method="post">
                 {{ csrf_field() }}
+                {{ method_field('put')}}
             <div class="row">
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Asal :</label>
-                    <select class="form-control" name="station_id" required>
-                      <option value="0" disabled>{{ $data->from }}</option>
+                    <select class="select2" name="station_id" required>
+                      <option value="0" disabled selected>{{ $data->from }}</option>
                       @foreach($station as $key)
-                        <option value="{{ $key->id }}">{{ $key->station_name }}</option>
+                        <b><option value="{{ $key->id }}">{{ $key->station_name }}</option>
                       @endforeach
                     </select>
                     <input type="hidden" class="form-control asal" id="asal">
@@ -38,9 +39,8 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
-                    <select class="form-control" name="destination" required>
-                      <option value="0" disabled
-                      >{{ $data->destination }}</option>
+                    <select class="form-control" name="Tdestination">
+                      <option value="0" disabled selected>{{ $data->destination }}</option>
                       @foreach($station as $key)
                         <option value="{{ $key->id }}">{{ $key->station_name }}</option>
                       @endforeach
@@ -57,7 +57,7 @@
                 <div class="form-group">
                   <label for="code">Nama Kereta Api :</label>
                     <select class="form-control" name="train_id">
-                      <option value="0">{{ $data->train->train_name }}</option>
+                      <option value="{{ $data->train_id }}" disabled selected >{{ $data->train->train_name }}</option>
                       @foreach($train as $key)
                         <option value="{{ $key->id }}">{{ $key->train_name }}</option>
                       @endforeach
@@ -67,19 +67,19 @@
               <div class="col-md-4">
                 <div class="form-group">
                     <label for="code">Eco Seat:</label>
-                    <input type="text" class="form-control option" id="eco_seat" name="eco_seat" readonly>
+                    <input type="text" class="form-control option" id="eco_seat" value="{{ $data->eco_seat }}" disabled>
                 </div>
               </div>
                 <div class="col-md-4">
                   <div class="form-group">
                       <label for="code">Bussiness Seat:</label>
-                      <input type="text" class="form-control option" id="bus_seat" name="bus_seat" readonly>
+                      <input type="text" class="form-control option" id="bus_seat" value="{{ $data->bus_seat }}" disabled>
                   </div>
                 </div>
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Executive Seat:</label>
-                        <input type="text" class="form-control option" id="exec_seat" name="exec_seat" readonly>
+                        <input type="text" class="form-control option" id="exec_seat" value="{{ $data->exec_seat }}" disabled>
                     </div>
                   </div>
                   <div class="col-md-4">
@@ -96,7 +96,7 @@
                   <div class="col-md-4">
                     <div class="form-group">
                         <label for="code">Duration :</label>
-                        <input type="time" name="duration" class="form-control" placeholder="dd/mm/yy" required>
+                        <input type="time" name="duration" class="form-control" value="{{ $data->gate }}" required>
                     </div>
                   </div>
                     <div class="col-md-4">

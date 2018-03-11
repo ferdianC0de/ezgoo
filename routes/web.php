@@ -17,9 +17,6 @@ Route::group(['prefix' => 'booking'], function(){
 });
 //admin
 Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
-  //PDF
-  Route::get('pdfUsers', 'UserController@pdf');
-
   Route::get('', 'AdminController@index');
   Route::get('users','AdminController@showUsers');
   //booking
@@ -36,6 +33,7 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
     Route::post('store','PlaneController@storeSchedule');
     Route::get('edit/{id}','PlaneController@editSchedule');
     Route::put('update/{id}','PlaneController@updateSchedule');
+    Route::delete('destroy/{id}','PlaneController@destroySchedule');
   });
   //train
   Route::resource('train', 'TrainController');
@@ -49,11 +47,11 @@ Route::group(['prefix'=>'admin','middleware'=> 'checkRole'], function(){
     Route::post('store','TrainController@storeSchedule');
     Route::get('edit/{id}','TrainController@editSchedule');
     Route::put('update/{id}','TrainController@updateSchedule');
+    Route::delete('destroy/{id}','TrainController@destroySchedule');
   });
 });
-//
 //user
-Route::group(['prefix' => 'user', 'middleware'=> ['isVerified']], function(){
+Route::group(['prefix' => 'user', 'middleware'=> ['checkRole', 'isVerified']], function(){
   Route::get('edit/{id}/{type}', 'UserController@edit')->name('edit');
   Route::put('update', 'UserController@update')->name('update');
   Route::put('updatePass', 'UserController@updatePassword')->name('updatePass');

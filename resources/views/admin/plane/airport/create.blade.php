@@ -22,7 +22,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
           <hr>
-          <form action="{{ url('admin/plane/pcreateAirport') }}" method="post">
+          <form action="{{ url('admin/airport') }}" method="post">
               {{ csrf_field() }}
               <div class="form-group">
                   <label for="nama">Airport Name:</label>

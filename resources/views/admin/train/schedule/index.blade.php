@@ -22,7 +22,7 @@
                     <strong>{{ Session::get('alert-success') }}</strong>
                 </div>
             @endif
-          <a href="{{ url('admin/train/cTrainschedule')}}" class="fa fa-plus-circle fa-2x"></a><h3 align="center">JADWAL KEBERANGKATAN</h3>
+          <a href="{{ url('admin/train/schedule/create')}}" class="fa fa-plus-circle fa-2x"></a><h3 align="center">JADWAL KEBERANGKATAN</h3>
           <hr>
           <table class="table table-striped table-bordered data">
               <thead>
@@ -44,11 +44,11 @@
                       <td>{{ $data->boarding_time }}</td>
                       <td>{{ $data->platform }}</td>
                       <td>
-                          <form action="{{ url('admin/train/destroyTS', $data->id) }}" method="post">
+                          <form action="{{ url('admin/train/schedule/destroy', $data->id) }}" method="post">
                               {{ csrf_field() }}
                               {{ method_field('delete') }}
-                              <a href="{{ url('admin/train/detailTrainschedule',$data->id) }}" class="fa fa-info-circle"></a>
-                              <a href="{{ url('admin/train/editTrainschedule',$data->id) }}" class="fa fa-edit"></a>
+                              <a href="{{ url('admin/train/schedule/detail',$data->id) }}" class="fa fa-info-circle"></a>
+                              <a href="{{ url('admin/train/schedule/edit',$data->id) }}" class="fa fa-edit"></a>
                               <button class="fa fa-trash" type="submit" onclick="return confirm('Yakin ingin menghapus data?')"></button>
                           </form>
                       </td>

@@ -18,14 +18,14 @@
               <div class="panel-body">
             <hr>
             @foreach($data as $datas)
-            <form action="{{ url('admin/train/updateTrain', $datas->id) }}" method="post">
+            <form action="{{ url('admin/train/'.$datas->id) }}" method="post">
                 {{ csrf_field() }}
                 {{ method_field('put')}}
                 <input type="hidden" name="id" value="{{ $datas->trainfare->id }}">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                        <label for="nama">train Name:</label>
+                        <label for="nama">Train Name:</label>
                         <input type="text" class="form-control" id="train_name" name="train_name" value="{{ $datas->train_name }}">
                     </div>
                   </div>

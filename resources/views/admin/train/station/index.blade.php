@@ -22,7 +22,7 @@
                     <strong>{{ Session::get('alert-success') }}</strong>
                 </div>
             @endif
-            <a href="{{ url('admin/train/createStation') }}" class="fa fa-plus-circle fa-2x"></a><h3 align="center">DAFTAR STASIUN</h3>
+            <a href="{{ url('admin/station/create') }}" class="fa fa-plus-circle fa-2x"></a><h3 align="center">DAFTAR STASIUN</h3>
           <hr>
           <table class="table table-striped table-bordered data">
             <thead>
@@ -42,10 +42,10 @@
                   <td>{{ $data->code }}</td>
                   <td>{{ $data->city }}</td>
                   <td>
-                      <form action="{{ url('admin/train/destroyStation',$data->id) }}" method="post">
+                      <form action="{{ url('admin/station',$data->id) }}" method="post">
                           {{ csrf_field() }}
                           {{ method_field('delete') }}
-                          <a href="{{ url('admin/train/editStation',$data->id) }}" class="btn btn-sm btn-primary">Edit</a>
+                          <a href="{{ url('admin/station/'.$data->id.'/edit') }}" class="btn btn-sm btn-primary">Edit</a>
                           <button class="btn btn-sm btn-danger" type="submit" onclick="return confirm('Yakin ingin menghapus data?')">Delete</button>
                       </form>
                   </td>

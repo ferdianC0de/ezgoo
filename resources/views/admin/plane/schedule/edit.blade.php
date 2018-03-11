@@ -20,7 +20,7 @@
               <div class="panel-body">
             <hr>
             @foreach ($planeschedule as $data)
-            <form action="{{ url('admin/plane/updatePlaneschedule', $data->id) }}" method="post">
+            <form action="{{ url('admin/plane/schedule/update', $data->id) }}" method="post">
             {{ csrf_field() }}
             {{ method_field('put')}}
             <div class="row">

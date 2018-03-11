@@ -54,7 +54,7 @@ class PlaneController extends Controller
       $planeFare->first_seat = $request->first_seatfare;
       $planeFare->save();
 
-      return redirect('admin.plane.index')->with('alert-success','Berhasil Menambah Data!');
+      return redirect('admin/plane')->with('alert-success','Berhasil Menambah Data!');
     }
 
     public function show($id)
@@ -83,14 +83,14 @@ class PlaneController extends Controller
       $planefare->first_seat  = $request->first_seatfare;
       $planefare->save();
 
-      return redirect('admin.plane.index')->with('alert-success','Data berhasil diubah!');
+      return redirect('admin/plane')->with('alert-success','Data berhasil diubah!');
     }
 
     public function destroy($id)
     {
       $data = Plane::where('id',$id)->first();
       $data->delete();
-      return redirect('admin.plane.index')->with('alert-success','Data berhasi dihapus!');
+      return redirect('admin/plane')->with('alert-success','Data berhasi dihapus!');
     }
 
     public function schedule()
@@ -102,7 +102,7 @@ class PlaneController extends Controller
     public function detailSchedule($id)
     {
       $detail = PlaneSchedule::where('id',$id)->with('Plane')->get();
-      return view('admin.plane.detailSchedule', compact('detail'));
+      return view('admin/plane/schedule/show', compact('detail'));
     }
 
     public function createSchedule()
@@ -129,7 +129,7 @@ class PlaneController extends Controller
       $planeschedule->duration          = strtotime($request->duration);
       $planeschedule->gate              = $request->gate;
       $planeschedule->save();
-      return redirect('admin.plane.schedule.index')->with('alert-success','Berhasil Menambah Data!');
+      return redirect('admin/plane/schedule/index')->with('alert-success','Berhasil Menambah Data!');
     }
 
     public function editSchedule($id)
@@ -156,13 +156,13 @@ class PlaneController extends Controller
       $planeschedule->boarding_time     = $request->boarding_time;
       $planeschedule->duration          = strtotime($request->duration);
       $planeschedule->gate              = $request->gate;
-      return redirect('admin.plane.schedule.index')->with('alert-success','Berhasil Mengubah Data!');
+      return redirect('admin/plane/schedule/index')->with('alert-success','Berhasil Mengubah Data!');
     }
 
     public function destroySchedule($id)
     {
       $data = PlaneSchedule::where('id',$id)->first();
       $data->delete();
-      return redirect('admin.plane.schedule.index')->with('alert-success','Data berhasi dihapus!');
+      return redirect('admin/plane/schedule/index')->with('alert-success','Data berhasi dihapus!');
     }
 }

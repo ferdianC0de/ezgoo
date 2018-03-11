@@ -19,7 +19,7 @@
             <div class="panel panel-default">
               <div class="panel-body">
             <hr>
-            <form action="{{ url('admin/train/pcreateTrainschedule') }}" method="post">
+            <form action="{{ url('admin/train/schedule/store') }}" method="post">
                 {{ csrf_field() }}
             <div class="row">
               <div class="col-md-6">
@@ -37,7 +37,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="code">Tujuan :</label>
-                    <select class="form-control" name="destination" required>
+                    <select class="form-control" name="Tdestination" required>
                       <option value="0">--Select Plane--</option>
                       @foreach($station as $key)
                         <option value="{{ $key->id }}">{{ $key->station_name }}</option>

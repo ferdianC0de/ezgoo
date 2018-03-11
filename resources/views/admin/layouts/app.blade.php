@@ -12,6 +12,8 @@
         <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/jquery.dataTables.min.css')}}">
     </head>
     <body>
@@ -36,7 +38,7 @@
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
             <div class="profile-userpic">
-                <img src="{{ asset('images/logo.png') }}" class="img-responsive" alt="">
+                <img src="{{ asset('img/world.png') }}" class="img-responsive" alt="">
             </div>
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">{{Auth::user()->name}}</div>
@@ -62,13 +64,13 @@
                 </a>
                 <ul class="children collapse" id="sub-item-1">
                     <li>
-                        <a class="" href="{{ url('admin/plane/airport') }}"><span class="fa fa-arrow-right"></span> Bandara</a>
+                        <a class="" href="{{ url('admin/airport') }}"><span class="fa fa-arrow-right"></span> Bandara</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/plane/listPlane') }}"><span class="fa fa-arrow-right"></span> Daftar Pesawat</a>
+                        <a class="" href="{{ url('admin/plane') }}"><span class="fa fa-arrow-right"></span> Daftar Pesawat</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/plane/planeSchedule') }}"><span class="fa fa-arrow-right"></span> Jadwal Penerbangan </a>
+                        <a class="" href="{{ url('admin/plane/schedule/index') }}"><span class="fa fa-arrow-right"></span> Jadwal Penerbangan </a>
                     </li>
                 </ul>
             </li>
@@ -77,13 +79,13 @@
                 </a>
                 <ul class="children collapse" id="sub-item-2">
                     <li>
-                        <a class="" href="{{ url('admin/train/station') }}"><span class="fa fa-arrow-right">&nbsp;</span> Stasiun</a>
+                        <a class="" href="{{ url('admin/station') }}"><span class="fa fa-arrow-right">&nbsp;</span> Stasiun</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/train/listTrain')}}"><span class="fa fa-arrow-right">&nbsp;</span> Daftar Kereta</a>
+                        <a class="" href="{{ url('admin/train')}}"><span class="fa fa-arrow-right">&nbsp;</span> Daftar Kereta</a>
                     </li>
                     <li>
-                        <a class="" href="{{ url('admin/train/trainSchedule')}}"><span class="fa fa-arrow-right">&nbsp;</span> Jadwal Keberangkatan</a>
+                        <a class="" href="{{ url('admin/train/schedule/index')}}"><span class="fa fa-arrow-right">&nbsp;</span> Jadwal Keberangkatan</a>
                     </li>
                 </ul>
             </li>
@@ -113,8 +115,8 @@
 <script type="text/javascript" src="{{ asset('vendor/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
+<script type="text/javascript" src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 <script type="text/javascript">
-@stack('scripts')
 $(document).ready(function() {
   $('.data').DataTable();
   $('.datetimepicker').datetimepicker({
@@ -177,19 +179,19 @@ $(document).ready(function() {
   });
   // TRAIN
   $('select[name="train_id"]').on('change', function() {
-    var train_id = $(this).val();
-    if(train_id) {
+    var param = $(this).val();
+    if(param) {
       $.ajax({
-        url: '/train/ajax/'+train_id,
+        url: '/train/ajax/'+param,
         type: "GET",
         dataType: 'JSON',
         success:function(data) {
           console.log(data);
             $.each(data, function(index, obj) {
               $('.option').empty();
-              $('#eco_seat').val(obj.eco_seat);
-              $('#bus_seat').val(obj.bus_seat);
-              $('#exec_seat').val(obj.exec_seat);
+              $('#eco_seat').append('<input type="hidden" name="eco_seat" value="'+ obj.eco_seat +'">');
+              $('#bus_seat').append('<input type="hidden" name="bus_seat" value="'+ obj.bus_seat +'">');
+              $('#exec_seat').append('<input type="hidden" name="exec_seat" value="'+ obj.exec_seat +'">');
             });
           }
         });
@@ -213,20 +215,36 @@ $(document).ready(function() {
       }
     });
   });
-  $('select[name="destination"]').on('change', function() {
+  $('select[name="Tdestination"]').on('change', function() {
     param = $(this).val();
     $.ajax({
-      url: '/airport/ajax/'+param,
+      url: '/station/ajax/'+param,
       type: "GET",
       dataType: 'JSON',
       success:function(data) {
         console.log(data);
         $.each(data, function(index, obj) {
-          $('.destination').empty();
+          $('.Tdestination').empty();
           $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
         });
       }
     });
+  });
+  $.fn.select2.defaults.set( "theme", "bootstrap" );
+  $.fn.select2.defaults.set("width", null);
+  $('.select2').select2();
+  $('.select2').change(function(){
+    $('.select2').find('option').prop('disabled', false);
+    $('.select2').each(function(){
+      var current = $(this);
+      // console.log(current);
+      $('.select2').not(current).find('option').each(function(){
+        if($(this).val() == current.val()){
+          $(this).prop('disabled', true);
+        }
+      });
+    });
+    $('.select2').select2();
   });
 });
 </script>
