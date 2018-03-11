@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>EZGo</title>
+        <title>{{ config('app.name') }} | Admin </title>
 
         <!-- Fonts -->
         <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -26,20 +26,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button>
                 <a class="navbar-brand" href="#"><span>EZ</span>Goo</a>
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown"><a class="fa fa-cog" href="index.html"></a>
-                    <li class="dropdown"><a class="fa fa-sign-out" href="#"></a>
-                    </li>
-                </ul>
             </div>
         </div><!-- /.container-fluid -->
     </nav>
     <!-- profile -->
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
-            <div class="profile-userpic">
-                <img src="{{ asset('images/logo.png') }}" class="img-responsive" alt="">
-            </div>
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">{{Auth::user()->name}}</div>
                 <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
@@ -91,30 +83,13 @@
             </li>
         </ul>
     </div>
-    <!-- menu -->
-
     @yield('content')
-
-<!--     <footer class="footer" style="padding-top: 60px;">
-        <div class="container">
-            <span class="text-muted">hai</span>
-        </div>
-    </footer> -->
-
-
-        </div><!--/.row-->
-    </div>  <!--/.main-->
-
-
-
-
 
 <script type="text/javascript" src="{{ asset('js/jquery-1.12.0.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datepicker/moment.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
-<script type="text/javascript" src="{{ asset('vendor/datatables/dataTables.bootstrap4.js')}}"></script>
 <script type="text/javascript" src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
 <script type="text/javascript">
 $(document).ready(function() {

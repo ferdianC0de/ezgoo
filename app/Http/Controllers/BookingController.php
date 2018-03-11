@@ -33,11 +33,6 @@ class BookingController extends Controller
       return view('admin.booking.index', compact('booking'));
     }
 
-    public function show($id)
-    {
-
-    }
-
     public function edit($id)
     {
       $booking = Booking::find($id);
@@ -45,11 +40,6 @@ class BookingController extends Controller
       foreach($detail as $pass){
       $passengers = Passenger::where('detail_booking_id', $pass->id)->get();}
       return view('admin.booking.edit',compact('booking','detail','pass'));
-    }
-
-    public function update(Request $request, $id)
-    {
-
     }
 
     public function destroy($id)
@@ -226,9 +216,6 @@ class BookingController extends Controller
         }else{
           abort(404);
         }
-      // }else{
-      //   return 'Register dulu baru bisa pesen';
-      // }
       }
     }
 

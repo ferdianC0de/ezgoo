@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'EZGOO'),
+    'name' => env('APP_NAME', 'EZGoo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -173,6 +173,7 @@ return [
          Zizaco\Entrust\EntrustServiceProvider::class,
          Maatwebsite\Excel\ExcelServiceProvider::class,
          Barryvdh\DomPDF\ServiceProvider::class,
+         Fx3costa\LaravelChartJs\Providers\ChartjsServiceProvider::class,
 
         /*
          * Application Service Providers...

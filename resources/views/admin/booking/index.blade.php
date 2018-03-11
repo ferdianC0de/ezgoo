@@ -9,11 +9,9 @@
           <li><a href="#">
               <em class="fa fa-home"></em>
               </a></li>
-          <li class="active">Kereta Api</li>
+          <li class="active">Booking</li>
       </ol>
-    </div><br><!--/.row-->
-
-<body>
+    </div><br>
   <div class="row">
     <div class="col-md-12">
             <div class="panel panel-default">
