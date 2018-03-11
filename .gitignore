@@ -1,8 +1,6 @@
 /node_modules
 /public/hot
 /public/storage
-/public/images/awesome.png
-/public/images/logo.png
 /storage/*.key
 /vendor
 /.idea
