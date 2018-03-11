@@ -25,7 +25,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button>
-                <a class="navbar-brand" href="#"><span>EZ</span>Go</a>
+                <a class="navbar-brand" href="#"><span>EZ</span>Goo</a>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown"><a class="fa fa-cog" href="index.html"></a>
                     <li class="dropdown"><a class="fa fa-sign-out" href="#"></a>
@@ -38,7 +38,7 @@
     <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
         <div class="profile-sidebar">
             <div class="profile-userpic">
-                <img src="{{ asset('img/world.png') }}" class="img-responsive" alt="">
+                <img src="{{ asset('images/logo.png') }}" class="img-responsive" alt="">
             </div>
             <div class="profile-usertitle">
                 <div class="profile-usertitle-name">{{Auth::user()->name}}</div>
@@ -57,7 +57,7 @@
         <ul class="nav menu">
             <li><a href="{{ url('admin')}}"><em class="fa fa-home"></em> Dashboard</a></li>
             <li><a href="{{ URL('admin/users') }}"><em class="fa fa-users"></em> Users</a></li>
-            <li><a href="{{ URL('admin/bookingdata') }}"><em class="fa fa-list"></em> Booking Data </a></li>
+            <li><a href="{{ URL('admin/booking') }}"><em class="fa fa-list"></em> Booking Data </a></li>
 
             <li class="parent "><a data-toggle="collapse" href="#sub-item-1">
                 <em class="fa fa-plane">&nbsp;</em> Pesawat <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>

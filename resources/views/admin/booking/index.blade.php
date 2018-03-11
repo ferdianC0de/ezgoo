@@ -38,7 +38,7 @@
             @foreach($booking as $data)
             <tr>
                 <td>1</td>
-                <td>{{$data->booking_date}}</td>
+                <td>{{ date('l,d-M  y', strtotime($data->created_at))}}</td>
                 <td>{{$data->vehicle}}</td>
                 <!-- <td>
                     <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
