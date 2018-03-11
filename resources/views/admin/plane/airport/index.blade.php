@@ -29,9 +29,9 @@
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Airport Name</th>
-                    <th>Code</th>
-                    <th>City</th>
+                    <th>Nama Pesawat </th>
+                    <th>Kode</th>
+                    <th>Kota</th>
                     <th>Aksi</th>
                 </tr>
                 </thead>

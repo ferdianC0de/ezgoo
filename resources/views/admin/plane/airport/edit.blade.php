@@ -25,16 +25,16 @@
                 {{ csrf_field() }}
                 {{ method_field('put')}}
                 <div class="form-group">
-                    <label for="nama">Airport Name:</label>
-                    <input type="text" class="form-control" id="airport_name" name="airport_name" value="{{ $datas->airport_name }}">
+                    <label for="nama">Nama Pesawat :</label>
+                    <input type="text" class="form-control" id="airport_name" name="airport_name" value="{{ $datas->airport_name }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="code">Code:</label>
-                    <input type="text" class="form-control" id="code" name="code" value="{{ $datas->code }}">
+                    <label for="code">Kode :</label>
+                    <input type="text" class="form-control" id="code" name="code" value="{{ $datas->code }}" required>
                 </div>
                 <div class="form-group">
-                    <label for="city">City:</label>
-                    <input type="text" class="form-control" id="city" name="city" value="{{ $datas->city }}">
+                    <label for="city">Kota :</label>
+                    <input type="text" class="form-control" id="city" name="city" value="{{ $datas->city }}" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-md btn-primary">Submit</button>

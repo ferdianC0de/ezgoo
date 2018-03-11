@@ -28,7 +28,7 @@
                 <thead>
                 <tr>
                     <th>No.</th>
-                    <th>Plane Name</th>
+                    <th>Nama Pesawat</th>
                     <th>Ekonomi</th>
                     <th>Bisnis</th>
                     <th>First Class</th>
