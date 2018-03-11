@@ -13,7 +13,7 @@
       </div><br>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <h4>Grafik penjualan tiket bulanan</h4>
+            <h4>Grafik penjualan tiket tahun {{date('Y')}}</h4>
           </div>
           <div class="panel-body">
             @if(Session::has('alert-success'))

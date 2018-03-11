@@ -46,9 +46,9 @@
                         <td>{{ $data->eco_seat }}</td>
                         <td>{{ $data->bus_seat }}</td>
                         <td>{{ $data->first_seat }}</td>
-                        <td>IDR {{ number_format($data->planefare->eco_seat)}}</td>
-                        <td>IDR {{ number_format($data->planefare->bus_seat) }}</td>
-                        <td>IDR {{ number_format($data->planefare->first_seat)}}</td>
+                        <td>IDR {{ number_format($data->planefare['eco_seat'])}}</td>
+                        <td>IDR {{ number_format($data->planefare['bus_seat']) }}</td>
+                        <td>IDR {{ number_format($data->planefare['first_seat'])}}</td>
                         <td>
                             <form action="{{ url('admin/plane', $data->id) }}" method="post">
                                 {{ csrf_field() }}

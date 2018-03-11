@@ -52,6 +52,7 @@ class PlaneController extends Controller
       $planeFare->eco_seat = $request->eco_seatfare;
       $planeFare->bus_seat = $request->bus_seatfare;
       $planeFare->first_seat = $request->first_seatfare;
+      $planeFare->unique_code = mt_rand(100,999);
       $planeFare->save();
 
       return redirect('admin/plane')->with('alert-success','Berhasil Menambah Data!');

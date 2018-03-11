@@ -51,6 +51,7 @@ class TrainController extends Controller
       $trainfare->eco_seat = $request->eco_seatfare;
       $trainfare->bus_seat = $request->bus_seatfare;
       $trainfare->exec_seat = $request->exec_seatfare;
+      $trainfare->unique_code = mt_rand(100,999);
       $trainfare->save();
       return redirect('admin/train');
     }
@@ -97,7 +98,7 @@ class TrainController extends Controller
       $trainfare = TrainFare::findOrFail($request->id);
       $trainfare->eco_seat    = $request->eco_seatfare;
       $trainfare->bus_seat    = $request->bus_seatfare;
-      $trainfare->exec_seat  = $request->exec_seatfare;
+      $trainfare->exec_seat   = $request->exec_seatfare;
       $trainfare->save();
 
       return redirect('admin/train')->with('alert-success','Data berhasil diubah!');
