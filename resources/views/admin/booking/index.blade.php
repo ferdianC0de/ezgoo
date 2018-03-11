@@ -29,22 +29,26 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Tanggal Booking</th>
-                <th>Jenis Pesanan</th>
+                <th>Kode booking</th>
+                <th>Tanggal booking</th>
+                <th>Kendaraan</th>
+                <th>Biaya</th>
                 <!-- <th>Aksi</th> -->
             </tr>
         </thead>
         <tbody>
-            @foreach($booking as $data)
+          @foreach ($booking as $data)
             <tr>
-                <td>1</td>
-                <td>{{ date('l,d-M  y', strtotime($data->created_at))}}</td>
-                <td>{{$data->vehicle}}</td>
-                <!-- <td>
-                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
-                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-minus-circle"></a>
-                    <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-trash 5x"></a>
-                </td> -->
+              <td>{{ $loop->iteration }}</td>
+              <td>{{ $data->booking_code }}</td>
+              <td>{{ date('d-m-Y', strtotime($data->created_at)) }}</td>
+              <td>pakein if plane = Pesawat, train = kereta</td>
+              <td>Pake number format</td>
+              <!-- <td>
+                  <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-info-circle"></a>
+                  <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-minus-circle"></a>
+                  <a href="{{ url('admin/edit/'.$data->id)}}" class="fa fa-trash 5x"></a>
+              </td> -->
             </tr>
             @endforeach
         </tbody>

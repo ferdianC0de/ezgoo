@@ -28,6 +28,7 @@
                 <th>NO.</th>
                 <th>Nama Lengkap</th>
                 <th>Email</th>
+                <th>No handphone</th>
                 <!-- <th>Aksi</th> -->
             </tr>
             </thead>
@@ -37,6 +38,7 @@
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $data->first_name }} {{ $data->last_name }}</td>
                   <td>{{ $data->email }}</td>
+                  <td>{{ $data->phone }}</td>
               </tr>
             @endforeach
             </tbody>

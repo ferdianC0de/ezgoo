@@ -50,7 +50,7 @@
                   <td>{{ $duration }} jam</td>
                   <td>{{ date('H:i:s', $range) }}</td>
                   <td>{{ $s->gate }}</td>
-                  <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
+                  <td>IDR {{ number_format($s->$seat,2, ".", ",") }}</td>
                   <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
                 </tr>
               @endforeach
@@ -67,7 +67,7 @@
                   <td>{{ date('H:i:s', $range) }}</td>
                   <td>{{ $s->duration }}</td>
                   <td>{{ $s->platform }}</td>
-                  <td>Rp {{ number_format($s->$seat,2, ".", ",") }}</td>
+                  <td>IDR {{ number_format($s->$seat,2, ".", ",") }}</td>
                   <td> <button type="submit" name="go" value="{{$s->id}}">Pesan</button></td>
                 </tr>
               @endforeach

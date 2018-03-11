@@ -51,9 +51,12 @@ class ExpireJob extends Command
             $modelS = $this->train;
           }
 
-          $transaction= Transaction::find($bE->id);
+          $transaction = Transaction::find($bE->id);
           if ($transaction->status == 0) {
-            $delete = Booking::where('expire', '<=', date('Y-m-d H:i:s'))->delete();
+            $delete = Booking::where([
+              ['id', '=', $bE->id],
+              ['expire', '<=', date('Y-m-d H:i:s')]
+              ])->delete();
             if ($delete) {
               $increment = $modelS::where('id', $bE->schedule_id)->increment($bE->detail_booking->class, $bE->detail_booking->passenger);
               $this->info('Expired booking deleted!');

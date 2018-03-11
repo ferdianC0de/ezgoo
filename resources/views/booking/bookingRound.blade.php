@@ -78,7 +78,7 @@
                       <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->platform }}</td>
                     @endif
-                    <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
+                    <td>IDR {{ number_format($s->$seat,2, ".", ",") }}</td>
                   </tr>
                 @endforeach
               @endif
@@ -150,7 +150,7 @@
                       <td>{{ date('H:i:s', $range) }}</td>
                       <td>{{ $s->platform }}</td>
                     @endif
-                    <td>Rp.{{ number_format($s->$seat,2, ".", ",") }}</td>
+                    <td>IDR {{ number_format($s->$seat,2, ".", ",") }}</td>
                   </tr>
                 @endforeach
               @endif

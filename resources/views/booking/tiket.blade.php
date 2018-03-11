@@ -81,7 +81,7 @@
                       <td><b><center>{{$d->scheP->gate}}</center></b></td>
                       <td>
                         <h5 class="card-title"><b>{{$d->scheP->from}} ({{$d->scheP->from_code}})</b></h5>
-                        <p class="card-text">{{date('D-m-Y', strtotime($d->scheP->boarding_time))}}</p>
+                        <p class="card-text">{{date('d-m-Y', strtotime($d->scheP->boarding_time))}}</p>
                         <p class="card-text">{{date('H:i', strtotime($d->scheP->boarding_time))}}</p>
                       </td>
                       <td>
@@ -90,7 +90,7 @@
                           $duration = date('h',$d->scheP->duration);
                           $range    = strtotime($d->scheP->boarding_time ."+$duration hours");
                         @endphp
-                        <p class="card-text">{{date('D-m-Y', $range)}}</p>
+                        <p class="card-text">{{date('d-m-Y', $range)}}</p>
                         <p class="card-text">{{date('H:i', $range)}}</p>
                       </td>
                     @elseif($vehicleT)
@@ -98,7 +98,7 @@
                       <td><b><center>{{$d->scheT->platform}}</center></b></td>
                       <td>
                         <h5 class="card-title"><b>{{$d->scheT->from}} ({{$d->scheT->from_code}})</b></h5>
-                        <p class="card-text">{{date('D-m-Y', strtotime($d->scheT->boarding_time))}}</p>
+                        <p class="card-text">{{date('d-m-Y', strtotime($d->scheT->boarding_time))}}</p>
                         <p class="card-text">{{date('H:i', strtotime($d->scheT->boarding_time))}}</p>
                       </td>
                       <td>
@@ -107,7 +107,7 @@
                           $duration = date('h',$d->scheT->duration);
                           $range    = strtotime($d->scheT->boarding_time ."+$duration hours");
                         @endphp
-                        <p class="card-text">{{date('D-m-Y', $range)}}</p>
+                        <p class="card-text">{{date('d-m-Y', $range)}}</p>
                         <p class="card-text">{{date('H:i', $range)}}</p>
                       </td>
                     @endif

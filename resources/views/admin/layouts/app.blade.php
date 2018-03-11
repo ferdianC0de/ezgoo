@@ -8,13 +8,13 @@
         <title>EZGo</title>
 
         <!-- Fonts -->
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/admin/styles.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/datepicker/datepicker3.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/select2/css/select2.min.css') }}" rel="stylesheet">
         <link href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="{{ asset('vendor/datatables/jquery.dataTables.min.css')}}">
+        <link href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}" rel="stylesheet">
     </head>
     <body>
 
@@ -109,8 +109,8 @@
 
 
 
-<script src="{{ asset('js/jquery-1.11.1.min.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jquery-1.12.0.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datepicker/moment.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datepicker/bootstrap-datetimepicker.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/datatables/jquery.dataTables.js') }}"></script>
@@ -124,111 +124,6 @@ $(document).ready(function() {
   });
   $('.timepicker').datetimepicker({
     format:'HH:mm',
-  });
-  $('select[name="plane_id"]').on('change', function() {
-    var param = $(this).val();
-    if(param) {
-      $.ajax({
-          url: '/plane/ajax/'+param,
-          type: "GET",
-          dataType: 'JSON',
-          success:function(data) {
-            console.log(data);
-              $.each(data, function(index, obj) {
-                $('.option').empty();
-                $('#eco_seat').val(obj.eco_seat);
-                $('#bus_seat').val(obj.bus_seat);
-                $('#first_seat').val(obj.first_seat);
-              });
-          }
-      });
-    }else{
-        $('select[name="eco"]').empty();
-    }
-  });
-  $('select[name="airport_id"]').on('change', function() {
-    param = $(this).val();
-    $.ajax({
-      url: '/airport/ajax/'+param,
-      type: "GET",
-      dataType: 'JSON',
-      success:function(data) {
-        console.log(data);
-        $.each(data, function(index, obj) {
-          $('.from').empty();
-          $('#asal').append('<input type="hidden" name="from" value="'+ obj.airport_name +'">');
-          $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-        });
-      }
-    });
-  });
-  $('select[name="destination"]').on('change', function() {
-    param = $(this).val();
-    $.ajax({
-      url: '/airport/ajax/'+param,
-      type: "GET",
-      dataType: 'JSON',
-      success:function(data) {
-        console.log(data);
-        $.each(data, function(index, obj) {
-          $('.destination').empty();
-          $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-        });
-      }
-    });
-  });
-  // TRAIN
-  $('select[name="train_id"]').on('change', function() {
-    var param = $(this).val();
-    if(param) {
-      $.ajax({
-        url: '/train/ajax/'+param,
-        type: "GET",
-        dataType: 'JSON',
-        success:function(data) {
-          console.log(data);
-            $.each(data, function(index, obj) {
-              $('.option').empty();
-              $('#eco_seat').append('<input type="hidden" name="eco_seat" value="'+ obj.eco_seat +'">');
-              $('#bus_seat').append('<input type="hidden" name="bus_seat" value="'+ obj.bus_seat +'">');
-              $('#exec_seat').append('<input type="hidden" name="exec_seat" value="'+ obj.exec_seat +'">');
-            });
-          }
-        });
-      }else{
-        $('select[name="eco"]').empty();
-      }
-  });
-  $('select[name="station_id"]').on('change', function() {
-    param = $(this).val();
-    $.ajax({
-      url: '/station/ajax/'+param,
-      type: "GET",
-      dataType: 'JSON',
-      success:function(data) {
-        console.log(data);
-        $.each(data, function(index, obj) {
-          $('.from').empty();
-          $('#asal').append('<input type="hidden" name="from" value="'+ obj.station_name +'">');
-          $('#code').append('<input type="text" name="from_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-        });
-      }
-    });
-  });
-  $('select[name="Tdestination"]').on('change', function() {
-    param = $(this).val();
-    $.ajax({
-      url: '/station/ajax/'+param,
-      type: "GET",
-      dataType: 'JSON',
-      success:function(data) {
-        console.log(data);
-        $.each(data, function(index, obj) {
-          $('.Tdestination').empty();
-          $('#codes').append('<input type="text" name="destination_code" value="'+ obj.code +'">'+ obj.code +'</input>');
-        });
-      }
-    });
   });
   $.fn.select2.defaults.set( "theme", "bootstrap" );
   $.fn.select2.defaults.set("width", null);
@@ -247,6 +142,8 @@ $(document).ready(function() {
     $('.select2').select2();
   });
 });
+</script>
+@stack('scripts')
 </script>
 </body>
 </html>
