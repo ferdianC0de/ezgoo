@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use App\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
+use App\User;
+use App\Models\Role;
+
+use App\Mail\VerifyAccount;
+use App\Jobs\VerifyAccountJob;
 
 class RegisterController extends Controller
 {
@@ -69,6 +74,7 @@ class RegisterController extends Controller
           'name' => $data['name'],
           'email' => $data['email'],
           'password' => Hash::make($data['password']),
+          'token' => md5($data['email'])
       ]);
     }
 
@@ -76,6 +82,9 @@ class RegisterController extends Controller
     {
       $user = $this->create($request->all());
       $user->roles()->attach(Role::find(2));
-      return redirect('login');
+      $verify = (new VerifyAccountJob($user))->delay(Carbon::now()->addSeconds(3));
+      dispatch($verify);
+
+      return back()->with('success', 'Verification has been sent, check your email and click on the link to verify');
     }
 }
