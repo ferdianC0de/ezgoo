@@ -4,12 +4,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Models\Home;
+
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
     public function index()
     {
-      return view('home');
+      $home = Home::find(1);
+      $home->addPageViewThatExpiresAt(Carbon::now()->addHours(1));
+      return view('home', compact('monthlyViews'));
     }
     public function verify($token)
     {

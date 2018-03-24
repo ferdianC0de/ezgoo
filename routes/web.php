@@ -9,4 +9,6 @@ Route::group(['prefix' => 'user', 'middleware' => ['verified', 'role:user']], fu
 });
 Route::group(['prefix' => 'administrator', 'middleware' => 'role:admin'], function(){
   Route::get('', 'AdminController@index');
+  //Chart
+  Route::get('chart/{month?}/{year?}', 'AdminController@chart');
 });

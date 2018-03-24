@@ -10,8 +10,10 @@
 	<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/linearicons/style.css') }}">
-	<link rel="stylesheet" href="{{ asset('vendor/chartist/css/chartist-custom.css') }}">
-	<link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/datepicker/datepicker3.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}"> --}}
 	@stack('css')
 	{{-- Main --}}
 	<link rel="stylesheet" href="{{ asset('admin/css/main.css') }}">
@@ -118,15 +120,24 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
+	{{-- <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
 	<script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
 	<script src=" {{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
 	<script src=" {{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-	<script src=" {{ asset('vendor/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
-	<script src=" {{ asset('vendor/chartist/js/chartist.min.js') }}"></script>
-	<script src=" {{ asset('vendor/bootstrap-daterangepicker/moment.js') }}"></script>
-	<script src=" {{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 	<script src=" {{ asset('admin/js/klorofil-common.js') }}"></script>
+	<script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
+	<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+	<script type="text/javascript">
+		$('.datepicker').datepicker({
+			format: "mm-yyyy",
+	    viewMode: "months",
+	    minViewMode: "months",
+			autoclose:true
+		});
+	</script>
 	@stack('js')
+	{{-- <script src=" {{ asset('vendor/bootstrap-daterangepicker/moment.js') }}"></script>
+	<script src=" {{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script> --}}
 </body>
 
 </html>

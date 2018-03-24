@@ -13,8 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    You are logged in!
+                    This month visitor {{ $monthlyViews }}
                 </div>
             </div>
         </div>

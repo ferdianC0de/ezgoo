@@ -2,12 +2,12 @@
 
 @section('content')
   @push('css')
-    {!! Charts::styles() !!}
+    {{-- {!! Charts::styles() !!} --}}
   @endpush
   <div class="panel panel-headline">
     <div class="panel-heading">
       <h3 class="panel-title">Monthly Overview</h3>
-      <p class="panel-subtitle">Period: insert daterangepicker here</p>
+      <p class="panel-subtitle">Period: {{date('F Y')}}</p>
     </div>
     <div class="panel-body">
       <div class="row">
@@ -15,7 +15,7 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-user"></i></span>
             <p>
-              <span class="number">1,252</span>
+              <span class="number">{{ $monthlyUsers }}</span>
               <span class="title">Users</span>
             </p>
           </div>
@@ -24,7 +24,7 @@
           <div class="metric">
             <span class="icon"><i class="fa fa-eye"></i></span>
             <p>
-              <span class="number">274,678</span>
+              <span class="number">{{ $monthlyViews }}</span>
               <span class="title">Visits</span>
             </p>
           </div>
@@ -50,20 +50,7 @@
       </div>
       <div class="row">
         <div class="col-md-9">
-          <div class="custom-tabs-line tabs-line-bottom left-aligned">
-            <ul class="nav" role="tablist">
-              <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Plane</a></li>
-              <li><a href="#tab-bottom-left2" role="tab" data-toggle="tab">Train </a></li>
-            </ul>
-          </div>
-          <div class="tab-content">
-            <div class="tab-pane fade in active" id="tab-bottom-left1">
-              {!! $chart->html() !!}
-            </div>
-            <div class="tab-pane fade" id="tab-bottom-left2">
-              <p>Chart 2</p>
-            </div>
-          </div>
+          {!! $chart->html() !!}
         </div>
         <div class="col-md-3">
           <div class="weekly-summary text-right">
@@ -197,7 +184,7 @@
     </div>
   </div>
   @push('js')
-    {!! Charts::scripts() !!}
-    {!! $chart->script() !!}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    {!! $chart->script !!}
   @endpush
 @endsection

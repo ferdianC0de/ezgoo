@@ -150,7 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        CyrildeWit\PageViewCounter\PageViewCounterServiceProvider::class,
         /*
          * Application Service Providers...
          */
