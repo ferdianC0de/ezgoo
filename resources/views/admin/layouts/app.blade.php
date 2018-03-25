@@ -13,9 +13,7 @@
 	<link rel="stylesheet" href="{{ asset('vendor/datepicker/datepicker3.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}">
-	{{-- <link rel="stylesheet" href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}"> --}}
-	<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
-	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
+	<link rel="stylesheet" href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}">
 	{{-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}"> --}}
 	@stack('css')
 	{{-- Main --}}
@@ -89,19 +87,19 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="index.html"><i class="lnr lnr-user"></i> <span>User</span></a></li>
+						<li><a href="{{ url('administrator') }}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{{ url('administrator/user') }}"><i class="lnr lnr-user"></i> <span>User</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-list"></i> <span>Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
-									<li><a href="page-login.html"><i class="fa fa-plane"></i>Plane</a></li>
-									<li><a href="page-login.html"><i class="lnr lnr-train"></i> Train</a></li>
+									<li><a href="{{ url('administrator/plane') }}"><i class="fa fa-plane"></i>Plane</a></li>
+									<li><a href="{{ url('administrator/train') }}"><i class="lnr lnr-train"></i> Train</a></li>
 								</ul>
 							</div>
 						</li>
-						<li><a href="index.html"><i class="lnr lnr-cart"></i> <span>Purchases</span></a></li>
-						<li><a href="index.html"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
+						<li><a href="{{ url('administrator/purchase') }}"><i class="lnr lnr-cart"></i> <span>Purchases</span></a></li>
+						<li><a href="{{ url('administrator/message') }}"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -134,9 +132,7 @@
 	<script src="{{ asset('admin/js/klorofil-common.js') }}"></script>
 	<script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
-	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
-	<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
+	<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 	<script type="text/javascript">
 		$('.datepicker').datepicker({
 			format: "mm-yyyy",

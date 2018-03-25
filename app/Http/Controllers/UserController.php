@@ -11,4 +11,11 @@ class UserController extends Controller
     {
       return 'hi user';
     }
+
+    public function destroy($id)
+    {
+      $user = User::find($id);
+      $user->delete();
+      return back()->with('success', 'Successfully deleted!');
+    }
 }

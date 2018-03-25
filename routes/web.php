@@ -14,6 +14,7 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'role:admin'], functi
 
   Route::group(['prefix' => 'user'], function(){
     Route::get('', 'AdminController@user');
+    Route::delete('destroy/{id}', 'UserController@destroy');
   });
   Route::group(['prefix' => 'resource'], function(){
     Route::get('user', 'AdminController@userData');

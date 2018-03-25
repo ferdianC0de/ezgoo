@@ -2,9 +2,12 @@
 
 @section('content')
   @push('js')
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function(){
-        $('#usersTable').DataTable({
+        $('#refresh').click(function(){
+          table.ajax.reload();
+        });
+        var table = $('#usersTable').DataTable({
           processing: true,
           serverSide: true,
           ajax : '{{ url('administrator/resource/user') }}',
@@ -17,15 +20,14 @@
           ]
         });
       });
-    </script> --}}
+    </script>
   @endpush
   <div class="panel panel-headline">
     <div class="panel-heading">
       <h3 class="panel-title">Users data</h3>
     </div>
     <div class="panel-body">
-      @yield('datatable')
-      {{-- <div class="table-responsive">
+      <div class="table-responsive">
         <table id="usersTable" class="table table-bordered">
           <thead>
             <tr>
@@ -37,7 +39,7 @@
             </tr>
           </thead>
         </table>
-      </div> --}}
+      </div>
     </div>
   </div>
 @endsection
