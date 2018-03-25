@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Yajra\Datatables\Datatables;
 use Charts;
 use DB;
 
 use App\User;
 use App\Models\Home;
 use App\Models\Role;
+
+use App\DataTables\UserDataTable;
 
 class AdminController extends Controller
 {
@@ -26,5 +29,10 @@ class AdminController extends Controller
                      ->dataset('non-verified user', $non)
                      ->groupByDay(date('m'), date('Y'), true);
       return view('admin.index', compact('monthlyUsers','monthlyViews', 'chart'));
+    }
+
+    public function user(UserDataTable $dataTable)
+    {
+      return $dataTable->render('admin.user.datatable');
     }
 }

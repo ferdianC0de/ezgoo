@@ -13,6 +13,9 @@
 	<link rel="stylesheet" href="{{ asset('vendor/datepicker/datepicker3.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}">
+	{{-- <link rel="stylesheet" href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}"> --}}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
 	{{-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}"> --}}
 	@stack('css')
 	{{-- Main --}}
@@ -66,7 +69,11 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ asset('admin/img/user.png') }}" class="img-circle" alt="Avatar"> <span>{{ Auth::user()->name }}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
 							<ul class="dropdown-menu">
 								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								<li><a href="{{ route('logout') }}" onclick="event.preventDefault();
+															document.getElementById('logout-form').submit();"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
+								<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+										@csrf
+								</form>
 							</ul>
 						</li>
 						<!-- <li>
@@ -121,12 +128,15 @@
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
 	{{-- <script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script> --}}
-	<script src=" {{ asset('vendor/jquery/jquery.min.js') }}"></script>
-	<script src=" {{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-	<script src=" {{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-	<script src=" {{ asset('admin/js/klorofil-common.js') }}"></script>
+	<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+	<script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+	<script src="{{ asset('vendor/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
+	<script src="{{ asset('admin/js/klorofil-common.js') }}"></script>
 	<script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+	<script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
 	<script type="text/javascript">
 		$('.datepicker').datepicker({
 			format: "mm-yyyy",

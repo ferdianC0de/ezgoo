@@ -11,4 +11,11 @@ Route::group(['prefix' => 'administrator', 'middleware' => 'role:admin'], functi
   Route::get('', 'AdminController@index');
   //Chart
   Route::get('chart/{month?}/{year?}', 'AdminController@chart');
+
+  Route::group(['prefix' => 'user'], function(){
+    Route::get('', 'AdminController@user');
+  });
+  Route::group(['prefix' => 'resource'], function(){
+    Route::get('user', 'AdminController@userData');
+  });
 });
