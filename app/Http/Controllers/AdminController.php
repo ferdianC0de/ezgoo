@@ -31,7 +31,8 @@ class AdminController extends Controller
 
     public function user()
     {
-      return view('admin.user.index');
+      $to = 'user';
+      return view('admin.user', compact('to'));
     }
     public function userData(Datatables $datatable)
     {
@@ -47,7 +48,8 @@ class AdminController extends Controller
                          })
                          ->addColumn('action', function($data){
                            $data = $data;
-                           return view('admin.layouts.form.user', compact('data'));
+                           $to = 'user' ;
+                           return view('admin.layouts.button', compact('data', 'to'));
                          })
                          ->rawColumns(['verified', 'action'])
                          ->make(true);

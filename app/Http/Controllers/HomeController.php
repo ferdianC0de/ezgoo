@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
       $home = Home::find(1);
       $home->addPageViewThatExpiresAt(Carbon::now()->addHours(1));
-      return view('home', compact('monthlyViews'));
+      return view('home');
     }
     public function verify($token)
     {

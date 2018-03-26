@@ -6,6 +6,8 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 	{{-- Vendor  --}}
 	<link rel="stylesheet" href="{{ asset('vendor/bootstrap/css/bootstrap.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/font-awesome/css/font-awesome.min.css') }}">
@@ -13,8 +15,9 @@
 	<link rel="stylesheet" href="{{ asset('vendor/datepicker/datepicker3.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
 	<link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}">
-	{{-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}"> --}}
+	{{-- <link rel="stylesheet" href="{{ asset('vendor/datatables/jquery.dataTables.min.css') }}"> --}}
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"> --}}
+	{{-- <link rel="stylesheet" href="{{ asset('vendor/bootstrap-daterangepicker/daterangepicker.css') }}">
 	@stack('css')
 	{{-- Main --}}
 	<link rel="stylesheet" href="{{ asset('admin/css/main.css') }}">
@@ -54,7 +57,7 @@
 											</div>
 											<div class="col-md-10">
 												<b>Samuel</b>
-												<p>Heh Heh Heh Heh Heh...</p>
+												<p>Heh Heh Heh Heh Heh</p>
 											</div>
 										</div>
 									</a>
@@ -87,7 +90,7 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="{{ url('administrator') }}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{{ url('administrator') }}"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="{{ url('administrator/user') }}"><i class="lnr lnr-user"></i> <span>User</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-list"></i> <span>Data</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -132,16 +135,18 @@
 	<script src="{{ asset('admin/js/klorofil-common.js') }}"></script>
 	<script src="{{ asset('vendor/datepicker/bootstrap-datepicker.js') }}"></script>
 	<script src="{{ asset('vendor/select2/js/select2.min.js') }}"></script>
-	<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-	<script type="text/javascript">
-		$('.datepicker').datepicker({
-			format: "mm-yyyy",
-	    viewMode: "months",
-	    minViewMode: "months",
-			autoclose:true
-		});
-	</script>
+	{{-- <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script> --}}
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<script src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
 	@stack('js')
+	<script type="text/javascript">
+	$('.datepicker').datepicker({
+		format: "mm-yyyy",
+		viewMode: "months",
+		minViewMode: "months",
+		autoclose:true
+	});
+	</script>
 	{{-- <script src=" {{ asset('vendor/bootstrap-daterangepicker/moment.js') }}"></script>
 	<script src=" {{ asset('vendor/bootstrap-daterangepicker/daterangepicker.js') }}"></script> --}}
 </body>
