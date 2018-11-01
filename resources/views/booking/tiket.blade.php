@@ -10,7 +10,7 @@
     @foreach ($data as $d)
       <div class="container">
         <h1><b>E-Tiket</b></h1>
-        <p class="pull-right">cetak</p>
+        <p class="pull-right"><button type="button" name="print" onclick="this.style.display = 'none';window.history.back();window.print();">Cetak</button></p>
         @if ($vehicleP)
           <h4>Jadwal penerbangan {{date('d-m-Y', strtotime($d->scheP->boarding_time))}}</h4>
         @elseif ($vehicleT)
